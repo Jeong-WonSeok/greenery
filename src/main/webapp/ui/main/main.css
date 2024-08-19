@@ -1,0 +1,312 @@
+.modal-container {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.coupon-modal {
+    position: relative;
+    flex-direction: column;
+    width: 25%;
+    background-color: #ffffff;
+    display: flex;
+    margin: 0 auto;
+    padding: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.modal-image {
+    width: 100%;
+    cursor: pointer;
+}
+
+.modal-text {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #676767;
+}
+
+.modal-text .close {
+    color: #000000;
+    cursor: pointer;
+}
+
+.modal-text .today-close {
+    cursor: pointer;
+}
+
+.alert-coupon {
+    display: flex;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    margin: 0;
+    padding: 0 10px 0 10px;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-in-out;
+    background-color: #000000;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.img-alert-coupon {
+    width: 14px;
+    margin-right: 7px;
+}
+
+.alert-coupon.show {
+    transform: translate(-50%, 30px);
+}
+
+.banner {
+    cursor: pointer;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.banner_slides img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.banner-control {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.banner-control-btn-left,
+.banner-control-btn-right {
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+.banner-control-btn-left {
+    background: url("../../res/images/left_arrow.png") no-repeat center
+        center/40%;
+}
+
+.banner-control-btn-right {
+    background: url("../../res/images/right_arrow.png") no-repeat center
+        center/40%;
+}
+
+.banner-indicator {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.banner-indicator-btn {
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+    background-color: rgba(73, 73, 73, 0.6);
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.banner-indicator-btn:hover {
+    background-color: rgb(255, 255, 255, 0.6);
+}
+
+.banner-indicator-btn.active {
+    background-color: rgb(255, 255, 255, 0.6);
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade_slide {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.toolbar {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 80px 0 50px 0;
+}
+
+.toolbar-category {
+    flex: 1.5;
+}
+
+.toolbar-category-btn {
+    flex: 1;
+    border: none;
+    background-color: #f5f5f5;
+    color: #9b9f9e;
+    border-radius: 16px;
+    cursor: pointer;
+    padding: 6px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.active-category {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.toolbar-sort {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toolbar-sort-select {
+    border: none;
+    cursor: pointer;
+}
+
+.toolbar-sort-select:focus {
+    outline: none;
+}
+
+.main-products {
+    position: relative;
+    margin: 0 auto;
+    width: 75%;
+}
+
+.scroll-btn-up {
+    z-index: 98;
+    position: fixed;
+    right: 2%;
+    bottom: 10%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    background-image: url("../../res/images/up_arrow.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 40%;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 가로로 5개의 열 */
+    gap: 20px; /* 각 상품 간격 */
+    margin: 20px auto; /* 페이지 중앙 정렬 */
+}
+
+.product-item {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    margin-bottom: 100px;
+}
+
+.product-image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.product-icons {
+    position: absolute;
+    bottom: -100px; /* 아이콘들이 기본적으로 숨겨져 있는 위치 */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    transition: bottom 0.3s ease-in-out; /* 슬라이드 애니메이션 */
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 7px 0;
+}
+
+.product-image-container:hover .product-icons {
+    bottom: 0; /* 마우스 오버 시 아이콘들이 올라오는 위치(0이면 맨 밑에서 올라옴) */
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    margin: 0 15px;
+    border-radius: 50%; /* 원형 배경 */
+}
+
+.icon img {
+    width: 27px; /* 아이콘 이미지의 너비 */
+    height: 27px; /* 아이콘 이미지의 높이 */
+    cursor: pointer;
+}
+
+.icon:hover img {
+    filter: brightness(1.2);
+}
+
+.product-details {
+    padding: 10px 0 0 0;
+}
+
+.product-details .product-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.product-details .product-description {
+    font-size: 12px;
+    color: #757575;
+    margin-bottom: 15px;
+}
+
+.product-details .product-price {
+    font-size: 18px;
+    font-weight: bold;
+}

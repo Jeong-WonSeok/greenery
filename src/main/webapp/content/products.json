@@ -1,0 +1,144 @@
+{
+  "products": [
+    {
+      "productId": 1,
+      "productName": "수분 크림",
+      "price": 25000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/1.png"
+      ],
+      "mainDescription": "피부에 깊은 보습을 제공합니다.",
+      "summaryDescription": "피부를 촉촉하게 유지하는 수분 크림",
+      "detailedDescription": "이 수분 크림은 자연 유래 성분으로 만들어져 피부에 영양과 수분을 공급합니다.",
+      "registrationDate": "2024-01-10",
+      "category": "Skincare"
+    },
+    {
+      "productId": 2,
+      "productName": "매트 립스틱",
+      "price": 18000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/2.png"
+      ],
+      "mainDescription": "선명한 컬러와 매트한 마무리",
+      "summaryDescription": "오랜 지속력을 자랑하는 매트 립스틱",
+      "detailedDescription": "이 립스틱은 부드러운 발림성과 깊은 색감을 제공합니다.",
+      "registrationDate": "2024-01-12",
+      "category": "Makeup"
+    },
+    {
+      "productId": 3,
+      "productName": "바디 스크럽",
+      "price": 22000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/3.png"
+      ],
+      "mainDescription": "피부 각질 제거 및 보습",
+      "summaryDescription": "부드럽고 매끄러운 피부로 가꿔주는 바디 스크럽",
+      "detailedDescription": "천연 성분으로 만들어져 피부를 자극하지 않으며, 각질을 부드럽게 제거합니다.",
+      "registrationDate": "2024-01-15",
+      "category": "BodyCare"
+    },
+    {
+      "productId": 4,
+      "productName": "헤어 오일",
+      "price": 30000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/4.png"
+      ],
+      "mainDescription": "머릿결을 부드럽고 윤기 있게",
+      "summaryDescription": "모발 보호와 영양을 동시에",
+      "detailedDescription": "이 헤어 오일은 열과 환경으로부터 모발을 보호합니다.",
+      "registrationDate": "2024-01-18",
+      "category": "HairCare"
+    },
+    {
+      "productId": 5,
+      "productName": "메이크업 브러시 세트",
+      "price": 15000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/5.png"
+      ],
+      "mainDescription": "여행용 메이크업 브러시",
+      "summaryDescription": "다양한 메이크업을 위한 미니 브러시 세트",
+      "detailedDescription": "이 세트는 모든 메이크업을 위한 필수 도구를 포함하고 있습니다.",
+      "registrationDate": "2024-01-20",
+      "category": "BeautyTools"
+    },
+    {
+      "productId": 6,
+      "productName": "맨즈 스킨케어 세트",
+      "price": 45000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/6.png"
+      ],
+      "mainDescription": "남성을 위한 맞춤형 스킨케어",
+      "summaryDescription": "피부 고민을 해결해주는 스킨케어 세트",
+      "detailedDescription": "클렌저, 토너, 모이스처라이저가 포함된 세트입니다.",
+      "registrationDate": "2024-01-25",
+      "category": "MensCare"
+    },
+    {
+      "productId": 7,
+      "productName": "토너",
+      "price": 20000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/7.png"
+      ],
+      "mainDescription": "피부를 진정시키고 수분을 공급",
+      "summaryDescription": "촉촉한 피부를 위한 필수 아이템",
+      "detailedDescription": "피부 진정을 돕고 수분을 공급하는 토너입니다.",
+      "registrationDate": "2024-01-30",
+      "category": "Skincare"
+    },
+    {
+      "productId": 8,
+      "productName": "아이섀도우 팔레트",
+      "price": 35000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/8.png"
+      ],
+      "mainDescription": "다양한 컬러로 나만의 스타일 완성",
+      "summaryDescription": "다채로운 색상의 아이섀도우 팔레트",
+      "detailedDescription": "부드러운 텍스처와 뛰어난 발색을 자랑합니다.",
+      "registrationDate": "2024-02-01",
+      "category": "Makeup"
+    },
+    {
+      "productId": 9,
+      "productName": "바디 로션",
+      "price": 27000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/9.png"
+      ],
+      "mainDescription": "부드러운 피부를 위한 보습 로션",
+      "summaryDescription": "온 가족이 사용할 수 있는 바디 로션",
+      "detailedDescription": "자연 유래 성분으로 만들어져 피부에 안전합니다.",
+      "registrationDate": "2024-02-05",
+      "category": "BodyCare"
+    },
+    {
+      "productId": 10,
+      "productName": "헤어 마스크",
+      "price": 32000,
+      "stock": 1,
+      "imageUrls": [
+        "../../res/images/productImages/10.png"
+      ],
+      "mainDescription": "손상된 모발을 회복",
+      "summaryDescription": "영양을 공급하는 헤어 마스크",
+      "detailedDescription": "모발에 깊은 영양을 주고 부드러움을 제공합니다.",
+      "registrationDate": "2024-02-10",
+      "category": "HairCare"
+    }
+  ]
+}

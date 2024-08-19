@@ -1,0 +1,44 @@
+{
+    "orders": [
+        {
+            "orderId": 1,
+            "orderAmount": 50000,
+            "orderDetails": {
+                "productId1": 2,
+                "productId2": 1
+            }
+        },
+        {
+            "orderId": 2,
+            "orderAmount": 30000,
+            "orderDetails": {
+                "productId3": 3
+            }
+        },
+        {
+            "orderId": 3,
+            "orderAmount": 45000,
+            "orderDetails": {
+                "productId1": 1,
+                "productId4": 2
+            }
+        },
+        {
+            "orderId": 4,
+            "orderAmount": 25000,
+            "orderDetails": {
+                "productId2": 1,
+                "productId5": 1
+            }
+        },
+        {
+            "orderId": 5,
+            "orderAmount": 70000,
+            "orderDetails": {
+                "productId1": 2,
+                "productId3": 1,
+                "productId4": 1
+            }
+        }
+    ]
+}

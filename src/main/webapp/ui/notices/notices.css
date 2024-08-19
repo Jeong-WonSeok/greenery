@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap');
+
+body {
+	font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
+}
+
+.notice-container {
+	display: flex;
+	margin-top: 100px;
+	flex-direction: column;
+	align-items: center;
+}
+
+.notice-inner {
+	display: flex;
+	margin-bottom: 20px;
+	justify-content: space-between;
+	align-items: flex-end;
+	align-items: center;
+	width: 75%;
+}
+
+.notice-title {
+	font-size: 38px;
+	font-weight: 800;
+	margin-bottom: 1px;
+}
+
+.notice-num {
+	margin-top: 30px;
+	margin-bottom: 1px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.divider {
+	display: flex;
+	justify-content: space-between;
+	width: 75%;
+	border-top: 3px solid #191919;
+	margin: 0 auto;
+}
+
+.contents .divider,
+.content-title .divider {
+	border: 0.2px solid rgba(0, 0, 0, 0.1);
+	width: 1270px;
+	margin: 0 auto;
+}
+
+.content-title {
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.content-title .main-title {
+	margin-left: 215px
+}
+
+.content-title .num {
+	margin-left: 165px
+}
+
+.content-title .date {
+	margin-right: 160px;
+}
+
+.content-title div {
+	margin: 20px auto;
+}
+
+.contents {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	width: 75%;
+	font-weight: 500;
+	text-align: left;
+}
+
+.notices-item {
+	display: flex;
+	align-items: center;
+	margin: 30px auto;
+	font-size: 15px
+}
+
+.notices-item .title {
+	cursor: pointer;
+}
+
+
+.title {
+	display: flex;
+	justify-content: center;
+	flex: 1.2;
+}
+
+.noticeId {
+	display: flex;
+	justify-content: center;
+	flex: 0.8;
+}
+
+.registrationDate {
+	display: flex;
+	justify-content: center;
+	flex: 0.8;
+	color: #a9a9a9;
+}
+
+.pageNum {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	fon-size: 16px;
+	margin: 70px auto;
+	cursor: pointer;
+}

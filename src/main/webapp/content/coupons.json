@@ -1,0 +1,16 @@
+{
+    "coupons": [
+        {
+            "couponId": 1,
+            "couponAmount": 1000
+        },
+        {
+            "couponId": 2,
+            "couponAmount": 1000
+        },
+        {
+            "couponId": 3,
+            "couponAmount": 1000
+        }
+    ]
+}

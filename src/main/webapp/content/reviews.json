@@ -1,0 +1,49 @@
+{
+    "reviews": [
+        {
+            "reviewId": 1,
+            "productId": 101,
+            "authorId": "길주",
+            "registrationDate": "2024-05-02",
+            "rating": 5,
+            "content": "이 제품 정말 좋아요! 사용 후 피부가 부드러워졌어요.",
+            "imageUrl": "../../res/images/productImages/1.png"
+        },
+        {
+            "reviewId": 2,
+            "productId": 102,
+            "authorId": "해원",
+            "registrationDate": "2024-05-10",
+            "rating": 4,
+            "content": "향이 너무 좋고, 보습력도 뛰어나요. 재구매 의사 있어요!",
+            "imageUrl": "../../res/images/productImages/2.png"
+        },
+        {
+            "reviewId": 3,
+            "productId": 103,
+            "authorId": "지혜",
+            "registrationDate": "2024-05-15",
+            "rating": 3,
+            "content": "가격대비 괜찮은 제품이에요. 하지만 효과는 기대 이하였습니다.",
+            "imageUrl": "../../res/images/productImages/3.png"
+        },
+        {
+            "reviewId": 4,
+            "productId": 104,
+            "authorId": "민성",
+            "registrationDate": "2024-05-20",
+            "rating": 5,
+            "content": "정말 만족스럽습니다! 발림성이 좋고, 피부에 잘 스며들어요.",
+            "imageUrl": "../../res/images/productImages/4.png"
+        },
+        {
+            "reviewId": 5,
+            "productId": 105,
+            "authorId": "skincareaddict",
+            "registrationDate": "2024-05-25",
+            "rating": 2,
+            "content": "별로였어요. 사용 후 피부 트러블이 생겼습니다.",
+            "imageUrl": "../../res/images/productImages/5.png"
+        }
+    ]
+}

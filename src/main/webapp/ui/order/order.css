@@ -1,0 +1,51 @@
+@charset "UTF-8";
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap')
+	;
+
+body {
+	font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	margin-top: 100px;
+}
+
+
+.order {
+	display: flex;
+	flex-direction: column;
+	margin: 0 20px 0 auto;
+	width: 150px;
+}
+
+.finish {
+	padding: 20px;
+	display : flex;
+	flex-direction: column;
+	margin: 0 auto 0 20px;
+}
+
+.order-complete {
+    font-size: 32px; 
+    font-weight: bold;
+    color: #333;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.order-info {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.ordernum {
+    font-size: 18px;
+    color: #666;
+}

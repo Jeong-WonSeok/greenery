@@ -1,0 +1,46 @@
+{
+  "members": [
+    {
+      "memberId": 1,
+      "username": "user01",
+      "password": "password01",
+      "name": "Hong Gil-dong",
+      "phoneNumber": 1012345678,
+      "email": "hong@example.com",
+      "postalCode": "12345",
+      "address": "123, Dosan-daero, Gangnam-gu, Seoul",
+      "detailedAddress": "Apt 101",
+      "coupons": {
+        "coupon01": 1
+      }
+    },
+    {
+      "memberId": 2,
+      "username": "user02",
+      "password": "password02",
+      "name": "Kim Chul-soo",
+      "phoneNumber": 1087654321,
+      "email": "kim@example.com",
+      "postalCode": "67890",
+      "address": "456, Haeundae-ro, Haeundae-gu, Busan",
+      "detailedAddress": "Apt 202",
+      "coupons": {
+        "coupon02": 1
+      }
+    },
+    {
+      "memberId": 3,
+      "username": "user03",
+      "password": "password03",
+      "name": "Lee Young-hee",
+      "phoneNumber": 1055558888,
+      "email": "lee@example.com",
+      "postalCode": "54321",
+      "address": "789, Dongdaegu-ro, Suseong-gu, Daegu",
+      "detailedAddress": "Apt 303",
+      "coupons": {
+        "coupon03": 1
+      }
+    }
+  ]
+}

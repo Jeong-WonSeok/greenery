@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../../common.css" />
+    <link rel="stylesheet" href="main.css" />
+    <title>메인페이지</title>
+</head>
+
+<body>
+    <script src="main.js"></script>
+    <div class="modal-container">
+        <div class="coupon-modal">
+            <img src="../../res/images/modal.png" class="modal-image" />
+            <div class="modal-text">
+                <span class="today-close">오늘 그만 보기</span>
+                <span class="close">닫기</span>
+            </div>
+        </div>
+    </div>
+    <div class="alert-coupon">
+        <img src="../../res/images/coupon_modal_check.png" class="img-alert-coupon" />
+        <span>쿠폰 발급이 완료되었습니다!</span>
+    </div>
+    <!-- 헤더를 삽입할 위치 -->
+    <div id="header"></div>
+    <!-- 배너 -->
+    <section class="banner">
+        <!-- 배너 이미지 -->
+        <div class="banner_slides fade_slide">
+            <img src="../../res/images/banner1.png" alt="slide 1" />
+        </div>
+        <div class="banner_slides fade_slide">
+            <img src="../../res/images/banner2.png" alt="slide 2" />
+        </div>
+        <div class="banner_slides fade_slide">
+            <img src="../../res/images/banner3.png" alt="slide 3" />
+        </div>
+        <!-- 배너 이동 버튼 (왼/오) -->
+        <div class="banner-control">
+            <button class="banner-control-btn-left" onclick="plusSlides(-1)"></button>
+            <button class="banner-control-btn-right" onclick="plusSlides(1)"></button>
+        </div>
+        <!-- 배너 이동 버튼 (순서) -->
+        <div class="banner-indicator">
+            <button class="banner-indicator-btn" onclick="currentSlide(1)"></button>
+            <button class="banner-indicator-btn" onclick="currentSlide(2)"></button>
+            <button class="banner-indicator-btn" onclick="currentSlide(3)"></button>
+        </div>
+    </section>
+    <div class="toolbar">
+        <!-- 카테고리 -->
+        <nav class="toolbar-category">
+            <button class="toolbar-category-btn active-category">
+                전체
+            </button>
+            <button class="toolbar-category-btn" data-category="Skincare">
+                스킨케어
+            </button>
+            <button class="toolbar-category-btn" data-category="Makeup">
+                메이크업
+            </button>
+            <button class="toolbar-category-btn" data-category="BodyCare">
+                바디케어
+            </button>
+            <button class="toolbar-category-btn" data-category="HairCare">
+                헤어케어
+            </button>
+            <button class="toolbar-category-btn" data-category="BeautyTools">
+                미용소품
+            </button>
+            <button class="toolbar-category-btn" data-category="MensCare">
+                맨즈케어
+            </button>
+        </nav>
+        <!-- 상품 정렬 -->
+        <div class="toolbar-sort">
+            <select class="toolbar-sort-select">
+                <option value="default">신상품순</option>
+                <option value="price-asc">낮은 가격순</option>
+                <option value="price-desc">높은 가격순</option>
+            </select>
+        </div>
+    </div>
+    <div class="main-products">
+        <div class="product-container"></div>
+        <button class="scroll-btn-up" onclick="scrollToTop()"></button>
+    </div>
+
+    <!-- 푸터를 삽입할 위치 -->
+    <div id="footer"></div>
+</body>
+
+</html>

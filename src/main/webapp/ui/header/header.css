@@ -1,0 +1,235 @@
+header {
+    box-sizing: content-box;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    height: 90px;
+    padding-top: 25px;
+    margin: 0 auto;
+}
+
+.header-logo {
+    margin-bottom: 10px;
+}
+
+.logo {
+	width: 75%;
+    /* font-size: 32px;
+    font-weight: 500;
+    color: #0f5a20; */
+}
+
+.header-search {
+    position: absolute;
+    top: 0;
+    margin-top: 63px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26%;
+    /* width: 22.5%; */
+    display: flex;
+    align-items: center;
+}
+
+.header-search-input {
+    border: none;
+    border-bottom: 1px solid #525252;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.header-search-input:focus {
+    outline: none;
+}
+
+.header-search-icon {
+    background: url("../../res/images/search_icon.png") no-repeat center center;
+    background-size: contain;
+    background-color: #ffffff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+}
+
+.header-nav {
+    display: flex;
+}
+
+.header-login,
+.header-mypage,
+.header-cart {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    margin: 10px 0 0 20px;
+}
+
+.header-nav-icon {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 7px;
+}
+
+.header-nav-text {
+    color: #676767;
+}
+
+.header-cart {
+    position: relative;
+}
+
+.header-cart-badge {
+    position: absolute;
+    top: -0.38rem;
+    right: 0.25rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background-color: #00a372;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2rem;
+}
+
+.header-category {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    height: 40px;
+    margin: 0 auto;
+    border-bottom: 1px solid #eeeeee;
+    box-sizing: border-box;
+}
+
+.header-category-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    width: 140px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.header-category-btn.open {
+    background-color: #000000;
+    color: #ffffff;
+    justify-content: center;
+}
+
+.header-category-btn.open .header-category-bar .bar {
+    background-color: #ffffff;
+}
+
+.header-category-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2px 16px 0 0;
+    height: 100%;
+}
+
+.bar {
+    width: 20px;
+    height: 2px;
+    background-color: #333;
+    margin-bottom: 4px;
+    transition: 0.4s;
+}
+
+.bar:last-child {
+    margin-bottom: 0;
+}
+
+.header-category-btn.open .header-category-bar .bar:first-child {
+    transform: translate(0, 6px) rotate(-45deg);
+}
+
+.header-category-btn.open .header-category-bar .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.header-category-btn.open .header-category-bar .bar:last-child {
+    transform: translate(0, -6px) rotate(45deg);
+}
+
+.header-category-btn.open+.header-category-wrap {
+    display: block;
+}
+
+.header-category-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+}
+
+.header-category-text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-category-wrap {
+    display: none;
+    position: absolute;
+    width: 140px;
+    z-index: 99;
+    margin-top: 40px;
+    background-color: rgb(238, 238, 238);
+}
+
+.category-wrap {
+    padding-left: 0px;
+}
+
+.category-wrap li {
+    margin: 15px 0 0 32px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.category-wrap li a {
+    display: block;
+}
+
+.category-wrap li a:visited {
+    color: inherit;
+}
+
+.category-wrap li:nth-last-child(1) {
+    margin-bottom: 15px;
+}
+
+.category-span {
+    display: flex;
+    width: 80px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.notice {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .header-search {
+        margin-top: 125px;
+        left: 50%;
+    }
+}
