@@ -1,0 +1,101 @@
+body {
+    text-align: center;
+}
+
+.icon-close {
+    cursor: pointer;
+    width: 30px;
+}
+
+.container-signup {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 470px;
+    margin: 20px auto;
+}
+
+.container-signup h2 {
+    margin: auto;
+}
+
+.text-introduce {
+    margin: 0 auto;
+    border-top: 1px solid lightgray;
+    width: 570px;
+    padding-top: 35px;
+    padding-bottom: 15px;
+    color: grey;
+}
+
+.form-signup {
+    width: 470px;
+    margin: 0 auto;
+}
+
+.input {
+    height: 55px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.input2, .input3,
+.input4, .input5,
+.input9, .input10,
+.input10 {
+    width: 100%;
+}
+
+.form-id,
+.form-email,
+.form-address {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input1 {
+    width: 70%;
+}
+
+.input6,
+.input7 {
+    width: 48%;
+}
+
+.input8 {
+    width: 50%;
+}
+
+.btn {
+    background-color: #000000;
+    color: white;
+    height: 55px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.btn1 {
+    width: 100px;
+}
+
+.btn2 {
+    width: 200px;
+}
+
+.btn3 {
+    width: 470px;
+}
+
+#inputIdMessage, #inputPasswordMessage1,
+#inputPasswordMessage2, #inputNameMessage, 
+#inputPhoneMessage {
+    width: 100%;
+    text-align: left;
+    margin-left: 5px;
+}

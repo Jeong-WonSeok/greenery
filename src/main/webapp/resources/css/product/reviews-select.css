@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
+
+#reviewList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.reviews {
+    width: 75%;
+    display: flex;
+    gap: 100px;
+    padding: 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.star-cnt {
+    font-size: 25px;
+}
+
+.star-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.star {
+    width: 25px;
+    height: 25px;
+}
+
+.star:hover {
+    cursor: no-drop;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.review-span {
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.img-box img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+}

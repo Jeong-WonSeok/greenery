@@ -1,0 +1,398 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
+}
+
+h1 {
+    margin: 120px 0 30px auto;
+    width: 75%;
+    margin: 120px auto 30px;
+}
+
+h2 {
+    margin: 14px;
+    text-align: left;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* 기본 체크박스 스타일 제거 */
+input[type="checkbox"] {
+    appearance: none;
+    /* 기본 스타일 제거 */
+    width: 20px;
+    /* 너비 */
+    height: 20px;
+    /* 높이 */
+    border: 1px solid #ccc;
+    /* 테두리 색상 */
+    cursor: pointer;
+    /* 포인터 커서 */
+    margin-right: 8px;
+}
+
+/* 체크 시 배경과 체크 표시 */
+input[type="checkbox"]:checked {
+    background-color: #069369;
+    /* 체크 시 배경색 */
+    border-color: #069369;
+    /* 체크 시 테두리 색상 */
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    display: block;
+    width: 13px;
+    /* 이미지 크기 */
+    height: 13px;
+    /* 이미지 크기 */
+    background-image: url('../../res/images/check-icon.png');
+    /* 체크 표시 이미지 경로 */
+    background-size: contain;
+    /* 이미지 크기 조정 */
+    background-repeat: no-repeat;
+    /* 이미지 반복 방지 */
+    margin-top: 3px;
+    margin-left: 2px;
+}
+
+.basket {
+    display: flex;
+    /* 수평 정렬 */
+    width: 75%;
+    /* 전체 너비 */
+    margin: auto;
+}
+
+.product {
+    margin: 30px 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product-list {
+    margin: 0 200px 0 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    /* 양쪽 끝으로 배치 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    margin-bottom: 10px;
+}
+
+.product-all {
+    display: flex;
+    justify-content: center;
+}
+
+.product-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-checkbox {
+    margin: 0 10px 110px 0;
+}
+
+.product-label {
+    margin: 0 0 0 15px;
+    width: 240px;
+    align-self: flex-start;
+}
+
+.product-quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 30px 0 0;
+    width: 100px;
+    justify-content: space-between;
+}
+
+.product-price {
+    font-size: 22px;
+    min-width: 120px;
+    max-width: 150px;
+    text-align: right;
+}
+
+.product-description {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #B2B2B2;
+}
+
+.label-box {
+    position: relative;
+}
+
+
+.delete-icon:hover {
+    cursor: pointer;
+}
+
+.product-quantity button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 22px;
+    height: 22px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.basket-delete {
+    margin: 0 10px 110px 0;
+}
+
+
+.payment-info {
+    position: sticky;
+    top: 200px;
+    border: 1px solid #ccc;
+    /* 회색 테두리 */
+    padding: 10px;
+    /* 내부 여백 */
+    height: 400px;
+    /* 고정된 높이 */
+
+}
+
+#payment-info-body {
+    text-align: center;
+    justify-content: space-between;
+}
+
+.basket-list-header {
+    display: flex;
+    /* 요소 수평 정렬 */
+    justify-content: space-between;
+    /* 양쪽 끝으로 배치 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+.button-group {
+    display: flex;
+    /* 버튼 그룹을 수평으로 정렬 */
+}
+
+button {
+    background-color: transparent;
+    color: black;
+    border: 0.5px solid black;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.apply-coupon {
+    background-color: #CFF7D3;
+    color: #0F5E32;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px
+}
+
+#order-button {
+    /* 결제정보 버튼 */
+    background-color: #CFF7D3;
+    border: none;
+    width: 85%;
+    margin: 0px;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+#hr-topLine {
+    border: 1.5px solid black;
+    margin: 0 0 60px 0;
+}
+
+.payment-info-body-content2,
+.delivery,
+.coupon,
+.orderPrice {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 14px;
+    margin-top: 15px;
+}
+
+.totalPrice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 20px;
+    font-size: 16px;
+}
+
+#totalPrice-num {
+    font-weight: bold;
+    color: #d9534f;
+    font-size: 20px;
+}
+
+.payment-info-body-content1 {
+    margin: 38px 0;
+}
+
+#product-order {
+    margin: 25px 0 10px 0;
+
+}
+
+a {
+    text-decoration: none;
+    color: #02542D;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.picture {
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
+}
+
+.product-picture {
+    display: flex;
+
+}
+
+#sum_p_price {
+    display: flex;
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    justify-content: space-between;
+    width: 200px;
+}
+
+.coupon-info {
+    margin: 20px 0;
+}
+
+.coupon-title {
+    display: flex;
+    align-items: flex-end;
+}
+
+.coupon-title h1 {
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+
+#have-coupon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.coupon-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.coupon-label {
+    margin-right: 10px;
+    font-size: 16px;
+
+}
+
+.custom-select {
+    position: relative;
+    flex: 1;
+    margin-right: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #B2B2B2;
+    border-radius: 5px;
+    color: #B2B2B2;
+    font-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.dropdown-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.divider {
+    border-top: 1px solid #ddd;
+    margin: 5px 0;
+}
+
+.scroll-btn-up {
+    z-index: 98;
+    position: fixed;
+    right: 2%;
+    bottom: 10%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    background-image: url("../../res/images/up_arrow.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 40%;
+}
+
+.btn {
+    padding: 2px 18px 3px 18px;
+}

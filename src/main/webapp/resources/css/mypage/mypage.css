@@ -1,0 +1,295 @@
+@charset "UTF-8";
+
+.mypage {
+	width: 75%;
+	margin: 0 auto;
+	padding-top: 50px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.mypage-sidebar {
+	display: flex;
+	flex-direction: column;
+	width: 15%;
+}
+
+.mypage-sidebar-title {
+	border-bottom: 1px solid #000000;
+	font-size: 24px;
+	font-weight: 600;
+	padding-bottom: 14px;
+	margin-bottom: 20px;
+}
+
+.mypage-menu {
+	margin-bottom: 20px;
+	color: #7A7A7A;
+	letter-spacing: -.8px;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.mypage-content {
+	width: 75%;
+}
+
+/* 찜한 상품 */
+
+.mypage-title {
+	align-items: center;
+	display: flex;
+	border-bottom: 1px solid #EEEEEE;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.mypage-title-greeting {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 15px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.mypage-title-greeting img {
+	width: 34px;
+	height: 34px;
+}
+
+.coupon-status {
+	font-size: 14px;
+}
+
+.coupon-num {
+	color: #069369;
+}
+
+.mypage-content-title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.product-container {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	/* 가로로 5개의 열 */
+	gap: 20px;
+	/* 각 상품 간격 */
+	margin: 20px auto;
+	/* 페이지 중앙 정렬 */
+}
+
+.product-item {
+	text-align: left;
+	/* 텍스트를 왼쪽 정렬 */
+	margin-bottom: 100px;
+}
+
+.product-image-container {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.product-image {
+	width: 100%;
+	height: auto;
+	display: block;
+	cursor: pointer;
+}
+
+.product-icons {
+	position: absolute;
+	bottom: -100px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	transition: bottom 0.3s ease-in-out;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 7px 0;
+}
+
+.product-image-container:hover .product-icons {
+	bottom: 0;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	background-color: transparent;
+	margin: 0 15px;
+	border-radius: 50%
+}
+
+.icon img {
+	width: 27px;
+	height: 27px;
+	cursor: pointer;
+}
+
+.icon:hover img {
+	filter: brightness(1.2);
+}
+
+.product-details {
+	padding: 10px 0 0 0;
+}
+
+.product-details .product-name {
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+.product-details .product-description {
+	font-size: 12px;
+	color: #757575;
+	margin-bottom: 15px;
+}
+
+.product-details .product-price {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+/* 주문 내역 */
+
+.order-list {
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.order-list-col {
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
+	text-align: center;
+	border-top: 2px solid #AFAFAF;
+	background-color: #f2f2f2;
+}
+
+.order-list-col div {
+	display: flex;
+	border-right: 1px solid #DCDCDC;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.order-list-col div:nth-last-child(1) {
+	border-right: none;
+}
+
+.ol-1 {
+	flex: 1;
+}
+
+.ol-3 {
+	flex: 3;
+	display: flex;
+}
+
+.ol-3 img {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+}
+
+.order-item-col {
+	display: flex;
+	justify-content: space-between;
+	height: 200px;
+	text-align: center;
+	border-bottom: 1px solid #AFAFAF;
+}
+
+.order-item-img {
+	width: 40%;
+}
+
+.order-item-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 50%;
+}
+
+.order-item-col>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	word-break: break-all;
+}
+
+.order-status {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.item-desc {
+	color: #B1B1B1;
+}
+
+/* 개인정보 수정 */
+
+.mypage-myinfo-title {
+	font-size: 20px;
+	font-weight: 600;
+	border-bottom: 1px solid #EEEEEE;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.myinfo-list {
+	font-size: 14px;
+	width: 60%;
+}
+
+.myinfo-list div {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	border-bottom: 1px solid #AEAEAE;
+}
+
+.myinfo-list div:last-child {
+	border: none;
+	margin-top: 50px;
+}
+
+.myinfo-list div span {
+	width: 50%;
+	box-sizing: border-box;
+}
+
+.myinfo-list div span:first-child {
+	font-weight: 600;
+}
+
+.myinfo-list div span:last-child {
+	color: #7E7E7E;
+}
+
+.myinfo-edit {
+	justify-content: center;
+}
+
+.myinfo-edit-btn {
+	width: 40%;
+	background-color: #CFF7D3;
+	border: none;
+	border-radius: 5px;
+	height: 50px;
+}
+
+.order-img:hover {
+	cursor: pointer;
+}

@@ -1,0 +1,23 @@
+package com.mycompany.miniproject.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@Slf4j
+@RequestMapping("/notice")
+public class NoticesController {
+
+	@RequestMapping("/noticeContent")
+	public String editMyInfo() {
+		return "notice/noticeContent";
+	}
+	
+	@RequestMapping("/notices")
+	public String notices() {
+		return "notice/notices";
+	}
+	
+	
+}
