@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="../../common.css" />
+<!-- <link rel="stylesheet" href="../../common.css" /> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css"/>
-<script src="../header/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/common/header.js"></script>
 
 <header>
     <div class="header-logo">
-        <a href="../main/main.html">
+        <a href="${pageContext.request.contextPath}">
             <!--  <span class="logo">greenery</span> -->
             <img src="${pageContext.request.contextPath}/resources/images/logo4.png" class="logo">
         </a>
     </div>
     <div class="header-nav">
-        <button class="header-login" onclick="location.href='../login/login.html'">
+        <button class="header-login" onclick="location.href='user/login'">
             <img src="${pageContext.request.contextPath}/resources/images/login_icon.png" class="header-nav-icon" />
             <span class="header-nav-text">로그인</span>
         </button>
-        <button class="header-mypage" onclick="location.href='../mypage/mypage.html'">
+        <button class="header-mypage" onclick="location.href='mypage/mypage'">
             <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
             <span class="header-nav-text">마이페이지</span>
         </button>
-        <button class="header-cart" onclick="location.href='../basket/basket.html'">
+        <button class="header-cart" onclick="location.href='order/basket'">
             <img src="${pageContext.request.contextPath}/resources/images/cart_icon.png" class="header-nav-icon" />
             <span class="header-cart-badge">0</span>
             <span class="header-nav-text">장바구니</span>
