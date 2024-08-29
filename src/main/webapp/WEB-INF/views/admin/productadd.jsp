@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link href="../../../res/bootstrap/bootstrap.min.css" rel="stylesheet">
-	<script src="../../../res/bootstrap/bootstrap.bundle.min.js"></script>
-	<script src="../../../res/bootstrap/jquery.min.js"></script>
-    <link href="../productadd/productadd.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/bootstrap.min.css" rel="stylesheet">
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+    <link href="${pageContext.request.contextPath}/resources/css/admin/productadd.css" rel="stylesheet" type="text/css"/>
     <!-- summernote html editor -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -99,6 +99,6 @@
     </div>
     
 
-    <script src="../productadd/productadd.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/productadd.js"></script>
 </body>
 </html>

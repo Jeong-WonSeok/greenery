@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
-<link href="../../../res/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="../../../res/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="../../../res/bootstrap/jquery.min.js"></script>
-<link href="../noticeadd/noticeadd.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/admin/noticeadd.css" rel="stylesheet" type="text/css" />
 </head>
 
 
@@ -18,7 +18,7 @@
 <body>
 
 	<div>
-		<form class="container-form">
+		<form class="container-form" mehtod>
 			<div class="top-text-margin">
 				공지사항 > <span class="text-success"><b>공지사항 등록</b></span>
 			</div>
@@ -47,6 +47,6 @@
 		</form>
 	</div>
 
-	<script src="noticeadd.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin/noticeadd.js"></script>
 </body>
 </html>

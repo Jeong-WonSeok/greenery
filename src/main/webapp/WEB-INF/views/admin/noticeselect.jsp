@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link href="../../../res/bootstrap/bootstrap.min.css" rel="stylesheet">
-	<script src="../../../res/bootstrap/bootstrap.bundle.min.js"></script>
-	<script src="../../../res/bootstrap/jquery.min.js"></script>
-    <link href="../noticeselect/noticeselect.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+    <link href="${pageContext.request.contextPath}/resources/css/admin/noticeselect.css" rel="stylesheet" type="text/css"/>
 </head>
 
 
@@ -56,6 +56,6 @@
     </div>
     
 
-    <script src="noticeselect.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/noticeselect.js"></script>
 </body>
 </html>
