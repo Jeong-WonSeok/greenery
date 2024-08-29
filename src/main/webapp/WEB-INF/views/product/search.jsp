@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div id="header"></div> <!-- 공통 헤더(상단바) 삽입 -->
+    <!--<div id="header"></div>  공통 헤더(상단바) 삽입 -->
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
     <div class="search-result-text">
         '<span class="search-term"></span>' 에 대한 검색 결과입니다.
@@ -47,8 +48,9 @@
 
 
 
-    <div id="footer"></div> <!-- 공통 footer 삽입 -->
-    <script src="search.js"></script>
+    <!--<div id="footer"></div>  공통 footer 삽입 -->
+    <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+    <script src="${pageContext.request.contextPath}/resources/js/product/search.js"></script>
 </body>
 
 </html>

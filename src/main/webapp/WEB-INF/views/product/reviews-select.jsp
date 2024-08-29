@@ -9,7 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../../common.css" />
     <!-- <link rel="stylesheet" href="reviews-select.css"> -->
-    <script src="reviews-select.js"></script>
+    
+
 </head>
 
 <body>
