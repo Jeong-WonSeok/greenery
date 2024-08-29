@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <section class="mypage-title">
 	<div class="mypage-title-greeting">
-		<img src="../../res/images/thum.png">
+		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
 		<div class="greeting-text">
 			홍길동 님 반갑습니다.
 		</div>
@@ -25,7 +25,7 @@
 		<div class="ol-1">2024-07-21</div>
 		<div class="ol-3">
 			<div class="order-item-img">
-				<img src="../../res/images/productImages/1.png" class="order-img">
+				<img src="${pageContext.request.contextPath}/resources/images/productImages/1.png" class="order-img">
 			</div>
 			<div class="order-item-info">
 				<span class="item-title">수분 크림</span>
@@ -40,7 +40,7 @@
 		<div class="ol-1">2024-07-20</div>
 		<div class="ol-3">
 			<div class="order-item-img">
-				<img src="../../res/images/productImages/4.png" class="order-img">
+				<img src="${pageContext.request.contextPath}/resources/images/productImages/4.png" class="order-img">
 			</div>
 			<div class="order-item-info">
 				<span class="item-title">헤어 오일</span>

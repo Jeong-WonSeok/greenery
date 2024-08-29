@@ -11,9 +11,9 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../reviews/reviews.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/reviews.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../reviews/reviews.js"></script> <!-- 스크립트 파일 경로 -->
+    <script src="${pageContext.request.contextPath}/resources/js/mypage/reviews.js"></script> <!-- 스크립트 파일 경로 -->
 
 </head>
 
@@ -58,8 +58,8 @@
                     <div class="review-tips">
                         <span>리뷰 작성 TIP</span>
                         <div class="image-container">
-                            <img src="../../res/images/reviews-tip-1.jpg" alt="이미지 1" class="review-image">
-                            <img src="../../res/images/reviews-tip-2.jpg" alt="이미지 2" class="review-image">
+                            <img src="${pageContext.request.contextPath}/resources/images/reviews-tip-1.jpg" alt="이미지 1" class="review-image">
+                            <img src="${pageContext.request.contextPath}/resources/images/reviews-tip-2.jpg" alt="이미지 2" class="review-image">
                         </div>
                         <span class="tip-text">나만의 스킨케어루틴과 함께 전/후 변화를 보여주세요</span>
                         <span class="tip-text" id="tip-text2">오랜 기간동안 사용한 후기라면 더 좋아요!</span>

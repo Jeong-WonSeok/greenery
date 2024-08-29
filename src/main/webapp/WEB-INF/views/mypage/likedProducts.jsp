@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <section class="mypage-title">
 	<div class="mypage-title-greeting">
-		<img src="../../res/images/thum.png">
+		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
 		<div class="greeting-text">
 			홍길동 님 반갑습니다.
 		</div>
