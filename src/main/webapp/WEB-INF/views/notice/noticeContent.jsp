@@ -6,14 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>공지 내용 페이지</title>
 
-<link rel="stylesheet" href="noticeContent.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticeContent.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
-	<script src="noticeContent.js"></script>
-	<div id="header"></div>
+	<script src="${pageContext.request.contextPath}/resources/js/noticeContent.js"></script>
+	<!-- <div id="header"></div> -->
 	<!-- 공통 헤더(상단바) 삽입 -->
+	<%@ include file="/WEB-INF/views/common/header.jsp"%> 
 
 	<div class="notice-container">
 		<div class="notice-inner">
@@ -37,7 +38,8 @@
 </div>
 
 
-	<div id="footer"></div>
+<!-- 	<div id="footer"></div> -->
 	<!-- 푸터를 삽입할 위치 -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%> 
 </body>
 </html>
