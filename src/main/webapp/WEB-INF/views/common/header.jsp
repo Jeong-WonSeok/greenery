@@ -11,15 +11,15 @@
         </a>
     </div>
     <div class="header-nav">
-        <button class="header-login" onclick="location.href='user/login'">
+        <button class="header-login" onclick="location.href='${pageContext.request.contextPath}/user/login'">
             <img src="${pageContext.request.contextPath}/resources/images/login_icon.png" class="header-nav-icon" />
             <span class="header-nav-text">로그인</span>
         </button>
-        <button class="header-mypage" onclick="location.href='mypage/mypage'">
+        <button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/mypage/mypage'">
             <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
             <span class="header-nav-text">마이페이지</span>
         </button>
-        <button class="header-cart" onclick="location.href='order/basket'">
+        <button class="header-cart" onclick="location.href='${pageContext.request.contextPath}/order/basket'">
             <img src="${pageContext.request.contextPath}/resources/images/cart_icon.png" class="header-nav-icon" />
             <span class="header-cart-badge">0</span>
             <span class="header-nav-text">장바구니</span>

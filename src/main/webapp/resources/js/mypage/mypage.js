@@ -1,6 +1,6 @@
 function getContent(url) {
     $.ajax({
-        url: url + ".html",
+        url: url,
         method: "GET",
         dataType: "html",
         success: function (data) {
@@ -67,7 +67,7 @@ function getData() {
 
 function getReview() {
     $.ajax({
-        url: "../reviews/reviews.html",
+        url: "reviews",
         method: "GET",
         dataType: "html",
         success: function (data) {
@@ -87,6 +87,7 @@ $(document).ready(function () {
     // 마이페이지 로딩 시 기본적으로 찜한 상품 탭 글씨 진하게 보여줌
     $('.mypage-menu').each(function () {
         if ($(this).data('url') === 'likedProducts') {
+        	console.log("likedProductㄴ");
             $(this).html('<strong>' + $(this).text() + '</strong>');
         }
     });
@@ -114,8 +115,8 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.product-image', function () {
-    window.location.href = '../detail/detailpage.html';
+    window.location.href = 'detailpage';
 });
 $(document).on('click', '.order-img', function () {
-    window.location.href = '../detail/detailpage.html';
+    window.location.href = 'detailpage';
 });
