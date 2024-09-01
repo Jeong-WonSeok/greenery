@@ -55,6 +55,13 @@ $(document).ready(() => {
     });
 });
 
+function getContextPath(){
+	const hostIndex = location.href.indexOf(location.host) + location.host.length;
+	const contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	return contextPath;
+}
+
 $(document).on("click", ".notice", function () {
-    window.location.href = "../notices/notices.html";
+	console.log(getContextPath());
+    window.location.href = getContextPath() + "/notice/notices";
 });

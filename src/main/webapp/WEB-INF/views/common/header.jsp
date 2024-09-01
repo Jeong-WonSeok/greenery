@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- <link rel="stylesheet" href="../../common.css" /> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css"/>
-<script src="${pageContext.request.contextPath}/resources/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
 
 <header>
     <div class="header-logo">
