@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mycompany.miniproject.dto.UserDto;
+import com.mycompany.miniproject.dto.SignUpFormDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +27,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/signup")
-	public String signup(UserDto dto) {
+	public String signup(SignUpFormDto dto) {
 		
 		log.info("greeneryId: " + dto.getGreeneryId());
 		log.info("password: " + dto.getPassword());
