@@ -3,7 +3,7 @@ package com.mycompany.miniproject.dto;
 import lombok.Data;
 
 @Data
-public class SignInFormDto {
+public class SignUpFormDto {
 	
 	private String greeneryId;          // inputId
     private String password;             // inputPassword1
