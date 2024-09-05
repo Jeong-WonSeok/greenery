@@ -8,16 +8,17 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <title>주문완료 페이지</title>
 
-  <link rel="stylesheet" href="order.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/order.css">
 </head>
 
 <body>
-  <div id="header"></div>
+  <!-- <div id="header"></div> -->
   <!-- 공통 헤더(상단바) 삽입 -->
+  <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
   <div class="container">
     <div class="order">
-      <img src="../../res/images/checkout-icon.png" alt="order" class="order-icon">
+      <img src="${pageContext.request.contextPath}/resources/images/checkout-icon.png" alt="order" class="order-icon">
     </div>
     <div class="finish">
       <p class="order-complete">고객님의 주문이 완료 되었습니다.</p>
@@ -28,13 +29,9 @@
 
   <div id="footer"></div>
   <!-- 푸터를 삽입할 위치 -->
+  <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      $("#header").load("../header/header.html");
-      $("#footer").load("../footer/footer.html");
-    });
-  </script>
+  
 
 </body>
 

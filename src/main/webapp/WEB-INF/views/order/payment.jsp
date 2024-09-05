@@ -8,13 +8,14 @@
 	<title>결제 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="../../common.css" />
-	<link rel="stylesheet" href="payment.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/payment.css">
 </head>
 
 <body>
 	<script src="payment.js"></script>
-	<div id="header"></div>
-	<!-- 공통 헤더(상단바) 삽입 -->
+	<!--<div id="header"></div>공통 헤더(상단바) 삽입 -->
+	 
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 	<h1>결제하기</h1>
 	<div class="basket" id="basket">
@@ -48,7 +49,7 @@
 					<div class="custom-select">
 						<select id="coupon-select">
 							<option value="1">그리너리 회원을 위한 1,000원 할인 쿠폰</option>
-						</select> <img src="../../res/images/dropdown-icon.png" alt="dropdown-icon"
+						</select> <img src="${pageContext.request.contextPath}/resources/images/dropdown-icon.png" alt="dropdown-icon"
 							class="dropdown-icon">
 					</div>
 					<button class="apply-coupon" onclick="applyCoupon()">쿠폰 적용</button>
@@ -58,7 +59,7 @@
 
 		</div>
 		<div class="alert-coupon">
-			<img src="../../res/images/coupon_modal_check.png" class="img-alert-coupon" />
+			<img src="${pageContext.request.contextPath}/resources/images/coupon_modal_check.png" class="img-alert-coupon" />
 			<span>쿠폰 적용 되었습니다.</span>
 		</div>
 
@@ -97,10 +98,9 @@
 
 
 
-	<div id="footer"></div> <!-- 푸터를 삽입할 위치 -->
-
-	<!--  <script src="script.js"></script> JavaScript 파일 링크 -->
-
+	<!-- <div id="footer"></div> 푸터를 삽입할 위치 -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<script src="${pageContext.request.contextPath}/resources/js/order/payment.js"></script> 
 
 </body>
 

@@ -5,15 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="basket.css">
-    <link rel="stylesheet" href="../../common.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/basket.css">
 </head>
 
 <body>
-    <script src="basket.js"></script> <!-- 스크립트 파일 경로 -->
-    <div id="header"></div> <!-- 공통 헤더(상단바) 삽입 -->
+    <!--<div id="header"></div> 공통 헤더(상단바) 삽입 -->
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
     <h1>장바구니</h1>
 
@@ -65,7 +64,10 @@
             </div>
         </div>
     </div>
-    <div id="footer"></div> <!-- 공통 footer 삽입 -->
+    <!--<div id="footer"></div>  공통 footer 삽입 -->
+    <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+    
+    <script src="${pageContext.request.contextPath}/resources/js/order/basket.js"></script> 
 </body>
 
 </html>
