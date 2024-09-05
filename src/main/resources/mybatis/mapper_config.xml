@@ -33,7 +33,6 @@
 		<typeAlias
 			type="com.mycompany.miniproject.dto.UserDto" 
 			alias="User" />
-			
 		<typeAlias
 			type="com.mycompany.miniproject.dto.Pager"
 			alias="Pager" />
