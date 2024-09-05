@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	
+	<!-- mapper들의 공통 설정하는 곳 -->
+	
+	
+	<!-- null을 넣는 공통 설정 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value=""/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias
+			type="com.mycompany.miniproject.dto.CartDto" 
+			alias="Cart" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.LikeDto" 
+			alias="Like" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.NoticeDto" 
+			alias="Notice" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.OrderDto" 
+			alias="Order" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.ProductDto" 
+			alias="Product" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.ReviewDto" 
+			alias="Review" />
+		<typeAlias
+			type="com.mycompany.miniproject.dto.UserDto" 
+			alias="User" />
+			
+		<typeAlias
+			type="com.mycompany.miniproject.dto.Pager"
+			alias="Pager" />
+
+	</typeAliases>
+
+</configuration>
