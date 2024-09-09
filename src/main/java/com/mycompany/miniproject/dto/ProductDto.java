@@ -8,18 +8,14 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
-	private int id;
-	private String name;
-	private int price;
-	private String image;
-	private String image2;
-	private String image3;
-	private String image4;
+	private int productId;
+	private String productName;
+	private int productPrice;
+	private int productStock;
 	private String mainDescription;
 	private String summaryDescription;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private String productCategory;
+	private int productEnable;
 	private Date createdAt;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date updateAt;
-	private String cartegory;
+	private String detailDescription;
 }

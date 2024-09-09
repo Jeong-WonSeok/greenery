@@ -1,26 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="../css/common.css" />
+	<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
     <title>메인페이지</title>
 </head>
 
 <body>
-    <div class="modal-container">
-        <div class="coupon-modal">
-            <img src="${pageContext.request.contextPath}/resources/images/modal.png" class="modal-image" />
-            <div class="modal-text">
-                <span class="today-close">오늘 그만 보기</span>
-                <span class="close">닫기</span>
-            </div>
-        </div>
-    </div>
+	<c:if test="${category == 'all'}">
+	    <div class="modal-container">
+	        <div class="coupon-modal">
+	            <img src="${pageContext.request.contextPath}/resources/images/modal.png" class="modal-image" />
+	            <div class="modal-text">
+	                <span class="today-close">오늘 그만 보기</span>
+	                <span class="close">닫기</span>
+	            </div>
+	        </div>
+	    </div>
+    </c:if>
     <div class="alert-coupon">
         <img src="${pageContext.request.contextPath}/resources/images/coupon_modal_check.png" class="img-alert-coupon" />
         <span>쿠폰 발급이 완료되었습니다!</span>
@@ -55,39 +58,74 @@
     <div class="toolbar">
         <!-- 카테고리 -->
         <nav class="toolbar-category">
-            <button class="toolbar-category-btn active-category">
-                전체
-            </button>
-            <button class="toolbar-category-btn" data-category="Skincare">
-                스킨케어
-            </button>
-            <button class="toolbar-category-btn" data-category="Makeup">
-                메이크업
-            </button>
-            <button class="toolbar-category-btn" data-category="BodyCare">
-                바디케어
-            </button>
-            <button class="toolbar-category-btn" data-category="HairCare">
-                헤어케어
-            </button>
-            <button class="toolbar-category-btn" data-category="BeautyTools">
-                미용소품
-            </button>
-            <button class="toolbar-category-btn" data-category="MensCare">
-                맨즈케어
-            </button>
+       	   	<a class="toolbar-category-btn ${category == 'all' ? 'active-category' : ''}" href="${pageContext.request.contextPath}">전체</a>
+        	<a class="toolbar-category-btn ${category == 'Skincare' ? 'active-category' : ''}" href="?category=Skincare">스킨케어</a>
+            <a class="toolbar-category-btn ${category == 'Makeup' ? 'active-category' : ''}" href="?category=Makeup">메이크업</a>
+            <a class="toolbar-category-btn ${category == 'BodyCare' ? 'active-category' : ''}" href="?category=BodyCare">바디케어</a>
+            <a class="toolbar-category-btn ${category == 'HairCare' ? 'active-category' : ''}" href="?category=HairCare">헤어케어</a>
+            <a class="toolbar-category-btn ${category == 'BeautyTools' ? 'active-category' : ''}" href="?category=BeautyTools">미용소품</a>
+            <a class="toolbar-category-btn ${category == 'MensCare' ? 'active-category' : ''}" href="?category=MensCare">맨즈케어</a>
         </nav>
         <!-- 상품 정렬 -->
         <div class="toolbar-sort">
-            <select class="toolbar-sort-select">
-                <option value="default">신상품순</option>
-                <option value="price-asc">낮은 가격순</option>
-                <option value="price-desc">높은 가격순</option>
-            </select>
+			<form action="${pageContext.request.contextPath}" method="get">	        	
+	            <select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()">
+	                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+	                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+	                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+	            </select>
+            </form>
         </div>
     </div>
     <div class="main-products">
-        <div class="product-container"></div>
+        <div class="product-container">
+        
+        	<c:forEach items="${productList}" var="product">
+        		<div class="product-item">
+	                <div class="product-image-container">
+	                    <img src="imageDown?productId=${product.productId}" alt="${product.productName}" class="product-image">
+	                    <div class="product-icons">
+	                        <span class="icon like-icon">
+	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">
+	                        </span>
+	                        <span class="icon cart-icon">
+	                            <img src="${pageContext.request.contextPath}/resources/images/cart_icon2.png" alt="장바구니 아이콘">
+	                        </span>
+	                        <span class="icon buy-icon">
+	                            <img src="${pageContext.request.contextPath}/resources/images/dollar.png" alt="구매하기 아이콘" class="payment-img">
+	                        </span>
+	                    </div>
+	                </div>
+	                <div class="product-details">
+	                    <p class="product-name">${product.productName}</p>
+	                    <p class="product-description">${product.summaryDescription}</p>
+	                    <p class="product-price"><span class="price-amount">${product.productPrice}</span>원</p>
+	                </div>
+	            </div>
+        	</c:forEach>
+	   		<%-- [처음][이전] 1 2 3 4 5 [다음][맨끝] --%>
+        </div>
+        <c:if test="${category == 'all'}">
+	   		<div class="pager text-center">
+	   			<a href="?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
+	   			<c:if test="${pager.groupNo>1}">
+	   				<a href="?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
+	   			</c:if>
+	   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+	   				<c:if test="${i == pager.pageNo}">
+	   					<a href="boardList?pageNo=${i}" class="btn btn-success btn-sm">${i}</a>
+					</c:if>
+	   				<c:if test="${i != pager.pageNo }">
+	   					<a href="?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+					</c:if>
+	   			</c:forEach>
+	   			<c:if test="${pager.groupNo<pager.totalGroupNo }" >
+	   				<a href="?pageNo=${pager.endPageNo+1 }" class="btn btn-outline-info btn-sm">다음</a>
+	  				</c:if>
+	   			<a href="?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+	   		</div>
+		</c:if>
+
         <button class="scroll-btn-up" onclick="scrollToTop()"></button>
     </div>
 

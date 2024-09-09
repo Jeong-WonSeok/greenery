@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mycompany.miniproject.dao.ProductImage"/>
+<mapper namespace="com.mycompany.miniproject.dao.ProductImageDao">
+	<select id="selectImage" parameterType="int" resultType="ProductImage">
+		select pimage_id, pimage_name, pimage_type, pimage_data, pimage_usecase, product_id
+		from product_image
+		where product_id = #{id} and pimage_usecase = 'productImage1'
+	</select>
+</mapper>

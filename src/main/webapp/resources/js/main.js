@@ -77,40 +77,7 @@ function showAlertCoupon() {
     }, 2000);       // 2초동안 보이게
 }
 
-// 상품 데이터 가져오기
-function dataToHtml(products) {
-    if (Array.isArray(products)) {
-        products.forEach(product => {
-            const productHtml = `
-            <div class="product-item">
-                <div class="product-image-container">
-                    <img src="${product.imageUrls[0]}" alt="${product.productName
-                }" class="product-image">
-                    <div class="product-icons">
-                        <span class="icon like-icon">
-                            <img src="../../res/images/heart.png" alt="찜하기 아이콘">
-                        </span>
-                        <span class="icon cart-icon">
-                            <img src="../../res/images/cart_icon2.png" alt="장바구니 아이콘">
-                        </span>
-                        <span class="icon buy-icon">
-                            <img src="../../res/images/dollar.png" alt="구매하기 아이콘" class="payment-img">
-                        </span>
-                    </div>
-                </div>
-                <div class="product-details">
-                    <p class="product-name">${product.productName}</p>
-                    <p class="product-description">${product.mainDescription
-                }</p>
-                    <p class="product-price"><span class="price-amount">${product.price.toLocaleString()}</span>원</p>
-                </div>
-            </div>`;
 
-            // 생성한 HTML을 product-container에 추가
-            $(".product-container").append(productHtml);
-        });
-    }
-}
 // 정렬(신상품, 가격 오름차순, 가격 내림차순)
 function sortProducts(products, sortOption) {
     switch (sortOption) {
@@ -137,26 +104,12 @@ function filteredProducts(category) {
     dataToHtml(sortProducts(categoryProducts, sortOption));
 }
 
-function getData() {
-    $.ajax({
-        url: "../../content/products.json",
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
-            products = data.products;
-            filteredProducts();     // 데이터 불러올 때 성공하면 filteredProducts() 호출
-        },
-        error: function (err) {
-            console.error("Error fetching product data:", err);
-        },
-    });
-}
 
 $(document).ready(function () {
-    $("#header").load("../header/header.html");
-    $("#footer").load("../footer/footer.html");
+//    $("#header").load("../header/header.html");
+//    $("#footer").load("../footer/footer.html");
     autoSlides();
-    getData(); // 초기 데이터 로드 (전체)
+//    getData(); 초기 데이터 로드 (전체)
     scrollToTop();
     isOverExp("TodayCloseTime");
     $(".close").click(() => {
@@ -168,11 +121,13 @@ $(document).ready(function () {
     $(".modal-image").click(() => {
         showAlertCoupon();
     });
+    
     $(".toolbar-category-btn").click(function () {
         clickCategoryBtn($(this));
         $(".toolbar-sort-select").val("default"); // 카테고리 변경시 정렬 옵션 기본으로 되돌아가기
         filteredProducts($(this).data("category"));
     });
+    
     $(".toolbar-sort-select").change(function () {
         filteredProducts(
             $(".toolbar-category .active-category").data("category")
@@ -183,18 +138,17 @@ $(document).ready(function () {
         $(this).toggleClass("active");
         let heartIcon = $(this).find("img");
         if ($(this).hasClass("active")) {
-            heartIcon.attr("src", "../../res/images/fill_heart.png");
+            heartIcon.attr("src", "resources/images/fill_heart.png");
         } else {
-            heartIcon.attr("src", "../../res/images/heart.png")
+            heartIcon.attr("src", "resources/images/images/heart.png")
         }
     });
 });
 
-
-$(document).on('click', '.product-image', function () {
-    window.location.href = '../detail/detailpage.html';
-});
-
-$(document).on('click', '.buy-icon', function () {
-    window.location.href = '../payment/payment.html';
-});
+//$(document).on('click', '.product-image', function () {
+//    window.location.href = '../detail/detailpage.html';
+//});
+//
+//$(document).on('click', '.buy-icon', function () {
+//    window.location.href = '../payment/payment.html';
+//});

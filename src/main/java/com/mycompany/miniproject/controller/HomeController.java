@@ -1,6 +1,20 @@
 package com.mycompany.miniproject.controller;
+import java.io.OutputStream;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.mycompany.miniproject.dto.Pager;
+import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.ProductImageDto;
+import com.mycompany.miniproject.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,10 +22,42 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController {
 	
-	@RequestMapping("/")
-	public String mainPage() {
+	@Autowired
+	private ProductService productService;
+	
+	@GetMapping("/")
+	public String mainPage(@RequestParam(defaultValue="all") String category, 
+						@RequestParam(defaultValue="1") int pageNo,
+						@RequestParam(name="sort", defaultValue="default") String sort,
+						HttpSession session, 
+						Model model) {
+		
+		int totalRows = productService.getTotalRows();
+		Pager pager = new Pager(10, 5, totalRows, pageNo);
+		session.setAttribute("pager", pager);
+		
+		List<ProductDto> productList = productService.getProductList(category, pager, sort);
+		model.addAttribute("productList", productList);
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
 		return "main";
 	}
 	
+	
+	@GetMapping("/imageDown")
+	public void imageDown(int productId, HttpServletResponse response) throws Exception{
+		ProductImageDto image = productService.getProductImage(productId);
+		
+		//응답 헤더에 들어가는 Content-Type
+		String contentType = image.getPimageType();
+		response.setContentType(contentType);		
+		
+		//응답 본문에 파일 데이터를 출력
+		OutputStream out = response.getOutputStream();
+		out.write(image.getPimageData());
+		out.flush();
+		out.close();
+	}
+
 }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- MyBatis 설정 파일의 위치를 설정 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+      
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mapper_config.xml" /> <!-- 파일위치 -->
+		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
+	</bean>
+   
+	<!-- 예전 방식으로 DAO를 만들기 위한 설정 -->
+	<!-- 기본 생성자를 생성 못해서 만들어 줘야한다. -->
+	<bean id="sqlSessionTemplate"
+   		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+         
+    <!-- @Mapper를 사용하기 위한 설정(관리 객체로 만듬) -->
+    <!-- @Mapper가 붙은애들을 여기(base-package)서 찾아서 관리 객체로 등록 -->
+	<mybatis-spring:scan 
+		base-package="com.mycompany.miniproject.dao"
+		annotation="org.apache.ibatis.annotations.Mapper"/>
+
+</beans>
