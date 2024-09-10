@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
-   <!--[옵션] ========================================================= -->
-   <!-- 
-   1) WAS가 web.xml의 listener 태그를 해석할 때 ContextLoaderLister 객체 생성
-   2) ContextLoaderLister 객체는 내부에 Root WebApplicationContext 생성 
-   3) Root WebApplicationContext는 관리할 객체(빈)의 설정 파일의 경로를 param-value 태그에서 찾음
-   -->
-   <listener>
-      <listener-class>
-         org.springframework.web.context.ContextLoaderListener
-      </listener-class>
-   </listener>
-   <context-param>
-      <param-name>contextConfigLocation</param-name>
-      <!-- classpath는 WAR 파일내부의 WEB-INF/classes 폴더를 말함 -->
-      <!-- src/main/java, src/main/resources 폴더의 내용들이 취합되어 classes에 들어감 -->
-      <param-value>classpath:spring/root/*.xml</param-value>
-      <!-- <param-value>/WEB-INF/spring/root/*.xml</param-value> -->
-   </context-param>
-   <!--  ============================================================ -->
-   
-   
-   <!--[필수] ========================================================= -->
-   <!-- 
-   1) WAS가 web.xml의 servlet 태그를 해석할 때 DispatcherServlet 객체 생성
-   2) DispatcherServlet 객체는 내부에 WebApplicationContext 생성 
-   3) WebApplicationContext는 관리할 객체(빈)의 설정 파일의 경로를 param-value 태그에서 찾음
-    -->
-   <servlet>
-      <servlet-name>dispatcher</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-      <init-param>
-         <param-name>contextConfigLocation</param-name>
-         <!-- classpath는 WAR 파일내부의 WEB-INF/classes 폴더를 말함 -->
-         <!-- src/main/java, src/main/resources 폴더의 내용들이 취합되어 classes에 들어감 -->
-         <param-value>classpath:spring/dispatcher/*.xml</param-value>
-         <!-- <param-value>/WEB-INF/spring/dispatcher/*.xml</param-value> -->
-      </init-param>
-      <load-on-startup>1</load-on-startup>
-   </servlet>
-   <!--
-   4) 브라우저(클라이언트)가 요청하는 모든 URL을 DispatcherServlet이 처리하도록 설정
-   -->
-   <servlet-mapping>
-      <servlet-name>dispatcher</servlet-name>
-      <url-pattern>/</url-pattern>
-   </servlet-mapping>
-   <!--  =================================================================================== -->
-   
-   
-   
-   <!--========== [필수] =================================== -->
-   <!-- Filter의 역할: DispatcherServlet이 실행되기 전에 전처리하는 역할 -->
-   <!-- CharacterEncodingFilter의 역할: DispatcherServlet이 실행되기 전에 한글 데이터를 복원하는 역할  -->
-   
-   <filter>
-   		<filter-name>characterEncodingFilter</filter-name>
-   		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-   		<init-param>
-   			<param-name>encoding</param-name>
-   			<param-value>UTF-8</param-value>
-   		</init-param>
-   		
-   <!-- 4) 브라우저(클라이언트)가 요청하는 모든 URL에 대해서 CharacterEncodingFilter가 동작하도록 설정 -->
-   </filter>
-   <filter-mapping>
-   		<filter-name>characterEncodingFilter</filter-name>
-   		<url-pattern>/*</url-pattern> 	<!-- 모든 요청이 들어와도 필터를 먼저 실행(/때문에) -->
-   </filter-mapping>
-   
-   
-   
+	<!--[옵션] ========================================================= -->
+	<!-- 
+	1) WAS가 web.xml의 listener 태그를 해석할 때 ContextLoaderLister 객체 생성
+	2) ContextLoaderLister 객체는 내부에 Root WebApplicationContext 생성 
+	3) Root WebApplicationContext는 관리할 객체(빈)의 설정 파일의 경로를 param-value 태그에서 찾음
+	-->
+	<listener>
+	   <listener-class>
+	      org.springframework.web.context.ContextLoaderListener
+	   </listener-class>
+	</listener>
+	<context-param>
+		  	
+	   <param-name>contextConfigLocation</param-name>
+	   <!-- classpath는 WAR 파일내부의 WEB-INF/classes 폴더를 말함 -->
+	   <!-- src/main/java, src/main/resources 폴더의 내용들이 취합되어 classes에 들어감 -->
+	   <param-value>classpath:spring/root/*.xml</param-value>
+	   <!-- <param-value>/WEB-INF/spring/root/*.xml</param-value> -->
+	</context-param>
+	<!--  ============================================================ -->
+	
+	
+	<!--[필수] ========================================================= -->
+	<!-- 
+	1) WAS가 web.xml의 servlet 태그를 해석할 때 DispatcherServlet 객체 생성
+	2) DispatcherServlet 객체는 내부에 WebApplicationContext 생성 
+	3) WebApplicationContext는 관리할 객체(빈)의 설정 파일의 경로를 param-value 태그에서 찾음
+	 -->
+	<servlet>
+	   <servlet-name>dispatcher</servlet-name>
+	   <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	   <init-param>
+	      <param-name>contextConfigLocation</param-name>
+	      <!-- classpath는 WAR 파일내부의 WEB-INF/classes 폴더를 말함 -->
+	      <!-- src/main/java, src/main/resources 폴더의 내용들이 취합되어 classes에 들어감 -->
+	      <param-value>classpath:spring/dispatcher/*.xml</param-value>
+	      <!-- <param-value>/WEB-INF/spring/dispatcher/*.xml</param-value> -->
+	   </init-param>
+	   <init-param>
+	   		<param-name>throwExceptionIfNoHandlerFound</param-name>
+	   		<param-value>true</param-value>
+	   </init-param>
+	   
+	   <load-on-startup>1</load-on-startup>
+	   
+	   <!-- multipart/form-data를 해석하기위한 설정 -->
+	   <multipart-config>
+	   		<location>C:/Temp</location>		
+	   		<max-file-size>20971520</max-file-size>
+	   		<max-request-size>104857600</max-request-size>
+	   		<file-size-threshold>1024</file-size-threshold>
+	   </multipart-config>
+	   
+	</servlet>
+	<!--
+	4) 브라우저(클라이언트)가 요청하는 모든 URL을 DispatcherServlet이 처리하도록 설정
+	-->
+	<servlet-mapping>
+	   <servlet-name>dispatcher</servlet-name>
+	   <url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!--  ============================================================ -->
+	
+	<!-- [필수] ======================================================= -->
+	<!-- 
+	 CharacterEncodingFilter의 역할 : DispatcherServlet이 실행되기전에 한글 데이터를 복원하는 역할
+	-->
+ 	<filter>
+	<!-- alias 객체를 참조하는  별칭-->
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<!-- 
+		브라우저(클라이언트)가 요청하는 모든 URL에 대해서 CharacterEncodingFilter가 동작하도록 설정
+	 -->
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<!-- contextName 생략되어 있음 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>
