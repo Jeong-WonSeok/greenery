@@ -10,8 +10,12 @@ import com.mycompany.miniproject.dto.ProductDto;
 @Mapper
 public interface ProductDao {
 
-	public List<ProductDto> selectCategory(Map<String, Object> catePager);
+	public List<ProductDto> selectAll(Map<String, Object> catePager);
 
 	public int countRows();
+
+	public List<ProductDto> selectCategory(String category, String sort);
+
+	public List<ProductDto> selectCategory(Map<String, Object> categorySort);
 	
 }

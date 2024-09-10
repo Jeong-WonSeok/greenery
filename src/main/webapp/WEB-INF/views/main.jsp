@@ -59,17 +59,20 @@
         <!-- 카테고리 -->
         <nav class="toolbar-category">
        	   	<a class="toolbar-category-btn ${category == 'all' ? 'active-category' : ''}" href="${pageContext.request.contextPath}">전체</a>
-        	<a class="toolbar-category-btn ${category == 'Skincare' ? 'active-category' : ''}" href="?category=Skincare">스킨케어</a>
-            <a class="toolbar-category-btn ${category == 'Makeup' ? 'active-category' : ''}" href="?category=Makeup">메이크업</a>
-            <a class="toolbar-category-btn ${category == 'BodyCare' ? 'active-category' : ''}" href="?category=BodyCare">바디케어</a>
-            <a class="toolbar-category-btn ${category == 'HairCare' ? 'active-category' : ''}" href="?category=HairCare">헤어케어</a>
-            <a class="toolbar-category-btn ${category == 'BeautyTools' ? 'active-category' : ''}" href="?category=BeautyTools">미용소품</a>
-            <a class="toolbar-category-btn ${category == 'MensCare' ? 'active-category' : ''}" href="?category=MensCare">맨즈케어</a>
+        	<a class="toolbar-category-btn ${category == 'Skincare' ? 'active-category' : ''}" href="category?category=Skincare">스킨케어</a>
+            <a class="toolbar-category-btn ${category == 'Makeup' ? 'active-category' : ''}" href="category?category=Makeup">메이크업</a>
+            <a class="toolbar-category-btn ${category == 'BodyCare' ? 'active-category' : ''}" href="category?category=BodyCare">바디케어</a>
+            <a class="toolbar-category-btn ${category == 'HairCare' ? 'active-category' : ''}" href="category?category=HairCare">헤어케어</a>
+            <a class="toolbar-category-btn ${category == 'BeautyTools' ? 'active-category' : ''}" href="category?category=BeautyTools">미용소품</a>
+            <a class="toolbar-category-btn ${category == 'MensCare' ? 'active-category' : ''}" href="category?category=MensCare">맨즈케어</a>
         </nav>
         <!-- 상품 정렬 -->
         <div class="toolbar-sort">
-			<form action="${pageContext.request.contextPath}" method="get">	        	
-	            <select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()">
+			<form action="${pageContext.request.contextPath}"  method="get">
+	        	<c:choose> 
+	            	<c:when test="${category!='all' }"><select id="sort" name="sort" class="toolbar-sort-select" onchange="location.href='category?category=${category}&sort=' + this.value"></c:when>
+	            	<c:otherwise> <select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()"></c:otherwise>
+            	</c:choose>
 	                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
 	                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
 	                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
@@ -107,22 +110,22 @@
         </div>
         <c:if test="${category == 'all'}">
 	   		<div class="pager text-center">
-	   			<a href="?pageNo=1" class="btn btn-outline-primary btn-sm">처음</a>
+	   			<a href="?pageNo=1&sort=${sort}" class="btn btn-outline-primary btn-sm">처음</a>
 	   			<c:if test="${pager.groupNo>1}">
-	   				<a href="?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm">이전</a>
+	   				<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
 	   			</c:if>
 	   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 	   				<c:if test="${i == pager.pageNo}">
-	   					<a href="boardList?pageNo=${i}" class="btn btn-success btn-sm">${i}</a>
+	   					<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
 					</c:if>
 	   				<c:if test="${i != pager.pageNo }">
-	   					<a href="?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-outline-success btn-sm">${i}</a>
 					</c:if>
 	   			</c:forEach>
 	   			<c:if test="${pager.groupNo<pager.totalGroupNo }" >
-	   				<a href="?pageNo=${pager.endPageNo+1 }" class="btn btn-outline-info btn-sm">다음</a>
+	   				<a href="?pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-outline-info btn-sm">다음</a>
 	  				</c:if>
-	   			<a href="?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+	   			<a href="?pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-outline-primary btn-sm">맨끝</a>
 	   		</div>
 		</c:if>
 

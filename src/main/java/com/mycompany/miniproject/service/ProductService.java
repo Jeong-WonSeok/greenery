@@ -24,17 +24,27 @@ public class ProductService {
 	@Autowired
 	private ProductImageDao productImageDao;
 	
-	public List<ProductDto> getProductList(String category, Pager pager, String sort) {
+	public List<ProductDto> getProductAll(String category, Pager pager, String sort) {
 		
 		Map<String, Object> catePager = new HashMap<>();
 		catePager.put("category", category);
 		catePager.put("pager", pager);
 		catePager.put("sort", sort);
-		List<ProductDto> productList = productDao.selectCategory(catePager);
+		List<ProductDto> productList = productDao.selectAll(catePager);
 		
 		return productList;
 	}
 	
+	public List<ProductDto> getProductCategory(String category, String sort){
+		Map<String, Object> categorySort = new HashMap<>();
+		
+		categorySort.put("category", category);
+		categorySort.put("sort", sort);
+		
+		log.info("실행");
+		List<ProductDto> productList = productDao.selectCategory(categorySort);
+		return productList;
+	}
 
 	public ProductImageDto getProductImage(int productId) {
 		ProductImageDto image = productImageDao.selectImage(productId);

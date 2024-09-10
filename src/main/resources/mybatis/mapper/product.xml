@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.miniproject.dao.ProductDao">
 
-	<select id="selectCategory" parameterType="map" resultType="Product">
+	<select id="selectAll" parameterType="map" resultType="Product">
 		select product_id, product_name, product_price, product_stock, 
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
@@ -27,9 +27,23 @@
 			)
 			where rownum &lt;= #{pager.endRowNo} 
 		)
-		where rnum &gt;= #{pager.startRowNo} 
-		<if test="category !='all'">
-			 and product_category=#{category}
+		where rnum &gt;= #{pager.startRowNo}
+	</select>
+	
+	<select id="selectCategory" parameterType="map" resultType="Product">
+		select product_id, product_name, product_price, product_stock, 
+			main_description, summary_description, product_category,
+			product_enable, created_at, detail_description
+		from product
+		where product_category=#{category}
+		<if test="sort == 'default'">
+			order by created_at desc
+		</if>
+		<if test="sort == 'price-asc'">
+			order by product_price asc
+		</if>
+		<if test="sort == 'price-desc'">
+			order by product_price desc
 		</if>
 	</select>
 	

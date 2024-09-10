@@ -36,11 +36,23 @@ public class HomeController {
 		Pager pager = new Pager(10, 5, totalRows, pageNo);
 		session.setAttribute("pager", pager);
 		
-		List<ProductDto> productList = productService.getProductList(category, pager, sort);
+		List<ProductDto> productList = productService.getProductAll(category, pager, sort);
+		model.addAttribute("productList", productList);
+		model.addAttribute("category", "all");
+		model.addAttribute("sort", sort);
+		return "main";
+	}
+	
+	@GetMapping("/category")
+	public String mainPage(
+			String category, Model model, 
+			@RequestParam(name="sort", defaultValue="default") String sort) {
+		List<ProductDto> productList = productService.getProductCategory(category, sort);
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", category);
 		model.addAttribute("sort", sort);
 		return "main";
+		
 	}
 	
 	
