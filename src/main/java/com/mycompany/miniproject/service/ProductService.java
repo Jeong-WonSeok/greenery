@@ -56,5 +56,16 @@ public class ProductService {
 		int totalRows = productDao.countRows();
 		return totalRows;
 	}
+	
+	public int insertProduct(ProductDto product) {
+		productDao.insertProduct(product);
+		int productId = product.getProductId();
+		log.info(productId+" ");
+		return productId;
+	}
+
+	public void insertProductImage(ProductImageDto productImage) {
+		productImageDao.insertProductImage(productImage);
+	}
 
 }

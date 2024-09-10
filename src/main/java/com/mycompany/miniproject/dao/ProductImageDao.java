@@ -8,4 +8,6 @@ import com.mycompany.miniproject.dto.ProductImageDto;
 public interface ProductImageDao {
 	
 	public ProductImageDto selectImage(int productId);
+
+	public void insertProductImage(ProductImageDto productImage);
 }

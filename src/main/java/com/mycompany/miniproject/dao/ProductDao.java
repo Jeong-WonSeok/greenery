@@ -17,5 +17,7 @@ public interface ProductDao {
 	public List<ProductDto> selectCategory(String category, String sort);
 
 	public List<ProductDto> selectCategory(Map<String, Object> categorySort);
+
+	public void insertProduct(ProductDto product);
 	
 }
