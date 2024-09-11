@@ -77,4 +77,9 @@ public class ProductService {
 		return productList;
 	}
 
+	public ProductDto getProduct(int productId) {
+		ProductDto productDto = productDao.selectProduct(productId);
+		return productDto;
+	}
+
 }

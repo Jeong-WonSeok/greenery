@@ -49,7 +49,7 @@
     <div class="main-products">
         <div class="product-container">
         	<c:forEach items="${productList}" var="product">
-        		<div class="product-item">
+        		<div class="product-item" onclick="location.href = '${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}'">
 	                <div class="product-image-container">
 	                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}" alt="${product.productName}" class="product-image">
 	                    <div class="product-icons">
@@ -77,7 +77,7 @@
 
 
 
-    <!--<div id="footer"></div>  공통 footer 삽입 -->
+    <div id="footer"></div>  <!-- 공통 footer 삽입 -->
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
     <script src="${pageContext.request.contextPath}/resources/js/product/search.js"></script>
 </body>

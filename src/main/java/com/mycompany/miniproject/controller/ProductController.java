@@ -26,8 +26,10 @@ public class ProductController {
 		return "product/detail-info";
 	}
 	
-	@RequestMapping("/detailpage")
-	public String detailpage() {
+	@GetMapping("/detailpage")
+	public String detailpage(int productId, Model model) {
+		ProductDto product = productService.getProduct(productId);
+		model.addAttribute("product", product);
 		return "product/detailpage";
 	}
 	

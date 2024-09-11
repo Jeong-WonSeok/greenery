@@ -17,7 +17,7 @@ function scrollToTop() {
     });
 }
 
-function dataToHtml(products) {
+/*function dataToHtml(products) {
     if (Array.isArray(products)) {
         products.forEach(product => {
             const productHtml = `
@@ -52,7 +52,7 @@ function dataToHtml(products) {
         });
     }
 }
-
+*/
 function handleQueryParams() {
 	const categoryMap ={
 			"Skincare" : "스킨케어",

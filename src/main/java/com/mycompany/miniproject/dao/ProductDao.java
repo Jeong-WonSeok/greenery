@@ -21,5 +21,7 @@ public interface ProductDao {
 	public void insertProduct(ProductDto product);
 
 	public List<ProductDto> selectQuery(Map<String, Object> querySort);
+
+	public ProductDto selectProduct(int productId);
 	
 }

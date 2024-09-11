@@ -17,6 +17,14 @@
 				1, sysdate, #{detailDescription}
 		)
 	</insert>
+	
+	<select id="selectProduct" parameterType="int" resultType="Product">
+		select product_id, product_name, product_price, product_stock, 
+			main_description, summary_description, product_category,
+			product_enable, created_at, detail_description
+		from product
+		where product_id = #{productId}
+	</select>
 
 	<!-- 전체 상품 가져오기 -->
 	<select id="selectAll" parameterType="map" resultType="Product">
