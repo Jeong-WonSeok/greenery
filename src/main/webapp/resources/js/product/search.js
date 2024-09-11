@@ -1,13 +1,11 @@
 // 헤더, 푸터 파일 로드
 $(document).ready(function () {
-    $("#header").load("../header/header.html");
-    $("#footer").load("../footer/footer.html");
 
-    $.getJSON("../../content/products.json", function (data) {
+  /*  $.getJSON("../../content/products.json", function (data) {
         dataToHtml(data.products);
     }).fail(function () {
         console.error("JSON 파일을 불러오는 데 실패함");
-    });
+    });*/
 
     handleQueryParams();
 });
@@ -56,10 +54,17 @@ function dataToHtml(products) {
 }
 
 function handleQueryParams() {
+	const categoryMap ={
+			"Skincare" : "스킨케어",
+			"Makeup" : "메이크업",
+			"BodyCare" : "바디케어",
+			"HairCare" : "헤어케어",
+			"BeautyTools" : "미용소품",
+			"MensCare" : "맨즈케어"
+	}
     const params = new URLSearchParams(window.location.search);
     const query = params.get("query");
-    const category = params.get("category");
-
+    const category = categoryMap[params.get("category")];
     if (query) {
         $(".search-term").html(query);
     }
