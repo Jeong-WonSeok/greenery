@@ -24,11 +24,13 @@ function searchTypeText() {
 }
 
 function redirectToPage(paramName, paramValue) {
-    if (paramValue) {
+	const path = getContextPath();
+	if (paramName=='query') {
         // 검색 페이지 이동시 검색어를 파라미터로 전달
-        window.location.href = `../search/search.html?${paramName}=${encodeURIComponent(
-            paramValue
-        )}`;
+    	window.location.href = path+`/product/search?${paramName}=${encodeURIComponent(paramValue)}`;
+    }
+    if(paramName=='category'){
+    	window.location.href = path+`/product/category?${paramName}=${encodeURIComponent(paramValue)}`;
     }
 }
 
@@ -51,7 +53,7 @@ $(document).ready(() => {
         }
     });
     $(".category-span").on("click", function () {
-        redirectToPage("category", $(this).data("category"));
+        redirectToPage("category", $(this).data("string"));
     });
 });
 
@@ -62,6 +64,5 @@ function getContextPath(){
 }
 
 $(document).on("click", ".notice", function () {
-	console.log(getContextPath());
     window.location.href = getContextPath() + "/notice/notices";
 });

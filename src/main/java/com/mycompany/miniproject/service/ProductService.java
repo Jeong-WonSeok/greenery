@@ -24,10 +24,10 @@ public class ProductService {
 	@Autowired
 	private ProductImageDao productImageDao;
 	
-	public List<ProductDto> getProductAll(String category, Pager pager, String sort) {
+	public List<ProductDto> getProductAll(Pager pager, String sort) {
 		
 		Map<String, Object> catePager = new HashMap<>();
-		catePager.put("category", category);
+//		catePager.put("category", category);
 		catePager.put("pager", pager);
 		catePager.put("sort", sort);
 		List<ProductDto> productList = productDao.selectAll(catePager);

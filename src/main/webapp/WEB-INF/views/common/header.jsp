@@ -63,38 +63,38 @@
     <div class="header-category-wrap">
         <ul class="category-wrap">
             <li>
-                <span class="category-span" data-category="스킨케어">
-                    스킨케어
+                <span class="category-span" data-category="스킨케어" data-string="Skincare">
+                   	 스킨케어
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
             <li>
-                <span class="category-span" data-category="메이크업">
-                    메이크업
+                <span class="category-span" data-category="메이크업" data-string="Makeup">
+					메이크업
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
             <li>
-                <span class="category-span" data-category="바디케어">
-                    바디케어
+                <span class="category-span" data-category="바디케어" data-string="BodyCare">
+                   	 바디케어
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
             <li>
-                <span class="category-span" data-category="헤어케어">
-                    헤어케어
+                <span class="category-span" data-category="헤어케어" data-string="HairCare">
+					헤어케어
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
             <li>
-                <span class="category-span" data-category="미용소품">
-                    미용소품
+                <span class="category-span" data-category="미용소품" data-string="BeautyTools">
+					미용소품
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
             <li>
-                <span class="category-span" data-category="맨즈케어">
-                    맨즈케어
+                <span class="category-span" data-category="맨즈케어" data-string="MensCare">
+              		 맨즈케어
                     <img src="${pageContext.request.contextPath}/resources/images/category_right_arrow.png" width="5" height="10" />
                 </span>
             </li>
