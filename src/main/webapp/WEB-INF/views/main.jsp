@@ -71,13 +71,21 @@
         <div class="toolbar-sort">
 			<form action="${pageContext.request.contextPath}"  method="get">
 	        	<c:choose> 
-	            	<c:when test="${category!='all' }"><select id="sort" name="sort" class="toolbar-sort-select" onchange="location.href='category?category=${category}&sort=' + this.value"></c:when>
-	            	<c:otherwise> <select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()"></c:otherwise>
+	            	<c:when test="${category!='all' }">
+	            		<select id="sort" name="sort" class="toolbar-sort-select" onchange="location.href='category?category=${category}&sort=' + this.value">
+			                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+			                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+			                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+			            </select>
+            		</c:when>
+	            	<c:otherwise> 
+	            		<select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()">
+			                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+			                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+			                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+			            </select>
+            		</c:otherwise>
             	</c:choose>
-	                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
-	                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
-	                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
-	            </select>
             </form>
         </div>
     </div>

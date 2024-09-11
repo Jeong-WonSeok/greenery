@@ -68,4 +68,13 @@ public class ProductService {
 		productImageDao.insertProductImage(productImage);
 	}
 
+	public List<ProductDto> getProductSearch(String query, String sort) {
+		Map<String, Object> querySort = new HashMap<>();
+		
+		querySort.put("query", query);
+		querySort.put("sort", sort);
+		List<ProductDto> productList = productDao.selectQuery(querySort); 
+		return productList;
+	}
+
 }
