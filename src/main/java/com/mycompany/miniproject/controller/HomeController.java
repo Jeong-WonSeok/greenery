@@ -57,8 +57,11 @@ public class HomeController {
 	
 	
 	@GetMapping("/imageDown")
-	public void imageDown(int productId, HttpServletResponse response) throws Exception{
-		ProductImageDto image = productService.getProductImage(productId);
+	public void imageDown(int productId,
+					@RequestParam(defaultValue="1") String usecase,
+					HttpServletResponse response) throws Exception{
+		log.info(productId +" "+ usecase);
+		ProductImageDto image = productService.getProductImage(productId, usecase);
 		
 		//응답 헤더에 들어가는 Content-Type
 		String contentType = image.getPimageType();

@@ -41,13 +41,16 @@ public class ProductService {
 		categorySort.put("category", category);
 		categorySort.put("sort", sort);
 		
-		log.info("실행");
 		List<ProductDto> productList = productDao.selectCategory(categorySort);
 		return productList;
 	}
 
-	public ProductImageDto getProductImage(int productId) {
-		ProductImageDto image = productImageDao.selectImage(productId);
+	public ProductImageDto getProductImage(int productId, String usecase) {
+		Map<String, Object> imageInfo = new HashMap<>();
+		imageInfo.put("productId", productId);
+		imageInfo.put("usecase", usecase);
+		
+		ProductImageDto image = productImageDao.selectImage(imageInfo);
 		return image;
 	}
 
@@ -60,7 +63,6 @@ public class ProductService {
 	public int insertProduct(ProductDto product) {
 		productDao.insertProduct(product);
 		int productId = product.getProductId();
-		log.info(productId+" ");
 		return productId;
 	}
 

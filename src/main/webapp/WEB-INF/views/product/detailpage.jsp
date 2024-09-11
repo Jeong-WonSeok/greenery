@@ -23,16 +23,16 @@
 
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
-                    <img src="https://i.pinimg.com/564x/db/a1/f2/dba1f28adc32bc960e89ee4dd4ffa027.jpg" alt="Slide 1">
+                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="Slide 1">
                 </div>
 
-                <div class="mySlides fade">
+                <!-- <div class="mySlides fade">
                     <img src="https://i.pinimg.com/564x/d9/d3/82/d9d3829fc798b6107ca26649c3000b13.jpg" alt="Slide 2">
                 </div>
 
                 <div class="mySlides fade">
                     <img src="https://i.pinimg.com/564x/17/71/74/177174a71afb907c30f5af5563b7375d.jpg" alt="Slide 3">
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -75,15 +75,15 @@
 
         <div class="currentSlide-container">
             <span class="dot" onclick="currentSlide(1)">
-                <img src="https://i.pinimg.com/564x/db/a1/f2/dba1f28adc32bc960e89ee4dd4ffa027.jpg" alt="currentSlide(1)"
+                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=2" alt="currentSlide(1)"
                     style="width: 25%">
             </span>
             <span class="dot" onclick="currentSlide(2)">
-                <img src="https://i.pinimg.com/564x/d9/d3/82/d9d3829fc798b6107ca26649c3000b13.jpg" alt="currentSlide(2)"
+                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=3" alt="currentSlide(2)"
                     style="width: 25%">
             </span>
             <span class="dot" onclick="currentSlide(3)">
-                <img src="https://i.pinimg.com/564x/17/71/74/177174a71afb907c30f5af5563b7375d.jpg" alt="currentSlide(3)"
+                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=4" alt="currentSlide(3)"
                     style="width: 25%">
             </span>
         </div>

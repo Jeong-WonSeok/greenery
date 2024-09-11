@@ -1,13 +1,13 @@
 // 헤더, 푸터 파일 로드
 $(document).ready(function () {
-    $("#header").load("../header/header.html");
+ /*   $("#header").load("../header/header.html");
     $("#footer").load("../footer/footer.html");
 
     $.getJSON("../../content/products.json", function (data) {
         dataToHtml(data.products);
     }).fail(function () {
         console.error("JSON 파일을 불러오는 데 실패함");
-    });
+    });*/
 });
 
 // 찜 추가
