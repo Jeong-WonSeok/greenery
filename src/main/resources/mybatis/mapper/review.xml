@@ -7,6 +7,11 @@
 			created_at, user_id
 		from review
 		where product_id = #{productId}
-			
+	</select>
+	
+	<select id="selectReview" parameterType="int" resultType="Review">
+		select review_image_data, review_image_name, review_image_type
+		from review
+		where review_id = #{reviewId}
 	</select>
 </mapper>
