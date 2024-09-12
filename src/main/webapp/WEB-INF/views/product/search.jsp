@@ -51,7 +51,7 @@
         	<c:forEach items="${productList}" var="product">
         		<div class="product-item" onclick="location.href = '${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}'">
 	                <div class="product-image-container">
-	                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}" alt="${product.productName}" class="product-image">
+	                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
 	                    <div class="product-icons">
 	                        <span class="icon like-icon">
 	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">

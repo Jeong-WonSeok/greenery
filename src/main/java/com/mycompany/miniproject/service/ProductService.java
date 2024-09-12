@@ -45,14 +45,6 @@ public class ProductService {
 		return productList;
 	}
 
-	public ProductImageDto getProductImage(int productId, String usecase) {
-		Map<String, Object> imageInfo = new HashMap<>();
-		imageInfo.put("productId", productId);
-		imageInfo.put("usecase", usecase);
-		
-		ProductImageDto image = productImageDao.selectImage(imageInfo);
-		return image;
-	}
 
 
 	public int getTotalRows() {
@@ -66,9 +58,6 @@ public class ProductService {
 		return productId;
 	}
 
-	public void insertProductImage(ProductImageDto productImage) {
-		productImageDao.insertProductImage(productImage);
-	}
 
 	public List<ProductDto> getProductSearch(String query, String sort) {
 		Map<String, Object> querySort = new HashMap<>();
@@ -84,4 +73,17 @@ public class ProductService {
 		return productDto;
 	}
 
+	public void insertProductImage(ProductImageDto productImage) {
+		productImageDao.insertProductImage(productImage);
+	}
+
+	public ProductImageDto getProductImage(int productId, int usecase) {
+		log.info(productId + " " + usecase);
+		Map<String, Object> imageInfo = new HashMap<>();
+		imageInfo.put("productId", productId);
+		imageInfo.put("usecase", usecase);
+		
+		ProductImageDto image = productImageDao.selectImage(imageInfo);
+		return image;
+	}
 }
