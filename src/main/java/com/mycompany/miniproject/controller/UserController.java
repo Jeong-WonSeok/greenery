@@ -41,9 +41,9 @@ public class UserController {
 	// 회원가입 할 때 ID 중복 체크 
 	@PostMapping("/checkId")
 	@ResponseBody
-	public ResponseEntity<Map<String, Boolean>> checkId(@RequestBody String userId) {
+	public ResponseEntity<Map<String, Boolean>> checkId(@RequestBody Map<String, String> userId) {
 		log.info("---------@@@@@@@@@@@--------------------");
-		boolean exists = userService.isUserId(userId); // 아이디 중복 확인
+		boolean exists = userService.isUserId(userId.get("userId")); // 아이디 중복 확인
 
 	    Map<String, Boolean> response = new HashMap<>();
 	    response.put("exists", exists);

@@ -112,7 +112,7 @@ function checkIdExists(userId) {
 	     headers: {
 	         'Content-Type': 'application/json',
 	     },
-	     body: JSON.stringify(userId)
+	     body: JSON.stringify({"userId" : userId})
 	 })
 	 .then(response => response.json())
 	 .then(data => {
