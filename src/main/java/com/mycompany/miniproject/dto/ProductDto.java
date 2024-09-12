@@ -15,7 +15,7 @@ public class ProductDto {
 	private String mainDescription;
 	private String summaryDescription;
 	private String productCategory;
-	private int productEnable;
+	private boolean productEnable;
 	private Date createdAt;
 	private String detailDescription;
 }

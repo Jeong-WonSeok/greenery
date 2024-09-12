@@ -101,11 +101,7 @@ body {
     margin-left: 5px;
 }
 
-.admin-login {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+
 
 /* 기본 체크박스 스타일 제거 */
 input[type="checkbox"] {

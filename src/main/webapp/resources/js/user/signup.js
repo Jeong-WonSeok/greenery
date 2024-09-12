@@ -89,7 +89,7 @@ function inputEmailCheck() {
 let idCheck = false;
 let btnInputId = document.querySelector('#btnInputId');
 btnInputId.addEventListener('click', btnInputIdCheck);
-
+						// 아이디 중복 확인 ---------------------------------
 function btnInputIdCheck() {
     let regExp = RegExp(/^[A-Za-z\d@$!%*?&]{6,16}$/);
  
@@ -101,43 +101,91 @@ function btnInputIdCheck() {
         inputId.value = '';
         inputId.focus();
     } else {
-        alert("회원가입이 가능한 아이디입니다");
-        idCheck = true;
+    	checkIdExists(inputId.value);
     }
 }
 
+//아이디 중복 체크 함수
+function checkIdExists(userId) {
+	 fetch('checkId', {
+	     method: 'POST',
+	     headers: {
+	         'Content-Type': 'application/json',
+	     },
+	     body: JSON.stringify(userId)
+	 })
+	 .then(response => response.json())
+	 .then(data => {
+		 console.log(data);
+	     if (data.exists) {
+	         alert("이미 사용 중인 아이디입니다.");
+	         idCheck = false; // 중복된 아이디
+	     } else {
+	         alert("사용 가능한 아이디입니다.");
+	         idCheck = true; // 중복되지 않은 아이디
+	     }
+	 });
+}
+
+//회원가입 버튼 클릭 시 실행되는 함수
+function signup(user) {
+	 if (!idCheck) {
+	     alert("아이디 중복 체크를 먼저 해주세요.");
+	     return; // 아이디 중복 체크가 완료되지 않으면 회원가입을 진행하지 않음
+	 }
+	
+	 fetch('signup', {
+	     method: 'POST',
+	     headers: {
+	         'Content-Type': 'application/json',
+	     },
+	     body: JSON.stringify(user)
+	 })
+	 .then(response => {
+	     if (!response.ok) {
+	         return response.json().then(data => { throw new Error(data.message); });
+	     }
+	     return response.json();
+	 })
+	 .then(data => {
+	     alert(data.message); // "회원가입이 완료되었습니다."
+	     window.location.href = '/user/login'; // 회원가입 완료 후 로그인 페이지로 이동
+	 });
+}
+
+
+// 우편번호 API
 let btnZipcode = document.querySelector('#btnZipcode');
 btnZipcode.addEventListener('click', () => {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                console.log(data)
-                let fullAddr = '';
-                let extraAddr = '';
+    new daum.Postcode({
+        oncomplete: function(data) {
+            console.log(data);
+            let fullAddr = '';
+            let extraAddr = '';
 
-                if (data.userSelectedType === 'R') {
-                    fullAddr = data.roadAddress;
-                } else {
-                    fullAddr = data.jibunAddress;
-                }
-
-                if (data.userSelectedType = 'R') {
-                    if(data.bname !== '') {
-                        extraAddr += data.bname
-                    }
-                    if (data.buildingName !== '') {
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    fullAddr += (extraAddr !== '' ? '(' + extraAddr + ')' : '');
-                }
-
-                document.formSignup.zipcode.value = data.zonecode;
-                document.formSignup.address1.value = fullAddr;
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            if (data.userSelectedType === 'R') {
+                fullAddr = data.roadAddress;
+            } else {
+                fullAddr = data.jibunAddress;
             }
-        }).open();
-    }
-);
+
+            if (data.userSelectedType = 'R') {
+                if (data.bname !== '') {
+                    extraAddr += data.bname;
+                }
+                if (data.buildingName !== '') {
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                fullAddr += (extraAddr !== '' ? '(' + extraAddr + ')' : '');
+            }
+
+            document.formSignup.userPostal.value = data.zonecode;
+            document.formSignup.userLoadAddress.value = fullAddr;
+            
+        }
+    }).open();
+});
+
 
 document.querySelector('#iconClose').addEventListener('click', function() {
     window.location.href = '../main/main.html';

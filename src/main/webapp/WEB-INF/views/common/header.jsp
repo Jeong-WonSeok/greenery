@@ -24,10 +24,10 @@
 	    
 	    							<!-- 로그인을 했을 때 -->
 		<sec:authorize	access="isAuthenticated()">		<!-- 로그인한 사용자의 id를 얻을 수 있음 -->
-			<img width="40" src="${pageContext.request.contextPath}/resources/image/login.png"/>
-			<span class="me-2 text-white me-2"><sec:authentication property="principal.username" /></span>
-			<!-- CSRF가 비활성화되어 있을 경우 -->
-			<a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			<button class="header-login" onclick="location.href='${pageContext.request.contextPath}/logout'">
+	            <img src="${pageContext.request.contextPath}/resources/images/login.png" class="header-nav-icon" />
+	            <span class="header-nav-text">로그아웃</span>
+	        </button>
 			
 			<!-- CSRF가 활성화되어 있을 경우(로그아웃도 post방식으로 요청해야함) 
 			<form class="d-inline-block" method="post" action="${pageContext.request.contextPath}/logout">

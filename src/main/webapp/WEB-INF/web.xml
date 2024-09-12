@@ -85,4 +85,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- Spring Security 구동을 위한 필터 등록 -->
+   <filter>
+   		<filter-name>springSecurityFilterChain</filter-name>
+   		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+   </filter>
+   
+   <filter-mapping>
+   		<filter-name>springSecurityFilterChain</filter-name>
+   		<url-pattern>/*</url-pattern>	<!-- 이 이름을 가진 필터를 모든 요청에서 실행 -->
+   </filter-mapping>
+	
 </web-app>
