@@ -71,20 +71,32 @@ function inputPhoneCheck() {
     }
 }
 
-let inputEmail = document.querySelector('#inputEmail')
-inputEmail.addEventListener('input', inputEmailCheck);
+$(document).ready(function() {
+    // 이메일 주소와 도메인 입력 필드 선택
+    $('#inputEmailAddress, #inputEmail').on('input', function() {
+        // 입력값 가져오기
+        let emailAddress = $('#inputEmailAddress').val();
+        let emailDomain = $('#inputEmail').val();
+        let inputEmailMessage = $('#inputEmailMessage');
+        
+        // 이메일 주소와 도메인 결합
+        let fullEmail = emailAddress + emailDomain;
 
-function inputEmailCheck() {
-    let inputEmailMessage = document.querySelector('#inputEmailMessage')
+        // 이메일 형식을 검증하는 정규 표현식
+        let regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    let regExp = RegExp(/^@{1,}$/);
-    if (regExp.test(inputEmail.value) || inputEmail.value === '') {
-        inputEmailMessage.innerHTML =  ''; 
-    } else {
-        inputEmailMessage.innerHTML = 
-        "<span style='color:#F03F40; font-size:12px;'>이메일 입력을 확인해주세요</span>";
-    }
-}
+        // 전체 이메일 형식 검사
+        if (regExp.test(fullEmail) || fullEmail === '') {
+            // 이메일 형식이 올바르거나 입력이 비어있으면 메시지 지우기
+            inputEmailMessage.html('');
+        } else {
+            // 이메일 형식이 올바르지 않으면 오류 메시지 표시
+            inputEmailMessage.html(
+                "<span style='color:#F03F40; font-size:12px;'>이메일 형식을 확인해주세요</span>"
+            );
+        }
+    });
+});
 
 let idCheck = false;
 let btnInputId = document.querySelector('#btnInputId');
@@ -105,6 +117,7 @@ function btnInputIdCheck() {
     }
 }
 
+    
 //아이디 중복 체크 함수
 function checkIdExists(userId) {
 	 fetch('checkId', {
@@ -128,30 +141,33 @@ function checkIdExists(userId) {
 }
 
 //회원가입 버튼 클릭 시 실행되는 함수
-function signup(user) {
+let signupGo = document.querySelector('#signupGo');
+signupGo.addEventListener('click', function (e) {
+
 	 if (!idCheck) {
+		 e.preventDefault();
 	     alert("아이디 중복 체크를 먼저 해주세요.");
 	     return; // 아이디 중복 체크가 완료되지 않으면 회원가입을 진행하지 않음
 	 }
 	
-	 fetch('signup', {
-	     method: 'POST',
-	     headers: {
-	         'Content-Type': 'application/json',
-	     },
-	     body: JSON.stringify(user)
-	 })
-	 .then(response => {
-	     if (!response.ok) {
-	         return response.json().then(data => { throw new Error(data.message); });
-	     }
-	     return response.json();
-	 })
-	 .then(data => {
-	     alert(data.message); // "회원가입이 완료되었습니다."
-	     window.location.href = '/user/login'; // 회원가입 완료 후 로그인 페이지로 이동
-	 });
-}
+//	 fetch('signup', {
+//	     method: 'POST',
+//	     headers: {
+//	         'Content-Type': 'application/json',
+//	     },
+//	     body: JSON.stringify(user)
+//	 })
+//	 .then(response => {
+//	     if (!response.ok) {
+//	         return response.json().then(data => { throw new Error(data.message); });
+//	     }
+//	     return response.json();
+//	 })
+//	 .then(data => {
+//	     alert(data.message); // "회원가입이 완료되었습니다."
+//	     window.location.href = '/user/login'; // 회원가입 완료 후 로그인 페이지로 이동
+//	 });
+});
 
 
 // 우편번호 API

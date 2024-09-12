@@ -68,9 +68,10 @@
 		<input class="input input9" name="userLoadAddress" type="text"
 			placeholder="도로명 주소" required> 
 			
-		<input class="input input10"
-			name="userDetailAddress" type="text" placeholder="상세 주소" required> <input
-			class="btn btn3" type="submit" value="회원가입">
+		<input class="input input10" 
+			name="userDetailAddress" type="text" placeholder="상세 주소" required> 
+			
+		<input id="signupGo" class="btn btn3" type="submit" value="회원가입">
 	</form>
 
 

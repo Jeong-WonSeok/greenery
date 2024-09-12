@@ -41,8 +41,6 @@ public class UserService {
 	
 	// 아이디 중복 체크
 	public boolean isUserId(String userId) {
-		log.info((userId instanceof String)  + "  ");
-		log.info(userId.equals("min1234") + " ");
 		UserDto user = userDao.selectById(userId);
 		if (user == null) {
 			return false;
