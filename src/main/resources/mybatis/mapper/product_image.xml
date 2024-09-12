@@ -17,19 +17,19 @@
 		select pimage_id, pimage_name, pimage_type, pimage_data, pimage_usecase, product_id
 		from product_image
 		where product_id = #{productId}
-		<if test="usecase == '1'" >  
+		<if test="usecase == 1" >  
 			and pimage_usecase = 'productImage1'
 		</if>
-		<if test="usecase == '2'" >  
+		<if test="usecase == 2" >  
 			and pimage_usecase = 'productImage2'
 		</if>
-		<if test="usecase == '3'" >  
+		<if test="usecase == 3" >  
 			and pimage_usecase = 'productImage3'
 		</if>
-		<if test="usecase == '4'" >  
+		<if test="usecase == 4" >  
 			and pimage_usecase = 'productImage4'
 		</if>
-		<if test="usecase == '5'" >  
+		<if test="usecase == 5" >  
 			and pimage_usecase = 'detailImage'
 		</if>
 		

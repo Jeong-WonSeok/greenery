@@ -21,8 +21,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping("/detail-info")
-	public String detailInfo() {
+	@RequestMapping("/detailInfo")
+	public String detailInfo(String productId, Model model) {
+		model.addAttribute("productId", productId);
 		return "product/detail-info";
 	}
 	

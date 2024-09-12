@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>화장품 상세페이지</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product/detailpage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product/detail-info.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product/reviews-select.css">
 </head>
 
@@ -22,7 +23,7 @@
             <div class="slideshow-container">
 
                 <!-- Full-width images with number and caption text -->
-                <div class="mySlides fade">
+                <div class="mySlides dot">
                     <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="Slide 1">
                 </div>
 
@@ -57,8 +58,8 @@
                 <span class="product-price" <%--data-price="" --%>>${product.productPrice}원</span>
             </div>
             <div class="buttons">
-                <button onclick="saveToLocalStorage(); cart();" class="add-to-cart">장바구니</button>
-                <button onclick="saveToLocalStorage(); checkout();" class="checkout">바로구매</button>
+                <button class="add-to-cart">장바구니</button>
+                <button class="checkout">바로구매</button>
                 <button class="wishlist-button">
                     <img src="${pageContext.request.contextPath}/resources/images/heart-icon.png" alt="wishlist" class="wishlist">
                 </button>
@@ -69,27 +70,27 @@
     <!-- 밑에 다른 이미지 -->
     <div class="sideimg">
         <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">
-            <img src="${pageContext.request.contextPath}/resources/images/left-icon.png" alt="Previous" style="width:80%">
+        <a class="prev" onclick="showSlides(1)">
+            <img src="${pageContext.request.contextPath}/resources/images/left-icon.png" alt="Previous" style="width:20px">
         </a>
 
         <div class="currentSlide-container">
-            <span class="dot" onclick="currentSlide(1)">
-                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=2" alt="currentSlide(1)"
-                    style="width: 25%">
+            <span class="dot">
+                <img  onclick="showSlides(1)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=2" alt="currentSlide(1)"
+                    onerror="noImage(this)" style="width: 25%">
             </span>
-            <span class="dot" onclick="currentSlide(2)">
-                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=3" alt="currentSlide(2)"
-                    style="width: 25%">
+            <span class="dot">
+                <img onclick="showSlides(2)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=3"  alt="currentSlide(2)"
+                    onerror="noImage(this)" style="width: 25%">
             </span>
-            <span class="dot" onclick="currentSlide(3)">
-                <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=4" alt="currentSlide(3)"
-                    style="width: 25%">
+            <span class="dot" >
+                <img onclick="showSlides(3)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=4" alt="currentSlide(3)"
+                    onerror="noImage(this)" style="width: 25%">
             </span>
         </div>
 
-        <a class="next" onclick="plusSlides(1)">
-            <img src="${pageContext.request.contextPath}/resources/images/right-icon.png" alt="Next" style="width:80%">
+        <a class="next" onclick="showSlides(3)">
+            <img src="${pageContext.request.contextPath}/resources/images/right-icon.png" alt="Next" style="width:20px">
         </a>
     </div>
 
@@ -97,11 +98,11 @@
     <div class="tab-container">
     <div class="tab">
     <div class="tab-item">
-        <button class="tab-button tablinks" data-target="detail-info">상세정보</button>
+        <button class="tab-button tablinks" data-target="detail-info" data-productid="${product.productId}">상세정보</button>
         <div class="detail-divider"></div>
         </div>
         <div class="tab-item">
-        <button class="tab-button tablinks" data-target="reviews-select">리뷰</button>
+        <button class="tab-button tablinks" data-target="reviews-select" data-productid="${product.productId}">리뷰</button>
         <div class="reviews-divider"></div>
     </div>
         </div>
@@ -124,7 +125,8 @@
     <!-- 푸터를 삽입할 위치 -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="detailpage.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/detailpage.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/detail-info.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- <link rel="stylesheet" href="../../common.css" /> -->
+<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css"/>
 <script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
 
