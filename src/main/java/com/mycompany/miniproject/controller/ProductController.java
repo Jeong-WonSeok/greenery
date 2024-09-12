@@ -1,8 +1,5 @@
 package com.mycompany.miniproject.controller;
-import java.io.OutputStream;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,22 +67,5 @@ public class ProductController {
 		model.addAttribute("sort", sort);
 		model.addAttribute("totalProducts", productList.size());
 		return "product/search";
-	}
-	
-	@GetMapping("/reviewImgDown")
-	public void reviewImgDow(int reviewId, HttpServletResponse response) throws Exception{
-		ReviewDto review = reviewService.getReview(reviewId); 
-		if(review.getReviewImageName() != null) {
-		//응답 헤더에 들어가는 Content-Type
-			String contentType = review.getReviewImageType();
-			response.setContentType(contentType);		
-			
-			//응답 본문에 파일 데이터를 출력
-			OutputStream out = response.getOutputStream();
-			out.write(review.getReviewImageData());
-			out.flush();
-			out.close();
-		}
-		
 	}
 }

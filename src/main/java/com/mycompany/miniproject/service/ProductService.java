@@ -78,7 +78,7 @@ public class ProductService {
 	}
 
 	public ProductImageDto getProductImage(int productId, int usecase) {
-		
+		log.info(productId + " " + usecase);
 		Map<String, Object> imageInfo = new HashMap<>();
 		imageInfo.put("productId", productId);
 		imageInfo.put("usecase", usecase);

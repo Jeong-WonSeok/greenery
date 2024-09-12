@@ -11,6 +11,4 @@ public interface ReviewDao {
 
 	List<ReviewDto> selectReviewList(int productId);
 
-	ReviewDto selectReview(int reviewId);
-
 }

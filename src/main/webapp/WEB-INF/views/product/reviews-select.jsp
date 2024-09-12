@@ -24,7 +24,7 @@
 			</div>
 		
 			<div class="img-box">
-			    <img src="${pageContext.request.contextPath}/product/reviewImgDown?reviewId=${item.reviewId}" alt="">
+			    <img src="${i.imageUrl}" alt="">
 		    </div>
 		</div>
 	</c:forEach>

@@ -99,6 +99,10 @@ $(document).ready(function () {
 	            method: 'GET',
 	            success: function (data) {
 	                $('#tab-content').html(data);
+	
+	                {
+	                    loadReviews();  // 리뷰 데이터 불러옴
+	                }
 	            }.bind(this),
 	            error: function () {
 	                $('#tab-content').html('<p>내용을 불러오는 데 실패함.</p>');
