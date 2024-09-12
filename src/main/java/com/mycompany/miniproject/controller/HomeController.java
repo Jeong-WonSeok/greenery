@@ -57,18 +57,22 @@ public class HomeController {
 	
 	
 	@GetMapping("/imageDown")
-	public void imageDown(int productId, HttpServletResponse response) throws Exception{
-		ProductImageDto image = productService.getProductImage(productId);
-		
+	public void imageDown(int productId,
+					@RequestParam(defaultValue="1") int usecase,
+					HttpServletResponse response) throws Exception{
+		ProductImageDto image = productService.getProductImage(productId, usecase);
+		if(image != null) {
+			log.info(productId +" "+ usecase);
 		//응답 헤더에 들어가는 Content-Type
-		String contentType = image.getPimageType();
-		response.setContentType(contentType);		
-		
-		//응답 본문에 파일 데이터를 출력
-		OutputStream out = response.getOutputStream();
-		out.write(image.getPimageData());
-		out.flush();
-		out.close();
+			String contentType = image.getPimageType();
+			response.setContentType(contentType);		
+			
+			//응답 본문에 파일 데이터를 출력
+			OutputStream out = response.getOutputStream();
+			out.write(image.getPimageData());
+			out.flush();
+			out.close();
+		}
 	}
 
 }

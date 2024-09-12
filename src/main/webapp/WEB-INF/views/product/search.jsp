@@ -20,15 +20,28 @@
     </div>
 
     <div class="result-info">
-        <div class="product-count"><span id="product-count-text">제품</span> <span id="product-count"></span>개</div>
+        <div class="product-count"><span id="product-count-text">제품</span> <span id="product-count">${totalProducts}</span>개</div>
 
         <!-- 상품 정렬 -->
         <div class="toolbar-sort">
-            <select class="toolbar-sort-select">
-                <option value="default">신상품순</option>
-                <option value="price-asc">낮은 가격순</option>
-                <option value="price-desc">높은 가격순</option>
-            </select>
+            <form method="get">
+            	<c:if test="${category != null }">
+            		<select id="sort" name="sort" class="toolbar-sort-select" 
+            			onchange="location.href='${pageContext.request.contextPath}/product/category?category=${category}&sort=' + this.value">
+		                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+		                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+		                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+		            </select>
+       			</c:if>
+            	<c:if test="${category == null }"> 
+            		<select id="sort" name="sort" class="toolbar-sort-select" 
+            			onchange="location.href='${pageContext.request.contextPath}/product/search?query=${query}&sort=' + this.value">
+		                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+		                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+		                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+		            </select>
+      			</c:if>
+            </form>
         </div>
     </div>
 
@@ -36,9 +49,9 @@
     <div class="main-products">
         <div class="product-container">
         	<c:forEach items="${productList}" var="product">
-        		<div class="product-item">
+        		<div class="product-item" onclick="location.href = '${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}'">
 	                <div class="product-image-container">
-	                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}" alt="${product.productName}" class="product-image">
+	                    <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
 	                    <div class="product-icons">
 	                        <span class="icon like-icon">
 	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">
@@ -64,7 +77,7 @@
 
 
 
-    <!--<div id="footer"></div>  공통 footer 삽입 -->
+    <div id="footer"></div>  <!-- 공통 footer 삽입 -->
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
     <script src="${pageContext.request.contextPath}/resources/js/product/search.js"></script>
 </body>

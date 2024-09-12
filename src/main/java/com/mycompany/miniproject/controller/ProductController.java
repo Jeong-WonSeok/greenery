@@ -21,13 +21,16 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping("/detail-info")
-	public String detailInfo() {
+	@RequestMapping("/detailInfo")
+	public String detailInfo(String productId, Model model) {
+		model.addAttribute("productId", productId);
 		return "product/detail-info";
 	}
 	
-	@RequestMapping("/detailpage")
-	public String detailpage() {
+	@GetMapping("/detailpage")
+	public String detailpage(int productId, Model model) {
+		ProductDto product = productService.getProduct(productId);
+		model.addAttribute("product", product);
 		return "product/detailpage";
 	}
 	
@@ -37,7 +40,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/search")
-	public String search() {
+	public String search(String query, 
+			@RequestParam(defaultValue="default") String sort, 
+			Model model) {
+		List<ProductDto> productList = productService.getProductSearch(query, sort);
+		model.addAttribute("query", query);
+		model.addAttribute("productList", productList);
+		model.addAttribute("sort", sort);
+		model.addAttribute("totalProducts", productList.size());
 		return "product/search";
 	}
 	
@@ -47,6 +57,9 @@ public class ProductController {
 						Model model) {
 		List<ProductDto> productList = productService.getProductCategory(category, sort);
 		model.addAttribute("productList", productList);
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
+		model.addAttribute("totalProducts", productList.size());
 		return "product/search";
 	}
 }

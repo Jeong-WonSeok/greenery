@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
-   <script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
+   	<script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
     <title>메인페이지</title>
@@ -71,13 +71,21 @@
         <div class="toolbar-sort">
 			<form action="${pageContext.request.contextPath}"  method="get">
 	        	<c:choose> 
-	            	<c:when test="${category!='all' }"><select id="sort" name="sort" class="toolbar-sort-select" onchange="location.href='category?category=${category}&sort=' + this.value"></c:when>
-	            	<c:otherwise> <select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()"></c:otherwise>
+	            	<c:when test="${category!='all' }">
+	            		<select id="sort" name="sort" class="toolbar-sort-select" onchange="location.href='category?category=${category}&sort=' + this.value">
+			                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+			                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+			                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+			            </select>
+            		</c:when>
+	            	<c:otherwise> 
+	            		<select id="sort" name="sort" class="toolbar-sort-select" onchange="this.form.submit()">
+			                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
+			                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
+			                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
+			            </select>
+            		</c:otherwise>
             	</c:choose>
-	                <option value="default" ${sort=='default' ? 'selected' : "" }>신상품순</option>
-	                <option value="price-asc" ${sort=='price-asc' ? 'selected' : "" }>낮은 가격순</option>
-	                <option value="price-desc" ${sort=='price-desc' ? 'selected' : "" }>높은 가격순</option>
-	            </select>
             </form>
         </div>
     </div>
@@ -85,9 +93,9 @@
         <div class="product-container">
         
         	<c:forEach items="${productList}" var="product">
-        		<div class="product-item">
+        		<div class="product-item" onclick="location.href = '${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}'">
 	                <div class="product-image-container">
-	                    <img src="imageDown?productId=${product.productId}" alt="${product.productName}" class="product-image">
+	                    <img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
 	                    <div class="product-icons">
 	                        <span class="icon like-icon">
 	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">

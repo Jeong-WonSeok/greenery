@@ -41,15 +41,10 @@ public class ProductService {
 		categorySort.put("category", category);
 		categorySort.put("sort", sort);
 		
-		log.info("실행");
 		List<ProductDto> productList = productDao.selectCategory(categorySort);
 		return productList;
 	}
 
-	public ProductImageDto getProductImage(int productId) {
-		ProductImageDto image = productImageDao.selectImage(productId);
-		return image;
-	}
 
 
 	public int getTotalRows() {
@@ -60,12 +55,35 @@ public class ProductService {
 	public int insertProduct(ProductDto product) {
 		productDao.insertProduct(product);
 		int productId = product.getProductId();
-		log.info(productId+" ");
 		return productId;
+	}
+
+
+	public List<ProductDto> getProductSearch(String query, String sort) {
+		Map<String, Object> querySort = new HashMap<>();
+		
+		querySort.put("query", query);
+		querySort.put("sort", sort);
+		List<ProductDto> productList = productDao.selectQuery(querySort); 
+		return productList;
+	}
+
+	public ProductDto getProduct(int productId) {
+		ProductDto productDto = productDao.selectProduct(productId);
+		return productDto;
 	}
 
 	public void insertProductImage(ProductImageDto productImage) {
 		productImageDao.insertProductImage(productImage);
 	}
 
+	public ProductImageDto getProductImage(int productId, int usecase) {
+		log.info(productId + " " + usecase);
+		Map<String, Object> imageInfo = new HashMap<>();
+		imageInfo.put("productId", productId);
+		imageInfo.put("usecase", usecase);
+		
+		ProductImageDto image = productImageDao.selectImage(imageInfo);
+		return image;
+	}
 }

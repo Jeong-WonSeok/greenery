@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.miniproject.dao.ProductImageDao">
-	<select id="selectImage" parameterType="int" resultType="ProductImage">
-		select pimage_id, pimage_name, pimage_type, pimage_data, pimage_usecase, product_id
-		from product_image
-		where product_id = #{id} and pimage_usecase = 'productImage1'
-	</select>
 	
 	<insert id="insertProductImage" parameterType="ProductImage">
 		<selectKey keyProperty="pimageId" resultType="int" order="BEFORE">
@@ -17,5 +12,28 @@
 			#{pimageId}, #{pimageName}, #{pimageType}, #{pimageData}, #{pimageUsecase}, #{productId}
 		)
 	</insert>
+	
+	<select id="selectImage" parameterType="map" resultType="ProductImage">
+		select pimage_id, pimage_name, pimage_type, pimage_data, pimage_usecase, product_id
+		from product_image
+		where product_id = #{productId}
+		<if test="usecase == 1" >  
+			and pimage_usecase = 'productImage1'
+		</if>
+		<if test="usecase == 2" >  
+			and pimage_usecase = 'productImage2'
+		</if>
+		<if test="usecase == 3" >  
+			and pimage_usecase = 'productImage3'
+		</if>
+		<if test="usecase == 4" >  
+			and pimage_usecase = 'productImage4'
+		</if>
+		<if test="usecase == 5" >  
+			and pimage_usecase = 'detailImage'
+		</if>
+		
+	</select>
+	
 	
 </mapper>
