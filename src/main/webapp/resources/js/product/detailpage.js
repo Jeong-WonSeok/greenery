@@ -146,92 +146,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-/*// 리뷰 json데이터 
-function loadReviews() {
-    $.ajax({
-        url: '../../content/reviews.json',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);  // 데이터 구조 확인
-
-            if (Array.isArray(data.reviews)) {
-                $('#reviewList').empty(); // 기존 리뷰 내용 초기화
-                data.reviews.forEach(i => {
-                    // 별 이미지를 rating 개수만큼 생성
-                    let starHTML = '';
-                    const totalStars = 5;   // 총 별의 개수(5점 만점 기준) -> 별점 3개라고 치면 나머지는 안채워진 별로 2개 채움
-                    for (let j = 0; j < totalStars; j++) {
-                        if (j < i.rating) {
-                            starHTML += <img src="../../res/images/fill-star.png" alt="별" class="star">;
-                        } else {
-                            starHTML += <img src="../../res/images/empty-star.png" alt="빈 별" class="star">;
-                        }
-                    }
-                   
-                    $('#reviewList').append(reviewHTML);
-                });
-            }
-        },
-        error: function (err) {
-            console.error('리뷰 등록에 실패함', err);
-        }
-    });
-};*/
-
-
-
 /* 수량 조절 */
 function increase(button) {
-    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
-    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
-
-    const quantitySpan = productDiv.querySelector('.quantity-number');
-    const priceSpan = productDiv.querySelector('.product-price');
-
-    if (!quantitySpan || !priceSpan) return; // 요소가 없으면 함수 종료
-
-    let quantity = parseInt(quantitySpan.innerText);
-    quantity += 1;
-    quantitySpan.innerText = quantity;
-
-    /* 가격 업데이트 */
-    const pricePerUnit = parseFloat(priceSpan.getAttribute('data-price'));
-    const totalPrice = (pricePerUnit * quantity).toLocaleString() + '원';
-    priceSpan.innerText = totalPrice; // 가격 업데이트
-
-    // 해당 정보 로컬 스토리지에 저장
-    saveToLocalStorage(productDiv);
-    console.log("수량 증가");
+	let price = parseInt($(".product-price").data("price"));
+	let priceString = $(".product-price").html();
+	let curPrice = parseInt(priceString.replace("원", ""));
+	let qty = parseInt($("#quantity").html());
+	console.log(price + price + " " + price);
+	console.log(curPrice + " 원");
+	$("#quantity").html(qty + 1);
+	$(".product-price").html(price+curPrice);
+	
+//    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
+//    console.log(productDiv);
+//    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
+//
+//    const quantitySpan = productDiv.querySelector('.quantity-number');
+//    const priceSpan = productDiv.querySelector('.product-price');
+//
+//    console.log(quantitySpan);
+//    console.log(priceSpan);
+//    if (!quantitySpan || !priceSpan) return; // 요소가 없으면 함수 종료
+//
+//    let quantity = parseInt(quantitySpan.innerText);
+//    quantity += 1;
+//    quantitySpan.innerText = quantity;
+//
+//    /* 가격 업데이트 */
+//    const pricePerUnit = parseFloat(priceSpan.getAttribute('data-price'));
+//    const totalPrice = (pricePerUnit * quantity) + '원';
+//    console.log(totalPrice);
+//    priceSpan.innerText = totalPrice; // 가격 업데이트
+//
+//    $(".product-price").html(totalPrice+"원");
+//    console.log("수량 증가");
 }
 
 
 
 function decrease(button) {
-    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
-    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
-
-    const quantitySpan = productDiv.querySelector('.quantity-number');
-    const priceSpan = productDiv.querySelector('.product-price');
-
-    if (!quantitySpan || !priceSpan) return; // 요소가 없으면 함수 종료
-
-    let quantity = parseInt(quantitySpan.innerText);
-    quantity -= 1;
-    if (quantity < 1) {
-        quantity = 1;
-    }
-    quantitySpan.innerText = quantity;
-
-    /* 가격 업데이트 */
-    const pricePerUnit = parseFloat(priceSpan.getAttribute('data-price'));
-    const totalPrice = (pricePerUnit * quantity).toLocaleString() + '원';
-    priceSpan.innerText = totalPrice; // 가격 업데이트
-
-    // 해당 정보 로컬 스토리지에 저장
-    saveToLocalStorage(productDiv);
+	let price = parseInt($(".product-price").data("price"));
+	let priceString = $(".product-price").html();
+	let curPrice = parseInt(priceString.replace("원", ""));
+	let qty = parseInt($("#quantity").html());
+	
+	if(qty <= 1) return;
+	$("#quantity").html(qty - 1);
+	$(".product-price").html(curPrice-price);
 }
 
 // 로컬 스토리지에 저장하는 함수

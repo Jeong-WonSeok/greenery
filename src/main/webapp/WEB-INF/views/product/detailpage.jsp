@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,6 +14,7 @@
 </head>
 
 <body>
+	
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
     <div id="header"></div>
     <!-- 공통 헤더(상단바) 삽입 -->
@@ -48,7 +51,10 @@
                     <span class="quantity-number" id="quantity">1</span>
                     <button onclick="increase(this)">+</button>
                 </div>
-                <span class="product-price" <%--data-price="" --%>>${product.productPrice}원</span>
+                <c:set var="productPrice" value="${product.productPrice}" />
+                <span class="product-price" data-price="${product.productPrice}">
+                	<fmt:formatNumber value="${productPrice}" type="number"/>원
+               	</span>
             </div>
             <div class="buttons">
                 <button class="add-to-cart">장바구니</button>

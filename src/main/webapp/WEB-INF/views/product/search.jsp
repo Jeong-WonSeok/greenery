@@ -67,7 +67,8 @@
 	                <div class="product-details">
 	                    <p class="product-name">${product.productName}</p>
 	                    <p class="product-description">${product.summaryDescription}</p>
-	                    <p class="product-price"><span class="price-amount">${product.productPrice}</span>원</p>
+                        <c:set var="productPrice" value="${product.productPrice}" />	                    
+	                    <p class="product-price"><span class="price-amount"><fmt:formatNumber value="${productPrice}" type="number"/></span>원</p>
 	                </div>
 	            </div>
         	</c:forEach>
