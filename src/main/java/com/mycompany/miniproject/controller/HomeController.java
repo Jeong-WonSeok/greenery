@@ -62,7 +62,6 @@ public class HomeController {
 					HttpServletResponse response) throws Exception{
 		ProductImageDto image = productService.getProductImage(productId, usecase);
 		if(image != null) {
-			log.info(productId +" "+ usecase);
 		//응답 헤더에 들어가는 Content-Type
 			String contentType = image.getPimageType();
 			response.setContentType(contentType);		

@@ -18,4 +18,9 @@ public class ReviewService {
 		return reviews;
 	}
 
+	public ReviewDto getReview(int reviewId) {
+		ReviewDto review = reviewDao.selectReview(reviewId);
+		return review;
+	}
+
 }
