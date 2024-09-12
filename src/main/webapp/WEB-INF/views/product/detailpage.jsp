@@ -27,13 +27,6 @@
                     <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="Slide 1">
                 </div>
 
-                <!-- <div class="mySlides fade">
-                    <img src="https://i.pinimg.com/564x/d9/d3/82/d9d3829fc798b6107ca26649c3000b13.jpg" alt="Slide 2">
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="https://i.pinimg.com/564x/17/71/74/177174a71afb907c30f5af5563b7375d.jpg" alt="Slide 3">
-                </div> -->
             </div>
         </div>
 
@@ -111,10 +104,6 @@
     <div id="tab-content">
         <!-- AJAX로 불러온 상세 페이지 or 리뷰 표시 -->
     </div>
-
-
-
-
     <!-- 업버튼 -->
     <div class="main-products">
         <button class="scroll-btn-up" onclick="scrollToTop()"></button>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.service.ProductService;
+import com.mycompany.miniproject.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping("/detailInfo")
 	public String detailInfo(String productId, Model model) {
@@ -34,8 +38,10 @@ public class ProductController {
 		return "product/detailpage";
 	}
 	
-	@RequestMapping("/reviews-select")
-	public String reviewsSelect() {
+	@RequestMapping("/reviewSelect")
+	public String reviewSelect(int productId, Model model) {
+		List<ReviewDto> productReviews = reviewService.getReviewList(productId);
+		model.addAttribute("productReviews", productReviews);
 		return "product/reviews-select";
 	}
 	

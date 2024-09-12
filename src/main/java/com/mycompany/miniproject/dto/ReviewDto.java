@@ -14,7 +14,6 @@ public class ReviewDto {
 	private byte[] reviewImageData;
 	private String reviewImageName;
 	private String reviewImageType;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date createdAt;
 	private int productId;
 	private String userId;

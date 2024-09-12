@@ -75,8 +75,6 @@
         <button class="scroll-btn-up" onclick="scrollToTop()"></button>
     </div>
 
-
-
     <div id="footer"></div>  <!-- 공통 footer 삽입 -->
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
     <script src="${pageContext.request.contextPath}/resources/js/product/search.js"></script>
