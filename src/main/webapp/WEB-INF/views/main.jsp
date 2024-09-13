@@ -101,7 +101,7 @@
 	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">
 	                        </span>
 	                        <span class="icon cart-icon">
-	                            <a href="order/cartAdd?productId=${product.productId}"><img src="${pageContext.request.contextPath}/resources/images/cart_icon2.png" alt="장바구니 아이콘"></a>
+	                            <img src="${pageContext.request.contextPath}/resources/images/cart_icon2.png" alt="장바구니 아이콘" class="cart-img" data-productid="${product.productId}">
 	                        </span>
 	                        <span class="icon buy-icon">
 	                            <img src="${pageContext.request.contextPath}/resources/images/dollar.png" alt="구매하기 아이콘" class="payment-img">

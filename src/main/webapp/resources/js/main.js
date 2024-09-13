@@ -1,6 +1,7 @@
 let slideIndex = 1;     // 슬라이드 인덱스
 let products = [];
 
+
 // ---------------------슬라이드 관련 함수 ----------------
 function autoSlides() {     // 슬라이드 자동으로 넘김
     showSlides(slideIndex);
