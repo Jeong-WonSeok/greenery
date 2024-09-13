@@ -4,6 +4,7 @@ function categoryOpen(x) {
     x.classList.toggle("open");
 }
 
+
 function searchTypeText() {
     const placeholderText = "✨딥클렌징으로 모공 속 피지, 싹- 제거!✨";
     if (textIndex < placeholderText.length) {
@@ -54,6 +55,20 @@ $(document).ready(() => {
     });
     $(".category-span").on("click", function () {
         redirectToPage("category", $(this).data("string"));
+    });
+    
+    $(document).on("click", ".cart-img", function (e) {
+    	$.ajax({
+    		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid"),
+    		method: 'GET',
+    		success: function (response){
+    			alert(response);
+    		},
+    		error: function(jqXHR, textStatus, errorThrown){
+    			alert(jqXHR.responseText);
+    		}
+    	
+    	});
     });
 });
 
