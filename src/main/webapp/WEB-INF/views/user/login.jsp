@@ -10,7 +10,10 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/user/login.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
 </head>
 
 <body>
@@ -30,9 +33,9 @@
 		
 			<form method="post" action="${pageContext.request.contextPath}/login">
 
-				<%--	스프링 시큐리티 hidden속성
+				<%--	스프링 시큐리티 hidden속성	--%>
 	       		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	       		--%>
+	       		
 
 				<input id="inputId" class="input-idpassword" type="text"
 					name="userId" placeholder="아이디 입력" required><br>
@@ -49,7 +52,7 @@
 			<div id="boxSignup" class="box-signup">
 				<div>아직 회원이 아니신가요?</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/user/signup">회원가입</a>
+					<a href="${pageContext.request.contextPath}/user/signup" class="no-underline">회원가입</a>
 					<img src="${pageContext.request.contextPath}/resources/images/arrowIcon.png">
 				</div>
 			</div>

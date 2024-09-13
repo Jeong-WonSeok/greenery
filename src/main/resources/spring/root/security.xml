@@ -25,7 +25,7 @@
 			success-handler-ref="logoutSuccessHandler" />
 
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
-		<security:csrf disabled="true" />
+		<!-- <security:csrf disabled="true" /> -->
 
 	</security:http>
 	

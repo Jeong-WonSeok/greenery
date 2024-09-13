@@ -118,26 +118,31 @@ function btnInputIdCheck() {
 }
 
     
-//아이디 중복 체크 함수
+//CSRF 토큰 가져오기
+const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+// 아이디 중복 체크 함수
 function checkIdExists(userId) {
-	 fetch('checkId', {
-	     method: 'POST',
-	     headers: {
-	         'Content-Type': 'application/json',
-	     },
-	     body: JSON.stringify({"userId" : userId})
-	 })
-	 .then(response => response.json())
-	 .then(data => {
-		 console.log(data);
-	     if (data.exists) {
-	         alert("이미 사용 중인 아이디입니다.");
-	         idCheck = false; // 중복된 아이디
-	     } else {
-	         alert("사용 가능한 아이디입니다.");
-	         idCheck = true; // 중복되지 않은 아이디
-	     }
-	 });
+    fetch('checkId', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',  // 폼 데이터로 전송
+            [csrfHeader]: csrfToken  // CSRF 토큰 포함
+        },
+        body: new URLSearchParams({ "userId": userId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.exists) {
+            alert("이미 사용 중인 아이디입니다.");
+            idCheck = false; // 중복된 아이디
+        } else {
+            alert("사용 가능한 아이디입니다.");
+            idCheck = true; // 중복되지 않은 아이디
+        }
+    });
 }
 
 //회원가입 버튼 클릭 시 실행되는 함수
@@ -149,24 +154,6 @@ signupGo.addEventListener('click', function (e) {
 	     alert("아이디 중복 체크를 먼저 해주세요.");
 	     return; // 아이디 중복 체크가 완료되지 않으면 회원가입을 진행하지 않음
 	 }
-	
-//	 fetch('signup', {
-//	     method: 'POST',
-//	     headers: {
-//	         'Content-Type': 'application/json',
-//	     },
-//	     body: JSON.stringify(user)
-//	 })
-//	 .then(response => {
-//	     if (!response.ok) {
-//	         return response.json().then(data => { throw new Error(data.message); });
-//	     }
-//	     return response.json();
-//	 })
-//	 .then(data => {
-//	     alert(data.message); // "회원가입이 완료되었습니다."
-//	     window.location.href = '/user/login'; // 회원가입 완료 후 로그인 페이지로 이동
-//	 });
 });
 
 

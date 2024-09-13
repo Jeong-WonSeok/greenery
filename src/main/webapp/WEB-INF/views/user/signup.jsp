@@ -15,6 +15,9 @@
 	<link
 		href="${pageContext.request.contextPath}/resources/css/user/signup.css"
 		rel="stylesheet" type="text/css" />
+		
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
 </head>
 
 <body>
@@ -30,7 +33,10 @@
 	<div class="text-introduce">그리너리 회원이 되어 다양한 혜택을 경험해 보세요!</div>
 
 	<form class="form-signup" name="formSignup" action="signup" method="post">
-
+	
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+		
+		
 		<div class="form-id">
 			<input id="inputId" name="userId" class="input input1"
 				type="text" placeholder="아이디 입력(6-20자)" required>
