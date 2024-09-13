@@ -16,4 +16,6 @@ public interface CartDao {
 
 	int updateProductQty(Map<String, Object> product);
 
+	int deleteProduct(Map<String, Object> product);
+
 }

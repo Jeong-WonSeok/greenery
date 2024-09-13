@@ -32,6 +32,7 @@ public class OrderController {
 	
 	@GetMapping("/cart")
 	public String cart(Model model) {
+		log.info("실행");
 		String userId = "jws9012";
 		List<CartDto> cartList = orderService.getCartList(userId);
 		List<Map<String, Object>> productList = new ArrayList<>();
@@ -76,6 +77,13 @@ public class OrderController {
 		orderService.chageProductQty(productId, productQty, userId);
 		
 		return ResponseEntity.ok("OK");
+	}
+	
+	@GetMapping("/deleteProduct")
+	public String deleteProduct(int productId) {
+		log.info(productId+" ");
+		orderService.deleteProduct(productId, "jws9012");
+		return "/order/cart";
 	}
 	
 	@RequestMapping("/order")

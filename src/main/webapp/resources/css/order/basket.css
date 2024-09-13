@@ -8,6 +8,10 @@
     font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
 }
 
+.product-price-p {
+	margin-bottom: 0px; 
+}
+
 a {
     text-decoration: none;
 }
@@ -66,7 +70,7 @@ input[type="checkbox"]:checked::after {
     /* 이미지 크기 */
     height: 13px;
     /* 이미지 크기 */
-    background-image: url('../../res/images/check-icon.png');
+    background-image: url('/miniproject/resources/images/check-icon.png');
     /* 체크 표시 이미지 경로 */
     background-size: contain;
     /* 이미지 크기 조정 */
@@ -393,6 +397,6 @@ select {
     background-size: 40%;
 }
 
-.btn {
+.choice-delete {
     padding: 2px 18px 3px 18px;
 }

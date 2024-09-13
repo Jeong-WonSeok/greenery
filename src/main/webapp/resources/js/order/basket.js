@@ -56,6 +56,7 @@ $.ajax({
     }
 });*/
 $(document).ready(function () {
+	
     $('#order-button').on('click', function () {
         window.location.href = '../payment/payment.html';
     });
@@ -75,7 +76,6 @@ $(document).ready(function () {
 
     $('.product-checkbox').change(function () {
         calculatePrice();
-        updateTotalPrice($(this));
     });
 });
 // 결제정보 가격 업데이트
@@ -146,20 +146,37 @@ function updateTotalPrice(button) {
 
     calculatePrice();
 }
+
+function deleteProduct(data) {
+	console.log($(data).data("productid"));
+	$.ajax({
+		url: "deleteProduct",
+		method: "GET",
+		data: {productId : $(data).data("productid")},
+		success : function (){
+			window.location.href="cart";
+		},
+		error : function(){
+			alert("삭제에 실패하였습니다.");
+		}
+		
+	})
+}
 // ----------상품 삭제(x버튼, 선택 삭제 버튼)---------------
 // x버튼
 $(document).on('click', '.delete-icon', function () {
-    $(this).closest('.product').remove();   // product조상 요소 찾아서 없앰
+	deleteProduct(this);
     calculatePrice();
 })
 
 // 선택 삭제 버튼 
-$('.btn').on('click', function () {
+$('.choice-delete').on('click', function () {
     deleteSelected();
 });
+
 function deleteSelected() {  
     $('.product-checkbox:checked').each(function () {
-        $(this).closest('.product').remove(); // 체크된 상품 삭제
+    	deleteProduct(this);
     });
     calculatePrice(); // 결제 정보 업데이트
 }

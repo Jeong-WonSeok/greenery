@@ -56,4 +56,11 @@ public class OrderService {
 		
 	}
 
+	public void deleteProduct(int productId, String userId) {
+		Map<String, Object> product = new HashMap<>();
+		product.put("productId", productId);
+		product.put("userId", userId);
+		cartDao.deleteProduct(product);
+	}
+
 }
