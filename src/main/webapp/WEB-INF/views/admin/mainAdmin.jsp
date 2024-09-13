@@ -15,7 +15,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/admin/mainadmin.css" rel="stylesheet" type="text/css" />
 </head>
 
-
+<!-- push 반영 -->
 
 <body>
 	<div class="section1">
@@ -65,3 +65,5 @@
 </body>
 
 </html>
+
+<!-- push 반영 -->
