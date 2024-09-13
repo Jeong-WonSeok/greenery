@@ -19,9 +19,9 @@ body {
 }
 
 h1 {
-    margin: 120px 0 30px auto;
+    margin: 120px 100px 30px auto;
     width: 75%;
-    margin: 120px auto 30px;
+    margin: 120px auto 30px !important;
 }
 
 h2 {
@@ -289,7 +289,7 @@ a {
     font-weight: bold;
 }
 
-.picture {
+.product-image {
     margin: 0 auto;
     width: 130px;
     height: 130px;

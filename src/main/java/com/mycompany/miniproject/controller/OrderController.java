@@ -1,4 +1,9 @@
 package com.mycompany.miniproject.controller;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.miniproject.dto.CartDto;
+import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 
@@ -22,8 +29,23 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	ProductService productService;
-	@RequestMapping("/cart")
-	public String cart() {
+	
+	@GetMapping("/cart")
+	public String cart(Model model) {
+		String userId = "jws9012";
+		List<CartDto> cartList = orderService.getCartList(userId);
+		List<Map<String, Object>> productList = new ArrayList<>();
+		for(CartDto cart : cartList) {
+			int productId = cart.getProductId();
+			Map<String, Object> productInfo = new HashMap<>();
+			ProductDto product = productService.getProduct(productId);
+			productInfo.put("product", product);
+			productInfo.put("productQty", cart.getProductQty());
+			productList.add(productInfo);
+		}
+		
+		model.addAttribute("productList", productList);
+		
 		return "order/cart";
 	}
 	
@@ -46,6 +68,14 @@ public class OrderController {
 			return ResponseEntity.ok()
 								.headers(headers)
 								.body("상품이 장바구니에 담겼습니다.");
+	}
+	
+	@GetMapping("/changeQty")
+	public ResponseEntity<String> changeQty(int productId, int productQty) {
+		String userId = "jws9012";
+		orderService.chageProductQty(productId, productQty, userId);
+		
+		return ResponseEntity.ok("OK");
 	}
 	
 	@RequestMapping("/order")

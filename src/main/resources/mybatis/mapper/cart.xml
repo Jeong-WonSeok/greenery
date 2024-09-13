@@ -6,5 +6,16 @@
 		values (#{userId}, #{productId}, #{productQty})
 			
 	</insert>
-
+	
+	<select id="selectCartList" parameterType="String">
+		select product_id, product_qty
+		from cart
+		where user_id = #{userId}
+	</select>
+	
+	<update id="updateProductQty" parameterType="map">
+		update cart set product_qty = #{productQty}
+		where product_id=#{productId} and user_id=#{userId}
+	</update>
+	
 </mapper>

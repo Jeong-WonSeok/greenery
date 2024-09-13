@@ -1,14 +1,4 @@
-// 헤더, 푸터 파일 로드
-$(document).ready(function () {
-    $("#header").load("../header/header.html");
-    $("#footer").load("../footer/footer.html");
 
-    $.getJSON("../../content/products.json", function (data) {
-        dataToHtml(data.products);
-    }).fail(function () {
-        console.error("JSON 파일을 불러오는 데 실패함");
-    });
-});
 
 function scrollToTop() {
     window.scrollTo({
@@ -18,7 +8,7 @@ function scrollToTop() {
 }
 
 
-// 데이터 
+/*// 데이터 
 $.ajax({
     url: '../../content/products.json',
     method: 'GET',
@@ -64,7 +54,7 @@ $.ajax({
     error: function (err) {
         console.error('Error fetching product data:', err);
     }
-});
+});*/
 $(document).ready(function () {
     $('#order-button').on('click', function () {
         window.location.href = '../payment/payment.html';
@@ -134,8 +124,25 @@ function updateTotalPrice(button) {
     let quantity = parseInt($(button).siblings('.quantity-number').text());    // 현재 수량
     let price = parseInt($(button).parent().siblings('.product-price').data('price')); // 가격
     let totalPrice = quantity * price;
-
-    $(button).parent().siblings('.product-price').html(`<strong>${totalPrice.toLocaleString()}</strong> 원`);
+    
+    let productId =$(button).parent().siblings('.product-price').data('productid');
+    
+    $.ajax({
+    	url: "changeQty",
+    	method:"GET",
+    	data: {
+    		productId: productId,
+    		productQty: quantity
+		},
+		success: function (data){
+			console.log(data);
+			$(button).parent().siblings('.product-price').html(`<strong>${totalPrice.toLocaleString()}</strong> 원`);			
+		},
+		error: function(data){
+			alert("수량 변경에 실패하였습니다.");
+		}
+		
+    })
 
     calculatePrice();
 }

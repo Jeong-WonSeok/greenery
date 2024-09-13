@@ -30,7 +30,35 @@
 
             <hr id="hr-topLine">
 
-            <div id="productList"></div> <!-- 동적으로 상품을 추가할 위치 -->
+            <div id="productList">
+            <!-- forEach -->
+            	<c:forEach items="${productList}" var="product">
+	            	<div class="product">
+                        <div class="product-body">
+                            <input type="checkbox" class="product-checkbox" data-price="${product.product.productPrice}">
+                            <div class="img"><img src="${pageContext.request.contextPath}/imageDown?productId=${product.product.productId}&usecase=1" alt="${product.product.productName}" class="product-image"></div>                            
+                            <div class="product-label">
+                                <div class="product-name"><span><strong>${product.product.productName}</strong></span></div>
+                                <div class="product-description"><span>${product.product.summaryDescription}</span></div>
+                            </div>
+                            <div class="product-quantity" data-stock="${product.productQty}">
+                                <button onclick="decreaseQuantity(this)">-</button>
+                                <span class="quantity-number" >${product.productQty}</span>
+                                <button onclick="increaseQuantity(this)">+</button>
+                            </div>
+							<c:set var="productPrice" value="${product.product.productPrice}" />
+                            <div class="product-price" data-price="${product.product.productPrice}" data-productid="${product.product.productId}"><p><strong>
+								<fmt:formatNumber value="${productPrice}" type="number"/>원
+							</strong></p></div>
+                            
+                            <div class="basket-delete">
+                                    <img src="${pageContext.request.contextPath}/resources/images/X버튼.png" alt="삭제 버튼" class="delete-icon" style="width: 30px; height: 30px;">
+                            </div>
+                            
+                       	</div>
+                    </div>
+				</c:forEach>
+            </div>
             <button class="scroll-btn-up" onclick="scrollToTop()"></button>
 
         </div>
@@ -57,7 +85,7 @@
                         <!-- 주문버튼 -->
                         <div class="clear"></div>
                         <div id="product-order">
-                            <button id="order-button">선택 상품 주문</button>
+                            <button id="order-button" onclick="location.href = '${pageContext.request.contextPath}/order/payment'" >선택 상품 주문</button>
                         </div>
                     </div>
                 </div>
