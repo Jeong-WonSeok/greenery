@@ -57,7 +57,13 @@ $(document).ready(() => {
         redirectToPage("category", $(this).data("string"));
     });
     
-    $(document).on("click", ".cart-img", function (e) {
+    $(document).on("click", ".cart-img, .add-to-cart", function (e) {
+    	let productQty;
+    	if($(this).className==="add-to-cart"){
+    		productQty="productQty=" + $(".quantity-number");
+    	}
+    	console.log(productQty);
+    	return;
     	$.ajax({
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid"),
     		method: 'GET',
