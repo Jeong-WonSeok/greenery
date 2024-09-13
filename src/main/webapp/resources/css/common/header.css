@@ -233,3 +233,6 @@ header {
         left: 50%;
     }
 }
+.no-underline {
+    text-decoration: none; /* 밑줄 제거 */
+}

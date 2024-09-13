@@ -14,7 +14,7 @@
     <div class="header-logo">
         <a href="${pageContext.request.contextPath}">
             <!--  <span class="logo">greenery</span> -->
-            <img src="${pageContext.request.contextPath}/resources/images/logo4.png" class="logo">
+            <img class="no-underline" src="${pageContext.request.contextPath}/resources/images/logo4.png" class="logo">
         </a>
     </div>
     <div class="header-nav">
@@ -28,12 +28,12 @@
 	    
 	    							<!-- 로그인을 했을 때 -->
 		<sec:authorize	access="isAuthenticated()">		<!-- 로그인한 사용자의 id를 얻을 수 있음 -->
-			<button class="header-login" onclick="location.href='${pageContext.request.contextPath}/logout'">
+			<%-- <button class="header-login" onclick="location.href='${pageContext.request.contextPath}/logout'">
 	            <img src="${pageContext.request.contextPath}/resources/images/login.png" class="header-nav-icon" />
 	            <span class="header-nav-text">로그아웃</span>
-	        </button> --%>
-			ㅁㄴㅇㄹㄴㅁㅇㄹ
-			<!-- CSRF가 활성화되어 있을 경우(로그아웃도 post방식으로 요청해야함) 
+	        </button>  --%>
+	        
+			<!-- CSRF가 활성화되어 있을 경우(로그아웃도 post방식으로 요청해야함)--> 
 			<form class="d-inline-block" method="post" action="${pageContext.request.contextPath}/logout">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<button class="header-login">
@@ -41,7 +41,6 @@
 		            <span class="header-nav-text">로그아웃</span>
 	            </button>
 			</form>
-			-->
 			
 		</sec:authorize>
 	    
@@ -58,7 +57,7 @@
         </button>
     </div>
 </header>
-<div class="header-category">
+<div class="header-category">		
     <div class="header-category-btn" onclick="categoryOpen(this)">
         <div class="header-category-bar">
             <div class="bar"></div>
