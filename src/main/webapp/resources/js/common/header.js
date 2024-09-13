@@ -64,7 +64,7 @@ $(document).ready(() => {
     	}
     	console.log(productQty);
     	return;
-    	$.ajax({
+    	$.ajax({										
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid"),
     		method: 'GET',
     		success: function (response){
