@@ -1,9 +1,12 @@
 package com.mycompany.miniproject.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,9 +83,12 @@ public class AdminController {
 		
 		return "admin/productSelect";		
 	}
-
-	@RequestMapping("/productselect")
-	public String productSelect() {
+	// 관리자 페이지 - 상품 목록 조회
+	@GetMapping("/productselect")
+	public String productSelect(Model model) {
+		List<ProductDto> product = productService.getProductAll();
+		model.addAttribute("product", product);
+		
 		return "admin/productSelect";
 	}
 

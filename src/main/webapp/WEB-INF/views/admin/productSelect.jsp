@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
-<link
-	href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
-<link
-	href="${pageContext.request.contextPath}/resources/css/admin/productselect.css"
-	rel="stylesheet" type="text/css" />
+	<link
+		href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css"
+		rel="stylesheet">
+	<script
+		src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+	<link
+		href="${pageContext.request.contextPath}/resources/css/admin/productselect.css"
+		rel="stylesheet" type="text/css" />
 </head>
 
 
@@ -38,66 +39,26 @@
 			<div class="item5">판매가</div>
 			<div class="item6">수정 / 삭제</div>
 		</div>
-
-		<div class="list-container">
-			<div class="list1">2024-07-21</div>
-			<div class="list2">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/productImages/5.png">
+		
+		<c:forEach items="${product}" var="i">
+			<div class="product-container">
+				<div class="product-created">${i.createdAt}2024-07-21</div>
+				<div class=product-image>
+					<%--<a href="${pageContext.request.contextPath}/admin/productSelect?productId=${i.productId}">
+	                     <img src="imageDown?productId=${i.productId}&usecase=1" class="product-image"> 
+	                </a>--%>
+				</div>
+				
+				<div class="product-name">${i.productName}</div>
+				<div class="product-stock">${i.productStock}</div>
+				<div class="product-price"><span><fmt:formatNumber value="${i.productPrice}" type="number"/></span>원</div>
+				<div class="upAndDelBtn">
+					<button class="btn1">수정</button>
+					<button class="btn2">삭제</button>
+				</div>
 			</div>
-			<div class="list3">아렌시아</div>
-			<div class="list4">999</div>
-			<div class="list5">30,000원</div>
-			<div class="list6">
-				<button class="btn1">수정</button>
-				<button class="btn2">삭제</button>
-			</div>
-		</div>
-
-		<div class="list-container">
-			<div class="list1">2024-07-21</div>
-			<div class="list2">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/productImages/6.png">
-			</div>
-			<div class="list3">아렌시아</div>
-			<div class="list4">999</div>
-			<div class="list5">30,000원</div>
-			<div class="list6">
-				<button class="btn1">수정</button>
-				<button class="btn2">삭제</button>
-			</div>
-		</div>
-
-		<div class="list-container">
-			<div class="list1">2024-07-21</div>
-			<div class="list2">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/productImages/7.png">
-			</div>
-			<div class="list3">아렌시아</div>
-			<div class="list4">999</div>
-			<div class="list5">30,000원</div>
-			<div class="list6">
-				<button class="btn1">수정</button>
-				<button class="btn2">삭제</button>
-			</div>
-		</div>
-
-		<div class="list-container">
-			<div class="list1">2024-07-21</div>
-			<div class="list2">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/productImages/8.png">
-			</div>
-			<div class="list3">아렌시아</div>
-			<div class="list4">999</div>
-			<div class="list5">30,000원</div>
-			<div class="list6">
-				<button class="btn1">수정</button>
-				<button class="btn2">삭제</button>
-			</div>
-		</div>
+		</c:forEach>
+		
 
 	</div>
 
@@ -106,5 +67,3 @@
 		src="${pageContext.request.contextPath}/resources/js/admin/productselect.js"></script>
 </body>
 </html>
-
-<!-- push 반영 -->

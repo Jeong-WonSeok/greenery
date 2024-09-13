@@ -25,7 +25,6 @@ public class ProductService {
 	private ProductImageDao productImageDao;
 	
 	public List<ProductDto> getProductAll(Pager pager, String sort) {
-		
 		Map<String, Object> catePager = new HashMap<>();
 //		catePager.put("category", category);
 		catePager.put("pager", pager);
@@ -58,7 +57,7 @@ public class ProductService {
 		return productId;
 	}
 
-
+	// 상품 검색
 	public List<ProductDto> getProductSearch(String query, String sort) {
 		Map<String, Object> querySort = new HashMap<>();
 		
@@ -76,7 +75,7 @@ public class ProductService {
 	public void insertProductImage(ProductImageDto productImage) {
 		productImageDao.insertProductImage(productImage);
 	}
-
+	
 	public ProductImageDto getProductImage(int productId, int usecase) {
 		
 		Map<String, Object> imageInfo = new HashMap<>();
@@ -85,5 +84,14 @@ public class ProductService {
 		
 		ProductImageDto image = productImageDao.selectImage(imageInfo);
 		return image;
+	}
+	// 관리자 상품 조회
+	public List<ProductDto> getProductAll() {
+		//Map<String, Object> catePager = new HashMap<>();
+		//catePager.put("pager", pager);
+		
+		List<ProductDto> productList = productDao.selectAllProduct();
+		
+		return productList;
 	}
 }

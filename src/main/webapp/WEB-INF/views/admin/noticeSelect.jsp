@@ -59,5 +59,3 @@
     <script src="${pageContext.request.contextPath}/resources/js/admin/noticeselect.js"></script>
 </body>
 </html>
-
-<!-- push 반영 -->

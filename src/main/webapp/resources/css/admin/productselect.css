@@ -10,7 +10,7 @@
         background-color: #F2F2F2;
     }
     
-    .list-container {
+    .product-container {
         display: flex;
         height: 70px;
         align-items: center;
@@ -19,24 +19,24 @@
 
     .item1, .item4,
     .item5, .item6,
-    .list1, .list4,
-    .list5, .list6 {
+    .product-created, .product-stock,
+    .product-price, .upAndDelBtn {
         flex: 1;
         text-align: center;
 
     }
 
     .item2, .item3,
-    .list2, .list3 {
+    .product-image, .product-name {
         flex: 2;
         text-align: center;
     }
 
-    .list2 img {
+    .product-image img {
         width: 50px;
     }
 
-    .list6 {
+    .upAndDelBtn {
         display: flex;
         flex-direction: column;
         align-items: center;

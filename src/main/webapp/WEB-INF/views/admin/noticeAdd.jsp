@@ -50,5 +50,3 @@
 	<script src="${pageContext.request.contextPath}/resources/js/admin/noticeadd.js"></script>
 </body>
 </html>
-
-<!-- push 반영 -->

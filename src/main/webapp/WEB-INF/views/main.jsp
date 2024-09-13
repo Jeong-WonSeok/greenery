@@ -95,7 +95,9 @@
         	<c:forEach items="${productList}" var="product">
         		<div class="product-item">
 	                <div class="product-image-container">
-	                    <a href="${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}"><img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image"></a>
+	                    <a href="${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}">
+		                    <img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
+		                </a>
 	                    <div class="product-icons">
 	                        <span class="icon like-icon">
 	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘">

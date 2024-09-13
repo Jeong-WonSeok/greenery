@@ -60,8 +60,8 @@
 	</div>
 
 
-	<script src="mainadmin.js"></script>
-
+<script
+		src="${pageContext.request.contextPath}/resources/js/admin/mainadmin.js"></script>
 </body>
 
 </html>
