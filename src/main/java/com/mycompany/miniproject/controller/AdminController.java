@@ -25,23 +25,23 @@ public class AdminController {
 	
 	@RequestMapping("")
 	public String mainadmin() {
-		return "admin/mainadmin";
+		return "admin/mainAdmin";
 	}
 
 	@RequestMapping("/noticeadd")
 	public String noticeoAdd() {
-		return "admin/noticeadd";
+		return "admin/noticeAdd";
 	}
 
 	@RequestMapping("/noticeselect")
 	public String admin_notice() {
-		return "admin/noticeselect";
+		return "admin/noticeSelect";
 	}
 
 	@RequestMapping("/productadd")
 	public String productAdd() {
 		log.info("실행");
-		return "admin/productadd";
+		return "admin/productAdd";
 	}
 	
 	@PostMapping("/productInsert")
@@ -78,12 +78,12 @@ public class AdminController {
 		}
 		log.info("완료");
 		
-		return "admin/productselect";		
+		return "admin/productSelect";		
 	}
 
 	@RequestMapping("/productselect")
 	public String productSelect() {
-		return "admin/productselect";
+		return "admin/productSelect";
 	}
 
 
