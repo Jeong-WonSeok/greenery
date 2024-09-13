@@ -32,7 +32,7 @@
 	            <img src="${pageContext.request.contextPath}/resources/images/login.png" class="header-nav-icon" />
 	            <span class="header-nav-text">로그아웃</span>
 	        </button> --%>
-			
+			ㅁㄴㅇㄹㄴㅁㅇㄹ
 			<!-- CSRF가 활성화되어 있을 경우(로그아웃도 post방식으로 요청해야함) 
 			<form class="d-inline-block" method="post" action="${pageContext.request.contextPath}/logout">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
