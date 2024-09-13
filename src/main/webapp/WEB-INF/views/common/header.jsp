@@ -48,7 +48,7 @@
             <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
             <span class="header-nav-text">마이페이지</span>
         </button>
-        <button class="header-cart" onclick="location.href='${pageContext.request.contextPath}/order/basket'">
+        <button class="header-cart" onclick="location.href='${pageContext.request.contextPath}/order/cart'">
             <img src="${pageContext.request.contextPath}/resources/images/cart_icon.png" class="header-nav-icon" />
             <span class="header-cart-badge">0</span>
             <span class="header-nav-text">장바구니</span>
