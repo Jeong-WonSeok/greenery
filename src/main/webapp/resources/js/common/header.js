@@ -58,7 +58,7 @@ $(document).ready(() => {
     });
     
     $(document).on("click", ".cart-img", function (e) {
-    	$.ajax({
+    	$.ajax({										/*ㅁㄴㅇㄹㄴㅁㄻㄹㅇ*/
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid"),
     		method: 'GET',
     		success: function (response){
