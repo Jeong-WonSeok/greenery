@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.miniproject.dto.CartDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.UserDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 
@@ -51,8 +54,11 @@ public class OrderController {
 	}
 	
 	@GetMapping("/cartAdd")
-	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model) {
-		int result = orderService.cartAdd(productQty, productId, "jws9012");
+	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model, Authentication authentication) {
+		String userId = authentication.getName();
+		log.info("userId : " + userId);
+		
+		int result = orderService.cartAdd(productQty, productId, userId);
 		
 		HttpHeaders headers = new HttpHeaders();
 	    headers.add("Content-Type", "text/html; charset=UTF-8");
@@ -72,16 +78,16 @@ public class OrderController {
 	}
 	
 	@GetMapping("/changeQty")
-	public ResponseEntity<String> changeQty(int productId, int productQty) {
-		String userId = "jws9012";
+	public ResponseEntity<String> changeQty(int productId, int productQty, Authentication authentication) {
+		String userId = authentication.getName();
 		orderService.chageProductQty(productId, productQty, userId);
 		
 		return ResponseEntity.ok("OK");
 	}
 	
 	@GetMapping("/deleteProduct")
-	public String deleteProduct(int productId) {
-		log.info(productId+" ");
+	public String deleteProduct(int productId, Authentication authentication) {
+		String userId = authentication.getName();
 		orderService.deleteProduct(productId, "jws9012");
 		return "/order/cart";
 	}

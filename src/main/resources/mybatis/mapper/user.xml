@@ -10,7 +10,7 @@
 		values 
 			(#{userId}, #{userPw}, #{userName}, #{userTel}, #{userEmail}, 
 			#{userPostal}, #{userLoadAddress}, #{userDetailAddress},
-			0, '24/09/06', 'ROLE_USER', 1)
+			0, sysdate, 'ROLE_USER', 1)
 	</insert>
 
 
