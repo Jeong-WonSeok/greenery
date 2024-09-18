@@ -8,6 +8,10 @@
     font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
 }
 
+.product-price-p {
+	margin-bottom: 0px; 
+}
+
 body {
     justify-content: center;
     flex-direction: column;
@@ -425,4 +429,10 @@ select {
 .img-alert-coupon {
     width: 14px;
     margin-right: 7px;
+}
+
+.product-image {
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
 }

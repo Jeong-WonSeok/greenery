@@ -13,6 +13,12 @@
 		where user_id = #{userId}
 	</select>
 	
+	<select id="selectListToOrder" parameterType="String">
+		select product_id, product_qty
+		from cart
+		where user_id = #{userId} and order_enable = 1
+	</select>
+	
 	<update id="updateProductQty" parameterType="map">
 		update cart set product_qty = #{productQty}
 		where product_id=#{productId} and user_id=#{userId}
@@ -23,4 +29,13 @@
 		where product_id=#{productId} and user_id=#{userId}
 	</delete>
 	
+	<update id="updateEnableToTrue" parameterType="map">
+		update cart set order_enable = 1
+		where product_id=#{productId} and user_id=#{userId}		
+	</update>
+	
+	<update id="updateEnableToFalse" parameterType="map">
+		update cart set order_enable = 0
+		where product_id=#{productId} and user_id=#{userId}		
+	</update>
 </mapper>

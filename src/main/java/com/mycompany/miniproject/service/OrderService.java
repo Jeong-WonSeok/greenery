@@ -63,4 +63,21 @@ public class OrderService {
 		cartDao.deleteProduct(product);
 	}
 
+	public void changeOrderEnable(int productId, String userId, boolean toOrder) {
+		
+		Map<String, Object> cartInfo=new HashMap<>();
+		cartInfo.put("productId", productId);
+		cartInfo.put("userId", userId);
+		if(toOrder)
+			cartDao.updateEnableToTrue(cartInfo);
+		else
+			cartDao.updateEnableToFalse(cartInfo);
+		
+	}
+
+	public List<CartDto> getCartListToOrder(String userId) {
+		List<CartDto> cartList = cartDao.selectListToOrder(userId);
+		return cartList;
+	}
+
 }

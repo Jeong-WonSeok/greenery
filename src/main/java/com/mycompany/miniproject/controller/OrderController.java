@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.miniproject.dto.CartDto;
 import com.mycompany.miniproject.dto.ProductDto;
-import com.mycompany.miniproject.dto.UserDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 
@@ -34,21 +33,25 @@ public class OrderController {
 	ProductService productService;
 	
 	@GetMapping("/cart")
-	public String cart(Model model) {
-		log.info("실행");
-		String userId = "jws9012";
-		List<CartDto> cartList = orderService.getCartList(userId);
-		List<Map<String, Object>> productList = new ArrayList<>();
-		for(CartDto cart : cartList) {
-			int productId = cart.getProductId();
-			Map<String, Object> productInfo = new HashMap<>();
-			ProductDto product = productService.getProduct(productId);
-			productInfo.put("product", product);
-			productInfo.put("productQty", cart.getProductQty());
-			productList.add(productInfo);
+	public String cart(Model model, Authentication authentication) {
+		if(authentication != null) {
+			String userId = authentication.getName();
+			List<CartDto> cartList = orderService.getCartList(userId);
+			List<Map<String, Object>> productList = new ArrayList<>();
+			for(CartDto cart : cartList) {
+				int productId = cart.getProductId();
+				
+				Map<String, Object> productInfo = new HashMap<>();
+				ProductDto product = productService.getProduct(productId);
+				productInfo.put("product", product);
+				productInfo.put("productQty", cart.getProductQty());
+				productList.add(productInfo);
+				
+				orderService.changeOrderEnable(productId, userId, false);
+			}
+			model.addAttribute("productList", productList);
 		}
 		
-		model.addAttribute("productList", productList);
 		
 		return "order/cart";
 	}
@@ -88,7 +91,7 @@ public class OrderController {
 	@GetMapping("/deleteProduct")
 	public String deleteProduct(int productId, Authentication authentication) {
 		String userId = authentication.getName();
-		orderService.deleteProduct(productId, "jws9012");
+		orderService.deleteProduct(productId, userId);
 		return "/order/cart";
 	}
 	
@@ -97,8 +100,37 @@ public class OrderController {
 		return "order/order";
 	}
 	
+	@GetMapping("/toOrder")
+	public ResponseEntity<String> insertOrder(int productId, Authentication authentication){
+		log.info("실행");
+		String userId = authentication.getName();
+		orderService.changeOrderEnable(productId, userId, true);
+		
+		return ResponseEntity.ok("OK");
+	}
+	
+	@Secured("ROLE_USER")
 	@RequestMapping("/payment")
-	public String payment() {
+	public String payment(Authentication authentication, Model model) {
+		log.info("실행");
+		if(authentication != null) {
+			String userId = authentication.getName();
+			List<CartDto> cartList = orderService.getCartListToOrder(userId);
+			List<Map<String, Object>> productList = new ArrayList<>();
+			
+			for(CartDto cart : cartList) {
+				int productId = cart.getProductId();
+				
+				Map<String, Object> productInfo = new HashMap<>();
+				ProductDto product = productService.getProduct(productId);
+				productInfo.put("product", product);
+				productInfo.put("productQty", cart.getProductQty());
+				productList.add(productInfo);				
+			}
+			
+			model.addAttribute("productList", productList);
+		}
+		
 		return "order/payment";
 	}
 }

@@ -18,4 +18,10 @@ public interface CartDao {
 
 	int deleteProduct(Map<String, Object> product);
 
+	int updateEnableToTrue(Map<String, Object> cartInfo);
+
+	int updateEnableToFalse(Map<String, Object> cartInfo);
+
+	List<CartDto> selectListToOrder(String userId);
+
 }

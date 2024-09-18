@@ -76,34 +76,54 @@ function totalPriceCalculation() {
     document.querySelector('#totalPrice-num').innerText = sumPrice.toLocaleString();
 }
 
-/* 수량 조절 */
-function changeQuantity(button, action) {
-    const productDiv = button.closest('.product'); // 부모 요소 찾기
-    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
+function decreaseQuantity(button) {
+    let quantity = $(button).siblings('.quantity-number');  // 형제노드인 quantity-number 선택함(그래야 수량 업뎃)
+    let stock = parseInt($(button).parent().data('stock')); // 부모 요소(product-quantity)의 stock 개수 가져옴
 
-    const quantitySpan = productDiv.querySelector('.quantity-number');
-    const priceSpan = productDiv.querySelector('.product-price'); // 제품 내 가격 요소 찾기
-    if (!quantitySpan || !priceSpan) return; // 요소가 없으면 함수 종료
-
-    let quantity = parseInt(quantitySpan.innerText);
-
-    if (action === 'increase') {
-        quantity += 1;
-    } else if (action === 'decrease') {
-        quantity -= 1;
-        if (quantity < 1) quantity = 1;
+    if (stock > 1) {
+        stock -= 1;
+        quantity.text(stock.toLocaleString());
+        $(button).parent().data('stock', stock);
+        updateTotalPrice(button);
     }
-    quantitySpan.innerText = quantity;
+}
+// 증가
+function increaseQuantity(button) {
+    let quantity = $(button).siblings('.quantity-number');
+    let stock = parseInt($(button).parent().data('stock'));
+    stock += 1;
 
-    // 가격 업데이트
-    const pricePerUnit = parseFloat(priceSpan.getAttribute('data-price'));
-    const totalPrice = (pricePerUnit * quantity).toLocaleString() + '원';
-    priceSpan.innerHTML = `<strong>${totalPrice}</strong>`; // 가격 업데이트
+    quantity.text(stock.toLocaleString());
+    $(button).parent().data('stock', stock);
+    updateTotalPrice(button);
+}
 
-    // 해당 정보 로컬 스토리지에 저장
-    saveToLocalStorage(productDiv);
-    orderPrice();
-    totalPriceCalculation(); // 총 가격 계산 업데이트
+// 상품 개별 가격 수량에 따라 업데이트(결제정보에는 반영x(체크가 되어있어야함))
+function updateTotalPrice(button) {
+    let quantity = parseInt($(button).siblings('.quantity-number').text());    // 현재 수량
+    let price = parseInt($(button).parent().siblings('.product-price').data('price')); // 가격
+    let totalPrice = quantity * price;
+    
+    let productId =$(button).parent().siblings('.product-price').data('productid');
+    
+    $.ajax({
+    	url: "changeQty",
+    	method:"GET",
+    	data: {
+    		productId: productId,
+    		productQty: quantity
+		},
+		success: function (data){
+			console.log(data);
+			$(button).parent().siblings('.product-price').html(`<strong>${totalPrice.toLocaleString()}</strong> 원`);			
+		},
+		error: function(data){
+			alert("수량 변경에 실패하였습니다.");
+		}
+		
+    })
+
+    calculatePrice();
 }
 
 function deleteSelected() {
@@ -114,32 +134,7 @@ function deleteSelected() {
     orderPrice();
 }
 
-/* 로컬 스토리지에 저장하는 함수 */
-function saveToLocalStorage(productDiv) {
-    const quantitySpan = productDiv.querySelector('.quantity-number');
-    const priceSpan = productDiv.querySelector('.product-price');
-    const productNameSpan = productDiv.querySelector('.product-name span strong');
 
-    if (!quantitySpan || !priceSpan || !productNameSpan) {
-        console.error("로컬 오류");
-        return;
-    }
-
-    const productName = productNameSpan.innerText.trim(); // 상품명
-    const quantity = parseInt(quantitySpan.innerText); // 수량
-    const price = priceSpan.getAttribute('data-price'); // 가격 (숫자형)
-
-    const productInfo = {
-        name: productName,
-        quantity: quantity,
-        price: price
-    };
-
-    // 로컬 스토리지에 저장
-    console.log("로컬저장:", productInfo);
-    localStorage.setItem(productName, JSON.stringify(productInfo));
-    console.log("저장된 데이터:", localStorage.getItem(productName));
-}
 
 /* 체크 박스 전체 선택 */
 document.addEventListener('DOMContentLoaded', function () {
@@ -172,7 +167,7 @@ function removeProduct(link) {
 }
 
 // 데이터
-$.ajax({
+/*$.ajax({
     url: '../../content/products.json',
     method: 'GET',
     dataType: 'json',
@@ -211,11 +206,11 @@ $.ajax({
     error: function (err) {
         console.error('Error fetching product data:', err);
     }
-});
+});*/
 
 $(document).ready(function () {
     $('#order-button').on('click', function () {
-        window.location.href = '../order/order.html';
+        window.location.href = 'order';
     });
 });
 

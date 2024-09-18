@@ -1,5 +1,3 @@
-
-
 function scrollToTop() {
     window.scrollTo({
         top: 0,
@@ -55,12 +53,12 @@ $.ajax({
         console.error('Error fetching product data:', err);
     }
 });*/
-$(document).ready(function () {
+/*$(document).ready(function () {
 	
     $('#order-button').on('click', function () {
         window.location.href = '../payment/payment.html';
     });
-});
+});*/
 
 // 전체선택 체크박스 클릭 시 상품 전체 체크 활성화
 $(document).ready(function () {
@@ -148,7 +146,6 @@ function updateTotalPrice(button) {
 }
 
 function deleteProduct(data) {
-	console.log($(data).data("productid"));
 	$.ajax({
 		url: "deleteProduct",
 		method: "GET",
@@ -174,7 +171,37 @@ $('.choice-delete').on('click', function () {
     deleteSelected();
 });
 
-function deleteSelected() {  
+$('#order-button').on('click', function() {
+	orderSelected();
+})
+
+function toOrder(data){
+	console.log($(data).data("productid"));
+	$.ajax({
+		url:"toOrder",
+		method: "GET",
+		data: {
+			productId : $(data).data("productid")
+			},
+		success: function() {
+		},
+		error : function(){
+			alert("에러가 발생하였습니다.")
+		}
+	})
+}
+
+
+function orderSelected(){
+	$('.product-checkbox:checked').each(function () {
+		console.log("Check " + $(this).data("productid"));
+		toOrder(this);
+    });
+	window.location.href="payment";
+}
+
+
+function deleteSelected() {
     $('.product-checkbox:checked').each(function () {
     	deleteProduct(this);
     });

@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>결제 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../../common.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/payment.css">
 </head>
 
@@ -32,7 +31,35 @@
 
 			<hr id="hr-topLine">
 
-			<div id="productList"></div> <!-- 동적으로 상품을 추가할 위치 -->
+			<div id="productList">
+				<c:forEach items="${productList}" var="product">
+					<div class="product">
+					    <div class="product-body">
+				            <input type="checkbox" class="product-checkbox">
+				            <div class="img"><img src="${pageContext.request.contextPath}/imageDown?productId=${product.product.productId}&usecase=1" alt="${product.product.productName}" class="product-image"></div>
+					
+					        <div class="product-label">
+                                <div class="product-name"><span><strong>${product.product.productName}</strong></span></div>
+                                <div class="product-description"><span>${product.product.summaryDescription}</span></div>
+                            </div>
+					        <div class="product-quantity" data-stock="${product.productQty}">
+                                <button onclick="decreaseQuantity(this)">-</button>
+                                <span class="quantity-number" >${product.productQty}</span>
+                                <button onclick="increaseQuantity(this)">+</button>
+                            </div>
+					        <c:set var="productPrice" value="${product.product.productPrice*product.productQty}" />
+                            <div class="product-price" data-price="${product.product.productPrice}" data-productid="${product.product.productId}">
+                            	<p class="product-price-p"><strong>
+								<fmt:formatNumber value="${productPrice}" type="number"/>원
+								</strong></p>
+							</div>
+					        <div class="basket-delete">
+								<img src="${pageContext.request.contextPath}/resources/images/X버튼.png" alt="삭제 버튼" data-productid="${product.product.productId}" class="delete-icon" style="width: 30px; height: 30px;">
+                            </div>
+					    </div>
+					</div>
+				</c:forEach>
+			</div> <!-- 동적으로 상품을 추가할 위치 -->
 			<button class="scroll-btn-up" onclick="scrollToTop()"></button>
 
 
@@ -49,8 +76,8 @@
 					<div class="custom-select">
 						<select id="coupon-select">
 							<option value="1">그리너리 회원을 위한 1,000원 할인 쿠폰</option>
-						</select> <img src="${pageContext.request.contextPath}/resources/images/dropdown-icon.png" alt="dropdown-icon"
-							class="dropdown-icon">
+						</select> 
+						<img src="${pageContext.request.contextPath}/resources/images/dropdown-icon.png" alt="dropdown-icon" class="dropdown-icon">
 					</div>
 					<button class="apply-coupon" onclick="applyCoupon()">쿠폰 적용</button>
 				</div>

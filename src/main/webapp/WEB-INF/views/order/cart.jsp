@@ -87,7 +87,7 @@
                         <!-- 주문버튼 -->
                         <div class="clear"></div>
                         <div id="product-order">
-                            <button id="order-button" onclick="location.href = '${pageContext.request.contextPath}/order/payment'" >선택 상품 주문</button>
+                            <button id="order-button" >선택 상품 주문</button>
                         </div>
                     </div>
                 </div>
