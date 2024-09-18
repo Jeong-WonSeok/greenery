@@ -192,7 +192,7 @@ public class AdminController {
 		log.info("수정 post 메소드 실행");
 		return "redirect:/admin/productselect";
 	}
-
+ 
 	
 	
 }
