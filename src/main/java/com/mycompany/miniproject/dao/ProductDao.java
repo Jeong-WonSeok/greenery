@@ -24,4 +24,8 @@ public interface ProductDao {
 	public ProductDto selectProduct(int productId);
 	
 	public List<ProductDto> selectAllProduct();
+	
+	public int updateProduct(ProductDto product);
+	
+	public int disableProduct(int productId);
 }

@@ -32,8 +32,47 @@
 		<if test="usecase == 5" >  
 			and pimage_usecase = 'detailImage'
 		</if>
-		
 	</select>
+	
+	<!-- 관리자 페이지 상품 이미지 수정 -->
+	<update id="updateProductImage" parameterType="ProductImage">
+		update product_image
+		set pimage_name = #{pimageName},
+		pimage_type = #{pimageType},
+		pimage_data = #{pimageData},
+		pimage_usecase = #{pimageUsecase}
+		where pimage_id = #{pimageId}
+	</update>
+	
+
+	
+	<!-- <update id="updateProductImage" parameterType="ProductImage">
+		update product_image
+		set pimage_name = #{pimageName},
+        pimage_type = #{pimageType},
+        pimage_data = #{pimageData},
+        pimage_usecase = 
+	        <if test="pimageUsecase == 'productImage1'">
+                'productImage1'
+            </if>
+            <if test="pimageUsecase == 'productImage2'">
+                'productImage2'
+            </if>
+            <if test="pimageUsecase == 'productImage3'">
+                'productImage3'
+            </if>
+            <if test="pimageUsecase == 'productImage4'">
+                'productImage4'
+            </if>
+            <if test="pimageUsecase == 'detailImage'">
+                'detailImage'
+            </if>
+            <if test="pimageUsecase == null">
+                null
+            </if>
+    	where pimage_id = #{pimageId}
+	</update> -->
+	
 	
 	
 </mapper>

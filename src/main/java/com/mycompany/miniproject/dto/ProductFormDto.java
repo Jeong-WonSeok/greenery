@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ProductFormDto {
+	private int productId;
 	private String productName;
 	private int productPrice;
 	private int productStock;
@@ -14,7 +15,7 @@ public class ProductFormDto {
 	private MultipartFile productImage2;
 	private MultipartFile productImage3;
 	private MultipartFile productImage4;
-	private String sumaryDescription;
+	private String summaryDescription;
 	private String mainDescription;
 	private String detailDescription;
 	private MultipartFile detailImage;

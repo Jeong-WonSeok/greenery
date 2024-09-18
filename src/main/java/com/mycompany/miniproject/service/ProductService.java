@@ -11,6 +11,7 @@ import com.mycompany.miniproject.dao.ProductDao;
 import com.mycompany.miniproject.dao.ProductImageDao;
 import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.ProductFormDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,8 +77,8 @@ public class ProductService {
 		productImageDao.insertProductImage(productImage);
 	}
 	
-	public ProductImageDto getProductImage(int productId, int usecase) {
-		
+	// 상품 이미지 조회
+	public ProductImageDto getProductImage(int productId, int usecase) {	
 		Map<String, Object> imageInfo = new HashMap<>();
 		imageInfo.put("productId", productId);
 		imageInfo.put("usecase", usecase);
@@ -85,6 +86,7 @@ public class ProductService {
 		ProductImageDto image = productImageDao.selectImage(imageInfo);
 		return image;
 	}
+	
 	// 관리자 상품 조회
 	public List<ProductDto> getProductAll() {
 		//Map<String, Object> catePager = new HashMap<>();
@@ -94,4 +96,22 @@ public class ProductService {
 		
 		return productList;
 	}
+	
+	// ---------관리자 페이지 상품 수정하기 ------
+	// 상품 수정 
+	public int updateProduct(ProductDto product) {
+		productDao.updateProduct(product);
+		int productId = product.getProductId();
+		return productId;
+	}
+	// 상품 이미지 수정
+	public void updateProductImage(ProductImageDto productImage) {
+		if (productImage.getPimageId() == 0) {
+			productImageDao.insertProductImage(productImage);
+		} else {
+			productImageDao.updateProductImage(productImage);
+		}
+	}
+	
+	
 }

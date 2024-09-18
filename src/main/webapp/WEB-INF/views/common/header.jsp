@@ -13,7 +13,6 @@
 <header>
     <div class="header-logo">
         <a href="${pageContext.request.contextPath}">
-            <!--  <span class="logo">greenery</span> -->
             <img class="no-underline" src="${pageContext.request.contextPath}/resources/images/logo4.png" class="logo">
         </a>
     </div>

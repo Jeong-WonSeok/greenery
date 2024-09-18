@@ -81,7 +81,7 @@
 		    </div>
 		    <div class="form-group">
 		        <label>상품 간략한 설명</label>
-		        <input type="text" name="sumaryDescription" placeholder="상품의 특징을 간단히 설명하세요">
+		        <input type="text" name="summaryDescription" placeholder="상품의 특징을 간단히 설명하세요">
 		    </div>
 		    <div class="form-group">
 		        <label>상품 상세페이지 대표 설명</label>

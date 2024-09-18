@@ -25,12 +25,12 @@
 		from product
 		where product_id = #{productId}
 	</select>
+	<!-- 관리자 페이지 상품 목록 조회 -->
 	<select id="selectAllProduct" resultType="Product">
 		select product_id, product_name, product_price, product_stock, 
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
 		from product
-		where product_id = #{productId}
 	</select>
 
 	<!-- 전체 상품 가져오기 -->
@@ -106,5 +106,26 @@
 		select count(*) from product
 	</select>
 	
+	<!-- 관리자 페이지 상품 수정 -->
+	<update id="updateProduct" parameterType="Product">
+		update product
+		set product_name = #{productName},
+	        product_price = #{productPrice},
+	        product_stock = #{productStock},
+	        main_description = #{mainDescription},
+	        summary_description = #{summaryDescription},
+	        product_category = #{productCategory},
+	        product_enable = #{productEnable},
+	        created_at = #{createdAt},
+	        detail_description = #{detailDescription}
+	    where product_id = #{productId}
+	</update>
+	
+	<!-- 관리자 페이지 상품 삭제 -->
+	<update id="disableProduct" parameterType="int">
+		update product
+		set product_enable = 0
+		where product_id = #{productId}
+	</update>
 	
 </mapper>
