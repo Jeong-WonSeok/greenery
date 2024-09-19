@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mycompany.miniproject.dao.OrderDao"/>
+<mapper namespace="com.mycompany.miniproject.dao.OrderDao">
+	<insert id="insertOrder" parameterType="Order">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			select order_seq.nextval from dual
+		</selectKey>
+		insert into "order" (
+			order_id, user_id, created_at, total_price
+		) values(
+			#{orderId}, #{userId}, sysdate, #{totalPrice}	
+		)
+	</insert>
+</mapper>

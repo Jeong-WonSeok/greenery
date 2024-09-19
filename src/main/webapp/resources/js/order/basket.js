@@ -5,61 +5,6 @@ function scrollToTop() {
     });
 }
 
-
-/*// 데이터 
-$.ajax({
-    url: '../../content/products.json',
-    method: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        console.log(data);  //데이터 구조 확인하려고 로그 출력함
-        // JSON 데이터 배열을 순회하면서 각 제품의 데이터를 HTML에 삽입
-        if (Array.isArray(data.products)) {
-            data.products.forEach(product => {
-                const productHtml = `
-                    <div class="product">
-
-                        <div class="product-body">
-                            <input type="checkbox" class="product-checkbox" data-price="${product.price}">
-                            <div class="img"><img src="${product.imageUrls[0]}" alt="${product.productName}" class="picture"></div>
-                            
-                            <div class="product-label">
-                                <div class="product-name"><span><strong>${product.productName}</strong></span></div>
-                                <div class="product-description"><span>${product.summaryDescription}</span></div>
-                            </div>
-                            
-                            <div class="product-quantity" data-stock="${product.stock.toLocaleString()}">
-                                <button onclick="decreaseQuantity(this)">-</button>
-                                <span class="quantity-number" >${product.stock.toLocaleString()}</span>
-                                <button onclick="increaseQuantity(this)">+</button>
-                            </div>
-
-                            <div class="product-price" data-price="${product.price}"><p><strong>${product.price.toLocaleString()}원</strong></p></div>
-                            
-                            <div class="basket-delete">
-                                    <img src="../../res/images/X버튼.png" alt="삭제 버튼" class="delete-icon" style="width: 30px; height: 30px;">
-                            </div>
-                            
-                        </div>
-                    </div>
-                `;
-                // 생성한 HTML을 productList에 추가
-                $('#productList').append(productHtml);
-            });
-        }
-
-    },
-    error: function (err) {
-        console.error('Error fetching product data:', err);
-    }
-});*/
-/*$(document).ready(function () {
-	
-    $('#order-button').on('click', function () {
-        window.location.href = '../payment/payment.html';
-    });
-});*/
-
 // 전체선택 체크박스 클릭 시 상품 전체 체크 활성화
 $(document).ready(function () {
     $('#allchk').prop('checked', true); // 페이지 로딩 시 전체선택이 활성화된 상태로 
@@ -176,7 +121,6 @@ $('#order-button').on('click', function() {
 })
 
 function toOrder(data){
-	console.log($(data).data("productid"));
 	$.ajax({
 		url:"toOrder",
 		method: "GET",
@@ -194,7 +138,6 @@ function toOrder(data){
 
 function orderSelected(){
 	$('.product-checkbox:checked').each(function () {
-		console.log("Check " + $(this).data("productid"));
 		toOrder(this);
     });
 	window.location.href="payment";

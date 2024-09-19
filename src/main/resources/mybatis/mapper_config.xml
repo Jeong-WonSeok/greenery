@@ -25,6 +25,9 @@
 			type="com.mycompany.miniproject.dto.OrderDto" 
 			alias="Order" />
 		<typeAlias
+			type="com.mycompany.miniproject.dto.OrderItemDto" 
+			alias="OrderItem" />
+		<typeAlias
 			type="com.mycompany.miniproject.dto.ProductDto" 
 			alias="Product" />
 		<typeAlias

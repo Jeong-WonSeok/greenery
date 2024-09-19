@@ -6,8 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>결제 페이지</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/payment.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/payment.css">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
 				<c:forEach items="${productList}" var="product">
 					<div class="product">
 					    <div class="product-body">
-				            <input type="checkbox" class="product-checkbox">
+				            <input type="checkbox" class="product-checkbox" data-productid="${product.product.productId}">
 				            <div class="img"><img src="${pageContext.request.contextPath}/imageDown?productId=${product.product.productId}&usecase=1" alt="${product.product.productName}" class="product-image"></div>
 					
 					        <div class="product-label">

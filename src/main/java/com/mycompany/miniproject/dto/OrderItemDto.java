@@ -8,5 +8,5 @@ public class OrderItemDto {
 	private int productId;
 	private int productQty;
 	private int productPrice;
-	private boolean orderState;
+	private String orderState;
 }

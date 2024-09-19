@@ -13,10 +13,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.miniproject.dao.CartDao;
 import com.mycompany.miniproject.dto.CartDto;
+import com.mycompany.miniproject.dto.CreatedOrderDto;
+import com.mycompany.miniproject.dto.OrderDto;
+import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
@@ -102,7 +108,6 @@ public class OrderController {
 	
 	@GetMapping("/toOrder")
 	public ResponseEntity<String> insertOrder(int productId, Authentication authentication){
-		log.info("실행");
 		String userId = authentication.getName();
 		orderService.changeOrderEnable(productId, userId, true);
 		
@@ -112,7 +117,7 @@ public class OrderController {
 	@Secured("ROLE_USER")
 	@RequestMapping("/payment")
 	public String payment(Authentication authentication, Model model) {
-		log.info("실행");
+
 		if(authentication != null) {
 			String userId = authentication.getName();
 			List<CartDto> cartList = orderService.getCartListToOrder(userId);
@@ -130,7 +135,40 @@ public class OrderController {
 			
 			model.addAttribute("productList", productList);
 		}
+		else {
+			return "redirect:/order/cart";
+		}
 		
 		return "order/payment";
+	}
+	
+	@PostMapping("/createOrder")
+	public ResponseEntity<String> createOrder(@RequestBody CreatedOrderDto order, Authentication authentication){
+		OrderDto orderDto = new OrderDto();
+		String userId = authentication.getName();
+		int totalPrice = order.getTotalPrice();
+		
+		orderDto.setUserId(userId);
+		orderDto.setTotalPrice(totalPrice);
+ 		int orderId = orderService.createOrder(orderDto);
+ 		
+ 		List<Integer> orderList = order.getProductIdList();
+ 		log.info(orderList.toString());
+ 		for(int productId : orderList) {
+ 			OrderItemDto orderItemDto = new OrderItemDto();
+ 			ProductDto productDto = productService.getProduct(productId);
+ 			CartDto cartDto = orderService.getCartInfo(productId, userId);
+ 			
+ 			orderItemDto.setOrderId(orderId);
+ 			orderItemDto.setOrderState("배달완료");
+ 			orderItemDto.setProductId(productId);
+ 			orderItemDto.setProductPrice(productDto.getProductPrice());
+ 			orderItemDto.setProductQty(cartDto.getProductQty());
+ 			
+ 			orderService.deleteProduct(productId, userId);
+ 			orderService.insertOrderItem(orderItemDto);
+ 		}
+		
+		return ResponseEntity.ok("OK");
 	}
 }

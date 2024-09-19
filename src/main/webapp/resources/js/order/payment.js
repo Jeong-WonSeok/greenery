@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    $("#header").load("../header/header.html");
+  /*  $("#header").load("../header/header.html");
     $("#footer").load("../footer/footer.html");
-    scrollToTop();
+    scrollToTop();*/
 
     $(".modal-image").click(() => {
-        console.log("쿠폰 버튼 클릭됨");
+//        console.log("쿠폰 버튼 클릭됨");
         showAlertCoupon();
     });
 });;
@@ -208,11 +208,6 @@ function removeProduct(link) {
     }
 });*/
 
-$(document).ready(function () {
-    $('#order-button').on('click', function () {
-        window.location.href = 'order';
-    });
-});
 
 // 전체선택 체크박스 클릭 시 상품 전체 체크 활성화
 $(document).ready(function () {
@@ -230,4 +225,41 @@ $(document).ready(function () {
         orderPrice();
         totalPriceCalculation();
     });
+    
+    
 });
+
+
+$(document).ready(function () {
+    $('#order-button').on('click', function () {
+        createdOrder();
+    });
+});
+
+// 주문내역 DB에 넣기
+function createdOrder() {
+	let productIdList = []; 
+	$('.product-checkbox:checked').each(function () {
+		productIdList.push(Number($(this).data("productid")));
+    });
+	const totalPrice = $('#totalPrice-num').html().replace(",", "");
+	console.log(productIdList);
+	
+	$.ajax({
+		url:"createOrder",
+		method:"POST",
+		contentType:"application/json",
+		data: JSON.stringify({
+			"productIdList": productIdList,
+			"totalPrice" : totalPrice
+		}),
+		success: function () {
+			location.href="order";
+		},
+		error:function () {
+			alert("주문에 실패하였습니다.");
+		}		
+	})
+}
+
+

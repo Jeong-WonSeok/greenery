@@ -9,7 +9,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.miniproject.dao.CartDao;
+import com.mycompany.miniproject.dao.OrderDao;
+import com.mycompany.miniproject.dao.OrderItemDao;
 import com.mycompany.miniproject.dto.CartDto;
+import com.mycompany.miniproject.dto.OrderDto;
+import com.mycompany.miniproject.dto.OrderItemDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +23,12 @@ public class OrderService {
 
 	@Autowired
 	CartDao cartDao;
+	
+	@Autowired
+	OrderDao orderDao;
+	
+	@Autowired
+	OrderItemDao orderItemDao;
 	
 	public int cartAdd(int productQty, int productId, String userId) {
 		Map<String, Object> cart = new HashMap<>();
@@ -79,5 +89,26 @@ public class OrderService {
 		List<CartDto> cartList = cartDao.selectListToOrder(userId);
 		return cartList;
 	}
+
+	public int createOrder(OrderDto order) {
+		orderDao.insertOrder(order);
+		int orderId = order.getOrderId();
+		return orderId;
+	}
+
+	public CartDto getCartInfo(int productId, String userId) {
+		Map<String, Object> cartInfo = new HashMap<>();
+		cartInfo.put("productId", productId);
+		cartInfo.put("userId", userId);
+		CartDto cartDto = cartDao.selectCart(cartInfo);
+		return cartDto;
+	}
+
+	public void insertOrderItem(OrderItemDto orderItemDto) {
+		orderItemDao.insertOrderItem(orderItemDto);
+		
+	}
+
+	
 
 }

@@ -12,10 +12,6 @@
 	margin-bottom: 0px; 
 }
 
-a {
-    text-decoration: none;
-}
-
 body {
     justify-content: center;
     flex-direction: column;

@@ -24,4 +24,6 @@ public interface CartDao {
 
 	List<CartDto> selectListToOrder(String userId);
 
+	CartDto selectCart(Map<String, Object> cartInfo);
+
 }

@@ -13,6 +13,12 @@
 		where user_id = #{userId}
 	</select>
 	
+	<select id="selectCart" parameterType="map">
+		select product_qty
+		from cart
+		where user_id = #{userId} and product_id = #{productId} 
+	</select>
+	
 	<select id="selectListToOrder" parameterType="String">
 		select product_id, product_qty
 		from cart

@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class OrderDto {
 	private int orderId;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date createdAt;
 	private String userId;
 	private int totalPrice;
