@@ -39,7 +39,7 @@ public class AdminController {
 	
 	@GetMapping("")
 	public String mainadmin() {
-		return "admin/mainAdmin";
+		return "redirect:/admin/productselect";
 	}
 
 	@GetMapping("/noticeadd")
@@ -131,12 +131,14 @@ public class AdminController {
 	    ProductImageDto image2 = productService.getProductImage(productId, 2);
 	    ProductImageDto image3 = productService.getProductImage(productId, 3);
 	    ProductImageDto image4 = productService.getProductImage(productId, 4);
+	    ProductImageDto detailImage = productService.getProductImage(productId, 5);
 
 	    model.addAttribute("product", product);
 	    model.addAttribute("image1", image1);
 	    model.addAttribute("image2", image2);
 	    model.addAttribute("image3", image3);
 	    model.addAttribute("image4", image4);
+	    model.addAttribute("detailImage", detailImage);
 	    
 	    return "admin/updateProductForm";
 	}
@@ -155,6 +157,7 @@ public class AdminController {
 		product.setDetailDescription(productForm.getDetailDescription());
 		product.setProductCategory(productForm.getProductCategory());
 		product.setCreatedAt(new Date());
+		product.setProductEnable(true);	 /*상품 이미지를 수정하면 enable이 0으로 변경됨(이유는 아직 발견x)*/
 		
 		// 업데이트할 상품 id 설정
 		int productId = productService.updateProduct(product);
@@ -166,7 +169,7 @@ public class AdminController {
 		
 		// 상품 1개 당 이미지는 5개니까 이미지 1개마다 ProductImageDto에 해당하는 필드값을 주입시켜줘야함
 		// PimageUsecase = 5 이면 디테일이미지, 그 외에는 해당 숫자의 이미지에 해당
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {	// 이미지가 5개니까 for문으로 이미지 하나하나 이미지Dto에 값 세팅
 			 if (imageList[i] != null && !imageList[i].isEmpty()) { // null 체크 추가
 				ProductImageDto productImage = new ProductImageDto();
 				productImage.setProductId(productId);
@@ -175,24 +178,37 @@ public class AdminController {
 				productImage.setPimageData(imageList[i].getBytes());
 				productImage.setPimageUsecase(i == 4 ? "detailImage" : "productImage" + (i + 1));
 				
+				log.info("이미지 {}: 이름={}", i + 1, imageList[i].getOriginalFilename());
+
 				// 기존 이미지 조회
 	            Map<String, Object> image = new HashMap<>();
 	            image.put("productId", productImage.getProductId());
 	            image.put("usecase", i + 1);
 	            
 	            ProductImageDto existingImage = productImageDao.selectImage(image);
-	            
+
 	            if (existingImage != null) {
 	                productImage.setPimageId(existingImage.getPimageId());
 	            }
 				
 				productService.updateProductImage(productImage);
 			}
+			 
 		}
 		log.info("수정 post 메소드 실행");
 		return "redirect:/admin/productselect";
 	}
  
-	
+	// 관리자 상품 조회 페이지 - 상품 삭제 
+	@PostMapping("/deleteProduct")
+	public String deleteProduct(int productId) {
+		productService.deleteProduct(productId);
+		ProductDto product = productService.getProduct(productId);
+		log.info("productId: " + product.getProductId());
+		log.info("상품 이름: " + product.getProductName());
+		
+		log.info("상품 삭제");
+		return "redirect:/admin/productselect";
+	}
 	
 }

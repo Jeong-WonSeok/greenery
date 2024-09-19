@@ -31,6 +31,7 @@
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
 		from product
+		where product_enable = 1
 	</select>
 
 	<!-- 전체 상품 가져오기 -->
@@ -121,7 +122,7 @@
 	    where product_id = #{productId}
 	</update>
 	
-	<!-- 관리자 페이지 상품 삭제 -->
+	<!-- 관리자 페이지 상품 삭제(update로 enable 1 -> 0으로 변경 -->
 	<update id="disableProduct" parameterType="int">
 		update product
 		set product_enable = 0

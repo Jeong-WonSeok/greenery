@@ -22,90 +22,92 @@
 </head>
 
 <body>
-    <div>
-		<div class="top-text-margin">상품관리 > <span class="text-success"><b>상품등록 / 수정</b></span></div>
-		<h2 class="top-text-margin"><b>상품등록 / 수정</b></h2>
-		<h5 class="top-text-margin"><b>기본 정보</b></h5>
-		<form method="post" action="productInsert" enctype="multipart/form-data">
-		    <div class="form-group">
-		        <label>상품명<span class="text-essential">(필수)</span></label>
-		        <input id="product-name" type="text" name="productName" placeholder="예시) 프레시 블랙 떡솝" maxlength="250">
-		        <div id="charCount">0 / 250</div>
-		    </div>
-		    <div class="form-group">
-		        <label>판매가<span class="text-essential">(필수)</span></label>
-		        <input type="text" name="productPrice" placeholder="가격을 입력해주세요" maxlength="10">
-		        <div class="form-blank">원</div>
-		    </div>
-		    <div class="form-group">
-		        <label>상품 수량<span class="text-essential">(필수)</span></label>
-		        <input type="text" name="productStock" placeholder="수량을 입력해주세요">
-		        <div class="form-blank">개</div>
-		    </div>
-		    <div class="form-group">
-		        <label>카테고리<span class="text-essential">(필수)</span></label>
-		        <input  type="text" name="productCategory" placeholder="MensCare, Makeup, BodyCare, HairCare, Skincare, BeautyTools" >
-		    </div>
-		    <div class="image-thumnail">
-		        <label>상품 대표 이미지 (썸네일)</label>
-		        <div class="image-upload-container">
-		            <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
-		                <span>+</span>
-		            </div>
-		            <input type="file" id="image-input1" name="productImage1" accept="image/*" style="display: none;"
-		                onchange="previewImage(event, 'image-preview1')" />
-		
-		            <div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
-		                <span>+</span>
-		            </div>
-		            <input type="file" id="image-input2" name="productImage2" accept="image/*"  style="display: none;"
-		                onchange="previewImage(event, 'image-preview2')" />
-		                
-		            <div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
-		                <span>+</span>
-		            </div>
-		            <input type="file" id="image-input3" name="productImage3" accept="image/*" style="display: none;"
-		                onchange="previewImage(event, 'image-preview3')" />
-		
-		            <div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
-		                <span>+</span>
-		            </div>
-		            <input type="file" id="image-input4" name="productImage4"  accept="image/*" style="display: none;"
-		                onchange="previewImage(event, 'image-preview4')" />
-		        </div>  
-		    </div>
-		
-		    <div class="form-group">
-		        <label>상품 대표 설명 (썸네일)</label>
-		        <input type="text" name="mainDescription" placeholder="상품의 대표 설명을 입력하세요">
-		    </div>
-		    <div class="form-group">
-		        <label>상품 간략한 설명</label>
-		        <input type="text" name="summaryDescription" placeholder="상품의 특징을 간단히 설명하세요">
-		    </div>
-		    <div class="form-group">
-		        <label>상품 상세페이지 대표 설명</label>
-		        <input type="text" name="detailDescription" placeholder="상품의 핵심 특징을 간단히 설명하세요">
-		    </div>
-		    <div class="image-thumnail">
-		        <label>상품 상세페이지 상세정보 설명</label>
-		        <div class="image-upload-container" onclick="document.getElementById('image-input5').click();">
-		            <div class="image-preview" id="image-preview5">
-		                <span>+</span>
-		            </div>
-		        </div>
-		        <input type="file" id="image-input5" name="detailImage" accept="image/*" style="display: none;"
-		            onchange="previewImage(event, 'image-preview5')" />    
-		        <!-- <div id="summernote"></div> -->
-		        <!-- <textarea rows="5" placeholder="상품에 대한 상세한 설명을 입력하세요"></textarea> -->
-		    </div>
-		    <div class="btn-register-div">
-		        <button type="submit" class="btn-register">등록</button>
-		    </div>
-		</form>
-
-    </div>
-    
+	<%@ include file="/WEB-INF/views/common/adminCommon.jsp"%>
+	<div class="section4">
+	    <div>
+			<div class="top-text-margin">상품관리 > <span class="text-success"><b>상품등록 / 수정</b></span></div>
+			<h2 class="top-text-margin"><b>상품등록 / 수정</b></h2>
+			<h5 class="top-text-margin"><b>기본 정보</b></h5>
+			<form method="post" action="productInsert" enctype="multipart/form-data">
+			    <div class="form-group">
+			        <label>상품명<span class="text-essential">(필수)</span></label>
+			        <input id="product-name" type="text" name="productName" placeholder="예시) 프레시 블랙 떡솝" maxlength="250">
+			        <div id="charCount">0 / 250</div>
+			    </div>
+			    <div class="form-group">
+			        <label>판매가<span class="text-essential">(필수)</span></label>
+			        <input type="text" name="productPrice" placeholder="가격을 입력해주세요" maxlength="10">
+			        <div class="form-blank">원</div>
+			    </div>
+			    <div class="form-group">
+			        <label>상품 수량<span class="text-essential">(필수)</span></label>
+			        <input type="text" name="productStock" placeholder="수량을 입력해주세요">
+			        <div class="form-blank">개</div>
+			    </div>
+			    <div class="form-group">
+			        <label>카테고리<span class="text-essential">(필수)</span></label>
+			        <input  type="text" name="productCategory" placeholder="MensCare, Makeup, BodyCare, HairCare, Skincare, BeautyTools" >
+			    </div>
+			    <div class="image-thumnail">
+			        <label>상품 대표 이미지 (썸네일)</label>
+			        <div class="image-upload-container">
+			            <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
+			                <span>+</span>
+			            </div>
+			            <input type="file" id="image-input1" name="productImage1" accept="image/*" style="display: none;"
+			                onchange="previewImage(event, 'image-preview1')" />
+			
+			            <div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
+			                <span>+</span>
+			            </div>
+			            <input type="file" id="image-input2" name="productImage2" accept="image/*"  style="display: none;"
+			                onchange="previewImage(event, 'image-preview2')" />
+			                
+			            <div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
+			                <span>+</span>
+			            </div>
+			            <input type="file" id="image-input3" name="productImage3" accept="image/*" style="display: none;"
+			                onchange="previewImage(event, 'image-preview3')" />
+			
+			            <div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
+			                <span>+</span>
+			            </div>
+			            <input type="file" id="image-input4" name="productImage4"  accept="image/*" style="display: none;"
+			                onchange="previewImage(event, 'image-preview4')" />
+			        </div>  
+			    </div>
+			
+			    <div class="form-group">
+			        <label>상품 대표 설명 (썸네일)</label>
+			        <input type="text" name="mainDescription" placeholder="상품의 대표 설명을 입력하세요">
+			    </div>
+			    <div class="form-group">
+			        <label>상품 간략한 설명</label>
+			        <input type="text" name="summaryDescription" placeholder="상품의 특징을 간단히 설명하세요">
+			    </div>
+			    <div class="form-group">
+			        <label>상품 상세페이지 대표 설명</label>
+			        <input type="text" name="detailDescription" placeholder="상품의 핵심 특징을 간단히 설명하세요">
+			    </div>
+			    <div class="image-thumnail">
+			        <label>상품 상세페이지 상세정보 설명</label>
+			        <div class="image-upload-container" onclick="document.getElementById('image-input5').click();">
+			            <div class="image-preview" id="image-preview5">
+			                <span>+</span>
+			            </div>
+			        </div>
+			        <input type="file" id="image-input5" name="detailImage" accept="image/*" style="display: none;"
+			            onchange="previewImage(event, 'image-preview5')" />    
+			        <!-- <div id="summernote"></div> -->
+			        <!-- <textarea rows="5" placeholder="상품에 대한 상세한 설명을 입력하세요"></textarea> -->
+			    </div>
+			    <div class="btn-register-div">
+			        <button type="submit" class="btn-register">등록</button>
+			    </div>
+			</form>
+	
+	    </div>
+	</div>
     <script src="${pageContext.request.contextPath}/resources/js/admin/productadd.js"></script>
 </body>
 </html>

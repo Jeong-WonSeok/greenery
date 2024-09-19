@@ -78,94 +78,92 @@
 			<div class="image-thumnail">
 				<label>상품 대표 이미지 (썸네일)</label>
 				<div class="image-upload-container">
-					<!-- 1번 이미지 (대표 이미지) -->
+					<!-- ----------1번 이미지 (대표 이미지)------------ -->
 					<c:if test="${image1 != null}">
-						<div class="image-preview" id="image-preview1">
-							<img src="imageDown?productId=${product.productId}&usecase=1"
-								alt="${product.productName}" class="product-image">
-						</div>
+					    <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
+					        <img src="imageDown?productId=${product.productId}&usecase=1"
+					            alt="${product.productName}" class="product-image">
+					    </div>
 					</c:if>
-					<c:if test="${image1 == null }">
-						<div class="image-preview" id="image-preview1"
-							onclick="document.getElementById('image-input1').click();">
-							<span>+</span>
-						</div>
-						<input type="file" id="image-input1" name="productImage1"
-							accept="image/*" style="display: none;"
-							onchange="previewImage(event, 'image-preview1')" />
+					<c:if test="${image1 == null}">
+					    <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
+					        <span>+</span>
+					    </div>
 					</c:if>
+					<input type="file" id="image-input1" name="productImage1"
+					    accept="image/*" style="display: none;"
+					    onchange="previewImage(event, 'image-preview1')" />
 
 
-					<!-- 2번 이미지 -->
+					<!--------------- 2번 이미지 ------------->
 					<c:if test="${image2 != null}">
-						<div class="image-preview" id="image-preview2">
+						<div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
 							<img src="imageDown?productId=${product.productId}&usecase=2"
 								alt="${product.productName}" class="product-image">
 						</div>
 					</c:if>
 					<c:if test="${image2 == null }">
-						<div class="image-preview" id="image-preview2"
-							onclick="document.getElementById('image-input2').click();">
+						<div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
 							<span>+</span>
 						</div>
-						<input type="file" id="image-input2" name="productImage2"
-							accept="image/*" style="display: none;"
-							onchange="previewImage(event, 'image-preview2')" />
 					</c:if>
+					<input type="file" id="image-input2" name="productImage2"
+						accept="image/*" style="display: none;"
+						onchange="previewImage(event, 'image-preview2')" />
 
-					<!-- 3번 이미지 -->
+					<!---------------- 3번 이미지------------ -->
 					<c:if test="${image3 != null}">
-						<div class="image-preview" id="image-preview3">
+						<div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
 							<img src="imageDown?productId=${product.productId}&usecase=3"
 								alt="${product.productName}" class="product-image">
 						</div>
 					</c:if>
 					<c:if test="${image3 == null }">
-						<div class="image-preview" id="image-preview3"
-							onclick="document.getElementById('image-input3').click();">
+						<div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
 							<span>+</span>
 						</div>
-						<input type="file" id="image-input3" name="productImage3"
-							accept="image/*" style="display: none;"
-							onchange="previewImage(event, 'image-preview3')" />
 					</c:if>
+					<input type="file" id="image-input3" name="productImage3"
+						accept="image/*" style="display: none;"
+						onchange="previewImage(event, 'image-preview3')" />
 
-					<!-- 4번 이미지 -->
+					<!-- --------------4번 이미지--------------- -->
 					<c:if test="${image4 != null}">
-						<div class="image-preview" id="image-preview4">
+						<div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
 							<img src="imageDown?productId=${product.productId}&usecase=4"
 								alt="${product.productName}" class="product-image">
 						</div>
 					</c:if>
 					<c:if test="${image4 == null }">
-						<div class="image-preview" id="image-preview4"
-							onclick="document.getElementById('image-input4').click();">
+						<div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
 							<span>+</span>
 						</div>
-						<input type="file" id="image-input4" name="productImage4"
-							accept="image/*" style="display: none;"
-							onchange="previewImage(event, 'image-preview4')" />
 					</c:if>
+					<input type="file" id="image-input4" name="productImage4"
+						accept="image/*" style="display: none;"
+						onchange="previewImage(event, 'image-preview4')" />
 
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label>상품 대표 설명 (썸네일)</label> <input type="text"
-					name="mainDescription" value="${product.mainDescription}">
+				<label>상품 대표 설명 (썸네일)</label> 
+				<input type="text" name="mainDescription" value="${product.mainDescription}">
 			</div>
 			<div class="form-group">
-				<label>상품 간략한 설명</label> <input type="text"
-					name="summaryDescription" value="${product.summaryDescription}">
+				<label>상품 간략한 설명</label> 
+				<input type="text" name="summaryDescription" value="${product.summaryDescription}">
 			</div>
 			<div class="form-group">
-				<label>상품 상세페이지 대표 설명</label> <input type="text"
-					name="detailDescription" value="${product.detailDescription}">
+				<label>상품 상세페이지 대표 설명</label> 
+				<input type="text" name="detailDescription" value="${product.detailDescription}">
 			</div>
+			
+			<!-- -------------- 5번 detailImage 이미지--------------- -->
 			<div class="image-thumnail">
 				<label>상품 상세페이지 상세정보 설명</label>
 				<c:if test="${detailImage != null}">
-					<div class="image-preview" id="image-preview5">
+					<div class="image-preview" id="image-preview5" onclick="document.getElementById('image-input5').click();">
 						<img src="imageDown?productId=${product.productId}&usecase=5"
 							alt="${product.productName}" class="product-image">
 					</div>
@@ -177,11 +175,13 @@
 							<span>+</span>
 						</div>
 					</div>
-					<input type="file" id="image-input5" name="detailImage"
-						accept="image/*" style="display: none;"
-						onchange="previewImage(event, 'image-preview5')" />
 				</c:if>
+				<input type="file" id="image-input5" name="detailImage"
+					accept="image/*" style="display: none;"
+					onchange="previewImage(event, 'image-preview5')" />
 			</div>
+			
+			
 			<div class="btn-register-div">
 				<button type="submit" class="btn-register">수정하기</button>
 			</div>

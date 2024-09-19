@@ -27,7 +27,27 @@
         $('#charCount').text(currentLength + " / " + maxLength);
     });
     
-    
+    /*// 이미지 클릭 시 이미지 제거
+    function removeImage(previewId, inputId) {
+        // 미리보기 요소 찾음
+        const $preview = $('#' + previewId); // 전달된 미리보기 영역
+        const $input = $('#' + inputId);	 // 파일 선택 input의 id
+
+        const $img = $preview.find('img');	// 이미지(img)가 있으면 그 이미지 없앰
+        if ($img.length) {
+            $img.remove();
+        }
+        if (!$preview.find('span').legnth){
+        	$preview.append('<span>+</span>');	// +(이미지 추가)버튼 다시 생성
+        }
+
+        $input.val(''); // 이미지 파일 input 초기화(이전에 선택했던 파일 값을 없애주기 위해서 함)
+        
+        $preview.off('click').on('click', function(){
+        	$input.click();
+        })
+    }*/
+
     
 
 

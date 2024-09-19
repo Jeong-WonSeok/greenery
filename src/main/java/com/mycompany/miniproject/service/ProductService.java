@@ -112,6 +112,12 @@ public class ProductService {
 			productImageDao.updateProductImage(productImage);
 		}
 	}
+
+	// 관리자 상품 조회 페이지 - 상품 삭제
+	public void deleteProduct(int productId) {
+		productDao.disableProduct(productId);
+	}
+	
 	
 	
 }
