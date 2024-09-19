@@ -139,8 +139,7 @@ public class OrderController {
 				productInfo.put("productQty", cart.getProductQty());
 				productList.add(productInfo);				
 			}
-			UserDetailsImpl userDetail = (UserDetailsImpl) authentication.getPrincipal();
-			boolean hasCoupon = userDetail.getMember().isUserCoupon();
+			boolean hasCoupon = userService.hasCoupon(userId);
 			log.info("쿠폰 확인 : " + hasCoupon);
 			model.addAttribute("hasCoupon", hasCoupon);
 			model.addAttribute("productList", productList);

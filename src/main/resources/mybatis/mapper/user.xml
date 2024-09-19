@@ -28,5 +28,10 @@
 		where user_id=#{userId}
 	</update>	
 	
+	<select id="selectUserCoupon" parameterType="String" resultType="boolean">
+		select user_coupon
+		from "User"
+		where user_id=#{userId}
+	</select>
 
 </mapper>

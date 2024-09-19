@@ -13,5 +13,7 @@ public interface UserDao {
 
 	public int updateUserCoupon(String userId);
 
+	public boolean selectUserCoupon(String userId);
+
 
 } 

@@ -74,5 +74,12 @@ public class UserService {
 		log.info("결과 : " + result);
 	}
 	
+	public boolean hasCoupon(String userId) {
+		boolean result = userDao.selectUserCoupon(userId);
+		return result;
+		
+	}
+	
+	
 
 }

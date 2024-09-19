@@ -68,7 +68,7 @@
 				<!--  쿠폰 할인 정보 -->
 				<div class="coupon-title">
 					<h1>쿠폰할인정보</h1>
-					<button id="have-coupon">보유쿠폰(${isCoupon ? 1 : 0 })</button>
+					<button id="have-coupon">보유쿠폰(${hasCoupon ? 1 : 0 })</button>
 				</div>
 				<hr id="hr-topLine">
 				<div class="coupon-input-container">
