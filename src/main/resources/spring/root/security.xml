@@ -29,6 +29,8 @@
 
 	</security:http>
 	
+	<security:global-method-security secured-annotations="enabled"/>
+
 	<!-- 로그인이 성공 or 실패하면 이 관리객체로 등록되어 있는 클래스 실행 -->
 	<bean id="authenticationSuccessHandler"
 		class="com.mycompany.miniproject.security.AuthenticationSuccessHandler" />
@@ -38,6 +40,7 @@
 
 	<bean id="logoutSuccessHandler"
 		class="com.mycompany.miniproject.security.LogoutSuccessHandler" />
+
 
 	<!-- DB에서 데이터를 가져와서 사용자가 보낸 데이터와 비교 -->
 	<security:authentication-manager>

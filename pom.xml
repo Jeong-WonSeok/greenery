@@ -177,6 +177,11 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.4.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.22.1</version>
+		</dependency>
 	</dependencies>
 
 
