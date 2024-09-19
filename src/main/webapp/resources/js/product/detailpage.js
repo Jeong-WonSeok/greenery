@@ -62,22 +62,26 @@ function currentSlide(n) {
 }*/
 
 function noImage(e){
-	e.style.display='none';
-	$(".prev").css("display", 'none');
-	$(".next").css("display", 'none');
+	$(e).parent('.dot').remove();
+	/*e.style.display='none';*/
+	/*$(".prev").css("display", 'none');
+	$(".next").css("display", 'none');*/
 }
 
 function showSlides(n) {
+	if (n === -1) 
+		n = $(".dot").length-1;
     let i;
     let dots = $(".dot img");
-    const temp = [];
-    console.log($(".dot img").eq(2).css("display"));
-    if(dots.length != 1){
-	    for(i = 0; i < 4; i++){
-	    	temp.push(dots[i].src)
-	    }	
-	    for(i = 0; i < 4; i++){	
-	        $(dots[i]).attr("src", temp[(i+n) %4]);
+    const length = parseInt(dots.length);
+    let srcList = [];
+    if(length != 1){
+	    for(i = 0; i < length; i++){
+	    	let src = dots[i].src;
+	    	srcList.push(src);
+	    }
+	    for(i = 0; i < length; i++){	
+	        $(dots[i]).attr("src", srcList[(i+n) % length]);
 	    }
     }
 
@@ -150,12 +154,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function increase(button) {
 	let price = parseInt($(".product-price").data("price"));
 	let priceString = $(".product-price").html();
-	let curPrice = parseInt(priceString.replace("원", ""));
+	let curPrice = parseInt(priceString.replace(",", "").replace("원", ""));
 	let qty = parseInt($("#quantity").html());
-	console.log(price + price + " " + price);
-	console.log(curPrice + " 원");
 	$("#quantity").html(qty + 1);
-	$(".product-price").html(price+curPrice);
+	$(".product-price").html((price+curPrice).toLocaleString() + "원");
 	
 //    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
 //    console.log(productDiv);
@@ -187,15 +189,15 @@ function increase(button) {
 function decrease(button) {
 	let price = parseInt($(".product-price").data("price"));
 	let priceString = $(".product-price").html();
-	let curPrice = parseInt(priceString.replace("원", ""));
+	let curPrice = parseInt(priceString.replace(",", "").replace("원", ""));
 	let qty = parseInt($("#quantity").html());
 	
 	if(qty <= 1) return;
 	$("#quantity").html(qty - 1);
-	$(".product-price").html(curPrice-price);
+	$(".product-price").html((curPrice-price).toLocaleString() + "원");
 }
 
-// 로컬 스토리지에 저장하는 함수
+/*// 로컬 스토리지에 저장하는 함수
 function saveToLocalStorage(productDiv) {
     const quantitySpan = document.querySelector('.quantity-number');
     const priceSpan = document.querySelector('.product-price');
@@ -217,7 +219,7 @@ function saveToLocalStorage(productDiv) {
     localStorage.setItem(productName, JSON.stringify(productInfo));
 
 //    console.log(저장된 상품: ${productName}, 수량: ${quantity}, 가격: ${price});
-}
+}*/
 
 // 결제 페이지로 이동 시 호출되는 함수
 function checkout() {

@@ -74,21 +74,15 @@
         </a>
 
         <div class="currentSlide-container">
-            <span class="dot">
-                <img  onclick="showSlides(1)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=2" alt="currentSlide(1)"
-                    onerror="noImage(this)" style="width: 25%">
-            </span>
-            <span class="dot">
-                <img onclick="showSlides(2)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=3"  alt="currentSlide(2)"
-                    onerror="noImage(this)" style="width: 25%">
-            </span>
-            <span class="dot" >
-                <img onclick="showSlides(3)" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=4" alt="currentSlide(3)"
-                    onerror="noImage(this)" style="width: 25%">
-            </span>
+        	<c:forEach begin="1" end="${imageNum-1}" varStatus="status" >
+	        	<span class="dot">
+	                <img onclick="showSlides(${status.index})" src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=${status.index + 1}" alt="currentSlide(1)" style="width: 25%">
+	            </span>
+        	</c:forEach>
+
         </div>
 
-        <a class="next" onclick="showSlides(3)">
+        <a class="next" onclick="showSlides(-1)">
             <img src="${pageContext.request.contextPath}/resources/images/right-icon.png" alt="Next" style="width:20px">
         </a>
     </div>
