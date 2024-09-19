@@ -11,5 +11,7 @@ public interface UserDao {
 
 	public int insert(UserDto user);
 
+	public int updateUserCoupon(String userId);
+
 
 } 

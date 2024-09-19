@@ -23,5 +23,10 @@
 	
 	</select>
 	
+	<update id="updateUserCoupon" parameterType="String">
+		update "User" set user_coupon = 0
+		where user_id=#{userId}
+	</update>	
+	
 
 </mapper>

@@ -68,6 +68,11 @@ public class UserService {
 	public void logout(String userId) {
 		
 	}
+
+	public void useCoupon(String userId) {
+		int result = userDao.updateUserCoupon(userId);
+		log.info("결과 : " + result);
+	}
 	
 
 }

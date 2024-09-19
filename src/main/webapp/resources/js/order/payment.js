@@ -1,8 +1,10 @@
 $(document).ready(function () {
-  /*  $("#header").load("../header/header.html");
-    $("#footer").load("../footer/footer.html");
-    scrollToTop();*/
-
+	$('#allchk').prop('checked', true);  
+    $('.product-checkbox').prop('checked', true);
+    
+    scrollToTop();
+	calculatePrice();	
+	
     $(".modal-image").click(() => {
 //        console.log("쿠폰 버튼 클릭됨");
         showAlertCoupon();
@@ -39,7 +41,7 @@ function applyCoupon() {
     showAlertCoupon();
 }
 
-function orderPrice() {
+/*function orderPrice() {
     const checkedBoxes = document.querySelectorAll('.product-checkbox:checked');
     let finalPrice = 0;
 
@@ -52,6 +54,21 @@ function orderPrice() {
     });
 
     document.querySelector('#sumPrice').innerText = finalPrice.toLocaleString() + '원';
+}*/
+function calculatePrice() {
+    let totalOrderPrice = 0;    // 총 주문 금액
+    let deliveryPrice = 2500;
+    // 체크된 상품 가격 업데이트
+    $('.product-checkbox:checked').each(function () {
+        let price = parseInt($(this).data('price'));    //각 상품 가격 가져옴
+        let quantity = parseInt($(this).closest('.product').find('.quantity-number').text()); // 수량 가져옴
+
+        totalOrderPrice += price * quantity;
+    });
+    let totalPrice = deliveryPrice + totalOrderPrice;
+
+    $('#sumPrice').text(totalOrderPrice.toLocaleString() + ' 원');
+    $('#totalPrice-num').text(totalPrice.toLocaleString());
 }
 
 /* 총 가격 계산 */
@@ -131,7 +148,8 @@ function deleteSelected() {
         checkbox.closest('.product').remove();
     });
     totalPriceCalculation();
-    orderPrice();
+    calculatePrice();
+    
 }
 
 
@@ -147,13 +165,13 @@ document.addEventListener('DOMContentLoaded', function () {
         productCheckboxes.forEach(checkBox => {
             checkBox.checked = isChecked;
         });
-        orderPrice();
+        calculatePrice();
         totalPriceCalculation(); // 전체 선택 시 총 가격 계산 업데이트
     });
 
     productCheckboxes.forEach(chk => {
         chk.addEventListener('click', function () {
-            orderPrice();
+        	calculatePrice();	
             totalPriceCalculation(); // 체크 박스 클릭 시 총 가격 계산 업데이트
         });
     });
@@ -162,51 +180,9 @@ document.addEventListener('DOMContentLoaded', function () {
 /* 제품 삭제 */
 function removeProduct(link) {
     link.closest('.product').remove();
-    orderPrice();
+    calculatePrice();
     totalPriceCalculation(); // 제품 삭제 후 총 가격 계산 업데이트
 }
-
-// 데이터
-/*$.ajax({
-    url: '../../content/products.json',
-    method: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        console.log(data);  // 데이터 구조 확인 로그 출력
-        if (Array.isArray(data.products)) {
-            data.products.forEach(product => {
-                const productHtml = `
-                    <div class="product">
-                        <div class="product-body">
-                                <input type="checkbox" class="product-checkbox">
-                                <div class="img"><img src="${product.imageUrls[0]}" alt="${product.productName}" class="picture"></div>
-
-                            <div class="product-label">
-                                <div class="product-name"><span><strong>${product.productName}</strong></span></div>
-                                <div class="product-description"><span>${product.summaryDescription}</span></div>
-                            </div>
-                            <div class="product-quantity">
-                                <button onclick="changeQuantity(this, 'decrease')">-</button>
-                                <span class="quantity-number" id="quantity-${product.productId}">1</span>
-                                <button onclick="changeQuantity(this, 'increase')">+</button>
-                            </div>
-                            <div class="product-price" data-price="${product.price}"><p><strong>${product.price.toLocaleString()}원</strong></p></div>
-                            <div class="basket-delete">
-                                <a href="#" class="abutton" onclick="removeProduct(this); return false;">
-                                    <img src="../../res/images/X-icon.png" alt="삭제 버튼" class="delete-icon" style="width: 30px; height: 30px;">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                $('#productList').append(productHtml);
-            });
-        }
-    },
-    error: function (err) {
-        console.error('Error fetching product data:', err);
-    }
-});*/
 
 
 // 전체선택 체크박스 클릭 시 상품 전체 체크 활성화
@@ -218,11 +194,11 @@ $(document).ready(function () {
     $('#allchk').click(function () {
         let isChecked = $(this).is(':checked'); // 전체 선택 체크박스의 체크 상태를 true, false로 저장
         $('.product-checkbox').prop('checked', isChecked);
-        orderPrice();
+        calculatePrice();
     });
 
     $('.product-checkbox').change(function () {
-        orderPrice();
+    	calculatePrice();
         totalPriceCalculation();
     });
     
@@ -243,20 +219,22 @@ function createdOrder() {
 		productIdList.push(Number($(this).data("productid")));
     });
 	const totalPrice = $('#totalPrice-num').html().replace(",", "");
-	console.log(productIdList);
-	
+	const couponValue = ($('#discount').html()).replace("원", "");
+	const coupon = parseInt(couponValue) < 0 ? true : false; 
+
 	$.ajax({
 		url:"createOrder",
 		method:"POST",
 		contentType:"application/json",
 		data: JSON.stringify({
 			"productIdList": productIdList,
-			"totalPrice" : totalPrice
+			"totalPrice" : totalPrice,
+			"coupon" : coupon
 		}),
-		success: function () {
-			location.href="order";
+		success: function (data) {
+			location.href="order?orderId="+data;
 		},
-		error:function () {
+		error: function () {
 			alert("주문에 실패하였습니다.");
 		}		
 	})

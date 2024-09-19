@@ -35,7 +35,7 @@
 				<c:forEach items="${productList}" var="product">
 					<div class="product">
 					    <div class="product-body">
-				            <input type="checkbox" class="product-checkbox" data-productid="${product.product.productId}">
+				            <input type="checkbox" class="product-checkbox" data-price="${product.product.productPrice}" data-productid="${product.product.productId}">
 				            <div class="img"><img src="${pageContext.request.contextPath}/imageDown?productId=${product.product.productId}&usecase=1" alt="${product.product.productName}" class="product-image"></div>
 					
 					        <div class="product-label">
@@ -68,14 +68,17 @@
 				<!--  쿠폰 할인 정보 -->
 				<div class="coupon-title">
 					<h1>쿠폰할인정보</h1>
-					<button id="have-coupon">보유쿠폰(1)</button>
+					<button id="have-coupon">보유쿠폰(${isCoupon ? 1 : 0 })</button>
 				</div>
 				<hr id="hr-topLine">
 				<div class="coupon-input-container">
 					<span class="coupon-label">쿠폰</span>
 					<div class="custom-select">
 						<select id="coupon-select">
-							<option value="1">그리너리 회원을 위한 1,000원 할인 쿠폰</option>
+							<c:if test="${hasCoupon}">
+								<option value="1">그리너리 회원을 위한 1,000원 할인 쿠폰</option>
+							</c:if>
+							<option value="0">선택하지 않음</option>
 						</select> 
 						<img src="${pageContext.request.contextPath}/resources/images/dropdown-icon.png" alt="dropdown-icon" class="dropdown-icon">
 					</div>

@@ -23,7 +23,7 @@
     <div class="finish">
       <p class="order-complete">고객님의 주문이 완료 되었습니다.</p>
       <p class="order-info">주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.</p>
-      <div class="ordernum">주문번호: <strong style="color: black">2020202020</strong></div>
+      <div class="ordernum">주문번호: <strong style="color: black">${orderId}</strong></div>
     </div>
   </div>
 

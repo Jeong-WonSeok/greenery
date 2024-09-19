@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +25,11 @@ import com.mycompany.miniproject.dto.CreatedOrderDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.UserDto;
+import com.mycompany.miniproject.security.UserDetailsImpl;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
+import com.mycompany.miniproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +41,8 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/cart")
 	public String cart(Model model, Authentication authentication) {
@@ -102,7 +108,8 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order")
-	public String order() {
+	public String order(int orderId, Model model) {
+		model.addAttribute("orderId", orderId);
 		return "order/order";
 	}
 	
@@ -132,7 +139,10 @@ public class OrderController {
 				productInfo.put("productQty", cart.getProductQty());
 				productList.add(productInfo);				
 			}
-			
+			UserDetailsImpl userDetail = (UserDetailsImpl) authentication.getPrincipal();
+			boolean hasCoupon = userDetail.getMember().isUserCoupon();
+			log.info("쿠폰 확인 : " + hasCoupon);
+			model.addAttribute("hasCoupon", hasCoupon);
 			model.addAttribute("productList", productList);
 		}
 		else {
@@ -168,7 +178,11 @@ public class OrderController {
  			orderService.deleteProduct(productId, userId);
  			orderService.insertOrderItem(orderItemDto);
  		}
-		
-		return ResponseEntity.ok("OK");
+ 		
+ 		if(order.isCoupon()) {
+ 			userService.useCoupon(userId);
+ 		}
+ 		
+		return ResponseEntity.ok(String.valueOf(orderId));
 	}
 }
