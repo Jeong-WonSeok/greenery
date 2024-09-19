@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,32 +39,19 @@
 				<div class="item3">수정 / 삭제</div>
 			</div>
 
-			<div class="list-container">
-				<div class="list1">2024-07-21</div>
-				<div class="list2">아렌시아</div>
-				<div class="list3">
-					<button class="btn1">수정</button>
-					<button class="btn2">삭제</button>
-				</div>
-			</div>
 
-			<div class="list-container">
-				<div class="list1">2024-07-21</div>
-				<div class="list2">아렌시아</div>
-				<div class="list3">
-					<button class="btn1">수정</button>
-					<button class="btn2">삭제</button>
+			<c:forEach items="${notice}" var="i">
+				<div class="list-container">
+					<div class="notice-created">${i.createdAt}</div>
+					<div class="notice-title">${i.noticeTitle }</div>
+					
+					<div class="upAndDelBtn">
+						<button onclick="location.href='updateNoticeForm?noticeId=${i.noticeId}'" class="btn1">수정</button>
+						<button class="btn2">삭제</button>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 
-			<div class="list-container">
-				<div class="list1">2024-07-21</div>
-				<div class="list2">아렌시아</div>
-				<div class="list3">
-					<button class="btn1">수정</button>
-					<button class="btn2">삭제</button>
-				</div>
-			</div>
 
 
 		</div>

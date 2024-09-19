@@ -12,12 +12,12 @@
     }
 
     .item1, .item3,
-    .list1, .list3 {
+    .notice-created, .upAndDelBtn {
         flex: 1;
         text-align: center;
     }
 
-    .item2, .list2 {
+    .item2, .notice-title {
         flex: 2;
         text-align: center;
     }
@@ -29,7 +29,7 @@
         border-bottom: 1px solid #ccc;
     }
 
-    .list3 {
+    .upAndDelBtn {
         display: flex;
         flex-direction: column;
         align-items: center;

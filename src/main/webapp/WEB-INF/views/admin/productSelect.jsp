@@ -47,16 +47,16 @@
 					<div class="product-created">${i.createdAt}</div>
 					<div class=product-image>
 						<a href="${pageContext.request.contextPath}/admin/productSelect?productId=${i.productId}">
-		                     <img src="imageDown?productId=${i.productId}&usecase=1" alt="${i.productName}" class="product-image"> 
-		                </a>
+		                     <img src="imageDown?productId=${i.productId}&usecase=1" alt="${i.productName}" class="product-image">
+						</a>
 					</div>
 					
 					<div class="product-name">${i.productName}</div>
 					<div class="product-stock">${i.productStock}</div>
 					<div class="product-price"><span><fmt:formatNumber value="${i.productPrice}" type="number"/></span>원</div>
+					
 					<div class="upAndDelBtn">
 						<button onclick="location.href='updateProductForm?productId=${i.productId}'" class="btn1">수정</button>
-						<%-- <button onclick="location.href='deleteProduct?productId=${i.productId}'" class="btn2">삭제</button> --%>
 						<form action="deleteProduct" method="post">
 						    <input type="hidden" name="productId" value="${i.productId}">
 						    <button type="submit" class="btn2">삭제</button>
@@ -64,6 +64,7 @@
 					</div>
 				</div>
 			</c:forEach>
+			
 		</div>
 	</div>
 

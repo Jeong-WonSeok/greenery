@@ -11,8 +11,7 @@ public class NoticeDto {
 	private int noticeId;
 	private String noticeTitle;
 	private String noticeContent;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date created_at;
+	private Date createdAt;
 	private String userId;
 
 }

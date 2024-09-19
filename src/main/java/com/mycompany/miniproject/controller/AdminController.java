@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.miniproject.dao.NoticeDao;
 import com.mycompany.miniproject.dao.ProductImageDao;
+import com.mycompany.miniproject.dto.NoticeDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductFormDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
+import com.mycompany.miniproject.service.NoticeService;
 import com.mycompany.miniproject.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +39,10 @@ public class AdminController {
 	ProductService productService;
 	@Autowired
 	ProductImageDao productImageDao;
+	@Autowired
+	NoticeService noticeService;
+	@Autowired
+	NoticeDao noticeDao;
 	
 	@GetMapping("")
 	public String mainadmin() {
@@ -46,9 +53,11 @@ public class AdminController {
 	public String noticeoAdd() {
 		return "admin/noticeAdd";
 	}
-
+	// 공지사항 전체 조회
 	@GetMapping("/noticeselect")
-	public String admin_notice() {
+	public String noticeSelect(Model model) {
+		List<NoticeDto> notice = noticeService.getNoticeAll();
+		model.addAttribute("notice", notice);
 		return "admin/noticeSelect";
 	}
 
