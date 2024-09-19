@@ -221,7 +221,8 @@ function createdOrder() {
 	const totalPrice = $('#totalPrice-num').html().replace(",", "");
 	const couponValue = ($('#discount').html()).replace("원", "");
 	const coupon = parseInt(couponValue) < 0 ? true : false; 
-
+	const productQty = $('.quantity-number').html();
+	
 	$.ajax({
 		url:"createOrder",
 		method:"POST",
@@ -229,7 +230,8 @@ function createdOrder() {
 		data: JSON.stringify({
 			"productIdList": productIdList,
 			"totalPrice" : totalPrice,
-			"coupon" : coupon
+			"coupon" : coupon,
+			"productQty" : productQty
 		}),
 		success: function (data) {
 			location.href="order?orderId="+data;
@@ -240,4 +242,23 @@ function createdOrder() {
 	})
 }
 
+$(document).on('click', '.delete-icon', function () {
+	deleteProduct(this);
+    calculatePrice();
+})
+
+function deleteProduct(data) {
+	$.ajax({
+		url: "deleteProduct",
+		method: "GET",
+		data: {productId : $(data).data("productid")},
+		success : function (){
+			window.location.href="cart";
+		},
+		error : function(){
+			alert("삭제에 실패하였습니다.");
+		}
+		
+	})
+}
 

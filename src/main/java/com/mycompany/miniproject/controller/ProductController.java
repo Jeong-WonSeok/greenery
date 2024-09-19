@@ -37,6 +37,9 @@ public class ProductController {
 	@GetMapping("/detailpage")
 	public String detailpage(int productId, Model model) {
 		ProductDto product = productService.getProduct(productId);
+		int imageNum = productService.getImageNum(productId); 
+		model.addAttribute("imageNum", imageNum);
+		log.info(imageNum + " ");
 		model.addAttribute("product", product);
 		return "product/detailpage";
 	}

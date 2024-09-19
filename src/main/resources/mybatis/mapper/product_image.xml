@@ -44,6 +44,11 @@
 		where pimage_id = #{pimageId}
 	</update>
 	
+	<select id="selectImageNumber" parameterType="int" resultType="int">
+		select count(*)
+		from product_image
+		where product_id = #{productId} and pimage_usecase != 'detailImage'
+	</select>
 
 	
 	<!-- <update id="updateProductImage" parameterType="ProductImage">

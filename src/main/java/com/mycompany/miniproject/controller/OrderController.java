@@ -167,12 +167,15 @@ public class OrderController {
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = orderService.getCartInfo(productId, userId);
+ 			if(cartDto!=null)
+ 				orderItemDto.setProductQty(cartDto.getProductQty());
+ 			else
+ 				orderItemDto.setProductQty(order.getQty());
  			
  			orderItemDto.setOrderId(orderId);
  			orderItemDto.setOrderState("배달완료");
  			orderItemDto.setProductId(productId);
  			orderItemDto.setProductPrice(productDto.getProductPrice());
- 			orderItemDto.setProductQty(cartDto.getProductQty());
  			
  			orderService.deleteProduct(productId, userId);
  			orderService.insertOrderItem(orderItemDto);
@@ -183,5 +186,30 @@ public class OrderController {
  		}
  		
 		return ResponseEntity.ok(String.valueOf(orderId));
+	}
+	
+	@Secured("ROLE_USER")
+	@GetMapping("addOneProduct")
+	public String addOneProduct(int productId,
+							@RequestParam(defaultValue="1") int qty,
+							Authentication authentication, Model model) {
+		if(authentication != null) {
+			String userId = authentication.getName();
+			List<Map<String, Object>> productList = new ArrayList<>();
+			
+				
+			Map<String, Object> productInfo = new HashMap<>();
+			ProductDto product = productService.getProduct(productId);
+			productInfo.put("product", product);
+			productInfo.put("productQty", qty);
+			productList.add(productInfo);				
+			
+			boolean hasCoupon = userService.hasCoupon(userId);
+		
+			model.addAttribute("hasCoupon", hasCoupon);
+			model.addAttribute("productList", productList);
+		}
+		
+		return "order/payment";
 	}
 }

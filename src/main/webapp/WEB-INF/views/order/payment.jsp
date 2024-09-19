@@ -50,7 +50,7 @@
 					        <c:set var="productPrice" value="${product.product.productPrice*product.productQty}" />
                             <div class="product-price" data-price="${product.product.productPrice}" data-productid="${product.product.productId}">
                             	<p class="product-price-p"><strong>
-								<fmt:formatNumber value="${productPrice}" type="number"/>원
+									<fmt:formatNumber value="${productPrice}" type="number"/>원
 								</strong></p>
 							</div>
 					        <div class="basket-delete">

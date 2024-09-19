@@ -117,6 +117,11 @@ public class ProductService {
 	public void deleteProduct(int productId) {
 		productDao.disableProduct(productId);
 	}
+
+	public int getImageNum(int productId) {
+		int num = productImageDao.selectImageNumber(productId);
+		return num;
+	}
 	
 	
 	

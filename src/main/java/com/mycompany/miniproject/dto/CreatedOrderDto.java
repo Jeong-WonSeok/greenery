@@ -10,5 +10,6 @@ public class CreatedOrderDto {
 	private List<Integer> productIdList;
 	private int totalPrice;
 	private boolean coupon;
+	private int qty;
 
 }

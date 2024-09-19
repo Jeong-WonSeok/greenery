@@ -59,6 +59,11 @@ input[type="checkbox"]:checked {
     /* 체크 시 테두리 색상 */
 }
 
+.delete-icon:hover {
+    cursor: pointer;
+}
+
+
 input[type="checkbox"]:checked::after {
     content: '';
     display: block;

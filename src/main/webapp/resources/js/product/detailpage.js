@@ -40,6 +40,19 @@ function slideReset(){
 	}
 		
 }
+
+function getContextPath(){
+	const hostIndex = location.href.indexOf(location.host) + location.host.length;
+	const contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	return contextPath;
+}
+
+function buyNow(productId) {
+	let quantity = $('#quantity').text();
+
+	location.href = getContextPath() + "/order/addOneProduct?productId=" + productId + "&qty=" + quantity;
+}
+
 function removeFromWishlist(productName) {
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     wishlist = wishlist.filter(item => item !== productName);
@@ -237,7 +250,7 @@ function checkout() {
 }
 
 
-function cart() {
+/*function cart() {
     const cartItems = [];
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -248,7 +261,7 @@ function cart() {
     sessionStorage.setItem('add-to-cart', JSON.stringify(cart));
     window.location.href = '../basket/basket.html'; // 장바구니 페이지로 이동 
 }
-
+*/
 function scrollToTop() {
     window.scrollTo({
         top: 0,

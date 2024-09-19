@@ -58,7 +58,7 @@
             </div>
             <div class="buttons">
                 <button class="add-to-cart" data-productid="${product.productId}">장바구니</button>
-                <button class="checkout">바로구매</button>
+                <button class="checkout" onclick="buyNow(${product.productId})">바로구매</button>
                 <button class="wishlist-button">
                     <img src="${pageContext.request.contextPath}/resources/images/heart-icon.png" alt="wishlist" class="wishlist">
                 </button>
