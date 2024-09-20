@@ -23,6 +23,11 @@
 	            <img src="${pageContext.request.contextPath}/resources/images/login_icon.png" class="header-nav-icon" />
 	            <span class="header-nav-text">로그인</span>
 	        </button>
+	        
+	        <button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/mypage/mypage'">
+	            <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
+	            <span class="header-nav-text">마이페이지</span>
+	        </button>
 	    </sec:authorize>
 	    
 	    							<!-- 로그인을 했을 때 -->
@@ -41,14 +46,18 @@
 	            </button>
 			</form>
 			
+			<button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/admin/productselect'">
+	            <img src="${pageContext.request.contextPath}/resources/images/adminIcon.png" class="header-nav-icon" />
+	            <span class="header-nav-text">관리자페이지</span>
+	        </button>
+	        
+			<button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/mypage/mypage'">
+	            <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
+	            <span class="header-nav-text">마이페이지</span>
+	        </button>
+	        
 		</sec:authorize>
-	    
-	    
-        
-        <button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/mypage/mypage'">
-            <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
-            <span class="header-nav-text">마이페이지</span>
-        </button>
+		
         <button class="header-cart" onclick="location.href='${pageContext.request.contextPath}/order/cart'">
             <img src="${pageContext.request.contextPath}/resources/images/cart_icon.png" class="header-nav-icon" />
             <span class="header-cart-badge">0</span>
