@@ -11,4 +11,10 @@
 			#{orderId}, #{userId}, sysdate, #{totalPrice}	
 		)
 	</insert>
+	
+	<select id="selectCreatedOrder" parameterType="int" resultType="Order">
+		select created_at
+		from "order"
+		where order_id = #{orderId}
+	</select>
 </mapper>

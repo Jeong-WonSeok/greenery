@@ -1,5 +1,7 @@
 package com.mycompany.miniproject.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +109,12 @@ public class OrderService {
 	public void insertOrderItem(OrderItemDto orderItemDto) {
 		orderItemDao.insertOrderItem(orderItemDto);
 		
+	}
+
+	public Date getCreatedOrder(int orderId) {
+		OrderDto order = orderDao.selectCreatedOrder(orderId);
+		Date createdOrder = order.getCreatedAt();
+		return createdOrder;
 	}
 
 	

@@ -14,4 +14,15 @@
 		from review
 		where review_id = #{reviewId}
 	</select>
+	
+	<insert id="insertReview" parameterType="map">
+		<selectKey keyProperty="reviewId" resultType="int" order="BEFORE" >
+			select reviews_seq.nextval from dual
+		</selectKey>
+		insert into review (
+			review_id, created_at, product_id, user_id, review_enable
+		) values (
+			#{reviewId}, #{createdAt}, #{productId}, #{userId}, 0
+		)
+	</insert>
 </mapper>

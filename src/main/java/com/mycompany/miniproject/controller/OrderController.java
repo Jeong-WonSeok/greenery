@@ -1,5 +1,7 @@
 package com.mycompany.miniproject.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +20,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycompany.miniproject.dao.CartDao;
 import com.mycompany.miniproject.dto.CartDto;
 import com.mycompany.miniproject.dto.CreatedOrderDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
-import com.mycompany.miniproject.dto.UserDto;
-import com.mycompany.miniproject.security.UserDetailsImpl;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
+import com.mycompany.miniproject.service.ReviewService;
 import com.mycompany.miniproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +42,8 @@ public class OrderController {
 	ProductService productService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	ReviewService reviewService;
 	
 	@GetMapping("/cart")
 	public String cart(Model model, Authentication authentication) {
@@ -160,10 +161,11 @@ public class OrderController {
 		orderDto.setUserId(userId);
 		orderDto.setTotalPrice(totalPrice);
  		int orderId = orderService.createOrder(orderDto);
- 		
+ 		Date createdOrder = orderService.getCreatedOrder(orderId);
  		List<Integer> orderList = order.getProductIdList();
- 		log.info(orderList.toString());
+ 		
  		for(int productId : orderList) {
+ 			reviewService.createReview(createdOrder, userId, productId);
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = orderService.getCartInfo(productId, userId);

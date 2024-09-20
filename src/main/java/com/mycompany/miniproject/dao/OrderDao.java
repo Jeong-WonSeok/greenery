@@ -9,4 +9,6 @@ public interface OrderDao {
 
 	int insertOrder(OrderDto order);
 
+	OrderDto selectCreatedOrder(int orderId);
+
 }
