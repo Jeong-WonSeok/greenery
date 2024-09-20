@@ -7,16 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
-	<link
-		href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css"
-		rel="stylesheet">
-	<script
-		src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
-	<link
-		href="${pageContext.request.contextPath}/resources/css/admin/noticeadd.css"
-		rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link
+	href="${pageContext.request.contextPath}/resources/css/admin/noticeadd.css"
+	rel="stylesheet" type="text/css" />
 </head>
 
 
@@ -25,7 +26,7 @@
 	<%@ include file="/WEB-INF/views/common/adminCommon.jsp"%>
 	<div class="section4">
 		<div>
-			<form class="container-form" mehtod>
+			<form class="container-form" method="post" action="insertNotice">
 				<div class="top-text-margin">
 					공지사항 > <span class="text-success"><b>공지사항 등록</b></span>
 				</div>
@@ -37,7 +38,8 @@
 				</h5>
 
 				<div class="form-group">
-					<label>제목</label> <input type="text"
+					<label>제목</label> 
+					<input type="text" name="noticeTitle" id="notice-title" 
 						placeholder="그리너리 서버 점검 안내(8/21)" maxlength="250">
 					<div id="charCount">0 / 250</div>
 				</div>
@@ -45,7 +47,7 @@
 					<label>내용</label>
 				</div>
 				<div class="container-textarea">
-					<textarea class="textarea" rows="5"
+					<textarea class="textarea" rows="5" name="noticeContent"
 						placeholder="공지사항에 대한 내용을 입력하세요"></textarea>
 				</div>
 
@@ -53,8 +55,10 @@
 					<button type="submit" class="btn-register">등록</button>
 				</div>
 			</form>
+			
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/noticeadd.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/admin/noticeadd.js"></script>
 </body>
 </html>

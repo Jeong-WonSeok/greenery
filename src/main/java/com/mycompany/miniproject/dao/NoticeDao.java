@@ -11,4 +11,6 @@ public interface NoticeDao {
 
 	public List<NoticeDto> selectAll();
 
+	public void insertNotice(NoticeDto notice);
+
 }

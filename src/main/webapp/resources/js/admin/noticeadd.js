@@ -21,3 +21,27 @@ document.addEventListener('DOMContentLoaded', function() {
 		bsCollapse.toggle();
 	});
 });
+
+// 문자 길이 250자 제한
+$('#notice-title').on('input', function(){
+	var currentLength = $(this).val().length;
+	var maxLength = 250;
+	
+	if (currentLength > maxLength){
+		$(this).val($(this).val().substring(0, maxLength));	// 0 ~ 250 까지만 남기고 나머진 버림
+		currentLength = maxLength;
+	}
+	$('#charCount').text(currentLength + "/" + maxLength);
+	
+});
+
+
+
+
+
+
+
+
+
+
+

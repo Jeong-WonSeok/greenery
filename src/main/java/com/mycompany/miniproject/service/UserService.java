@@ -79,7 +79,10 @@ public class UserService {
 		return result;
 		
 	}
-	
-	
+	/*// UserId 가져오기
+	public UserDto selectUserId(UserDto user) {
+		UserDto userId = userDao.selectById(user.getUserId());
+		return userId;
+	}*/
 
 }

@@ -23,6 +23,13 @@ public class NoticeService {
 		return noticeList;
 	}
 	
+	// 공지사항 등록
+	public int insertNotice(NoticeDto notice) {
+		noticeDao.insertNotice(notice);
+		int noticeId = notice.getNoticeId();
+		return noticeId;
+	}
+	
 	
 	
 	

@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mycompany.miniproject.dao.NoticeDao;
 import com.mycompany.miniproject.dao.ProductImageDao;
 import com.mycompany.miniproject.dto.NoticeDto;
+import com.mycompany.miniproject.dto.NoticeFormDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductFormDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
+import com.mycompany.miniproject.dto.UserDto;
 import com.mycompany.miniproject.service.NoticeService;
 import com.mycompany.miniproject.service.ProductService;
+import com.mycompany.miniproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,22 +47,44 @@ public class AdminController {
 	NoticeService noticeService;
 	@Autowired
 	NoticeDao noticeDao;
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("")
 	public String mainadmin() {
 		return "redirect:/admin/productselect";
 	}
-
-	@GetMapping("/noticeadd")
-	public String noticeoAdd() {
-		return "admin/noticeAdd";
-	}
+	
 	// 공지사항 전체 조회
 	@GetMapping("/noticeselect")
 	public String noticeSelect(Model model) {
 		List<NoticeDto> notice = noticeService.getNoticeAll();
 		model.addAttribute("notice", notice);
+		log.info("목록 조회");
 		return "admin/noticeSelect";
+	}
+	// 공지사항 추가 폼get
+	@GetMapping("/noticeadd")
+	public String noticeoAdd() {
+		return "admin/noticeAdd";
+	}
+	// 공지사항 추가 post
+	@PostMapping("/insertNotice")
+	public String insertNotice(NoticeFormDto noticeForm, Authentication authentication) {
+		NoticeDto notice = new NoticeDto();
+		
+		notice.setNoticeId(noticeForm.getNoticeId());
+		notice.setNoticeTitle(noticeForm.getNoticeTitle());
+		notice.setNoticeContent(noticeForm.getNoticeContent());
+		
+		String userId = authentication.getName();
+		log.info("userId : " + userId);
+		
+		notice.setUserId(userId);
+		int noticeId = noticeService.insertNotice(notice);
+		
+		log.info("공지사항 추가 완료. Id: "  + noticeId);
+		return "redirect:/admin/noticeselect";
 	}
 
 	@GetMapping("/productadd")
