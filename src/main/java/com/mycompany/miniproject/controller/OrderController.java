@@ -1,5 +1,4 @@
 package com.mycompany.miniproject.controller;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -161,6 +160,7 @@ public class OrderController {
 		orderDto.setUserId(userId);
 		orderDto.setTotalPrice(totalPrice);
  		int orderId = orderService.createOrder(orderDto);
+ 		
  		Date createdOrder = orderService.getCreatedOrder(orderId);
  		List<Integer> orderList = order.getProductIdList();
  		

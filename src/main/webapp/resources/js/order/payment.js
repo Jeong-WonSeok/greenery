@@ -221,7 +221,8 @@ function createdOrder() {
 	const totalPrice = $('#totalPrice-num').html().replace(",", "");
 	const couponValue = ($('#discount').html()).replace("원", "");
 	const coupon = parseInt(couponValue) < 0 ? true : false; 
-	const productQty = $('.quantity-number').html();
+	const productQty = parseInt($('.quantity-number').html());
+	console.log(productQty);
 	
 	$.ajax({
 		url:"createOrder",
@@ -231,7 +232,7 @@ function createdOrder() {
 			"productIdList": productIdList,
 			"totalPrice" : totalPrice,
 			"coupon" : coupon,
-			"productQty" : productQty
+			"qty" : productQty
 		}),
 		success: function (data) {
 			location.href="order?orderId="+data;
