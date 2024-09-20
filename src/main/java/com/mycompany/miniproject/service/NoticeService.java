@@ -1,8 +1,31 @@
 package com.mycompany.miniproject.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class NoticeService {
+import com.mycompany.miniproject.dao.NoticeDao;
+import com.mycompany.miniproject.dto.NoticeDto;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class NoticeService {
+	
+	@Autowired
+	NoticeDao noticeDao;
+	
+	// 공지사항 조회
+	public List<NoticeDto> getNoticeAll(){
+		List<NoticeDto> noticeList = noticeDao.selectAll();
+		return noticeList;
+	}
+	
+	
+	
+	
+	
+	
 }

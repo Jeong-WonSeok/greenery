@@ -7,6 +7,7 @@
     display: flex;
     border: 1px solid #ccc;
     height: 60px;
+    margin-bottom: 0px !important;
 }
 
 .form-group label {
@@ -19,6 +20,7 @@
     box-sizing: border-box;
     border-right: 1px solid #ccc;
     text-align: auto;
+    margin-bottom: 0px !important;
 }
 
 .form-group input {
@@ -27,6 +29,7 @@
     border: 1px solid #ccc;
     font-size: 14px;
     padding-left: 10px;
+    margin-bottom: 0px !important;
 }
 
 #charCount {
