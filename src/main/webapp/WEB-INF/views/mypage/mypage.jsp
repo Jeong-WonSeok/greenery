@@ -6,8 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>마이페이지</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+	<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
+   	<script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css">
 </head>
 
@@ -16,7 +17,6 @@
 	<!-- 헤더를 삽입할 위치 -->
 	<!-- <div id="header"></div> -->
 	<%@ include file="/WEB-INF/views/common/header.jsp"%> 
-	<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
 		<div class="mypage">
 		<div class="mypage-sidebar">
 			<span class="mypage-sidebar-title">마이페이지</span>
@@ -29,6 +29,7 @@
 	</div>
 	<!-- 푸터를 삽입할 위치 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%> 
+	<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
 <!-- 	<div id="footer"></div>
 </body>
 

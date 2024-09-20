@@ -6,7 +6,7 @@
 			review_image_name, review_image_type, 
 			created_at, user_id
 		from review
-		where product_id = #{productId}
+		where product_id = #{productId} and review_enable=1
 	</select>
 	
 	<select id="selectReview" parameterType="int" resultType="Review">

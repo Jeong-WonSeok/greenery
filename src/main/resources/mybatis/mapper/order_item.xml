@@ -10,4 +10,10 @@
 			#{productQty}, #{orderState}
 		)
 	</insert>
+	
+	<select id="selectOrderItem" parameterType="int">
+		select order_id, product_id, product_qty, product_price, order_state 
+		from order_item
+		where order_id=#{orderId}
+	</select>
 </mapper>

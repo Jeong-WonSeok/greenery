@@ -1,8 +1,8 @@
 function getContent(url) {
+	console.log(url);
     $.ajax({
         url: url,
         method: "GET",
-        dataType: "html",
         success: function (data) {
             $(".mypage-content").append(data);
             if (url === "likedProducts") {
@@ -50,7 +50,7 @@ function dataToHtml(products) {
         });
     }
 }
-
+/*
 function getData() {
     $.ajax({
         url: "../../content/products.json",
@@ -64,7 +64,7 @@ function getData() {
         },
     });
 }
-
+*/
 function getReview() {
     $.ajax({
         url: "reviews",
@@ -80,14 +80,12 @@ function getReview() {
 }
 
 $(document).ready(function () {
-    $("#header").load("../header/header.html");
-    $("#footer").load("../footer/footer.html");
+	
     getContent("likedProducts");
 
     // 마이페이지 로딩 시 기본적으로 찜한 상품 탭 글씨 진하게 보여줌
     $('.mypage-menu').each(function () {
         if ($(this).data('url') === 'likedProducts') {
-        	console.log("likedProductㄴ");
             $(this).html('<strong>' + $(this).text() + '</strong>');
         }
     });

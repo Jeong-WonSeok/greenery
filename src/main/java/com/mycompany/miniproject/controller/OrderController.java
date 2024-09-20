@@ -169,7 +169,7 @@ public class OrderController {
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = orderService.getCartInfo(productId, userId);
- 			if(cartDto!=null)
+ 			if(cartDto != null)
  				orderItemDto.setProductQty(cartDto.getProductQty());
  			else
  				orderItemDto.setProductQty(order.getQty());

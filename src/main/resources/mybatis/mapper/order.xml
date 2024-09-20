@@ -17,4 +17,10 @@
 		from "order"
 		where order_id = #{orderId}
 	</select>
+	
+	<select id="selectOrderList" parameterType="String" resultType="Order">
+		select order_id, user_id, created_at, total_price
+		from "order"
+		where user_id=#{userId}
+	</select>
 </mapper>

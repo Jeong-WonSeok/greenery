@@ -117,6 +117,16 @@ public class OrderService {
 		return createdOrder;
 	}
 
+	public List<OrderDto> getOrderList(String userId) {
+		List<OrderDto> orderList = orderDao.selectOrderList(userId);
+		return orderList;
+	}
+
+	public List<OrderItemDto> getOrderItem(int orderId) {
+		List<OrderItemDto> orderItemList = orderItemDao.selectOrderItem(orderId);
+		return orderItemList;
+	}
+
 	
 
 }
