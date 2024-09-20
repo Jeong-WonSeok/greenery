@@ -1,12 +1,12 @@
 function getContent(url) {
-	console.log(url);
+	
     $.ajax({
         url: url,
         method: "GET",
         success: function (data) {
             $(".mypage-content").append(data);
             if (url === "likedProducts") {
-                getData();
+                /*getData();*/
             } else if (url === "orderList") {
                 getReview();
             }
@@ -16,6 +16,22 @@ function getContent(url) {
         },
     });
 }
+
+$(document).on("click",".review-btn", function() {
+	const orderId = $(this).data("orderid");
+	const productId = $(this).data("productid");
+	$.ajax({
+		url:"reviewDetail",
+		method:"GET",
+		data:{
+			"productId" : productId,
+			"orderId" : orderId
+		},
+		success: function(){
+			console.log("성공");
+		}
+	})
+})
 
 function dataToHtml(products) {
     if (Array.isArray(products)) {
@@ -69,7 +85,6 @@ function getReview() {
     $.ajax({
         url: "reviews",
         method: "GET",
-        dataType: "html",
         success: function (data) {
             $(".order-status").append(data);
         },

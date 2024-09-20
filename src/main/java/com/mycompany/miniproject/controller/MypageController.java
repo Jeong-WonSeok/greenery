@@ -1,4 +1,5 @@
 package com.mycompany.miniproject.controller;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
+import com.mycompany.miniproject.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +30,8 @@ public class MypageController {
 	OrderService orderService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	ReviewService reviewService;
 	
 	@RequestMapping("/editMyInfo")
 	public String editMyInfo() {
@@ -42,9 +48,8 @@ public class MypageController {
 		return "mypage/mypage";
 	}
 	
-	@RequestMapping("/orderList")
-	public String orderList(Authentication authentication, Model model) {
-		log.info("실행");
+	@GetMapping("/orderList")
+	public String orderList(Authentication authentication, Model model) throws ParseException {
 		String userId = authentication.getName();
 		List<OrderDto> orderList = orderService.getOrderList(userId);
 		List<OrderDetailDto> orderDetailList = new ArrayList<>();
@@ -52,7 +57,6 @@ public class MypageController {
 		for(OrderDto orderDto : orderList) {
 			int orderId = orderDto.getOrderId();
 			List<OrderItemDto> orderItemList = orderService.getOrderItem(orderId);
-			
 			for(OrderItemDto orderItemDto : orderItemList) {
 				int productId = orderItemDto.getProductId();
 				
@@ -65,7 +69,6 @@ public class MypageController {
 				orderDetail.setProductName(productDto.getProductName());
 				orderDetail.setProductId(productId);
 				orderDetail.setProductPrice(orderItemDto.getProductPrice());
-				log.info(orderDetail.getProductPrice()+" ");
 				orderDetail.setProductQty(orderItemDto.getProductQty());
 				orderDetail.setSummaryDescription(productDto.getSummaryDescription());
 				orderDetail.setOrderState(orderItemDto.getOrderState());
@@ -80,6 +83,13 @@ public class MypageController {
 	@RequestMapping("/reviews")
 	public String reviews() {
 		return "mypage/reviews";
+	}
+	
+	@GetMapping("/reviewDetail")
+	public String reviewDetail(int productId, int orderId, Authentication authentication) {
+		String userId = authentication.getName();
+		ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
+		return null;
 	}
 	
 	

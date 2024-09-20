@@ -12,7 +12,7 @@ public interface ReviewDao {
 
 	List<ReviewDto> selectReviewList(int productId);
 
-	ReviewDto selectReview(int reviewId);
+	ReviewDto selectReview(Map<String, Object> reviewInfo);
 
 	int insertReview(Map<String, Object> reviewInfo);
 

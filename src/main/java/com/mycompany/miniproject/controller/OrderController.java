@@ -165,7 +165,7 @@ public class OrderController {
  		List<Integer> orderList = order.getProductIdList();
  		
  		for(int productId : orderList) {
- 			reviewService.createReview(createdOrder, userId, productId);
+ 			reviewService.createReview(orderId, userId, productId);
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = orderService.getCartInfo(productId, userId);

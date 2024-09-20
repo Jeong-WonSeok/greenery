@@ -1,6 +1,5 @@
 package com.mycompany.miniproject.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,10 @@ import org.springframework.stereotype.Service;
 import com.mycompany.miniproject.dao.ReviewDao;
 import com.mycompany.miniproject.dto.ReviewDto;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ReviewService {
 	@Autowired
 	private ReviewDao reviewDao;
@@ -21,14 +23,19 @@ public class ReviewService {
 		return reviews;
 	}
 
-	public ReviewDto getReview(int reviewId) {
-		ReviewDto review = reviewDao.selectReview(reviewId);
+	public ReviewDto getReview(int orderId, String userId, int productId) {
+		Map<String, Object> reviewInfo = new HashMap<>();
+		reviewInfo.put("orderId", orderId);
+		reviewInfo.put("userId", userId);
+		reviewInfo.put("productId", productId);
+		
+		ReviewDto review = reviewDao.selectReview(reviewInfo);
 		return review;
 	}
 
-	public void createReview(Date createdOrder, String userId, int productId) {
+	public void createReview(int orderId, String userId, int productId) {
 		Map<String, Object> reviewInfo = new HashMap<>();
-		reviewInfo.put("createdAt", createdOrder);
+		reviewInfo.put("orderId", orderId);
 		reviewInfo.put("userId", userId);
 		reviewInfo.put("productId", productId);
 		reviewDao.insertReview(reviewInfo);
@@ -36,4 +43,5 @@ public class ReviewService {
 		
 	}
 
+	
 }

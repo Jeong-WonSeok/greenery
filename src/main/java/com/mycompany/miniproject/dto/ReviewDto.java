@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
-	private int reviewId;
 	private int reviewScore;
 	private String reviewContent;
 	private byte[] reviewImageData;
@@ -19,4 +18,5 @@ public class ReviewDto {
 	private int productId;
 	private String userId;
 	private boolean reviewEnable;
+	private String orderId;
 }

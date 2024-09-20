@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,8 +77,9 @@ public class ProductController {
 	}
 	
 	@GetMapping("/reviewImgDown")
-	public void reviewImgDow(int reviewId, HttpServletResponse response) throws Exception{
-		ReviewDto review = reviewService.getReview(reviewId); 
+	public void reviewImgDow(int productId, int orderId, HttpServletResponse response, Authentication authentication) throws Exception{
+		String userId = authentication.getName();
+		ReviewDto review = reviewService.getReview(orderId, userId,productId); 
 		if(review.getReviewImageName() != null) {
 		//응답 헤더에 들어가는 Content-Type
 			String contentType = review.getReviewImageType();

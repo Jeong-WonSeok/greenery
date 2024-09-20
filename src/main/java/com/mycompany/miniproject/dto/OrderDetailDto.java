@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class OrderDetailDto {
+	
 	private Date createdAt;
 	private String userId;
 	private int orderId;
