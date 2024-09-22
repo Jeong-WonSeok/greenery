@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <section class="mypage-title">
 	<div class="mypage-title-greeting">
 		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
@@ -42,10 +43,18 @@
 			<div class="ol-1"><fmt:formatNumber value="${productPrice}" type="number"/>원</div>
 			<div class="ol-1 order-status">
 				결제완료
-				<button type="button" class="review-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" 
-					data-productid="${detail.productId}" data-orderid="${detail.orderId }">
-        			리뷰 작성
-				</button>
+				<c:if test="${!detail.reviewEnable}">
+					<button type="button" class="review-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+						data-productid="${detail.productId}" data-orderid="${detail.orderId }">
+	        			리뷰 작성
+					</button>
+				</c:if>
+				<c:if test="${detail.reviewEnable}">
+					<button type="button" class="review-btn update-review" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+						data-productid="${detail.productId}" data-orderid="${detail.orderId }">
+	        			리뷰 수정
+					</button>
+				</c:if>
 			    <!-- Modal -->
 			    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			        <div class="modal-dialog modal-dialog-scrollable" >
@@ -69,12 +78,10 @@
 			                    <div class="star-container">
 			                        <span id="review-span">상품은 어떠셨나요?</span>
 			                        <div class="star_rating"> <!-- 별점 매기기 -->
-			                            <span class="star" value="1"></span>
-			                            <span class="star" value="2"></span>
-			                            <span class="star" value="3"></span>
-			                            <span class="star" value="4"></span>
-			                            <span class="star" value="5"></span>
-			                        </div>
+			                        	<c:forEach begin="1" end="5" varStatus="status">
+			                        		<span class="star" ></span>
+			                        	</c:forEach>
+		                        	</div>
 			                    </div>
 			
 			                    <div class="review-tips">
@@ -93,7 +100,7 @@
 도움수가 올라가면 포인트도 받고,
 탑리뷰어가 될 확률도 높아져요!
 
-*반품, 환불 관련 내용은 고객센터로 별도 문의해주세요."></textarea>
+*반품, 환불 관련 내용은 고객센터로 별도 문의해주세요." ></textarea>
 			                        <div id="charCount">0 / 1,000</div> <!-- 글자 수 표시 -->
 			                    </div>
 			
@@ -101,7 +108,9 @@
 			                        <span>포토</span>
 			                        <div class="image-upload-container" onclick="document.getElementById('image-input').click();">
 			                            <div class="image-preview" id="image-preview">
-			                                <span>+</span>
+			                                <span>
+			                                	+
+			                                </span>
 			                            </div>
 			                        </div>
 			                        <input type="file" id="image-input" accept="image/*" style="display: none;"

@@ -39,22 +39,29 @@ function previewImage(event) {
 }
 
 $(document).on("click", ".write-btn", function(){
+	console.log("실행");
 	const reviewScore = $(".star_rating .on").length;
 	const reviewContent = $("#reviewTextarea").val();
 	const reviewImage = $("#image-input")[0].files[0];
 	const productId = $(this).data("productid");
 	const orderId = $(this).data("orderid");
+	console.log(productId);
+	console.log(reviewScore);
+	console.log(reviewContent);
+	console.log(reviewImage);
+	console.log(orderId);
 	
 	const formData = new FormData();
 	formData.append('orderId', orderId);
 	formData.append('productId', productId);
+	
 	formData.append('reviewImage', reviewImage);
 	formData.append('reviewContent', reviewContent);
 	formData.append('reviewScore', reviewScore);
 	
 	
 	$.ajax({
-		url:"createReview",
+		url:"updateReview",
 		method:"POST",
 		data: formData,
 		processData: false,

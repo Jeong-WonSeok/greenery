@@ -1,8 +1,11 @@
 package com.mycompany.miniproject.controller;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.dto.ProductImageDto;
 import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.dto.ReviewFormDto;
 import com.mycompany.miniproject.service.OrderService;
@@ -67,7 +72,12 @@ public class MypageController {
 				
 				ProductDto productDto = productService.getProduct(productId); 
 				OrderDetailDto orderDetail = new OrderDetailDto();
+				ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
 				
+				if(reviewDto != null) 
+					orderDetail.setReviewEnable(reviewDto.isReviewEnable());
+				else 
+					orderDetail.setReviewEnable(false);
 				orderDetail.setOrderId(orderId);
 				orderDetail.setUserId(userId);
 				orderDetail.setCreatedAt(orderDto.getCreatedAt());
@@ -90,8 +100,9 @@ public class MypageController {
 		return "mypage/reviews";
 	}
 */	
-	@PostMapping("/createReview")
-	public ResponseEntity<String> createReview(ReviewFormDto reviewFormDto, Authentication authentication) throws IOException {
+	@PostMapping("/updateReview")
+	public ResponseEntity<String> updateReview(ReviewFormDto reviewFormDto, Authentication authentication) throws IOException {
+		log.info("실행");
 		ReviewDto reviewDto = new ReviewDto();
 		String userId = authentication.getName();
 		
@@ -116,5 +127,31 @@ public class MypageController {
 		return ResponseEntity.ok("OK");
 	}
 	
+	@GetMapping("/reviewDetail")
+	public ResponseEntity<ReviewDto> reviewDetail(int productId, int orderId, Authentication authentication, Model model){
+		String userId = authentication.getName();
+		ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
+		model.addAttribute("review", reviewDto);
+		return ResponseEntity.ok(reviewDto);
+	}
+	
+	@GetMapping("/imageDown")
+	public void imageDown(int productId, int orderId, Authentication authentication,
+					HttpServletResponse response) throws Exception{
+		
+		String userId = authentication.getName();
+		ReviewDto reviewImage = reviewService.getReview(orderId, userId, productId);
+		if(reviewImage != null) {
+		//응답 헤더에 들어가는 Content-Type
+			String contentType = reviewImage.getReviewImageType();
+			response.setContentType(contentType);		
+			
+			//응답 본문에 파일 데이터를 출력
+			OutputStream out = response.getOutputStream();
+			out.write(reviewImage.getReviewImageData());
+			out.flush();
+			out.close();
+		}
+	}
 	
 }

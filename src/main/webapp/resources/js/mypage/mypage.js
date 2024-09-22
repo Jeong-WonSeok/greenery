@@ -18,20 +18,38 @@ function getContent(url) {
     });
 }
 
-/*$(document).on("click",".review-btn", function() {
+$(document).on("click",".update-review", function() {
 	const orderId = $(this).data("orderid");
 	const productId = $(this).data("productid");
 	$.ajax({
-		url:"createReview",
+		url:"reviewDetail",
 		method:"GET",
 		data:{
 			"productId" : productId,
 			"orderId" : orderId
 		},
-		success: function(){
+		success: function(data){
+			console.log(data);
+			const review = data.review;
+			console.log(data.reviewContent);
+			
+			$("#reviewTextarea").val(data.reviewContent);
+			
+			$(".star").removeClass('on'); // 모든 별점 리셋
+            for (let i = 1; i <= data.reviewScore; i++) {
+                $(".star_rating .star:nth-child(" + i + ")").addClass('on');
+            }
+            
+            if (data.reviewImageData) {
+                $("#image-preview").html('<img src="imageDown?productId=' + productId + '&orderId=' + orderId + '" alt="이미지 미리보기" class="insert-img"/>');
+            } else {
+                $("#image-preview").html('+');
+            }
+            
+            $('#exampleModal').modal('show');
 		}
 	})
-})*/
+})
 
 function dataToHtml(products) {
     if (Array.isArray(products)) {

@@ -3,16 +3,18 @@
 <mapper namespace="com.mycompany.miniproject.dao.ReviewDao">
 	<select id="selectReviewList" parameterType="int" resultType="Review">
 		select review_score, review_content, review_image_data,
-			review_image_name, review_image_type, order_id
-			created_at, user_id
+			review_image_name, review_image_type, order_id,
+			created_at, user_id, review_enable
 		from review
 		where product_id = #{productId} and review_enable=1
 	</select>
 	
 	<select id="selectReview" parameterType="map" resultType="Review">
-		select review_image_data, review_image_name, review_image_type
+		select review_score, review_content, review_image_data,
+			review_image_name, review_image_type, order_id,
+			created_at, user_id, review_enable
 		from review
-		where user_id = #{userID} and product_id = #{productID} and order_id = #{orderId}
+		where user_id = #{userId} and product_id = #{productId} and order_id = #{orderId}
 	</select>
 	
 	<insert id="insertReview" parameterType="map">
