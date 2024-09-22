@@ -21,7 +21,7 @@
 		<div class="mypage-sidebar">
 			<span class="mypage-sidebar-title">마이페이지</span>
 			<span class="mypage-menu" data-url="likedProducts">찜한 상품</span>
-			<span class="mypage-menu" data-url="orderList">주문 내역</span>
+			<span class="mypage-menu order-list-btn" data-url="orderList">주문 내역</span>
 			<span class="mypage-menu" data-url="editMyInfo">개인정보 수정</span>
 		</div>
 		<div class="mypage-content">

@@ -62,6 +62,7 @@ $(document).on("click", ".write-btn", function(){
 		success: function() {
 			alert("리뷰가 등록되었습니다.");
 			$(".btn-close").trigger("click"); 
+			$(".order-list-btn").trigger("click");
 		}
 	})
 })
