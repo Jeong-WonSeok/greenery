@@ -18,5 +18,5 @@ public class ReviewDto {
 	private int productId;
 	private String userId;
 	private boolean reviewEnable;
-	private String orderId;
+	private int orderId;
 }

@@ -4,18 +4,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>리뷰 작성</title>
-<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
-   	<script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/reviews.css">
-    <script src="${pageContext.request.contextPath}/resources/js/mypage/reviews.js"></script> <!-- 스크립트 파일 경로 -->
+    <title>리뷰 작성</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
 </head>
 
 <body>
-
+	<button type="button" class="review-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+					data-productid="${detail.productId}" data-orderid="${detail.orderId }">
+        			리뷰 작성
+	</button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
@@ -28,10 +32,10 @@
 
                 <div class="modal-body">
                     <div class="product-container">
-                        <img src="../../res/images/productImages/1.png" alt="" id="review_img">
+                        <img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="" id="review_img">
                         <div class="product-label">
-                            <div class="product-name"><span><strong>아벤느</strong></span></div>
-                            <div class="product-description"><span>아벤느 이드랑스 에센스 인 로션 200ml 더블기획</span></div>
+                            <div class="product-name"><span><strong>${product.productName}</strong></span></div>
+                            <div class="product-description"><span>${product.summaryDescription }</span></div>
                         </div>
                     </div>
 
@@ -83,13 +87,13 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn">리뷰 등록하기</button>
+                    <button type="button" class="btn write-btn" >리뷰 등록하기</button>
                 </div>
 
             </div>
         </div>
     </div>
 
+	<script src="${pageContext.request.contextPath}/resources/js/mypage/reviews.js"></script> 
 </body>
-
 </html>

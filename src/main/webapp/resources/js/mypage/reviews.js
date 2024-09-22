@@ -30,10 +30,38 @@ function previewImage(event) {
     if (file) {
         const reader = new FileReader(); 
         reader.onload = function (e) {
-            imagePreview.innerHTML = `<img src="${e.target.result}" alt="이미지 미리보기" />`;
+            imagePreview.innerHTML = `<img src="${e.target.result}" alt="이미지 미리보기" class="insert-img"/>`;
         };
         reader.readAsDataURL(file); 
     } else {
         imagePreview.innerHTML = `<span>+</span>`;
     }
 }
+
+$(document).on("click", ".write-btn", function(){
+	const reviewScore = $(".star_rating .on").length;
+	const reviewContent = $("#reviewTextarea").val();
+	const reviewImage = $("#image-input")[0].files[0];
+	const productId = $(this).data("productid");
+	const orderId = $(this).data("orderid");
+	
+	const formData = new FormData();
+	formData.append('orderId', orderId);
+	formData.append('productId', productId);
+	formData.append('reviewImage', reviewImage);
+	formData.append('reviewContent', reviewContent);
+	formData.append('reviewScore', reviewScore);
+	
+	
+	$.ajax({
+		url:"createReview",
+		method:"POST",
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function() {
+			alert("리뷰가 등록되었습니다.");
+			$(".btn-close").trigger("click"); 
+		}
+	})
+})

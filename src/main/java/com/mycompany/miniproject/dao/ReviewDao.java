@@ -16,4 +16,6 @@ public interface ReviewDao {
 
 	int insertReview(Map<String, Object> reviewInfo);
 
+	int updateReview(ReviewDto reviewDto);
+
 }

@@ -6,10 +6,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>마이페이지</title>
-	<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
-   	<script src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/reviews.css">
+
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 	</div>
 	<!-- 푸터를 삽입할 위치 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%> 
-	<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script><!-- 스크립트 파일 경로 -->
 <!-- 	<div id="footer"></div>
 </body>
 

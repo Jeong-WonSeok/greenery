@@ -1,20 +1,25 @@
 package com.mycompany.miniproject.controller;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
+import com.mycompany.miniproject.dto.ReviewFormDto;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.ReviewService;
@@ -80,16 +85,35 @@ public class MypageController {
 		return "mypage/orderList";
 	}
 	
-	@RequestMapping("/reviews")
+/*	@RequestMapping("/reviews")
 	public String reviews() {
 		return "mypage/reviews";
 	}
-	
-	@GetMapping("/reviewDetail")
-	public String reviewDetail(int productId, int orderId, Authentication authentication) {
+*/	
+	@PostMapping("/createReview")
+	public ResponseEntity<String> createReview(ReviewFormDto reviewFormDto, Authentication authentication) throws IOException {
+		ReviewDto reviewDto = new ReviewDto();
 		String userId = authentication.getName();
-		ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
-		return null;
+		
+		MultipartFile reviewImage = reviewFormDto.getReviewImage();
+		
+		if(reviewImage != null) {
+			reviewDto.setReviewImageName(reviewImage.getOriginalFilename());
+			reviewDto.setReviewImageData(reviewImage.getBytes());
+			reviewDto.setReviewImageType(reviewImage.getContentType());			
+		}
+		
+		reviewDto.setReviewContent(reviewFormDto.getReviewContent());
+		reviewDto.setReviewScore(reviewFormDto.getReviewScore());
+		reviewDto.setOrderId(reviewFormDto.getOrderId());
+		reviewDto.setProductId(reviewFormDto.getProductId());
+		reviewDto.setUserId(userId);
+		reviewDto.setOrderId(reviewDto.getOrderId());
+		reviewDto.setProductId(reviewFormDto.getProductId());
+		
+		reviewService.updateReview(reviewDto);
+		
+		return ResponseEntity.ok("OK");
 	}
 	
 	

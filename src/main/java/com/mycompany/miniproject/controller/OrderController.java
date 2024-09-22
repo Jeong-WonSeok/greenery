@@ -161,11 +161,9 @@ public class OrderController {
 		orderDto.setTotalPrice(totalPrice);
  		int orderId = orderService.createOrder(orderDto);
  		
- 		Date createdOrder = orderService.getCreatedOrder(orderId);
  		List<Integer> orderList = order.getProductIdList();
  		
  		for(int productId : orderList) {
- 			reviewService.createReview(orderId, userId, productId);
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = orderService.getCartInfo(productId, userId);
@@ -181,6 +179,7 @@ public class OrderController {
  			
  			orderService.deleteProduct(productId, userId);
  			orderService.insertOrderItem(orderItemDto);
+ 			reviewService.createReview(orderId, userId, productId);
  		}
  		
  		if(order.isCoupon()) {

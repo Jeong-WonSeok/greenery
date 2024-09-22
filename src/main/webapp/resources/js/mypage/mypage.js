@@ -4,12 +4,13 @@ function getContent(url) {
         url: url,
         method: "GET",
         success: function (data) {
+            $(".mypage-content").empty();
             $(".mypage-content").append(data);
             if (url === "likedProducts") {
                 /*getData();*/
-            } else if (url === "orderList") {
+            }/* else if (url === "orderList") {
                 getReview();
-            }
+            }*/
         },
         error: function (err) {
             console.error("Error fetching product data:", err);
@@ -17,21 +18,20 @@ function getContent(url) {
     });
 }
 
-$(document).on("click",".review-btn", function() {
+/*$(document).on("click",".review-btn", function() {
 	const orderId = $(this).data("orderid");
 	const productId = $(this).data("productid");
 	$.ajax({
-		url:"reviewDetail",
+		url:"createReview",
 		method:"GET",
 		data:{
 			"productId" : productId,
 			"orderId" : orderId
 		},
 		success: function(){
-			console.log("성공");
 		}
 	})
-})
+})*/
 
 function dataToHtml(products) {
     if (Array.isArray(products)) {
@@ -81,7 +81,7 @@ function getData() {
     });
 }
 */
-function getReview() {
+/*function getReview() {
     $.ajax({
         url: "reviews",
         method: "GET",
@@ -92,7 +92,7 @@ function getReview() {
             console.error("Error fetching product data:", err);
         },
     })
-}
+}*/
 
 $(document).ready(function () {
 	
@@ -133,3 +133,5 @@ $(document).on('click', '.product-image', function () {
 $(document).on('click', '.order-img', function () {
     window.location.href = 'detailpage';
 });
+
+

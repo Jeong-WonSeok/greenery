@@ -43,5 +43,9 @@ public class ReviewService {
 		
 	}
 
+	public void updateReview(ReviewDto reviewDto) {
+		reviewDao.updateReview(reviewDto);
+	}
+
 	
 }

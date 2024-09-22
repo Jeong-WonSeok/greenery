@@ -72,13 +72,13 @@ body {
 .star_rating .star {
     width: 26px;
     height: 26px;
-    background-image: url('../../res/images/empty-star.png');
+    background-image: url('/miniproject/resources/images/empty-star.png');
     background-size: cover;
     cursor: pointer;
 }
 
 .star_rating .star.on {
-    background-image: url('../../res/images/fill-star.png');
+    background-image: url('/miniproject/resources/images/fill-star.png');
 }
 
 /* ------------리뷰 작성 팁------------------ */

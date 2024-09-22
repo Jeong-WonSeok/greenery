@@ -16,13 +16,18 @@
 	</select>
 	
 	<insert id="insertReview" parameterType="map">
-		<selectKey keyProperty="reviewId" resultType="int" order="BEFORE" >
-			select reviews_seq.nextval from dual
-		</selectKey>
 		insert into review (
-			review_id, order_id, product_id, user_id, review_enable, created_at
+			order_id, product_id, user_id, review_enable, created_at
 		) values (
-			#{reviewId}, #{orderId}, #{productId}, #{userId}, 0, sysdate
+			#{orderId}, #{productId}, #{userId}, 0, sysdate
 		)
 	</insert>
+	
+	<update id="updateReview" parameterType="Review">
+		update review 
+		set review_image_data=#{reviewImageData} , review_image_name = #{reviewImageName} 
+			, review_image_type = #{reviewImageType} , review_content = #{reviewContent} 
+			, review_score = #{reviewScore} , review_enable = 1
+		where user_id = #{userId} and order_id = #{orderId} and product_id = #{productId}
+	</update>
 </mapper>
