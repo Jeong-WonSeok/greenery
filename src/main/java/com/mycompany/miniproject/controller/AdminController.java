@@ -27,7 +27,6 @@ import com.mycompany.miniproject.dto.NoticeFormDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductFormDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
-import com.mycompany.miniproject.dto.UserDto;
 import com.mycompany.miniproject.service.NoticeService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.UserService;
@@ -87,6 +86,22 @@ public class AdminController {
 		return "redirect:/admin/noticeselect";
 	}
 
+	@GetMapping("/noticeDetail")
+	public String noticeDetail(int noticeId, Model model) {
+		NoticeDto noticeDto = noticeService.getNotice(noticeId);
+		model.addAttribute("notice", noticeDto);
+		return "admin/noticeAdd";
+	}
+	
+	@PostMapping("/updateNotice")
+	public String updateNotice(NoticeDto noticeDto, Authentication authentication, Model model) {
+		String userId = authentication.getName();
+		log.info(noticeDto.toString());
+		noticeDto.setUserId(userId);
+		noticeService.updateNotice(noticeDto);
+		return noticeDetail(noticeDto.getNoticeId(), model); 
+	}
+	
 	@GetMapping("/productadd")
 	public String productAdd() {
 		log.info("실행");

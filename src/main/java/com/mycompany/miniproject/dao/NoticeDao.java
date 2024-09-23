@@ -11,8 +11,10 @@ public interface NoticeDao {
 
 	public List<NoticeDto> selectAll();
 
-	public void insertNotice(NoticeDto notice);
+	public int insertNotice(NoticeDto notice);
 
 	public NoticeDto selectNotice(int noticeId);
+
+	public int updateNotice(NoticeDto noticeDto);
 
 }

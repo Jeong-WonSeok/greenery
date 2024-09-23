@@ -22,7 +22,6 @@ public class NoticesController {
 	@RequestMapping("/noticeContent")
 	public String editMyInfo(int noticeId, Model model) {
 		NoticeDto noticeDto = noticeService.getNotice(noticeId);
-		log.info(noticeDto.toString());
 		model.addAttribute("notice", noticeDto);
 		return "notice/noticeContent";
 	}

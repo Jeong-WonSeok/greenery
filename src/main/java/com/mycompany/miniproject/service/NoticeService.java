@@ -34,6 +34,11 @@ public class NoticeService {
 		NoticeDto noticeDto = noticeDao.selectNotice(noticeId);
 		return noticeDto;
 	}
+
+	public void updateNotice(NoticeDto noticeDto) {
+		noticeDao.updateNotice(noticeDto);
+		
+	}
 	
 	
 	

@@ -13,7 +13,7 @@
 	<select id="selectNotice" parameterType="int" resultType="Notice">
 		select notice_id, notice_title, notice_content, created_at, user_id
 		from notice
-		where notice_id=#{noticeId}
+		where notice_id =#{noticeId}
 	</select>
 
 	<!-- 공지사항 추가 -->
@@ -30,6 +30,12 @@
 		)
 	</insert>
 
+	<update id="updateNotice" parameterType="Notice">
+		update notice 
+		set notice_title = #{noticeTitle}, notice_content = #{noticeContent},
+			user_id = #{userId}
+		where notice_id=#{noticeId}
+	</update>
 
 
 

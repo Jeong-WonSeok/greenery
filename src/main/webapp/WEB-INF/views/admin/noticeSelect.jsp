@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,18 +43,15 @@
 
 			<c:forEach items="${notice}" var="i">
 				<div class="list-container">
-					<div class="notice-created">${i.createdAt}</div>
+					<div class="notice-created"><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd" /></div>
 					<div class="notice-title">${i.noticeTitle }</div>
 					
 					<div class="upAndDelBtn">
-						<button onclick="location.href='updateNoticeForm?noticeId=${i.noticeId}'" class="btn1">수정</button>
+						<button onclick="location.href='noticeDetail?noticeId=${i.noticeId}'" class="btn1">수정</button>
 						<button class="btn2">삭제</button>
 					</div>
 				</div>
 			</c:forEach>
-
-
-
 		</div>
 	</div>
 
