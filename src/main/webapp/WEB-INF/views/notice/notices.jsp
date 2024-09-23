@@ -35,13 +35,18 @@
 		</div>
 		<div class="contents">
 			<div class="content">
-				<!-- <img class="green"> -->
-				<!-- <img class="red" src="../../res/images/red-icon.png"> -->
 				<div class="noticeId"></div>
 				<div class="title"></div>
 
-				<!-- <p class="content"></p> -->
 				<div class="registrationDate"></div>
+				<c:forEach items="${noticeList}" var="notices">
+					<div class="notices-item">
+	        			<div class="noticeId">${notices.noticeId}</div>
+	        			<div class="title" >${notices.noticeTitle}</div>
+	        			<div class="registrationDate"><fmt:formatDate value="${notices.createdAt}" pattern="yyyy-MM-dd" /></div>
+	       			</div>
+					<div class="divider"></div>
+				</c:forEach>
 			</div>
 			<div class="divider"></div>
 		</div>

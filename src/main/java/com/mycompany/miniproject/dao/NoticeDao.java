@@ -13,4 +13,6 @@ public interface NoticeDao {
 
 	public void insertNotice(NoticeDto notice);
 
+	public NoticeDto selectNotice(int noticeId);
+
 }
