@@ -12,7 +12,7 @@
 	<select id="selectReview" parameterType="map" resultType="Review">
 		select review_score, review_content, review_image_data,
 			review_image_name, review_image_type, order_id,
-			created_at, user_id, review_enable
+			created_at, user_id, review_enable, product_id
 		from review
 		where user_id = #{userId} and product_id = #{productId} and order_id = #{orderId}
 	</select>

@@ -38,26 +38,34 @@ function previewImage(event) {
     }
 }
 
-$(document).on("click", ".write-btn", function(){
-	console.log("실행");
+$(document).off("click", ".write-btn").on("click", ".write-btn", function(){
 	const reviewScore = $(".star_rating .on").length;
 	const reviewContent = $("#reviewTextarea").val();
 	const reviewImage = $("#image-input")[0].files[0];
 	const productId = $(this).data("productid");
 	const orderId = $(this).data("orderid");
-	console.log(productId);
-	console.log(reviewScore);
-	console.log(reviewContent);
-	console.log(reviewImage);
-	console.log(orderId);
+	let chagedImg = false; // true 이미지를 바꿨다. false 애초에 이미지를 입력받지 않았다.
+	
+	/*리뷰 이미지가 null이 되는 경우는 둘
+	1. 이미지 입력 X일 경우 => 그냥 DB에 null을 넣으면 된다.
+	2. 이미지를 바꾸지 않았을 경우 => DB에 변화를 주면 안된다.*/
+	
+	const imgSrc = $(".insert-img").attr("src");
 	
 	const formData = new FormData();
+
+	if(!reviewImage){
+		if(imgSrc !== undefined)
+			chagedImg = true;
+	} else {
+		formData.append('reviewImage', reviewImage);		
+	}
+	
 	formData.append('orderId', orderId);
 	formData.append('productId', productId);
-	
-	formData.append('reviewImage', reviewImage);
 	formData.append('reviewContent', reviewContent);
 	formData.append('reviewScore', reviewScore);
+	formData.append('chagedImg', chagedImg);
 	
 	
 	$.ajax({
@@ -70,6 +78,9 @@ $(document).on("click", ".write-btn", function(){
 			alert("리뷰가 등록되었습니다.");
 			$(".btn-close").trigger("click"); 
 			$(".order-list-btn").trigger("click");
+		},
+		error: function(data){
+			alert(data);
 		}
 	})
 })

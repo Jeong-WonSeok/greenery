@@ -11,5 +11,6 @@ public class ReviewFormDto {
 	private String reviewContent;
 	private int productId;
 	private int orderId;
+	private boolean chagedImg;
 	
 }

@@ -3,11 +3,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,14 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
-import com.mycompany.miniproject.dto.ProductImageDto;
 import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.dto.ReviewFormDto;
 import com.mycompany.miniproject.service.OrderService;
@@ -102,16 +103,24 @@ public class MypageController {
 */	
 	@PostMapping("/updateReview")
 	public ResponseEntity<String> updateReview(ReviewFormDto reviewFormDto, Authentication authentication) throws IOException {
-		log.info("실행");
+
 		ReviewDto reviewDto = new ReviewDto();
 		String userId = authentication.getName();
+		int orderId = reviewFormDto.getOrderId();
+		int productId = reviewFormDto.getProductId();
 		
 		MultipartFile reviewImage = reviewFormDto.getReviewImage();
-		
+		ReviewDto tempReview = reviewService.getReview(orderId, userId, productId);
 		if(reviewImage != null) {
 			reviewDto.setReviewImageName(reviewImage.getOriginalFilename());
 			reviewDto.setReviewImageData(reviewImage.getBytes());
-			reviewDto.setReviewImageType(reviewImage.getContentType());			
+			reviewDto.setReviewImageType(reviewImage.getContentType());
+		}else {
+			if(reviewFormDto.isChagedImg()) {
+				reviewDto.setReviewImageName(tempReview.getReviewImageName());
+				reviewDto.setReviewImageData(tempReview.getReviewImageData());
+				reviewDto.setReviewImageType(tempReview.getReviewImageType());
+			}
 		}
 		
 		reviewDto.setReviewContent(reviewFormDto.getReviewContent());
@@ -119,20 +128,27 @@ public class MypageController {
 		reviewDto.setOrderId(reviewFormDto.getOrderId());
 		reviewDto.setProductId(reviewFormDto.getProductId());
 		reviewDto.setUserId(userId);
-		reviewDto.setOrderId(reviewDto.getOrderId());
-		reviewDto.setProductId(reviewFormDto.getProductId());
+		reviewDto.setOrderId(orderId);
+		reviewDto.setProductId(productId);
 		
-		reviewService.updateReview(reviewDto);
-		
-		return ResponseEntity.ok("OK");
+		boolean result = reviewService.updateReview(reviewDto);
+		if(result)
+			return ResponseEntity.ok("OK");
+		else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error 발생");
 	}
 	
 	@GetMapping("/reviewDetail")
-	public ResponseEntity<ReviewDto> reviewDetail(int productId, int orderId, Authentication authentication, Model model){
+	public ResponseEntity<Map<String, Object>> reviewDetail(int productId, int orderId, Authentication authentication){
+
+		Map<String,Object> reviewDetail = new HashMap<>();
 		String userId = authentication.getName();
 		ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
-		model.addAttribute("review", reviewDto);
-		return ResponseEntity.ok(reviewDto);
+		ProductDto productDto = productService.getProduct(productId);
+		reviewDetail.put("review", reviewDto);
+		reviewDetail.put("product", productDto);
+		
+		return ResponseEntity.ok(reviewDetail);
 	}
 	
 	@GetMapping("/imageDown")

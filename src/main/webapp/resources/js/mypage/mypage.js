@@ -18,9 +18,20 @@ function getContent(url) {
     });
 }
 
-$(document).on("click",".update-review", function() {
+
+
+$(document).on("click",".review-btn", function() {
+	
 	const orderId = $(this).data("orderid");
 	const productId = $(this).data("productid");
+	
+    $("#image-input").val(""); 
+    $("#reviewTextarea").val("");  
+    $(".star").removeClass('on');  
+
+    $(".write-btn").data("productid", productId).data("orderid", orderId);
+
+	
 	$.ajax({
 		url:"reviewDetail",
 		method:"GET",
@@ -29,22 +40,27 @@ $(document).on("click",".update-review", function() {
 			"orderId" : orderId
 		},
 		success: function(data){
-			console.log(data);
 			const review = data.review;
-			console.log(data.reviewContent);
+			const product = data.product;
+			$("#review_img").attr("src", '/miniproject/imageDown?productId='+productId+'&usecase=1')
+			$("#reviewTextarea").val(review.reviewContent);
+			$(".product-name").html("<span><strong>"+product.productName + "</strong></span>")
+			$(".product-description").html("<span>"+product.summaryDescription+"</span>")
+			$(".star").removeClass('on');
 			
-			$("#reviewTextarea").val(data.reviewContent);
-			
-			$(".star").removeClass('on'); // 모든 별점 리셋
-            for (let i = 1; i <= data.reviewScore; i++) {
+            for (let i = 1; i <= review.reviewScore; i++) {
                 $(".star_rating .star:nth-child(" + i + ")").addClass('on');
             }
             
-            if (data.reviewImageData) {
-                $("#image-preview").html('<img src="imageDown?productId=' + productId + '&orderId=' + orderId + '" alt="이미지 미리보기" class="insert-img"/>');
+            $(".write-btn").data("productid", product.productId);
+            $(".write-btn").data("orderid", review.orderId);
+            
+            if (review.reviewImageData) {
+                $("#image-preview").html('<img src="imageDown?productId=' + review.productId + '&orderId=' + review.orderId + '" alt="이미지 미리보기" class="insert-img"/>');
             } else {
                 $("#image-preview").html('+');
             }
+
             
             $('#exampleModal').modal('show');
 		}
@@ -134,7 +150,7 @@ $(document).ready(function () {
     });
 
     // 동적으로 생성된 like 아이콘에 대한 이벤트 처리
-    $(document).on('click', '.icon.like-icon', function () {
+    $(document).off("click", ".write-btn").on('click', '.icon.like-icon', function () {
         $(this).toggleClass("active");
         let heartIcon = $(this).find("img");
         if ($(this).hasClass("active")) {
@@ -143,6 +159,8 @@ $(document).ready(function () {
             heartIcon.attr("src", "../../res/images/heart.png")
         }
     });
+    
+   
 });
 
 $(document).on('click', '.product-image', function () {

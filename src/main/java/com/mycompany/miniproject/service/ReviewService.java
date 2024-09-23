@@ -43,8 +43,9 @@ public class ReviewService {
 		
 	}
 
-	public void updateReview(ReviewDto reviewDto) {
-		reviewDao.updateReview(reviewDto);
+	public boolean updateReview(ReviewDto reviewDto) {
+		boolean result = reviewDao.updateReview(reviewDto) > 0;
+		return result;
 	}
 
 	
