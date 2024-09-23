@@ -23,6 +23,13 @@ body {
 	width: 75%;
 }
 
+.notice-Content{
+	display: flex;	
+	justify-content: space-between;
+	align-items: flex-end;
+	align-items: center;
+	width: 75%;
+}
 .notice-title {
 	font-size: 38px;
 	font-weight: 800;
@@ -56,7 +63,8 @@ body {
 	display: flex;
 	align-items: center;
 	margin: 30px auto;
-	font-size: 18px
+	font-size: 18px;
+	width: 60%;
 }
 
 .notices-item .content {

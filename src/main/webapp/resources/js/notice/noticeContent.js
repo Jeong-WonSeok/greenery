@@ -8,7 +8,7 @@ function aryTostr(ary) {
        }
        
       /*  function appendContent(noticeId) { */
-        $.ajax({         
+        /*$.ajax({         
         	type: "get",
         	url: "../../content/notices.json",
         	dataType: "json",
@@ -57,9 +57,9 @@ function aryTostr(ary) {
         	error: function() {
         		console.log("통신에러");
         	}       	  	
-        })
+        })*/
 		
-		/* 조회수 */
+	/*	 조회수 
 		function increase(button) {
 		    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
 		    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
@@ -78,9 +78,9 @@ function aryTostr(ary) {
 		    saveToLocalStorage(productDiv);
 		    console.log("조회수 증가");
 		}
+*/
 
-
-		$(document).ready(function () {
+		/*$(document).ready(function () {
 			$("#header").load("../header/header.html");
 			$("#footer").load("../footer/footer.html");
 
@@ -89,4 +89,4 @@ function aryTostr(ary) {
 		    }).fail(function () {
 		        console.error("JSON 파일을 불러오는 데 실패함");
 		    });
-		});
+		});*/
