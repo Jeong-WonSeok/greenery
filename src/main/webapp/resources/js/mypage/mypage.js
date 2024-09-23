@@ -166,8 +166,6 @@ $(document).ready(function () {
 $(document).on('click', '.product-image', function () {
     window.location.href = 'detailpage';
 });
-$(document).on('click', '.order-img', function () {
-    window.location.href = 'detailpage';
-});
+
 
 
