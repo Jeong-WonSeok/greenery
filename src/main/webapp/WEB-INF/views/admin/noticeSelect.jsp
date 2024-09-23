@@ -48,7 +48,7 @@
 					
 					<div class="upAndDelBtn">
 						<button onclick="location.href='noticeDetail?noticeId=${i.noticeId}'" class="btn1">수정</button>
-						<button class="btn2">삭제</button>
+						<button class="btn2" data-noticeid="${i.noticeId}">삭제</button>
 					</div>
 				</div>
 			</c:forEach>

@@ -20,4 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 		bsCollapse.toggle();
 	});
+	
+	$(document).on("click", ".btn2", function() {
+		console.log("as");
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href = "deleteNotice?noticeId=" + $(this).data("noticeid");
+		}
+			
+	})
+	
 });

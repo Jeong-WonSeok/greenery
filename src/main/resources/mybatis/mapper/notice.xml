@@ -37,6 +37,10 @@
 		where notice_id=#{noticeId}
 	</update>
 
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice
+		where notice_id = #{noticeId}
+	</delete>
 
 
 </mapper>

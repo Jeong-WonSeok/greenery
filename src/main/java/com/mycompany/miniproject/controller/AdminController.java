@@ -99,9 +99,14 @@ public class AdminController {
 		log.info(noticeDto.toString());
 		noticeDto.setUserId(userId);
 		noticeService.updateNotice(noticeDto);
-		return noticeDetail(noticeDto.getNoticeId(), model); 
+		return "redirect:/admin/noticeselect";
 	}
 	
+	@PostMapping("/deleteNotice")
+	public String deleteNotice(int noticeId) {
+		noticeService.deleteNotice(noticeId);
+		return "redirect:/admin/noticeselect";
+	}
 	@GetMapping("/productadd")
 	public String productAdd() {
 		log.info("실행");

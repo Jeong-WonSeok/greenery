@@ -39,6 +39,11 @@ public class NoticeService {
 		noticeDao.updateNotice(noticeDto);
 		
 	}
+
+	public void deleteNotice(int noticeId) {
+		noticeDao.deleteNotice(noticeId);
+		
+	}
 	
 	
 	
