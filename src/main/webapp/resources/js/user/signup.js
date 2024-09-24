@@ -128,7 +128,7 @@ function checkIdExists(userId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',  // 폼 데이터로 전송
-            [csrfHeader]: csrfToken  // CSRF 토큰 포함
+//            [csrfHeader]: csrfToken  // CSRF 토큰 포함
         },
         body: new URLSearchParams({ "userId": userId })
     })

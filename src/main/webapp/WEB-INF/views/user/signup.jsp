@@ -34,7 +34,7 @@
 
 	<form class="form-signup" name="formSignup" action="signup" method="post">
 	
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+<%-- 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>  --%>
 		
 		
 		<div class="form-id">
