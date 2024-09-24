@@ -85,4 +85,9 @@ public class UserService {
 		return userId;
 	}*/
 
+	public void updateUser(UserDto userDto) {
+		userDao.updateUser(userDto);
+		
+	}
+
 }

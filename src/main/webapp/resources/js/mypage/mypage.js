@@ -160,12 +160,80 @@ $(document).ready(function () {
         }
     });
     
-   
 });
 
 $(document).on('click', '.product-image', function () {
     window.location.href = 'detailpage';
 });
 
+// ================================== 개인 정보 수정 =========================================
 
+document.addEventListener('input', function() {
+	if(event.target.matches("#userPw")){
+		inputPasswordCheck();
+	}
+	if(event.target.matches("#userPwCheck")){
+		inputPasswordCheck();
+	}
+})
+//inputPassword1.addEventListener('input', inputPasswordCheck);
+//inputPassword2.addEventListener('input', inputPasswordCheck);
+
+function inputPasswordCheck() {
+	let inputPassword1 = document.querySelector('#userPw');
+	let inputPassword2 = document.querySelector('#userPwCheck');
+    let inputPasswordMessage1 = document.querySelector('#inputPasswordMessage1');
+    let inputPasswordMessage2 = document.querySelector('#inputPasswordMessage2');
+
+    let regExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/);
+    if (regExp.test(inputPassword1.value) || inputPassword1.value === '') {
+        inputPasswordMessage1.innerHTML =  ''; 
+    } else {
+        inputPasswordMessage1.innerHTML = 
+        "<span style='color:#F03F40; font-size:11px;'>6자 이상 20자 이하의 대소문자, 숫자, 특수문자를 조합해주세요</span>";
+    }
+    
+    if (document.activeElement === inputPassword2) {
+    	console.log('asgd')
+        if (inputPassword1.value === inputPassword2.value || inputPassword2.value === '') {
+            inputPasswordMessage2.innerHTML =  '';
+        } else {
+            inputPasswordMessage2.innerHTML =
+            "<span style='color:#F03F40; font-size:11px;'>비밀번호를 확인해주세요</span>";
+        }
+    }
+}
+
+//우편번호 API
+document.addEventListener('click', () => {
+	if(event.target.matches('#btnZipcode')){
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            console.log(data);
+	            let fullAddr = '';
+	            let extraAddr = '';
+	
+	            if (data.userSelectedType === 'R') {
+	                fullAddr = data.roadAddress;
+	            } else {
+	                fullAddr = data.jibunAddress;
+	            }
+	
+	            if (data.userSelectedType = 'R') {
+	                if (data.bname !== '') {
+	                    extraAddr += data.bname;
+	                }
+	                if (data.buildingName !== '') {
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                fullAddr += (extraAddr !== '' ? '(' + extraAddr + ')' : '');
+	            }
+	
+	            document.formInfo.userPostal.value = data.zonecode;
+	            document.formInfo.userLoadAddress.value = fullAddr;
+	            
+	        }
+	    }).open();
+	}
+});
 

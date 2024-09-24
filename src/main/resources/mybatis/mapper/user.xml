@@ -33,5 +33,11 @@
 		from "User"
 		where user_id=#{userId}
 	</select>
-
+	<update id="updateUser" parameterType="User" >
+		update "User" 
+		set user_pw=#{userPw}, user_name=#{userName}, user_tel=#{userTel},
+			user_email=#{userEmail}, user_postal=#{userPostal}, 
+			user_detail_address=#{userDetailAddress},user_load_address=#{userLoadAddress}
+		where user_id=#{userId}		
+	</update>
 </mapper>

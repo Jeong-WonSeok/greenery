@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +30,13 @@ import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.dto.ReviewFormDto;
+import com.mycompany.miniproject.dto.UserDto;
+import com.mycompany.miniproject.security.UserDetailServiceImpl;
+import com.mycompany.miniproject.security.UserDetailsImpl;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.ReviewService;
+import com.mycompany.miniproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,10 +51,44 @@ public class MypageController {
 	ProductService productService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	UserService userService; 
+	@Autowired
+	UserDetailServiceImpl userDetailService;
 	
-	@RequestMapping("/editMyInfo")
-	public String editMyInfo() {
+	@GetMapping("/editMyInfo")
+	public String editMyInfo(Model model, Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDto userDto = userDetails.getMember();
+		
+		model.addAttribute("user", userDto);
+		
 		return "mypage/editMyInfo";
+	}
+	
+	@PostMapping("/updateUser")
+	public String updateUser(UserDto userDto, Model model, Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDto curUserDto = userDetails.getMember();
+		log.info(userDto.toString());
+		if(userDto.getUserPw() == null) {
+			userDto.setUserPw(curUserDto.getUserPw());
+		}else {
+			PasswordEncoder passwordEncoder = 
+					PasswordEncoderFactories.createDelegatingPasswordEncoder();
+			userDto.setUserPw(passwordEncoder.encode(userDto.getUserPw()));
+		}
+		userService.updateUser(userDto);
+		
+		//사용자 상세 정보 얻기
+		userDetails = (UserDetailsImpl) userDetailService.loadUserByUsername(userDto.getUserId());
+		//인증 객체 얻기
+		authentication = 
+				new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+		//스프링 시큐리티에 인증 객체 설정
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return "redirect:/mypage/mypage";
 	}
 	
 	@RequestMapping("/likedProducts")

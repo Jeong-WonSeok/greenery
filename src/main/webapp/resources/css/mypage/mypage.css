@@ -265,6 +265,11 @@
 	margin-top: 50px;
 }
 
+.myinfo-list input{
+	border: none;
+	color: #7E7E7E;
+}
+
 .myinfo-list div span {
 	width: 50%;
 	box-sizing: border-box;
@@ -282,6 +287,28 @@
 	justify-content: center;
 }
 
+.btnZip {
+	display: flex;
+	justify-content: flex-end;	
+}
+
+#btnZipcode {
+	width: 30%;
+	background-color: #CFF7D3;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	font-size:14px;
+	margin-top : 3px;
+}
+#inputPasswordMessage1, #inputPasswordMessage2{
+	border:none;
+	height: 20px;
+}
+
+#inputPasswordMessage1 span, #inputPasswordMessage2 span{
+	width:100%;
+}
 .myinfo-edit-btn {
 	width: 40%;
 	background-color: #CFF7D3;
