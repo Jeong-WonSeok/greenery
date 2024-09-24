@@ -66,10 +66,14 @@ $(document).ready(() => {
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid")+productQty,
     		method: 'GET',
     		success: function (response){
-    			alert(response);
+//    			alert(response);
     		},
     		error: function(jqXHR, textStatus, errorThrown){
-    			alert(jqXHR.responseText);
+    			if (jqXHR.status === 401) {
+                    alert("로그인이 필요합니다.");
+                }else{
+                	alert(jqXHR.responseText);
+                }
     		}
     	});
     });

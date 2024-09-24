@@ -10,7 +10,7 @@
 	<!-- 정적인 파일을 넣는 resources 파일에는 시큐리티 적용x -->
 	<security:http pattern="/resources/**" security="none" />
 	<!-- 시큐리티 필터 체인을 구성 -->
-	<security:http>
+	<security:http entry-point-ref="customAuthenticationEntryPoint">
 		<!-- 폼 인증 방식 선택 -->
 		<security:form-login 
 			login-page="/user/login"
@@ -26,10 +26,16 @@
 
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
 		<security:csrf disabled="true" />
+		
+<!-- 		<security:custom-filter ref="customAuthenticationEntryPoint" before="FORM_LOGIN_FILTER" /> -->
+		
 
 	</security:http>
 	
 	<security:global-method-security secured-annotations="enabled"/>
+	
+	<bean id="customAuthenticationEntryPoint" 
+		class="com.mycompany.miniproject.security.CustomAuthenticationEntryPoint" />
 
 	<!-- 로그인이 성공 or 실패하면 이 관리객체로 등록되어 있는 클래스 실행 -->
 	<bean id="authenticationSuccessHandler"
@@ -40,7 +46,8 @@
 
 	<bean id="logoutSuccessHandler"
 		class="com.mycompany.miniproject.security.LogoutSuccessHandler" />
-
+	
+	
 
 	<!-- DB에서 데이터를 가져와서 사용자가 보낸 데이터와 비교 -->
 	<security:authentication-manager>
@@ -67,3 +74,4 @@
 	</bean>
 
 </beans>
+

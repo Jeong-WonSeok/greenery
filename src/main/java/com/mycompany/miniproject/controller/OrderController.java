@@ -1,6 +1,5 @@
 package com.mycompany.miniproject.controller;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,13 +71,14 @@ public class OrderController {
 	@Secured("ROLE_USER")
 	@GetMapping("/cartAdd")
 	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model, Authentication authentication) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "text/html; charset=UTF-8");
+	    
 		String userId = authentication.getName();
-		log.info("userId : " + userId);
 		
 		int result = orderService.cartAdd(productQty, productId, userId);
 		
-		HttpHeaders headers = new HttpHeaders();
-	    headers.add("Content-Type", "text/html; charset=UTF-8");
 		
 		if(result == -1)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
