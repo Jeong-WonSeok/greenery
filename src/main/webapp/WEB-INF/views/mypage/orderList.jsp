@@ -61,6 +61,25 @@
 		    
 		</div>
 	</c:forEach>
+	<div class="order-pager text-center mt-5">
+		<c:if test="${pager.groupNo>1}">
+			<button class="btn btn-outline-info btn-sm page-move-button order-page" data-start="${pager.startPageNo-1 }">이전</button>
+		</c:if>
+		<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+			<c:if test="${i == pager.pageNo}">
+				<button class="btn btn-success btn-sm order-page">${i}</button>
+			</c:if>
+			<c:if test="${i != pager.pageNo }">
+				<button class="btn btn-outline-success btn-sm order-page">${i}</button>
+			</c:if>
+		</c:forEach>
+		<c:if test="${pager.groupNo<pager.totalGroupNo}" >
+			<button class="btn btn-outline-info btn-sm page-move-button order-page" data-start="${pager.endPageNo+1 }">>다음</button>
+		</c:if>
+	</div>
+	
+	
+	
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    <div class="modal-dialog modal-dialog-scrollable" >
 	        <div class="modal-content">

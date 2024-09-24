@@ -66,6 +66,30 @@ $(document).on("click",".review-btn", function() {
 	})
 })
 
+
+$(document).on("click", ".order-page", function(){
+	const page = $(this).html();
+	if(page === "이전" || page === "다음"){
+		$.ajax({
+			url:"orderList?pageNo=" + $(this).data("start"),
+			method:"get",
+			success: function (data) {
+	            $(".mypage-content").empty();
+	            $(".mypage-content").append(data);
+			}
+		})
+	}
+	
+	$.ajax({
+		url:"orderList?pageNo=" + page,
+		method:"get",
+		success: function (data) {
+            $(".mypage-content").empty();
+            $(".mypage-content").append(data);
+		}
+	})
+})
+
 function dataToHtml(products) {
     if (Array.isArray(products)) {
         products.forEach(product => {

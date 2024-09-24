@@ -13,4 +13,6 @@ public interface OrderItemDao {
 
 	List<OrderItemDto> selectOrderItem(int orderId);
 
+	int countRows(int orderId);
+
 }

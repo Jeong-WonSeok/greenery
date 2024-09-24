@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/admin")
+@Secured("ROLE_ADMIN")
 public class AdminController {
 	
 	@Autowired

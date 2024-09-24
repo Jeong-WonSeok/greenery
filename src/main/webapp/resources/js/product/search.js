@@ -1,6 +1,6 @@
 // 헤더, 푸터 파일 로드
 $(document).ready(function () {
-
+	
   /*  $.getJSON("../../content/products.json", function (data) {
         dataToHtml(data.products);
     }).fail(function () {

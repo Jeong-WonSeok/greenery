@@ -62,26 +62,36 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(String query, 
+	public String search(String query,
+			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="default") String sort, 
 			Model model) {
-		List<ProductDto> productList = productService.getProductSearch(query, sort);
+		int totalRows = productService.getSearchTotalRows(query);
+		Pager pager = new Pager(15, 5, totalRows, pageNo);
+		
+		List<ProductDto> productList = productService.getProductSearch(pager, query, sort);
+
+		model.addAttribute("pager", pager);
 		model.addAttribute("query", query);
 		model.addAttribute("productList", productList);
 		model.addAttribute("sort", sort);
-		model.addAttribute("totalProducts", productList.size());
+		model.addAttribute("totalProducts", totalRows);
 		return "product/search";
 	}
 	
 	@GetMapping("/category")
 	public String category(String category, 
+						@RequestParam(defaultValue="1") int pageNo,
 						@RequestParam(defaultValue="default") String sort, 
 						Model model) {
-		List<ProductDto> productList = productService.getProductCategory(category, sort);
+		int totalRows = productService.getTotalRowsByCategory(category);
+		Pager pager = new Pager(15, 5, totalRows, pageNo);
+		List<ProductDto> productList = productService.getProductCategory(category, sort, pager);
+		model.addAttribute("pager", pager);
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", category);
 		model.addAttribute("sort", sort);
-		model.addAttribute("totalProducts", productList.size());
+		model.addAttribute("totalProducts", totalRows);
 		return "product/search";
 	}
 	

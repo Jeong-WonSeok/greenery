@@ -16,4 +16,10 @@
 		from order_item
 		where order_id=#{orderId}
 	</select>
+	
+	<select id="countRows" parameterType="int" resultType="int">
+		select count(*)
+		from order_item
+		where order_id=#{orderId}
+	</select>
 </mapper>

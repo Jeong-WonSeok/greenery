@@ -30,16 +30,16 @@
 		</div>
 	</c:forEach>
 	<div class="pager text-center mt-5">
-		<a href="?pageNo=1$productId=${productId}" class="btn btn-outline-primary btn-sm">처음</a>
+		<a href="?pageNo=1&productId=${productId}" class="btn btn-outline-primary btn-sm">처음</a>
 		<c:if test="${pager.groupNo>1}">
-			<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
+			<a href="?pageNo=${pager.startPageNo-1}&productId=${productId}" class="btn btn-outline-info btn-sm">이전</a>
 		</c:if>
 		<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 			<c:if test="${i == pager.pageNo}">
-				<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
+				<a href="?pageNo=${i}&productId=${productId}" class="btn btn-success btn-sm">${i}</a>
 			</c:if>
 			<c:if test="${i != pager.pageNo }">
-				<a href="?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+				<a href="?pageNo=${i}&productId=${productId}" class="btn btn-outline-success btn-sm">${i}</a>
 			</c:if>
 		</c:forEach>
 		<c:if test="${pager.groupNo<pager.totalGroupNo }" >

@@ -45,9 +45,11 @@ public class HomeController {
 	
 	@GetMapping("/category")
 	public String mainPage(
-			String category, Model model, 
+			String category, Model model,
 			@RequestParam(name="sort", defaultValue="default") String sort) {
-		List<ProductDto> productList = productService.getProductCategory(category, sort);
+		List<ProductDto> productList = productService.getCategoryToMain(category, sort);
+		
+		
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", category);
 		model.addAttribute("sort", sort);

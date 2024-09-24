@@ -68,6 +68,7 @@ public class OrderController {
 		return "order/cart";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/cartAdd")
 	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model, Authentication authentication) {
 		String userId = authentication.getName();

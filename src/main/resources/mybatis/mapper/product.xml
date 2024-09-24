@@ -65,7 +65,7 @@
 	</select>
 	
 	<!-- 카테고리별 상품 가져오기 -->
-	<select id="selectCategory" parameterType="map" resultType="Product">
+	<select id="selectCategoryToMain" parameterType="map" resultType="Product">
 		select product_id, product_name, product_price, product_stock, 
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
@@ -82,30 +82,87 @@
 		</if>
 	</select>
 	
+	<select id="selectCategory" parameterType="map" resultType="Product">
+		select product_id, product_name, product_price, product_stock, 
+			main_description, summary_description, product_category,
+			product_enable, created_at, detail_description
+		from(
+			select rownum rnum, product_id, product_name, product_price, product_stock, 
+				main_description, summary_description, product_category,
+				product_enable, created_at, detail_description
+			from(
+				select product_id, product_name, product_price, product_stock, 
+					main_description, summary_description, product_category,
+					product_enable, created_at, detail_description
+				from product
+				where product_category=#{category} and product_enable=1
+				<if test="sort == 'default'">
+					order by created_at desc
+				</if>
+				<if test="sort == 'price-asc'">
+					order by product_price asc
+				</if>
+				<if test="sort == 'price-desc'">
+					order by product_price desc
+				</if>
+			)
+			where rownum &lt;= #{pager.endRowNo} 
+		)
+		where rnum &gt;= #{pager.startRowNo}
+				
+	</select>
+
+	
 	<!-- 검색에 따른 상품 가지고 오기 -->
 	<select id="selectQuery" parameterType="map" resultType="Product">
 		select product_id, product_name, product_price, product_stock, 
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
-		from product
-		where (product_name like '%' || #{query} || '%' or product_category like '%' || #{query} || '%' or
-			main_description like '%' || #{query} || '%' or summary_description like '%' || #{query} || '%' or
-			detail_description like '%' || #{query} || '%') and product_enable = 1
-		
-		<if test="sort == 'default'">
-			order by created_at desc
-		</if>
-		<if test="sort == 'price-asc'">
-			order by product_price asc
-		</if>
-		<if test="sort == 'price-desc'">
-			order by product_price desc
-		</if>
+		from (
+			select 
+				rownum rnum, product_id, product_name, product_price, product_stock, 
+				main_description, summary_description, product_category,
+				product_enable, created_at, detail_description
+			from (
+				select 
+					product_id, product_name, product_price, product_stock, 
+					main_description, summary_description, product_category,
+					product_enable, created_at, detail_description
+				from product
+				where (product_name like '%' || #{query} || '%' or product_category like '%' || #{query} || '%' or
+					main_description like '%' || #{query} || '%' or summary_description like '%' || #{query} || '%' or
+					detail_description like '%' || #{query} || '%') and product_enable = 1
+					
+				<if test="sort == 'default'">
+					order by created_at desc
+				</if>
+				<if test="sort == 'price-asc'">
+					order by product_price asc
+				</if>
+				<if test="sort == 'price-desc'">
+					order by product_price desc
+				</if>
+			)
+			where rownum &lt;= #{pager.endRowNo} 
+		)
+		where rnum &gt;= #{pager.startRowNo}
 	</select>
 	
 	
 	<select id="countRows" resultType="int">
 		select count(*) from product
+	</select>
+	
+	<select id="countRowsBySearch" parameterType="String" resultType="int">
+		select count(*) from product
+		where (product_name like '%' || #{query} || '%' or product_category like '%' || #{query} || '%' or
+					main_description like '%' || #{query} || '%' or summary_description like '%' || #{query} || '%' or
+					detail_description like '%' || #{query} || '%') and product_enable = 1
+	</select>
+	
+	<select id="countRowsByCategory" parameterType="String" resultType="int">
+		select count(*) from product
+		where product_category=#{productCategory}
 	</select>
 	
 	<!-- 관리자 페이지 상품 수정 -->
@@ -120,7 +177,7 @@
 	        product_enable = #{productEnable},
 	        created_at = #{createdAt},
 	        detail_description = #{detailDescription}
-	    where product_id = #{productId}
+	    where product_id = #{productId} 
 	</update>
 	
 	<!-- 관리자 페이지 상품 삭제(update로 enable 1 -> 0으로 변경 -->

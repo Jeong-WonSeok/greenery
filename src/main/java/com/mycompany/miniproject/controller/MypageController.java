@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,12 +25,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
+import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.dto.ReviewFormDto;
@@ -46,6 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/mypage")
+@Secured("ROLE_USER")
 public class MypageController {
 	
 	@Autowired
@@ -171,12 +176,23 @@ public class MypageController {
 	                             .body("찜이 해제되었습니다.");
 	}
 	@GetMapping("/orderList")
-	public String orderList(Authentication authentication, Model model) throws ParseException {
+	public String orderList(
+			@RequestParam(defaultValue="1") int pageNo,
+			HttpSession session,
+			Authentication authentication, Model model) throws ParseException {
 		String userId = authentication.getName();
+
+		
 		List<OrderDto> orderList = orderService.getOrderList(userId);
+		int totalRows = orderService.getTotalRows(orderList);
+		Pager pager = new Pager(8, 5, totalRows, pageNo);
+		session.setAttribute("pager", pager);
+		
 		List<OrderDetailDto> orderDetailList = new ArrayList<>();
 		
-		for(OrderDto orderDto : orderList) {
+		for(int i = pager.getStartRowNo(); i <= pager.getEndRowNo(); i++ ) {
+			if(orderList.size() < i) break;
+			OrderDto orderDto = orderList.get(i-1);
 			int orderId = orderDto.getOrderId();
 			List<OrderItemDto> orderItemList = orderService.getOrderItem(orderId);
 			for(OrderItemDto orderItemDto : orderItemList) {
@@ -203,6 +219,8 @@ public class MypageController {
 				orderDetailList.add(orderDetail);
 			}
 		}
+		
+		model.addAttribute("pager", pager);
 		model.addAttribute("orderList", orderDetailList);
 		return "mypage/orderList";
 	}

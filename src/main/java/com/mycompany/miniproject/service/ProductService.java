@@ -35,13 +35,22 @@ public class ProductService {
 		return productList;
 	}
 	
-	public List<ProductDto> getProductCategory(String category, String sort){
+	public List<ProductDto> getProductCategory(String category, String sort, Pager pager){
 		Map<String, Object> categorySort = new HashMap<>();
-		
+		categorySort.put("pager", pager);
 		categorySort.put("category", category);
 		categorySort.put("sort", sort);
 		
 		List<ProductDto> productList = productDao.selectCategory(categorySort);
+		return productList;
+	}
+	
+	public List<ProductDto> getCategoryToMain(String category, String sort){
+		Map<String, Object> categorySort = new HashMap<>();
+		categorySort.put("category", category);
+		categorySort.put("sort", sort);
+		
+		List<ProductDto> productList = productDao.selectCategoryToMain(categorySort);
 		return productList;
 	}
 
@@ -51,6 +60,13 @@ public class ProductService {
 		return totalRows;
 	}
 	
+	public int getTotalRowsByCategory(String category) {
+		int totalRows = productDao.countRowsByCategory(category);
+		return totalRows;
+	}
+	
+	
+	
 	public int insertProduct(ProductDto product) {
 		productDao.insertProduct(product);
 		int productId = product.getProductId();
@@ -58,9 +74,10 @@ public class ProductService {
 	}
 
 	// 상품 검색
-	public List<ProductDto> getProductSearch(String query, String sort) {
+	public List<ProductDto> getProductSearch(Pager pager, String query, String sort) {
 		Map<String, Object> querySort = new HashMap<>();
-		
+
+		querySort.put("pager", pager);
 		querySort.put("query", query);
 		querySort.put("sort", sort);
 		List<ProductDto> productList = productDao.selectQuery(querySort); 
@@ -120,6 +137,11 @@ public class ProductService {
 	public int getImageNum(int productId) {
 		int num = productImageDao.selectImageNumber(productId);
 		return num;
+	}
+
+	public int getSearchTotalRows(String query) {
+		int totalRows = productDao.countRowsBySearch(query);
+		return totalRows;
 	}
 	
 	

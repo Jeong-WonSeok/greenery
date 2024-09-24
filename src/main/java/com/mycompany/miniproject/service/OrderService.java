@@ -1,6 +1,5 @@
 package com.mycompany.miniproject.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,6 +124,14 @@ public class OrderService {
 	public List<OrderItemDto> getOrderItem(int orderId) {
 		List<OrderItemDto> orderItemList = orderItemDao.selectOrderItem(orderId);
 		return orderItemList;
+	}
+
+	public int getTotalRows(List<OrderDto> orderList) {
+		int totalRows = 0;
+		for(OrderDto orderDto : orderList) {
+			 totalRows += orderItemDao.countRows(orderDto.getOrderId());
+		}
+		return totalRows;
 	}
 
 	

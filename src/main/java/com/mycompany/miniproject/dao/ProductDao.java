@@ -11,9 +11,8 @@ import com.mycompany.miniproject.dto.ProductDto;
 public interface ProductDao {
 
 	public List<ProductDto> selectAll(Map<String, Object> catePager);
+	
 	public int countRows();
-
-	public List<ProductDto> selectCategory(String category, String sort);
 
 	public List<ProductDto> selectCategory(Map<String, Object> categorySort);
 
@@ -28,4 +27,10 @@ public interface ProductDao {
 	public int updateProduct(ProductDto product);
 	
 	public int disableProduct(int productId);
+	
+	public int countRowsBySearch(String query);
+	
+	public List<ProductDto> selectCategoryToMain(Map<String, Object> categorySort);
+
+	public int countRowsByCategory(String category);
 }
