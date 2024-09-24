@@ -44,4 +44,10 @@
 		update cart set order_enable = 0
 		where product_id=#{productId} and user_id=#{userId}		
 	</update>
+	
+	<select id="countCart" parameterType="String">
+		select count(*)
+		from cart
+		where user_id=#{userId}
+	</select>
 </mapper>

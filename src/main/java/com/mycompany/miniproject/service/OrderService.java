@@ -134,6 +134,11 @@ public class OrderService {
 		return totalRows;
 	}
 
+	public int getCartNum(String userId) {
+		int cartNum = cartDao.countCart(userId);
+		return cartNum;
+	}
+
 	
 
 }

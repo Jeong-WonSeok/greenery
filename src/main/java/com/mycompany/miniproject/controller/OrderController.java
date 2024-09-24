@@ -24,6 +24,7 @@ import com.mycompany.miniproject.dto.CreatedOrderDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.service.CartService;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.ReviewService;
@@ -214,5 +215,16 @@ public class OrderController {
 		}
 		
 		return "order/payment";
+	}
+	
+	@GetMapping("/getCartNum")
+	public ResponseEntity<Integer> getCartNum(Authentication authentication, Model model) {
+		if(authentication == null || !authentication.isAuthenticated() ) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(-1);
+		String userId = authentication.getName();
+		int cartNum = orderService.getCartNum(userId);
+		log.info(cartNum+ " ");
+		model.addAttribute("cartNum", cartNum);
+		
+		return ResponseEntity.ok(cartNum);
 	}
 }

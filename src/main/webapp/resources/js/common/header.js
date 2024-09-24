@@ -46,6 +46,7 @@ function toSearchPage() {
 }*/
 
 $(document).ready(() => {
+	cartIconUpdate();
     searchTypeText();
     $(".header-search-icon").on("click", toSearchPage);
     $(".header-search-input").on("keyup", function (e) {
@@ -66,7 +67,8 @@ $(document).ready(() => {
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid")+productQty,
     		method: 'GET',
     		success: function (response){
-//    			alert(response);
+    			alert(response);
+    			cartIconUpdate();
     		},
     		error: function(jqXHR, textStatus, errorThrown){
     			if (jqXHR.status === 401) {
@@ -87,6 +89,17 @@ function getContextPath(){
 	return contextPath;
 }
 
+function cartIconUpdate(){
+	$.ajax({
+		url: getContextPath() + "/order/getCartNum",
+		method : "GET",
+		success : function(data){
+			$(".header-cart-badge").html(data);
+		}
+
+	})
+	
+}
 $(document).on("click", ".notice", function () {
     window.location.href = getContextPath() + "/notice/notices";
 });

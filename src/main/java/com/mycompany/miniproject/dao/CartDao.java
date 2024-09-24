@@ -26,4 +26,6 @@ public interface CartDao {
 
 	CartDto selectCart(Map<String, Object> cartInfo);
 
+	int countCart(String userId);
+
 }
