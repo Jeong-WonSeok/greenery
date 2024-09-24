@@ -15,7 +15,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.bundle.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/bootstrap/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/admin/noticeselect.css"
 	rel="stylesheet" type="text/css" />

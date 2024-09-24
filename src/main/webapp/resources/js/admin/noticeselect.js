@@ -22,11 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 	
 	$(document).on("click", ".btn2", function() {
-		console.log("as");
+		const noticeId= $(this).data("noticeid");
+	
 		if(confirm("정말 삭제하시겠습니까?")){
-			location.href = "deleteNotice?noticeId=" + $(this).data("noticeid");
+			$.ajax({
+				url : "deleteNotice",
+				method:"POST",
+				data : {"noticeId" : noticeId},
+				success: function(){
+					alert("삭제되었습니다.");
+					location.href = "noticeselect";
+				}
+			});
 		}
 			
-	})
+	});
 	
 });
