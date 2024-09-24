@@ -1,5 +1,4 @@
 function getContent(url) {
-	
     $.ajax({
         url: url,
         method: "GET",

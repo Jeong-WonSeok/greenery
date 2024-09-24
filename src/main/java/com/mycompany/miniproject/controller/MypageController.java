@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
@@ -33,6 +35,7 @@ import com.mycompany.miniproject.dto.ReviewFormDto;
 import com.mycompany.miniproject.dto.UserDto;
 import com.mycompany.miniproject.security.UserDetailServiceImpl;
 import com.mycompany.miniproject.security.UserDetailsImpl;
+import com.mycompany.miniproject.service.LikeService;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.ReviewService;
@@ -55,6 +58,8 @@ public class MypageController {
 	UserService userService; 
 	@Autowired
 	UserDetailServiceImpl userDetailService;
+	@Autowired
+	LikeService likeService;
 	
 	@GetMapping("/editMyInfo")
 	public String editMyInfo(Model model, Authentication authentication) {
@@ -95,12 +100,76 @@ public class MypageController {
 	public String likedProducts() {
 		return "mypage/likedProducts";
 	}
-
+	
+	// 마이페이지 홈
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage/mypage";
 	}
 	
+	// 찜한 상품 조회 
+    @GetMapping("/likedProducts")
+    public String likedProducts(Model model, Authentication authentication) {
+    	log.info("실행------");
+        if(authentication != null) {
+            String userId = authentication.getName();
+            List<LikeDto> likeList = likeService.getLikeList(userId);
+            List<ProductDto> productList = new ArrayList<>();
+ 
+            for (LikeDto like : likeList) {
+                int productId = like.getProductId();
+                ProductDto product = productService.getProduct(productId);
+                productList.add(product);
+            }
+            model.addAttribute("productList", productList);
+        }
+        return "mypage/likedProducts";
+    }
+
+	
+	// 찜하기  - 찜 추가
+	@GetMapping("/likeAdd")
+	public ResponseEntity<String> likeAdd(int productId, Model model, Authentication authentication) {
+		log.info("productId: " + productId + "찜 추가");
+		String userId = authentication.getName();
+		log.info("userId: " + userId);
+		
+		int result = likeService.likeAdd(productId, userId);
+		
+		HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Type", "text/html; charset=UTF-8");
+		
+	    if(result == 0)
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                             .headers(headers)
+	                             .body("찜하기 등록에 실패하였습니다.");
+	    else
+	        return ResponseEntity.ok()
+	                             .headers(headers)
+	                             .body("상품을 찜하였습니다.");
+	}
+	// 찜하기 - 찜 삭제 
+	@GetMapping("/likeRemove")
+	public ResponseEntity<String> likeRemove(int productId, Authentication authentication){
+		log.info("productId: " + productId + " 찜 삭제");
+		String userId = authentication.getName();
+		log.info("userId: " + userId);
+		
+		int result = likeService.likeRemove(productId, userId);
+		
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Type", "text/html; charset=UTF-8");
+
+	    if (result == 0)
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                             .headers(headers)
+	                             .body("찜 해제에 실패하였습니다.");
+	    else
+	        return ResponseEntity.ok()
+	                             .headers(headers)
+	                             .body("찜이 해제되었습니다.");
+	}
 	@GetMapping("/orderList")
 	public String orderList(Authentication authentication, Model model) throws ParseException {
 		String userId = authentication.getName();

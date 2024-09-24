@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mycompany.miniproject.dao.LikeDao"/>
+<mapper namespace="com.mycompany.miniproject.dao.LikeDao">
+	<!-- 찜 추가 -->
+	<insert id="insertProduct" parameterType="map">
+		insert into "like" (
+			user_id, product_id, like_date
+		)
+		values (
+			#{userId}, #{productId}, sysdate
+		)
+	</insert>
+	<!-- 찜 삭제 -->
+	<delete id="deleteProduct" parameterType="map">
+		delete from "like" 
+		where product_id=#{productId} and user_id=#{userId}
+	</delete>
+	
+	<!-- 찜한 상품 조회 -->
+	<select id="selectLikeList" parameterType="String">
+        select product_id
+		from "like"
+		where user_id = #{userId}
+    </select> 
+
+</mapper>
