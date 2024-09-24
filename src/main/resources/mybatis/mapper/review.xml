@@ -4,9 +4,25 @@
 	<select id="selectReviewList" parameterType="int" resultType="Review">
 		select review_score, review_content, review_image_data,
 			review_image_name, review_image_type, order_id,
-			created_at, user_id, review_enable
-		from review
-		where product_id = #{productId} and review_enable=1
+			created_at, user_id, review_enable, product_id
+		from (
+			select 
+				rownum rnum,review_score, review_content, review_image_data,
+				review_image_name, review_image_type, order_id,
+				created_at, user_id, review_enable, product_id
+			from (
+				select
+					review_score, review_content, review_image_data,
+					review_image_name, review_image_type, order_id,
+					created_at, user_id, review_enable, product_id
+				from review
+				where product_id = #{productId} and review_enable=1	
+				order by created_at desc
+			)
+			where rownum &lt;= #{pager.endRowNo} 
+		) 
+		where rnum &gt;= #{pager.startRowNo} 
+		
 	</select>
 	
 	<select id="selectReview" parameterType="map" resultType="Review">
@@ -16,6 +32,13 @@
 		from review
 		where user_id = #{userId} and product_id = #{productId} and order_id = #{orderId}
 	</select>
+	
+	<select id="selectReviewByOrderId" parameterType="map" resultType="Review">
+		select review_image_data, review_image_name, review_image_type
+		from review
+		where product_id = #{productId} and order_id = #{orderId}
+	</select>
+	
 	
 	<insert id="insertReview" parameterType="map">
 		insert into review (
@@ -32,4 +55,8 @@
 			, review_score = #{reviewScore} , review_enable = 1
 		where user_id = #{userId} and order_id = #{orderId} and product_id = #{productId}
 	</update>
+	
+	<select id="countRows" resultType="int">
+		select count(*) from review
+	</select>
 </mapper>

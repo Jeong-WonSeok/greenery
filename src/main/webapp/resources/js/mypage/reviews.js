@@ -58,7 +58,7 @@ $(document).off("click", ".write-btn").on("click", ".write-btn", function(){
 		if(imgSrc !== undefined)
 			chagedImg = true;
 	} else {
-		formData.append('reviewImage', reviewImage);		
+		formData.append('reviewImage', reviewImage);
 	}
 	
 	formData.append('orderId', orderId);

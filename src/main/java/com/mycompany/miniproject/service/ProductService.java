@@ -46,7 +46,6 @@ public class ProductService {
 	}
 
 
-
 	public int getTotalRows() {
 		int totalRows = productDao.countRows();
 		return totalRows;

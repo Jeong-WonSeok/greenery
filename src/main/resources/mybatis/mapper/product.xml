@@ -48,6 +48,7 @@
 					product_stock, main_description, summary_description, product_category,
 					product_enable, created_at, detail_description 
 				from product
+				where product_enable=1
 				<if test="sort == 'default'">
 				order by created_at desc
 				</if>

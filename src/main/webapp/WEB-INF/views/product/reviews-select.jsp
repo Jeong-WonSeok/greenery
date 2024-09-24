@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div id="reviewList">
 	<c:forEach items="${productReviews}" var="item">
@@ -17,7 +18,7 @@
 		
 				<div class="info-container">
 				    <div class="user-id">${item.userId}</div>
-					<span>${review.createdAt}</span>
+					<span><fmt:formatDate value="${item.createdAt}" pattern="yyyy-MM-dd" /></span>
 				</div>
 		
 				<span class="review-span">${item.reviewContent}</span>
@@ -28,4 +29,23 @@
 		    </div>
 		</div>
 	</c:forEach>
+	<div class="pager text-center mt-5">
+		<a href="?pageNo=1$productId=${productId}" class="btn btn-outline-primary btn-sm">처음</a>
+		<c:if test="${pager.groupNo>1}">
+			<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
+		</c:if>
+		<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+			<c:if test="${i == pager.pageNo}">
+				<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
+			</c:if>
+			<c:if test="${i != pager.pageNo }">
+				<a href="?pageNo=${i}" class="btn btn-outline-success btn-sm">${i}</a>
+			</c:if>
+		</c:forEach>
+		<c:if test="${pager.groupNo<pager.totalGroupNo }" >
+			<a href="?pageNo=${pager.endPageNo+1 }" class="btn btn-outline-info btn-sm">다음</a>
+		</c:if>
+		<a href="?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+	</div>
+
 </div> 

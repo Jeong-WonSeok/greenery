@@ -118,8 +118,8 @@
 	                </div>
 	            </div>
         	</c:forEach>
-	   		<%-- [처음][이전] 1 2 3 4 5 [다음][맨끝] --%>
         </div>
+   		<%-- [처음][이전] 1 2 3 4 5 [다음][맨끝] --%>
         <c:if test="${category == 'all'}">
 	   		<div class="pager text-center">
 	   			<a href="?pageNo=1&sort=${sort}" class="btn btn-outline-primary btn-sm">처음</a>

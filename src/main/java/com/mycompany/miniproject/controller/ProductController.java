@@ -3,15 +3,16 @@ import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
 import com.mycompany.miniproject.service.ProductService;
@@ -46,9 +47,17 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/reviewSelect")
-	public String reviewSelect(int productId, Model model) {
-		List<ReviewDto> productReviews = reviewService.getReviewList(productId);
+	public String reviewSelect(
+			@RequestParam(defaultValue="1") int pageNo,
+			HttpSession session,
+			int productId, Model model) {
+		int totalRows = reviewService.getTotalRows();
+		Pager pager = new Pager(10, 5, totalRows, pageNo);
+		session.setAttribute("pager", pager);
+		List<ReviewDto> productReviews = reviewService.getReviewList(productId, pager);
+		
 		model.addAttribute("productReviews", productReviews);
+		model.addAttribute("productId", productId);
 		return "product/reviews-select";
 	}
 	
@@ -77,9 +86,8 @@ public class ProductController {
 	}
 	
 	@GetMapping("/reviewImgDown")
-	public void reviewImgDow(int productId, int orderId, HttpServletResponse response, Authentication authentication) throws Exception{
-		String userId = authentication.getName();
-		ReviewDto review = reviewService.getReview(orderId, userId,productId); 
+	public void reviewImgDown(int productId, int orderId, HttpServletResponse response) throws Exception{
+		ReviewDto review = reviewService.getReviewByOrderId(orderId, productId); 
 		if(review.getReviewImageName() != null) {
 		//응답 헤더에 들어가는 Content-Type
 			String contentType = review.getReviewImageType();
