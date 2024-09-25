@@ -58,11 +58,15 @@
 		<div id="inputPhoneMessage"></div>
 
 		<div class="form-email">
+		    <input id="inputEmailAddress" name="userEmail"
+		        class="input input6" type="text" placeholder="이메일주소" required>
+		</div>
+		<!-- <div class="form-email">
 			<input id="inputEmailAddress" name="userEmail"
 				class="input input6" type="text" placeholder="이메일주소" required>
 			<input id="inputEmail" name="emailDomain" class="input input6"
 				type="text" placeholder="@" required>
-		</div>
+		</div> -->
 		<div id="inputEmailMessage"></div>
 
 		<div class="form-address">

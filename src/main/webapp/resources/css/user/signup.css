@@ -44,25 +44,22 @@ body {
 
 .input2, .input3,
 .input4, .input5,
-.input9, .input10,
-.input10 {
-    width: 100%;
+.input6, .input9, .input10 {
+    width: 100%; 
 }
 
 .form-id,
-.form-email,
 .form-address {
     display: flex;
     justify-content: space-between;
 }
 
-.input1 {
-    width: 70%;
+.form-email {
+    display: block; 
 }
 
-.input6,
-.input7 {
-    width: 48%;
+.input1 {
+    width: 70%;
 }
 
 .input8 {
@@ -94,7 +91,7 @@ body {
 
 #inputIdMessage, #inputPasswordMessage1,
 #inputPasswordMessage2, #inputNameMessage, 
-#inputPhoneMessage {
+#inputPhoneMessage, #inputEmailMessage {
     width: 100%;
     text-align: left;
     margin-left: 5px;
