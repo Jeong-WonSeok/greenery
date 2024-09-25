@@ -52,7 +52,7 @@
 	})
 })*/
 
-function dataToHtml(products) {
+/*function dataToHtml(products) {
     if (Array.isArray(products)) {
         products.forEach(product => {
             const productHtml = `
@@ -84,7 +84,7 @@ function dataToHtml(products) {
             $(".product-container").append(productHtml);
         });
     }
-}
+}*/
 /*
 function getData() {
     $.ajax({
@@ -168,7 +168,7 @@ $(document).on("click", ".order-page", function(){
 			url:"orderList?pageNo=" + $(this).data("start"),
 			method:"get",
 			success: function (data) {
-	            $(".mypage-content").empty();
+		    	$('.mypage-title').nextAll().remove();
 	            $(".mypage-content").append(data);
 			}
 		})
@@ -178,7 +178,7 @@ $(document).on("click", ".order-page", function(){
 		url:"orderList?pageNo=" + page,
 		method:"get",
 		success: function (data) {
-            $(".mypage-content").empty();
+	    	$('.mypage-title').nextAll().remove();
             $(".mypage-content").append(data);
 		}
 	})
@@ -189,7 +189,7 @@ function getContent(url) {
         url: url,  // 절대 경로로 수정
         method: "GET",
         success: function (data) {
-            $(".mypage-content").html(data);  // 가져온 JSP를 mypage-content에 추가
+            $(".mypage-content").append(data);  // 가져온 JSP를 mypage-content에 추가
         },
         error: function (err) {
             console.error("Error fetching content:", err);
@@ -202,16 +202,16 @@ $(document).ready(function () {
 	// 페이지 로딩 시 기본적으로 찜한 상품 탭 보여줌 
     getContent("likedProducts");
 
-    // 마이페이지 로딩 시 찜한 상품 탭을 진하게
+    /*// 마이페이지 로딩 시 찜한 상품 탭을 진하게
     $('.mypage-menu').each(function () {
         if ($(this).data('url') === 'likedProducts') {
             $(this).html('<strong>' + $(this).text() + '</strong>');
         }
-    });
+    });*/
 
     // 메뉴 탭 클릭 시
     $(".mypage-menu").click(function () {
-        $(".mypage-content").empty();
+    	$('.mypage-title').nextAll().remove();
         getContent($(this).data("url"));  // 클릭한 탭의 URL을 기반으로 Ajax 호출
 
         $('.mypage-menu').html(function () {
@@ -260,12 +260,12 @@ $(document).ready(function () {
     
 });
 
-$(document).on('click', '.product-image', function () {
+/*$(document).on('click', '.product-image', function () {
     window.location.href = 'detailpage';
-});
-$(document).on('click', '.order-img', function () {
+});*/
+/*$(document).on('click', '.order-img', function () {
     window.location.href = 'detailpage';
-});
+});*/
 
 
 //================================== 개인 정보 수정 =========================================
