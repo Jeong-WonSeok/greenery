@@ -16,6 +16,7 @@
         },
     });
 }*/
+
 /*function getContent(url) {
     $.ajax({
         url: getContextPath() + "/mypage/" + url,  // 경로를 getContextPath() + "/mypage" 형태로 설정
@@ -35,7 +36,7 @@
 }*/
 
 
-$(document).on("click",".review-btn", function() {
+/*$(document).on("click",".review-btn", function() {
 	const orderId = $(this).data("orderid");
 	const productId = $(this).data("productid");
 	$.ajax({
@@ -49,7 +50,7 @@ $(document).on("click",".review-btn", function() {
 			console.log("성공");
 		}
 	})
-})
+})*/
 
 function dataToHtml(products) {
     if (Array.isArray(products)) {
@@ -99,7 +100,7 @@ function getData() {
     });
 }
 */
-function getReview() {
+/*function getReview() {
     $.ajax({
         url: "reviews",
         method: "GET",
@@ -111,10 +112,81 @@ function getReview() {
         },
     })
 }
+*/
+
+$(document).on("click",".review-btn", function() {
+	
+	const orderId = $(this).data("orderid");
+	const productId = $(this).data("productid");
+	
+    $("#image-input").val(""); 
+    $("#reviewTextarea").val("");  
+    $(".star").removeClass('on');  
+
+    $(".write-btn").data("productid", productId).data("orderid", orderId);
+
+	
+	$.ajax({
+		url:"reviewDetail",
+		method:"GET",
+		data:{
+			"productId" : productId,
+			"orderId" : orderId
+		},
+		success: function(data){
+			const review = data.review;
+			const product = data.product;
+			$("#review_img").attr("src", '/miniproject/imageDown?productId='+productId+'&usecase=1')
+			$("#reviewTextarea").val(review.reviewContent);
+			$(".product-name").html("<span><strong>"+product.productName + "</strong></span>")
+			$(".product-description").html("<span>"+product.summaryDescription+"</span>")
+			$(".star").removeClass('on');
+			
+            for (let i = 1; i <= review.reviewScore; i++) {
+                $(".star_rating .star:nth-child(" + i + ")").addClass('on');
+            }
+            
+            $(".write-btn").data("productid", product.productId);
+            $(".write-btn").data("orderid", review.orderId);
+            
+            if (review.reviewImageData) {
+                $("#image-preview").html('<img src="imageDown?productId=' + review.productId + '&orderId=' + review.orderId + '" alt="이미지 미리보기" class="insert-img"/>');
+            } else {
+                $("#image-preview").html('+');
+            }
+
+            
+            $('#exampleModal').modal('show');
+		}
+	})
+})
+
+$(document).on("click", ".order-page", function(){
+	const page = $(this).html();
+	if(page === "이전" || page === "다음"){
+		$.ajax({
+			url:"orderList?pageNo=" + $(this).data("start"),
+			method:"get",
+			success: function (data) {
+	            $(".mypage-content").empty();
+	            $(".mypage-content").append(data);
+			}
+		})
+	}
+	
+	$.ajax({
+		url:"orderList?pageNo=" + page,
+		method:"get",
+		success: function (data) {
+            $(".mypage-content").empty();
+            $(".mypage-content").append(data);
+		}
+	})
+})
 
 function getContent(url) {
     $.ajax({
-        url: "/mypage/" + url,  // 절대 경로로 수정
+        url: url,  // 절대 경로로 수정
         method: "GET",
         success: function (data) {
             $(".mypage-content").html(data);  // 가져온 JSP를 mypage-content에 추가
@@ -185,6 +257,7 @@ $(document).ready(function () {
         }
     });
     
+    
 });
 
 $(document).on('click', '.product-image', function () {
@@ -193,3 +266,76 @@ $(document).on('click', '.product-image', function () {
 $(document).on('click', '.order-img', function () {
     window.location.href = 'detailpage';
 });
+
+
+//================================== 개인 정보 수정 =========================================
+
+document.addEventListener('input', function() {
+	if(event.target.matches("#userPw")){
+		inputPasswordCheck();
+	}
+	if(event.target.matches("#userPwCheck")){
+		inputPasswordCheck();
+	}
+})
+//inputPassword1.addEventListener('input', inputPasswordCheck);
+//inputPassword2.addEventListener('input', inputPasswordCheck);
+
+function inputPasswordCheck() {
+	let inputPassword1 = document.querySelector('#userPw');
+	let inputPassword2 = document.querySelector('#userPwCheck');
+ let inputPasswordMessage1 = document.querySelector('#inputPasswordMessage1');
+ let inputPasswordMessage2 = document.querySelector('#inputPasswordMessage2');
+
+ let regExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/);
+ if (regExp.test(inputPassword1.value) || inputPassword1.value === '') {
+     inputPasswordMessage1.innerHTML =  ''; 
+ } else {
+     inputPasswordMessage1.innerHTML = 
+     "<span style='color:#F03F40; font-size:11px;'>6자 이상 20자 이하의 대소문자, 숫자, 특수문자를 조합해주세요</span>";
+ }
+ 
+ if (document.activeElement === inputPassword2) {
+ 	console.log('asgd')
+     if (inputPassword1.value === inputPassword2.value || inputPassword2.value === '') {
+         inputPasswordMessage2.innerHTML =  '';
+     } else {
+         inputPasswordMessage2.innerHTML =
+         "<span style='color:#F03F40; font-size:11px;'>비밀번호를 확인해주세요</span>";
+     }
+ }
+}
+
+//우편번호 API
+document.addEventListener('click', () => {
+	if(event.target.matches('#btnZipcode')){
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            console.log(data);
+	            let fullAddr = '';
+	            let extraAddr = '';
+	
+	            if (data.userSelectedType === 'R') {
+	                fullAddr = data.roadAddress;
+	            } else {
+	                fullAddr = data.jibunAddress;
+	            }
+	
+	            if (data.userSelectedType = 'R') {
+	                if (data.bname !== '') {
+	                    extraAddr += data.bname;
+	                }
+	                if (data.buildingName !== '') {
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                fullAddr += (extraAddr !== '' ? '(' + extraAddr + ')' : '');
+	            }
+	
+	            document.formInfo.userPostal.value = data.zonecode;
+	            document.formInfo.userLoadAddress.value = fullAddr;
+	            
+	        }
+	    }).open();
+	}
+});
+

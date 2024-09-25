@@ -11,10 +11,12 @@
 		)
 	</insert>
 	
-	<select id="selectOrderItem" parameterType="int">
-		select order_id, product_id, product_qty, product_price, order_state 
-		from order_item
-		where order_id=#{orderId}
+	<select id="selectOrderItemList" parameterType="String" resultType="OrderDetail">
+		select b.user_id, b.order_id, a.product_id, a.product_qty, a.product_price, a.order_state, b.created_at  
+		from order_item a join "order" b
+		on a.order_id = b.order_id
+		where b.user_id= #{userId}
+		order by created_at desc
 	</select>
 	
 	<select id="countRows" parameterType="int" resultType="int">

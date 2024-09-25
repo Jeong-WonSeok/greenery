@@ -178,50 +178,37 @@ public class MypageController {
 	@GetMapping("/orderList")
 	public String orderList(
 			@RequestParam(defaultValue="1") int pageNo,
-			HttpSession session,
 			Authentication authentication, Model model) throws ParseException {
-		String userId = authentication.getName();
 
-		
-		List<OrderDto> orderList = orderService.getOrderList(userId);
-		int totalRows = orderService.getTotalRows(orderList);
+		String userId = authentication.getName();
+		List<OrderDetailDto> orderDetailList = orderService.getOrderItemAll(userId);
+		int totalRows = orderDetailList.size();
+
 		Pager pager = new Pager(8, 5, totalRows, pageNo);
-		session.setAttribute("pager", pager);
-		
-		List<OrderDetailDto> orderDetailList = new ArrayList<>();
+		List<OrderDetailDto> orderDetailToClient = new ArrayList<>();
 		
 		for(int i = pager.getStartRowNo(); i <= pager.getEndRowNo(); i++ ) {
-			if(orderList.size() < i) break;
-			OrderDto orderDto = orderList.get(i-1);
-			int orderId = orderDto.getOrderId();
-			List<OrderItemDto> orderItemList = orderService.getOrderItem(orderId);
-			for(OrderItemDto orderItemDto : orderItemList) {
-				int productId = orderItemDto.getProductId();
-				
-				ProductDto productDto = productService.getProduct(productId); 
-				OrderDetailDto orderDetail = new OrderDetailDto();
-				ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
-				
-				if(reviewDto != null) 
-					orderDetail.setReviewEnable(reviewDto.isReviewEnable());
-				else 
-					orderDetail.setReviewEnable(false);
-				orderDetail.setOrderId(orderId);
-				orderDetail.setUserId(userId);
-				orderDetail.setCreatedAt(orderDto.getCreatedAt());
-				orderDetail.setProductName(productDto.getProductName());
-				orderDetail.setProductId(productId);
-				orderDetail.setProductPrice(orderItemDto.getProductPrice());
-				orderDetail.setProductQty(orderItemDto.getProductQty());
-				orderDetail.setSummaryDescription(productDto.getSummaryDescription());
-				orderDetail.setOrderState(orderItemDto.getOrderState());
-				
-				orderDetailList.add(orderDetail);
-			}
+			if(i > totalRows) break;
+			
+			OrderDetailDto orderDetailDto = orderDetailList.get(i-1);
+			int orderId = orderDetailDto.getOrderId();
+			int productId = orderDetailDto.getProductId();
+		
+			ProductDto productDto = productService.getProduct(productId); 
+			ReviewDto reviewDto = reviewService.getReview(orderId, userId, productId);
+			
+			if(reviewDto != null) 
+				orderDetailDto.setReviewEnable(reviewDto.isReviewEnable());
+			else 
+				orderDetailDto.setReviewEnable(false);
+			
+			orderDetailDto.setProductName(productDto.getProductName());
+			orderDetailDto.setSummaryDescription(productDto.getSummaryDescription());
+			orderDetailToClient.add(orderDetailDto);
 		}
 		
 		model.addAttribute("pager", pager);
-		model.addAttribute("orderList", orderDetailList);
+		model.addAttribute("orderList", orderDetailToClient);
 		return "mypage/orderList";
 	}
 	

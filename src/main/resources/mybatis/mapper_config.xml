@@ -43,6 +43,9 @@
 			type="com.mycompany.miniproject.dto.Pager"
 			alias="Pager" />
 <!-- 	==================================================	 -->
+		<typeAlias
+			type="com.mycompany.miniproject.dto.OrderDetailDto" 
+			alias="OrderDetail" />
 
 
 	</typeAliases>

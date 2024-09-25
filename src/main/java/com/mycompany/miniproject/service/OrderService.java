@@ -1,18 +1,15 @@
 package com.mycompany.miniproject.service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.miniproject.dao.CartDao;
 import com.mycompany.miniproject.dao.OrderDao;
 import com.mycompany.miniproject.dao.OrderItemDao;
-import com.mycompany.miniproject.dto.CartDto;
+import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 
@@ -55,18 +52,19 @@ public class OrderService {
 		return orderList;
 	}
 
-	public List<OrderItemDto> getOrderItem(int orderId) {
-		List<OrderItemDto> orderItemList = orderItemDao.selectOrderItem(orderId);
-		return orderItemList;
+	public List<OrderDetailDto> getOrderItemAll(String userId) {
+		List<OrderDetailDto> orderDetailList = orderItemDao.selectOrderItemList(userId);
+		
+		return orderDetailList;
 	}
 
-	public int getTotalRows(List<OrderDto> orderList) {
+	/*public int getTotalRows(List<OrderDto> orderList) {
 		int totalRows = 0;
 		for(OrderDto orderDto : orderList) {
 			 totalRows += orderItemDao.countRows(orderDto.getOrderId());
 		}
 		return totalRows;
-	}
+	}*/
 
 	
 	

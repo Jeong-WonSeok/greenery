@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.miniproject.dto.OrderDetailDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 
 @Mapper
@@ -11,7 +12,7 @@ public interface OrderItemDao {
 
 	int insertOrderItem(OrderItemDto orderItemDto);
 
-	List<OrderItemDto> selectOrderItem(int orderId);
+	List<OrderDetailDto> selectOrderItemList(String userId);
 
 	int countRows(int orderId);
 
