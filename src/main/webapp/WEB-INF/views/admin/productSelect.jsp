@@ -44,7 +44,9 @@
 			
 			<c:forEach items="${product}" var="i">
 				<div class="product-container">
-					<div class="product-created">${i.createdAt}</div>
+					<div class="product-created">
+					    <fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd" />
+					</div>
 					<div class=product-image>
 						<a href="${pageContext.request.contextPath}/admin/productSelect?productId=${i.productId}">
 		                     <img src="imageDown?productId=${i.productId}&usecase=1" alt="${i.productName}" class="product-image">
