@@ -75,12 +75,16 @@ $(document).off("click", ".write-btn").on("click", ".write-btn", function(){
 		processData: false,
 		contentType: false,
 		success: function() {
-			alert("리뷰가 등록되었습니다.");
+			$(".modal-title").html("리뷰 등록");
+			$(".modal-body").html("리뷰 등록에 성공하였습니다.");
+			$(".header-modal").trigger("click");
 			$(".btn-close").trigger("click"); 
 			$(".order-list-btn").trigger("click");
 		},
 		error: function(data){
-			alert(data);
+			$(".modal-title").html("등록 실패");
+			$(".modal-body").html("리뷰 등록에 실패하였습니다.");
+			$(".header-modal").trigger("click");
 		}
 	})
 })

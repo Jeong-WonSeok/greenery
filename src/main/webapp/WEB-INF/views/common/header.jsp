@@ -24,6 +24,7 @@
 	            <span class="header-nav-text">로그인</span>
 	        </button>
 	        
+	        
 	        <button class="header-mypage" onclick="location.href='${pageContext.request.contextPath}/mypage/mypage'">
 	            <img src="${pageContext.request.contextPath}/resources/images/mypage_icon.png" class="header-nav-icon" />
 	            <span class="header-nav-text">마이페이지</span>
@@ -117,6 +118,28 @@
         </ul>
     </div>
     <div class="notice">공지사항</div>
+</div>
+
+<button type="button" class="btn btn-primary header-modal" data-bs-toggle="modal" data-bs-target="#headerModal" style="display:none"></button>
+
+<div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">
+					Modal title
+				</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			  	로그인을 해주시길 바랍니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기 </button>
+				<!-- <button type="button" class="btn btn-primary"> 로그인 </button> -->
+			</div>
+		</div>
+	</div>
 </div>
 <!-- 검색창 -->
 <div class="header-search">

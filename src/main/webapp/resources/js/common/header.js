@@ -67,14 +67,19 @@ $(document).ready(() => {
     		url: getContextPath()+"/order/cartAdd?productId="+$(this).data("productid")+productQty,
     		method: 'GET',
     		success: function (response){
-    			alert(response);
+    			$(".modal-title").html("장바구니 등록 성공");
+    			$(".modal-body").html(response);
+    			$(".header-modal").trigger("click");
     			cartIconUpdate();
     		},
     		error: function(jqXHR, textStatus, errorThrown){
+    			$(".modal-title").html("장바구니 등록 실패");
     			if (jqXHR.status === 401) {
-                    alert("로그인이 필요합니다.");
+    				$(".modal-body").html("로그인을 해주세요.");
+                    $(".header-modal").trigger("click");
                 }else{
-                	alert(jqXHR.responseText);
+                	$(".modal-body").html(jqXHR.responseText);
+                	$(".header-modal").trigger("click");
                 }
     		}
     	});
