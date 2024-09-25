@@ -54,7 +54,27 @@
 			</c:forEach>
 		</div>
 	</div>
-
+	<button type="button" class="btn btn-primary notice-modal" data-bs-toggle="modal" data-bs-target="#noticeModal" style="display:none"></button>
+	
+	<div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">
+						Modal title
+					</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				  	로그인을 해주시길 바랍니다.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기 </button>
+					<button type="button" class="btn btn-primary delete-modal-btn">삭제 </button>	
+				</div>
+			</div>
+		</div>
+	</div>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/admin/noticeselect.js"></script>
 </body>

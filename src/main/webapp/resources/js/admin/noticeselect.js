@@ -23,18 +23,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	$(document).on("click", ".btn2", function() {
 		const noticeId= $(this).data("noticeid");
-	
-		if(confirm("정말 삭제하시겠습니까?")){
+		$(".modal-title").html("공지사항 삭제");
+		$(".modal-body").html("정말로 삭제하시겠습니까?");
+		$(".notice-modal").trigger("click");
+		
+		$(".delete-modal-btn").one("click", function() {
 			$.ajax({
 				url : "deleteNotice",
 				method:"POST",
 				data : {"noticeId" : noticeId},
 				success: function(){
-					alert("삭제되었습니다.");
 					location.href = "noticeselect";
 				}
 			});
-		}
+		});
 			
 	});
 	

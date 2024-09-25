@@ -136,7 +136,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 닫기 </button>
-				<!-- <button type="button" class="btn btn-primary"> 로그인 </button> -->
+<!-- 				<button type="button" class="btn btn-primary delete-modal-btn">삭제 </button> -->
 			</div>
 		</div>
 	</div>
