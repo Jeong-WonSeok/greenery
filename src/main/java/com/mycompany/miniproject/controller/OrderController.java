@@ -44,12 +44,14 @@ public class OrderController {
 	UserService userService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	CartService cartService;
 	
 	@GetMapping("/cart")
 	public String cart(Model model, Authentication authentication) {
 		if(authentication != null) {
 			String userId = authentication.getName();
-			List<CartDto> cartList = orderService.getCartList(userId);
+			List<CartDto> cartList = cartService.getCartList(userId);
 			List<Map<String, Object>> productList = new ArrayList<>();
 			for(CartDto cart : cartList) {
 				int productId = cart.getProductId();
@@ -60,7 +62,7 @@ public class OrderController {
 				productInfo.put("productQty", cart.getProductQty());
 				productList.add(productInfo);
 				
-				orderService.changeOrderEnable(productId, userId, false);
+				cartService.changeOrderEnable(productId, userId, false);
 			}
 			model.addAttribute("productList", productList);
 		}
@@ -78,7 +80,7 @@ public class OrderController {
 	    
 		String userId = authentication.getName();
 		
-		int result = orderService.cartAdd(productQty, productId, userId);
+		int result = cartService.cartAdd(productQty, productId, userId);
 		
 		
 		if(result == -1)
@@ -98,7 +100,7 @@ public class OrderController {
 	@GetMapping("/changeQty")
 	public ResponseEntity<String> changeQty(int productId, int productQty, Authentication authentication) {
 		String userId = authentication.getName();
-		orderService.chageProductQty(productId, productQty, userId);
+		cartService.chageProductQty(productId, productQty, userId);
 		
 		return ResponseEntity.ok("OK");
 	}
@@ -106,7 +108,7 @@ public class OrderController {
 	@GetMapping("/deleteProduct")
 	public String deleteProduct(int productId, Authentication authentication) {
 		String userId = authentication.getName();
-		orderService.deleteProduct(productId, userId);
+		cartService.deleteProduct(productId, userId);
 		return "/order/cart";
 	}
 	
@@ -119,7 +121,7 @@ public class OrderController {
 	@GetMapping("/toOrder")
 	public ResponseEntity<String> insertOrder(int productId, Authentication authentication){
 		String userId = authentication.getName();
-		orderService.changeOrderEnable(productId, userId, true);
+		cartService.changeOrderEnable(productId, userId, true);
 		
 		return ResponseEntity.ok("OK");
 	}
@@ -130,7 +132,7 @@ public class OrderController {
 
 		if(authentication != null) {
 			String userId = authentication.getName();
-			List<CartDto> cartList = orderService.getCartListToOrder(userId);
+			List<CartDto> cartList = cartService.getCartListToOrder(userId);
 			List<Map<String, Object>> productList = new ArrayList<>();
 			
 			for(CartDto cart : cartList) {
@@ -169,7 +171,7 @@ public class OrderController {
  		for(int productId : orderList) {
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
- 			CartDto cartDto = orderService.getCartInfo(productId, userId);
+ 			CartDto cartDto = cartService.getCartInfo(productId, userId);
  			if(cartDto != null)
  				orderItemDto.setProductQty(cartDto.getProductQty());
  			else
@@ -180,7 +182,7 @@ public class OrderController {
  			orderItemDto.setProductId(productId);
  			orderItemDto.setProductPrice(productDto.getProductPrice());
  			
- 			orderService.deleteProduct(productId, userId);
+ 			cartService.deleteProduct(productId, userId);
  			orderService.insertOrderItem(orderItemDto);
  			reviewService.createReview(orderId, userId, productId);
  		}
@@ -221,7 +223,7 @@ public class OrderController {
 	public ResponseEntity<Integer> getCartNum(Authentication authentication, Model model) {
 		if(authentication == null || !authentication.isAuthenticated() ) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(-1);
 		String userId = authentication.getName();
-		int cartNum = orderService.getCartNum(userId);
+		int cartNum = cartService.getCartNum(userId);
 		log.info(cartNum+ " ");
 		model.addAttribute("cartNum", cartNum);
 		
