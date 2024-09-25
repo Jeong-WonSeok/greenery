@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="selectListToOrder" parameterType="String">
-		select product_id, product_qty
+		select order_enable, user_id, product_id, product_qty
 		from cart
 		where user_id = #{userId} and order_enable = 1
 	</select>

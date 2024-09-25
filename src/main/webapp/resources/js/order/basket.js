@@ -120,27 +120,35 @@ $('#order-button').on('click', function() {
 	orderSelected();
 })
 
-function toOrder(data){
+function toOrder(orderItems){
+	//console.log(JSON.stringify(orderItems));
+	var queryString = "";
+	for(var i=0; i<orderItems.length; i++) {
+		queryString += "orderItems=" + orderItems[i] + "&";
+	}
 	$.ajax({
 		url:"toOrder",
-		method: "GET",
-		data: {
-			productId : $(data).data("productid")
-			},
+		method: "POST",
+		data: queryString,
 		success: function() {
+			console.log("asdf");
+			window.location.href="payment";
 		},
 		error : function(){
 			alert("에러가 발생하였습니다.")
 		}
-	})
+	});
 }
 
 
 function orderSelected(){
+	//console.log($('.product-checkbox:checked').length);
+	var orderItems = [];
 	$('.product-checkbox:checked').each(function () {
-		toOrder(this);
+		//toOrder(this);
+		orderItems.push($(this).data("productid"));
     });
-	window.location.href="payment";
+	toOrder(orderItems);
 }
 
 

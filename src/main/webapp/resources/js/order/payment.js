@@ -215,9 +215,11 @@ $(document).ready(function () {
 // 주문내역 DB에 넣기
 function createdOrder() {
 	let productIdList = []; 
+	
 	$('.product-checkbox:checked').each(function () {
 		productIdList.push(Number($(this).data("productid")));
     });
+	
 	const totalPrice = $('#totalPrice-num').html().replace(",", "");
 	const couponValue = ($('#discount').html()).replace("원", "");
 	const coupon = parseInt(couponValue) < 0 ? true : false; 

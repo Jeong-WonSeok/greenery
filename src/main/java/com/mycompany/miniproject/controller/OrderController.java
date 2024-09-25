@@ -118,40 +118,37 @@ public class OrderController {
 		return "order/order";
 	}
 	
-	@GetMapping("/toOrder")
-	public ResponseEntity<String> insertOrder(int productId, Authentication authentication){
+	@PostMapping("/toOrder")
+	public ResponseEntity<String> insertOrder(int[] orderItems, Authentication authentication){
 		String userId = authentication.getName();
-		cartService.changeOrderEnable(productId, userId, true);
-		
+		for(int productId : orderItems) {
+			cartService.changeOrderEnable(productId, userId, true);
+			log.info(productId + " ");
+		}
 		return ResponseEntity.ok("OK");
 	}
 	
 	@Secured("ROLE_USER")
-	@RequestMapping("/payment")
+	@GetMapping("/payment")
 	public String payment(Authentication authentication, Model model) {
 
-		if(authentication != null) {
-			String userId = authentication.getName();
-			List<CartDto> cartList = cartService.getCartListToOrder(userId);
-			List<Map<String, Object>> productList = new ArrayList<>();
-			
-			for(CartDto cart : cartList) {
-				int productId = cart.getProductId();
-				
-				Map<String, Object> productInfo = new HashMap<>();
-				ProductDto product = productService.getProduct(productId);
-				productInfo.put("product", product);
-				productInfo.put("productQty", cart.getProductQty());
-				productList.add(productInfo);				
-			}
-			boolean hasCoupon = userService.hasCoupon(userId);
-			log.info("쿠폰 확인 : " + hasCoupon);
-			model.addAttribute("hasCoupon", hasCoupon);
-			model.addAttribute("productList", productList);
+		String userId = authentication.getName();
+		List<CartDto> cartList = cartService.getCartListToOrder(userId);
+		List<Map<String, Object>> productList = new ArrayList<>();
+		
+		for(CartDto cart : cartList) {
+			int productId = cart.getProductId();
+			Map<String, Object> productInfo = new HashMap<>();
+			ProductDto product = productService.getProduct(productId);
+			log.info(product.toString());
+			productInfo.put("product", product);
+			productInfo.put("productQty", cart.getProductQty());
+			productList.add(productInfo);				
 		}
-		else {
-			return "redirect:/order/cart";
-		}
+		boolean hasCoupon = userService.hasCoupon(userId);
+		model.addAttribute("hasCoupon", hasCoupon);
+		model.addAttribute("productList", productList);
+
 		
 		return "order/payment";
 	}
@@ -172,6 +169,7 @@ public class OrderController {
  			OrderItemDto orderItemDto = new OrderItemDto();
  			ProductDto productDto = productService.getProduct(productId);
  			CartDto cartDto = cartService.getCartInfo(productId, userId);
+ 			
  			if(cartDto != null)
  				orderItemDto.setProductQty(cartDto.getProductQty());
  			else
@@ -224,7 +222,6 @@ public class OrderController {
 		if(authentication == null || !authentication.isAuthenticated() ) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(-1);
 		String userId = authentication.getName();
 		int cartNum = cartService.getCartNum(userId);
-		log.info(cartNum+ " ");
 		model.addAttribute("cartNum", cartNum);
 		
 		return ResponseEntity.ok(cartNum);

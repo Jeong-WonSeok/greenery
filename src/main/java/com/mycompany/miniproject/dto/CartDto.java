@@ -7,4 +7,5 @@ public class CartDto {
 	private String userId;
 	private int productId;
 	private int productQty;	
+	private boolean orderEnable;
 }
