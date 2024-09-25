@@ -17,7 +17,7 @@
 					created_at, user_id, review_enable, product_id
 				from review
 				where product_id = #{productId} and review_enable=1	
-				order by created_at desc
+				order by created_at
 			)
 			where rownum &lt;= #{pager.endRowNo} 
 		) 
@@ -56,7 +56,7 @@
 		where user_id = #{userId} and order_id = #{orderId} and product_id = #{productId}
 	</update>
 	
-	<select id="countRows" resultType="int">
-		select count(*) from review
+	<select id="countRows" parameterType="int" resultType="int">
+		select count(*) from review where product_id = #{productId} and review_enable = 1
 	</select>
 </mapper>

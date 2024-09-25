@@ -20,6 +20,6 @@ public interface ReviewDao {
 
 	ReviewDto selectReviewByOrderId(Map<String, Object> reviewInfo);
 
-	int countRows();
+	int countRows(int productId);
 
 }

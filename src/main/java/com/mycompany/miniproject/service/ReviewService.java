@@ -62,8 +62,8 @@ public class ReviewService {
 		return review;
 	}
 
-	public int getTotalRows() {
-		int totalRows = reviewDao.countRows();
+	public int getTotalRows(int productId) {
+		int totalRows = reviewDao.countRows(productId);
 		return totalRows;
 	}
 

@@ -51,7 +51,7 @@ public class ProductController {
 			@RequestParam(defaultValue="1") int pageNo,
 			HttpSession session,
 			int productId, Model model) {
-		int totalRows = reviewService.getTotalRows();
+		int totalRows = reviewService.getTotalRows(productId);
 		Pager pager = new Pager(10, 5, totalRows, pageNo);
 		session.setAttribute("pager", pager);
 		List<ReviewDto> productReviews = reviewService.getReviewList(productId, pager);
