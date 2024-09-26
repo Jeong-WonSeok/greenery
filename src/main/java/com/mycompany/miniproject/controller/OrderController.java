@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -47,39 +49,73 @@ public class OrderController {
 	CartService cartService;
 	
 	@GetMapping("/cart")
-	public String cart(Model model, Authentication authentication) {
+	public String cart(Model model, Authentication authentication, HttpSession session) {
+		List<Map<String, Object>> productList = new ArrayList<>();
+		Map<String, Object> productInfo = new HashMap<>();
+		ProductDto product = new ProductDto();
+		
 		if(authentication != null) {
 			String userId = authentication.getName();
 			List<CartDto> cartList = cartService.getCartList(userId);
-			List<Map<String, Object>> productList = new ArrayList<>();
 			for(CartDto cart : cartList) {
+				productInfo = new HashMap<>();
 				int productId = cart.getProductId();
 				
-				Map<String, Object> productInfo = new HashMap<>();
-				ProductDto product = productService.getProduct(productId);
+				product = productService.getProduct(productId);
 				productInfo.put("product", product);
 				productInfo.put("productQty", cart.getProductQty());
 				productList.add(productInfo);
 				
 				cartService.changeOrderEnable(productId, userId, false);
 			}
-			model.addAttribute("productList", productList);
+		}else {
+			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+			if(cartList != null) {
+				//key => productId, value => productQty
+				for(Map.Entry<Integer, Integer> entry: cartList.entrySet()) {
+					productInfo = new HashMap<>();
+					
+					product = productService.getProduct(entry.getKey());
+					productInfo.put("product", product);
+					productInfo.put("productQty",entry.getValue());
+					productList.add(productInfo);
+				}
+			}
 		}
 		
+		model.addAttribute("productList", productList);
 		
 		return "order/cart";
 	}
 	
-	@Secured("ROLE_USER")
+//	@Secured("ROLE_USER")
 	@PostMapping("/cartAdd")
-	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model, Authentication authentication) {
+	public ResponseEntity<String> cartAdd(@RequestParam(defaultValue="1") int productQty, int productId, Model model, Authentication authentication, HttpSession session) {
 		log.info("실행");
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
-	    
-		String userId = authentication.getName();
 		
-		int result = cartService.cartAdd(productQty, productId, userId);
+		int result = 1;
+		if(authentication != null) {
+			String userId = authentication.getName();
+			result = cartService.cartAdd(productQty, productId, userId);
+		}else {
+			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+			if(cartList == null) {
+				log.info("cart가 없습니다.");
+				cartList = new HashMap<Integer, Integer>();
+				session.setAttribute("cartList", cartList);
+			}
+			if(cartList.containsKey(productId)) {
+				result = -1;
+			}else {
+				cartList.put(productId, productQty);
+			}
+			cartList.forEach((key, value) -> {
+			    System.out.println("Key: " + key + ", Value: " + value);
+			});
+		}
 		
 		
 		if(result == -1)
@@ -105,14 +141,20 @@ public class OrderController {
 	}
 	
 	@GetMapping("/deleteProduct")
-	public ResponseEntity<Integer> deleteProduct(int productId, Authentication authentication) {
-		String userId = authentication.getName();
-		boolean hasProduct = cartService.hasProductInCart(productId, userId);
-		if(hasProduct) {
-			cartService.deleteProduct(productId, userId);
+	public ResponseEntity<Integer> deleteProduct(int productId, Authentication authentication, HttpSession session) {
+		if(authentication != null) {
+			String userId = authentication.getName();
+			boolean hasProduct = cartService.hasProductInCart(productId, userId);
+			if(hasProduct) {
+				cartService.deleteProduct(productId, userId);
+				return ResponseEntity.ok(1);
+			}else
+				return ResponseEntity.ok(0);
+		}else {
+			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+			cartList.remove(productId);
 			return ResponseEntity.ok(1);
-		}else
-			return ResponseEntity.ok(0);
+		}
 	}
 	
 	@RequestMapping("/order")
