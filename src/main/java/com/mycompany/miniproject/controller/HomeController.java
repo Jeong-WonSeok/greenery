@@ -53,6 +53,9 @@ public class HomeController {
 					CartDto cartDto = cartService.getCartInfo(productId, userId);
 					if(cartDto == null) {
 						cartService.cartAdd(productQty, productId, userId);
+					}else {
+						int changedQty = productQty + cartDto.getProductQty();
+						cartService.chageProductQty(productId, changedQty, userId);
 					}
 				}
 				session.removeAttribute("cartList");
