@@ -134,16 +134,44 @@ $(document).ready(function () {
             $(".toolbar-category .active-category").data("category")
         );
     });
-    // 동적으로 생성된 like 아이콘에 대한 이벤트 처리
+    
+ // like 아이콘 이벤트 처리
     $(document).on('click', '.icon.like-icon', function () {
-        $(this).toggleClass("active");
         let heartIcon = $(this).find("img");
-        if ($(this).hasClass("active")) {
-            heartIcon.attr("src", "resources/images/fill_heart.png");
+        let productId = heartIcon.data("productid");
+        let likeButton = $(this); // this를 likeButton 변수에 저장(이래야 Ajax 요청 내부에서 사용할 수 있음)
+        
+        if (likeButton.hasClass("active")) {
+            // 찜 해제 
+            $.ajax({
+                url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
+                method: 'GET',
+                success: function (response) {
+                    alert(response);
+                    heartIcon.attr("src", "resources/images/noFill_heart.png");
+                    likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                }
+            });
         } else {
-            heartIcon.attr("src", "resources/images/images/heart.png")
+            // 찜 추가 
+            $.ajax({
+                url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
+                method: 'GET',
+                success: function (response) {
+                    alert(response);
+                    heartIcon.attr("src", "resources/images/fill_heart.png");
+                    likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                }
+            });
         }
     });
+    
 });
 
 

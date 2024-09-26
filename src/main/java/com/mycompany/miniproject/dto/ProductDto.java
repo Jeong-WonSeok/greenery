@@ -20,4 +20,5 @@ public class ProductDto {
 	private boolean productEnable;
 	private Date createdAt;
 	private String detailDescription;
+	private boolean isLiked;
 }
