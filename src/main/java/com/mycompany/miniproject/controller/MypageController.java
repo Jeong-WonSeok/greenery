@@ -101,10 +101,10 @@ public class MypageController {
 		return "redirect:/mypage/mypage";
 	}
 	
-	@RequestMapping("/likedProducts")
+	/*@RequestMapping("/likedProducts")
 	public String likedProducts() {
 		return "mypage/likedProducts";
-	}
+	}*/
 	
 	// 마이페이지 홈
 	@RequestMapping("/mypage")
@@ -120,10 +120,11 @@ public class MypageController {
             String userId = authentication.getName();
             List<LikeDto> likeList = likeService.getLikeList(userId);
             List<ProductDto> productList = new ArrayList<>();
- 
-            for (LikeDto like : likeList) {
-                int productId = like.getProductId();
+            
+            for (LikeDto i : likeList) {
+                int productId = i.getProductId();
                 ProductDto product = productService.getProduct(productId);
+                product.setLiked(true);
                 productList.add(product);
             }
             model.addAttribute("productList", productList);
