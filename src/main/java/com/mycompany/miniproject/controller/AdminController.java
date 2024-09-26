@@ -131,8 +131,9 @@ public class AdminController {
 		MultipartFile[] iamgeList = { 
 				productForm.getProductImage1(), productForm.getProductImage2(),
 				productForm.getProductImage3(), productForm.getProductImage4(),
-				productForm.getDetailImage() };
-		
+				productForm.getDetailImage() 
+		};
+		int cnt = 0;
 		for(int i = 0; i < 5; i++) {
 			ProductImageDto productImage = new ProductImageDto();
 			if(!iamgeList[i].isEmpty()) {
@@ -143,7 +144,7 @@ public class AdminController {
 				if(i == 4) {
 					productImage.setPimageUsecase("detailImage");
 				}else {
-					productImage.setPimageUsecase("productImage"+(i+1));
+					productImage.setPimageUsecase("productImage"+(++cnt));
 				}
 				productService.insertProductImage(productImage);
 			}
