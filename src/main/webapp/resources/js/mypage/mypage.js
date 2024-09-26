@@ -296,7 +296,6 @@ function inputPasswordCheck() {
  }
  
  if (document.activeElement === inputPassword2) {
- 	console.log('asgd')
      if (inputPassword1.value === inputPassword2.value || inputPassword2.value === '') {
          inputPasswordMessage2.innerHTML =  '';
      } else {

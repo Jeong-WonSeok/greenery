@@ -23,13 +23,20 @@
     margin-bottom: 0px !important;
 }
 
-.form-group input {
+.form-group input{
     flex-grow: 1;
     margin: 10px;
     border: 1px solid #ccc;
     font-size: 14px;
     padding-left: 10px;
-    margin-bottom: 0px !important;
+}
+
+#product-category{
+	width: 280px; 
+    margin: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding-left: 10px;
 }
 
 #charCount {
@@ -79,15 +86,6 @@ form-group textarea {
     overflow-x: auto;
 }
 
-.image-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    font-size: 40px;
-    color: #888;
-    
-}
 
 .image-preview {
     border: 2px dashed #ccc;
@@ -103,7 +101,7 @@ form-group textarea {
     align-items: center;
     font-size: 40px;
     color: #888;
-    
+    height: 150px;
 }
 
 .image-preview img {
@@ -122,6 +120,10 @@ form-group textarea {
     height: 200px; 
 }
 
+.product-alert{
+	margin-left: 10px;
+}
+
 .image-thumnail label {
     display: flex;
     align-items: center;
@@ -132,6 +134,7 @@ form-group textarea {
     box-sizing: border-box;
     border-right: 1px solid #ccc;
     text-align: auto;
+    margin-bottom: 0px !important;
 }
 
 .image-thumnail input {
@@ -140,6 +143,10 @@ form-group textarea {
     border: 1px solid #ccc;
     font-size: 14px;
     padding-left: 10px;
+}
+
+#image-preview5 {
+	height: 90%;
 }
 
 
