@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.miniproject.dto.CartDto;
+import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
 import com.mycompany.miniproject.service.CartService;
+import com.mycompany.miniproject.service.LikeService;
 import com.mycompany.miniproject.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ public class HomeController {
 	private ProductService productService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private LikeService likeService;
 	
 	@GetMapping("/")
 	public String mainPage( 
@@ -43,9 +47,23 @@ public class HomeController {
 		Pager pager = new Pager(10, 5, totalRows, pageNo);
 		session.setAttribute("pager", pager);
 		
+		List<ProductDto> productList = productService.getProductAll(pager, sort);
+		
 		if(authentication != null) {
 			String userId = authentication.getName();
 			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+			
+			List<LikeDto> likeList = likeService.getLikeList(userId);
+			// productList에 있는 상품 중 찜한 상품을 찾아서 isLiked 설정
+	        for (ProductDto product : productList) {
+	            for (LikeDto like : likeList) {
+	                if (product.getProductId() == like.getProductId()) {
+	                    product.setLiked(true);
+	                    break;
+	                }
+	            }
+	        }
+			
 			if(cartList != null) {
 				for(Map.Entry<Integer, Integer> entry : cartList.entrySet()) {
 					int productId = entry.getKey();
@@ -62,7 +80,6 @@ public class HomeController {
 			}
 		}
 		
-		List<ProductDto> productList = productService.getProductAll(pager, sort);
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", "all");
 		model.addAttribute("sort", sort);
