@@ -218,6 +218,11 @@ $(document).ready(function () {
             return $(this).text();  // 기존 텍스트로 복구
         });
         $(this).html('<strong>' + $(this).text() + '</strong>');  // 선택한 탭 텍스트 진하게
+        if($(this).data("url") === 'editMyInfo'){
+//        	$('body').append($('#pwCheckModal'));
+        	$('#pwCheckModal').modal('show');
+        }
+        
     });
 
     // like 아이콘 이벤트 처리
