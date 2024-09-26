@@ -18,7 +18,7 @@ body {
     font-family: 'Helvetica', 'Noto Sans KR', sans-serif;
 }
 
-h1 {
+#payment-h1 {
     margin: 120px 0 30px auto;
     width: 75%;
     margin: 120px auto 30px !important;

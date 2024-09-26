@@ -246,7 +246,7 @@ function checkout() {
     /* document.getElementById('add-to-cart').addEventListener('click', function() {
         window.location.href = '../payment/payment.html'; */
     sessionStorage.setItem('checkout', JSON.stringify(checkout));
-    window.location.href = '../payment/payment.html'; // 결제 페이지로 이동 
+//    window.location.href = '../payment/payment.html'; // 결제 페이지로 이동 
 }
 
 

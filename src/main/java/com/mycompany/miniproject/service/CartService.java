@@ -93,4 +93,16 @@ public class CartService {
 		return cartNum;
 	}
 
+	public boolean hasProductInCart(int productId, String userId) {
+		Map<String, Object> cart = new HashMap<>();
+		cart.put("productId", productId);
+		cart.put("userId", userId);
+		CartDto cartDto = cartDao.selectCart(cart);
+		if(cartDto == null)
+			return false;
+		else
+			return true;
+		
+	}
+
 }

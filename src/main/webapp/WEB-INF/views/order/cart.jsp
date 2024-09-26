@@ -14,7 +14,7 @@
     <!--<div id="header"></div> 공통 헤더(상단바) 삽입 -->
     <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-    <h1>장바구니</h1>
+    <h1 id="cart-h1">장바구니</h1>
 
     <div class="basket" id="basket">
         <div class="product-list">
@@ -94,6 +94,7 @@
             </div>
         </div>
     </div>
+    
     <!--<div id="footer"></div>  공통 footer 삽입 -->
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
     

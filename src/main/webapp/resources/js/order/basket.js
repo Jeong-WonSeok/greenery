@@ -126,18 +126,25 @@ function toOrder(orderItems){
 	for(var i=0; i<orderItems.length; i++) {
 		queryString += "orderItems=" + orderItems[i] + "&";
 	}
-	$.ajax({
-		url:"toOrder",
-		method: "POST",
-		data: queryString,
-		success: function() {
-			console.log("asdf");
-			window.location.href="payment";
-		},
-		error : function(){
-			alert("에러가 발생하였습니다.")
-		}
-	});
+	if(orderItems.length === 0){
+		$(".modal-title").html("장바구니");
+		$(".modal-body").html("장바구니에 상품을 담아주세요.");
+		$("#headerModal").modal("show");
+	}else{
+		$.ajax({
+			url:"toOrder",
+			method: "POST",
+			data: queryString,
+			success: function() {
+				window.location.href="payment";
+			},
+			error : function(){
+				$(".modal-title").html("오류 발생");
+				$(".modal-body").html("알 수 없는 에러 발생");
+				$("#headerModal").modal("show");
+			}
+		});
+	}
 }
 
 

@@ -16,7 +16,7 @@
 	 
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-	<h1>결제하기</h1>
+	<h1 id="payment-h1">결제하기</h1>
 	<div class="basket" id="basket">
 		<div class="product-list">
 			<!-- <h1 class="payment-title">결제하기</h1> -->
