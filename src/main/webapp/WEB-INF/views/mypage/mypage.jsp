@@ -47,19 +47,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Modal title
+                	비밀번호 확인
                 </h1>
             </div>
             <div class="modal-body">
-                <label for="inputPassword5" class="form-label">Password</label>
+                <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock">
                 <div id="passwordHelpBlock" class="form-text">
                 	현재 비밀번호를 입력해 주세요.
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary pw-check">확인</button>
             </div>
         </div>
     </div>

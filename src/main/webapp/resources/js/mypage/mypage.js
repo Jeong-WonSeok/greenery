@@ -158,6 +158,13 @@ $(document).ready(function () {
 
 
 //================================== 개인 정보 수정 =========================================
+$('#pwCheckModal').on("click", function(){
+	$.ajax({
+		url: "/miniproject/CheckedPassword",
+		
+	})
+})
+
 
 document.addEventListener('input', function() {
 	if(event.target.matches("#userPw")){
