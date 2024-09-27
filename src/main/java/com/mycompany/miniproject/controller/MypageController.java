@@ -70,7 +70,6 @@ public class MypageController {
 	public String editMyInfo(Model model, Authentication authentication) {
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		UserDto userDto = userDetails.getMember();
-		
 		model.addAttribute("user", userDto);
 		model.addAttribute("userName", userDto.getUserName());
 		model.addAttribute("coupon", userDto.getUserCoupon() == 1 ? 1 : 0);

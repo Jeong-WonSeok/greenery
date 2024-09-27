@@ -24,11 +24,11 @@
 	</select>
 	
 	<update id="updateUserCoupon" parameterType="String">
-		update "User" set user_coupon = 0
+		update "User" set user_coupon = -1
 		where user_id=#{userId}
 	</update>	
 	
-	<select id="selectUserCoupon" parameterType="String" resultType="boolean">
+	<select id="selectUserCoupon" parameterType="String" resultType="int">
 		select user_coupon
 		from "User"
 		where user_id=#{userId}

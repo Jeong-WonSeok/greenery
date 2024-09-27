@@ -190,7 +190,8 @@ public class OrderController {
 			productInfo.put("productQty", cart.getProductQty());
 			productList.add(productInfo);				
 		}
-		boolean hasCoupon = userService.hasCoupon(userId);
+		int couponNum = userService.getCouponNum(userId);
+		boolean hasCoupon = couponNum <= 0 ? false : true;
 		model.addAttribute("hasCoupon", hasCoupon);
 		model.addAttribute("productList", productList);
 
@@ -253,8 +254,9 @@ public class OrderController {
 			productInfo.put("productQty", qty);
 			productList.add(productInfo);				
 			
-			boolean hasCoupon = userService.hasCoupon(userId);
-		
+			int couponNum = userService.getCouponNum(userId);
+			boolean hasCoupon = couponNum <= 0 ? false : true;
+			
 			model.addAttribute("hasCoupon", hasCoupon);
 			model.addAttribute("productList", productList);
 		}

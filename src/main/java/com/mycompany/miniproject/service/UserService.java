@@ -70,12 +70,11 @@ public class UserService {
 	}
 
 	public void useCoupon(String userId) {
-		int result = userDao.updateUserCoupon(userId);
-		log.info("결과 : " + result);
+		userDao.updateUserCoupon(userId);
 	}
 	
-	public boolean hasCoupon(String userId) {
-		boolean result = userDao.selectUserCoupon(userId);
+	public int getCouponNum(String userId) {
+		int result = userDao.selectUserCoupon(userId);
 		return result;
 		
 	}

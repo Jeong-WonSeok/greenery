@@ -319,6 +319,7 @@ a {
 .coupon-title {
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
 }
 
 .coupon-title h1 {
@@ -327,8 +328,8 @@ a {
 }
 
 #have-coupon {
+	border-radius: 3px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
