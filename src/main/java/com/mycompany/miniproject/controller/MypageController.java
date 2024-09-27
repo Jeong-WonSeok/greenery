@@ -81,7 +81,7 @@ public class MypageController {
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		UserDto curUserDto = userDetails.getMember();
 		log.info(userDto.toString());
-		if(userDto.getUserPw() == null) {
+		if(userDto.getUserPw().equals("")) {
 			userDto.setUserPw(curUserDto.getUserPw());
 		}else {
 			PasswordEncoder passwordEncoder = 

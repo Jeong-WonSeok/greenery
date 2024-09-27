@@ -2,7 +2,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <div class="mypage-myinfo-title">개인정보 수정</div>
 <div class="myinfo-list">
-	<form method="post" action="updateUser" name="formInfo">
+	<form class="myinfo-form" method="post" action="updateUser" name="formInfo">
 		<div class="myinfo-id">
 			<span><label for="userId">아이디</label></span>
 			<span><input type="text" id="userId" name="userId" value="${user.userId}" readonly></span>
@@ -25,8 +25,6 @@
 				<button id="btnZipcode" class="btn btn2" type="button">주소 찾기</button>
 			</div>
 		</div>
-		<!-- <div class="btnZip">
-		</div> -->
 		<div class="myinfo-address">
 			<span><label for="userLoadAddress">주소</label></span>
 			<span class="form-address"><input name="userLoadAddress" type="text"  value="${user.userLoadAddress}" required readonly></span> 
@@ -51,7 +49,9 @@
 		</div>
 		<div id="inputPasswordMessage2" class="form-message" style="display:none"></div>
 		<div class="myinfo-edit">
-			<button type=submit class="myinfo-edit-btn">개인정보 수정</button>
+			<button type="submit" class="myinfo-edit-btn">개인정보 수정</button>
 		</div>
 	</form>
 </div>
+
+<script src="${pageContext.request.contextPath}/resources/js/mypage/editMyInfo.js"></script>

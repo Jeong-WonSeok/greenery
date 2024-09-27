@@ -35,7 +35,6 @@ $("#product-form").on('submit', function(e){
 	
 	const productImg= $(".product-image").val();
 	const deatilImg= $(".product-detail-image").val();
-	console.log(isValid);
 	
 	if(productImg !== "" && productImg !== null && productImg !== undefined) 
 		isValid = false;
@@ -43,7 +42,7 @@ $("#product-form").on('submit', function(e){
 		isValid = false;
 	
 	if(!isValid){
-		$("modal-body").html("형식을등록해 주세요.");
+		$("modal-body").html("형식에 맞춰서 등록해 주세요.");
 		$("#productModal").modal('show');
 		return false;
 	}
