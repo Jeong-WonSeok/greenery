@@ -103,7 +103,6 @@ public class OrderController {
 		}else {
 			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
 			if(cartList == null) {
-				log.info("cart가 없습니다.");
 				cartList = new HashMap<Integer, Integer>();
 				session.setAttribute("cartList", cartList);
 			}
@@ -265,12 +264,19 @@ public class OrderController {
 	}
 	
 	@GetMapping("/getCartNum")
-	public ResponseEntity<Integer> getCartNum(Authentication authentication, Model model) {
-		if(authentication == null || !authentication.isAuthenticated() ) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(-1);
-		String userId = authentication.getName();
-		int cartNum = cartService.getCartNum(userId);
-		model.addAttribute("cartNum", cartNum);
+	public ResponseEntity<Integer> getCartNum(Authentication authentication, Model model, HttpSession session) {
+		int cartNum = 0;
 		
+		if(authentication == null) {
+			Map<Integer, Integer> cart = (Map<Integer,Integer>) session.getAttribute("cartList");
+			if(cart != null)
+				cartNum = cart.size();
+		}else {
+			String userId = authentication.getName();
+			cartNum = cartService.getCartNum(userId);
+		}
+		log.info(cartNum + " ");
+		model.addAttribute("cartNum", cartNum);
 		return ResponseEntity.ok(cartNum);
 	}
 }
