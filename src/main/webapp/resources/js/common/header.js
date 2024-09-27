@@ -40,10 +40,6 @@ function toSearchPage() {
     redirectToPage("query", searchQuery);
 }
 
-/*function toCategoryPage() {
-    const category = $(".category-span").data("category");
-    redirectToPage("category", category);
-}*/
 
 $(document).ready(() => {
 	cartIconUpdate();

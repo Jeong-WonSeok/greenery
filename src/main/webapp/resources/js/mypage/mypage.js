@@ -119,41 +119,22 @@ $(document).ready(function () {
                 url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 성공");
+        			$("#headerModal").modal("show");
                     heartIcon.attr("src", "resources/images/noFill_heart.png");
                     likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
                     location.reload() // 페이지 리로드시켜서 상품 찜 해제를 하는 순간 리스트에서 뺌
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
-                }
-            });
-        } else {
-            // 찜 추가 
-            $.ajax({
-                url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
-                method: 'GET',
-                success: function (response) {
-                    alert(response);
-                    heartIcon.attr("src", "resources/images/fill_heart.png");
-                    likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 실패");
+        			$("#headerModal").modal("show");
                 }
             });
         }
     });
-    
-    
 });
-
-/*$(document).on('click', '.product-image', function () {
-    window.location.href = 'detailpage';
-});*/
-/*$(document).on('click', '.order-img', function () {
-    window.location.href = 'detailpage';
-});*/
 
 let pwCheckSuccess = false
 let validCheck;

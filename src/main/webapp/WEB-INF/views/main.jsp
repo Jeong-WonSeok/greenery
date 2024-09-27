@@ -128,7 +128,7 @@
 	   			</c:if>
 	   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 	   				<c:if test="${i == pager.pageNo}">
-	   					<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
+	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
 					</c:if>
 	   				<c:if test="${i != pager.pageNo }">
 	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-sm">${i}</a>

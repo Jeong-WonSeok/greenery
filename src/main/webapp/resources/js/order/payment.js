@@ -6,7 +6,6 @@ $(document).ready(function () {
 	calculatePrice();	
 	
     $(".modal-image").click(() => {
-//        console.log("쿠폰 버튼 클릭됨");
         showAlertCoupon();
     });
 });;
@@ -21,11 +20,9 @@ function scrollToTop() {
 function showAlertCoupon() {
     const alertCoupon = $(".alert-coupon");
     if (alertCoupon.length === 0) {
-        console.error("알림 요소가 없습니다.");
         return;
     }
-    alertCoupon.addClass("show");
-    console.log("쿠폰 알림 표시됨");
+    alertCoupon.addClass("show")
     setTimeout(() => {
         alertCoupon.removeClass("show");
         console.log("쿠폰 알림 숨김");
@@ -41,20 +38,6 @@ function applyCoupon() {
     showAlertCoupon();
 }
 
-/*function orderPrice() {
-    const checkedBoxes = document.querySelectorAll('.product-checkbox:checked');
-    let finalPrice = 0;
-
-    checkedBoxes.forEach(checkedBox => {
-        const productElement = checkedBox.closest('.product');
-        const priceElement = productElement.querySelector('.product-price');
-        const price = parseFloat(priceElement.getAttribute('data-price'));
-        const quantity = parseInt(productElement.querySelector('.quantity-number').innerText);
-        finalPrice += price * quantity;
-    });
-
-    document.querySelector('#sumPrice').innerText = finalPrice.toLocaleString() + '원';
-}*/
 function calculatePrice() {
     let totalOrderPrice = 0;    // 총 주문 금액
     let deliveryPrice = 2500;

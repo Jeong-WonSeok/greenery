@@ -233,11 +233,7 @@ public class MypageController {
 		return "mypage/orderList";
 	}
 	
-/*	@RequestMapping("/reviews")
-	public String reviews() {
-		return "mypage/reviews";
-	}
-*/	
+
 	@PostMapping("/updateReview")
 	public ResponseEntity<String> updateReview(ReviewFormDto reviewFormDto, Authentication authentication) throws IOException {
 

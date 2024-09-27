@@ -78,7 +78,6 @@ function updateTotalPrice(button) {
     		productQty: quantity
 		},
 		success: function (data){
-			console.log(data);
 			$(button).parent().siblings('.product-price').html(`<strong>${totalPrice.toLocaleString()}</strong> 원`);			
 		},
 		error: function(data){
@@ -121,7 +120,6 @@ $('#order-button').on('click', function() {
 })
 
 function toOrder(orderItems){
-	//console.log(JSON.stringify(orderItems));
 	var queryString = "";
 	for(var i=0; i<orderItems.length; i++) {
 		queryString += "orderItems=" + orderItems[i] + "&";
@@ -149,10 +147,8 @@ function toOrder(orderItems){
 
 
 function orderSelected(){
-	//console.log($('.product-checkbox:checked').length);
 	var orderItems = [];
 	$('.product-checkbox:checked').each(function () {
-		//toOrder(this);
 		orderItems.push($(this).data("productid"));
     });
 	toOrder(orderItems);

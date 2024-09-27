@@ -18,8 +18,6 @@ document.addEventListener('input', function() {
 		inputEmailCheck();
 	}
 })
-//inputPassword1.addEventListener('input', inputPasswordCheck);
-//inputPassword2.addEventListener('input', inputPasswordCheck);
 
 function inputPasswordCheck() {
 	let inputPassword1 = document.querySelector('#userPw');
@@ -120,7 +118,6 @@ function inputPhoneCheck() {
     }
 }
 
-//function inputAdrressCheck
 
 function inputEmailCheck() {
     // 입력값 가져오기

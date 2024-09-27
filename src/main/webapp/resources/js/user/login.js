@@ -29,7 +29,7 @@ function inputPasswordCheck() {
     }
 }
 
-document.querySelector('#IconClose').addEventListener('click', function() {
+/*document.querySelector('#IconClose').addEventListener('click', function() {
     window.location.href = '../main/main.html';
 });
 
@@ -47,3 +47,4 @@ document.getElementById('btnLogin').addEventListener('click', function() {
     }
 });
 
+*/

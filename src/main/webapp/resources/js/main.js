@@ -157,12 +157,16 @@ $(document).ready(function () {
                 url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 성공");
+        			$("#headerModal").modal("show");
                     heartIcon.attr("src", "resources/images/noFill_heart.png");
                     likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 실패");
+        			$("#headerModal").modal("show");
                 }
             });
         } else {
@@ -171,25 +175,24 @@ $(document).ready(function () {
                 url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
+                	$(".modal-title").html("찜 등록");
+        			$(".modal-body").html("찜 등록에 성공하였습니다.");
+        			$("#headerModal").modal("show");
                     heartIcon.attr("src", "resources/images/fill_heart.png");
                     likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
+                	$(".modal-title").html("찜 등록");
+        			if (jqXHR.status === 401) {
+        				$(".modal-body").html("로그인을 해주세요.");
+        				$("#headerModal").modal("show");
+                    }else{
+                    	$(".modal-body").html("찜 등록에 실패했습니다.");
+                    	$("#headerModal").modal("show");
+                    }
                 }
             });
         }
     });
     
 });
-
-
-
-//$(document).on('click', '.product-image', function () {
-//    window.location.href = '../detail/detailpage.html';
-//});
-//
-//$(document).on('click', '.buy-icon', function () {
-//    window.location.href = '../payment/payment.html';
-//});

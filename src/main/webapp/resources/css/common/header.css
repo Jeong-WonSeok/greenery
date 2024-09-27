@@ -47,7 +47,7 @@ header {
 }
 
 .header-search-icon {
-    background: url("../../res/images/search_icon.png") no-repeat center center;
+    background: url("/miniproject/resources/images/search_icon.png") no-repeat center center;
     background-size: contain;
     background-color: #ffffff;
     border: none;

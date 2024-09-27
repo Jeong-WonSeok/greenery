@@ -44,11 +44,7 @@ $(document).off("click", ".write-btn").on("click", ".write-btn", function(){
 	const reviewImage = $("#image-input")[0].files[0];
 	const productId = $(this).data("productid");
 	const orderId = $(this).data("orderid");
-	let chagedImg = false; // true 이미지를 바꿨다. false 애초에 이미지를 입력받지 않았다.
-	
-	/*리뷰 이미지가 null이 되는 경우는 둘
-	1. 이미지 입력 X일 경우 => 그냥 DB에 null을 넣으면 된다.
-	2. 이미지를 바꾸지 않았을 경우 => DB에 변화를 주면 안된다.*/
+	let chagedImg = false; 
 	
 	const imgSrc = $(".insert-img").attr("src");
 	

@@ -13,12 +13,16 @@ $(document).ready(function () {
                 url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 성공");
+        			$("#headerModal").modal("show");
                     heartIcon.attr("src",  getContextPath() + "/resources/images/noFill_heart.png");
                     likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
+                	$(".modal-title").html("찜 해제");
+        			$(".modal-body").html("찜 해제 실패");
+        			$("#headerModal").modal("show");
                 }
             });
         } else {
@@ -27,12 +31,21 @@ $(document).ready(function () {
                 url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
+                	$(".modal-title").html("찜 등록");
+        			$(".modal-body").html("찜 등록에 성공하였습니다.");
+        			$("#headerModal").modal("show");
                     heartIcon.attr("src",  getContextPath() + "/resources/images/fill_heart.png");
                     likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
+                	$(".modal-title").html("찜 등록");
+        			if (jqXHR.status === 401) {
+        				$(".modal-body").html("로그인을 해주세요.");
+        				$("#headerModal").modal("show");
+                    }else{
+                    	$(".modal-body").html("찜 등록에 실패했습니다.");
+                    	$("#headerModal").modal("show");
+                    }
                 }
             });
         }
@@ -48,42 +61,6 @@ function scrollToTop() {
     });
 }
 
-/*function dataToHtml(products) {
-    if (Array.isArray(products)) {
-        products.forEach(product => {
-            const productHtml = `
-            <div class="product-item">
-                <div class="product-image-container">
-                    <img src="${product.imageUrls[0]}" alt="${
-                product.productName
-            }" class="product-image">
-                    <div class="product-icons">
-                        <span class="icon like-icon">
-                            <img src="../../res/images/heart.png" alt="찜하기 아이콘">
-                        </span>
-                        <span class="icon cart-icon">
-                            <img src="../../res/images/cart_icon2.png" alt="장바구니 아이콘">
-                        </span>
-                        <span class="icon buy-icon">
-                            <img src="../../res/images/dollar.png" alt="구매하기 아이콘">
-                        </span>
-                    </div>
-                </div>
-                <div class="product-details">
-                    <p class="product-name">${product.productName}</p>
-                    <p class="product-description">${
-                        product.mainDescription
-                    }</p>
-                    <p class="product-price"><span class="price-amount">${product.price.toLocaleString()}</span>원</p>
-                </div>
-            </div>`;
-
-            // 생성한 HTML을 product-container에 추가
-            $(".product-container").append(productHtml);
-        });
-    }
-}
-*/
 function handleQueryParams() {
 	const categoryMap ={
 			"Skincare" : "스킨케어",
