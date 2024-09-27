@@ -135,7 +135,7 @@ $(document).ready(function () {
         );
     });
     
- // like 아이콘 이벤트 처리
+    // like 아이콘 이벤트 처리
     $(document).on('click', '.icon.like-icon', function () {
         let heartIcon = $(this).find("img");
         let productId = heartIcon.data("productid");

@@ -1,4 +1,4 @@
-
+/* 
 // 찜 추가
 const wishlistButton = document.querySelector('.wishlist-button');
 
@@ -9,7 +9,7 @@ wishlistButton.addEventListener('click', function () {
     if (!productNameSpan) return;
     const productName = productNameSpan.innerText.trim();
 
-    this.classList.toggle('active'); // active 클래스를 토글
+   this.classList.toggle('active'); // active 클래스를 토글
 
     // 추가 기능: 위시리스트에 아이템 추가/제거 로직 구현 가능
     if (this.classList.contains('active')) {
@@ -19,7 +19,8 @@ wishlistButton.addEventListener('click', function () {
         console.log("아이템이 위시리스트에서 제거되었습니다.");
         removeFromWishlist(productName);
     }
-});
+    
+});	*/
 
 function saveToWishlist(productName) {
     let wishlist = JSON.parse(localStorage.getItem('whislist')) || [];
@@ -106,6 +107,78 @@ function showSlides(n) {
 // ---------------------탭 - 상세정보,  리뷰 --------------------
 $(document).ready(function () {
 	slideReset();
+	$(document).on('click', '.wishlist-button', function () {
+	    let heartIcon = $(this).find("img");
+	    let productId = heartIcon.data("productid");
+	    let likeButton = $(this); // this를 likeButton 변수에 저장(이래야 Ajax 요청 내부에서 사용할 수 있음)
+
+	    if (likeButton.hasClass("active")) {
+	        // 찜 해제 
+	        $.ajax({
+	            url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
+	            method: 'GET',
+	            success: function (response) {
+	                alert(response);
+	                heartIcon.attr("src", getContextPath() + "/resources/images/heart-icon.png");
+	                likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                alert(jqXHR.responseText);
+	            }
+	        });
+	    } else {
+	        // 찜 추가 
+	        $.ajax({
+	            url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
+	            method: 'GET',
+	            success: function (response) {
+	                alert(response);
+	                heartIcon.attr("src", getContextPath() + "/resources/images/fullheart-icon.png");
+	                likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                alert(jqXHR.responseText);
+	            }
+	        });
+	    }
+	});
+
+	/*// like 아이콘 이벤트 처리
+    $(document).on('click', 'wishlist-button', function () {
+        let heartIcon = $(this).find("img");
+        let productId = heartIcon.data("productid");
+        let likeButton = $(this); // this를 likeButton 변수에 저장(이래야 Ajax 요청 내부에서 사용할 수 있음)
+        
+        if (likeButton.hasClass("active")) {
+            // 찜 해제 
+            $.ajax({
+                url: getContextPath() + "/mypage/likeRemove?productId=" + productId,
+                method: 'GET',
+                success: function (response) {
+                    alert(response);
+                    heartIcon.attr("src", "resources/images/heart-icon.png");
+                    likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                }
+            });
+        } else {
+            // 찜 추가 
+            $.ajax({
+                url: getContextPath() + "/mypage/likeAdd?productId=" + productId,
+                method: 'GET',
+                success: function (response) {
+                    alert(response);
+                    heartIcon.attr("src", "resources/images/fullheart-icon.png");
+                    likeButton.addClass("active"); // likeButton을 사용하여 active 클래스 추가
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                }
+            });
+        }
+    });*/
 	
     $('.tab-button').on('click', function () {
         var target = $(this).data('target') + '.html';
@@ -172,29 +245,6 @@ function increase(button) {
 	$("#quantity").html(qty + 1);
 	$(".product-price").html((price+curPrice).toLocaleString() + "원");
 	
-//    const productDiv = button.closest('.product-info'); // 부모 요소 찾기
-//    console.log(productDiv);
-//    if (!productDiv) return; // productDiv가 null인 경우 함수 종료
-//
-//    const quantitySpan = productDiv.querySelector('.quantity-number');
-//    const priceSpan = productDiv.querySelector('.product-price');
-//
-//    console.log(quantitySpan);
-//    console.log(priceSpan);
-//    if (!quantitySpan || !priceSpan) return; // 요소가 없으면 함수 종료
-//
-//    let quantity = parseInt(quantitySpan.innerText);
-//    quantity += 1;
-//    quantitySpan.innerText = quantity;
-//
-//    /* 가격 업데이트 */
-//    const pricePerUnit = parseFloat(priceSpan.getAttribute('data-price'));
-//    const totalPrice = (pricePerUnit * quantity) + '원';
-//    console.log(totalPrice);
-//    priceSpan.innerText = totalPrice; // 가격 업데이트
-//
-//    $(".product-price").html(totalPrice+"원");
-//    console.log("수량 증가");
 }
 
 
@@ -210,29 +260,6 @@ function decrease(button) {
 	$(".product-price").html((curPrice-price).toLocaleString() + "원");
 }
 
-/*// 로컬 스토리지에 저장하는 함수
-function saveToLocalStorage(productDiv) {
-    const quantitySpan = document.querySelector('.quantity-number');
-    const priceSpan = document.querySelector('.product-price');
-    const productNameSpan = document.querySelector('.product-title');
-
-    if (!quantitySpan || !priceSpan || !productNameSpan) return; // 요소가 없으면 함수 종료
-
-    const productName = productNameSpan.innerText.trim(); // 상품명
-    const quantity = parseInt(quantitySpan.innerText); // 수량
-    const price = priceSpan.getAttribute('data-price'); // 가격 (숫자형)
-
-    const productInfo = {
-        name: productName,
-        quantity: quantity,
-        price: price
-    };
-
-    // 로컬 스토리지에 저장
-    localStorage.setItem(productName, JSON.stringify(productInfo));
-
-//    console.log(저장된 상품: ${productName}, 수량: ${quantity}, 가격: ${price});
-}*/
 
 // 결제 페이지로 이동 시 호출되는 함수
 function checkout() {
