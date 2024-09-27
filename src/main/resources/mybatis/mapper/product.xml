@@ -26,13 +26,28 @@
 		where product_id = #{productId}
 	</select>
 	<!-- 관리자 페이지 상품 목록 조회 -->
-	<select id="selectAllProduct" resultType="Product">
+	<select id="selectAllProduct" parameterType="Pager" resultType="Product">
+	<!-- <![CDATA[ -->
 		select product_id, product_name, product_price, product_stock, 
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
-		from product
-		where product_enable = 1
+		from (
+			select rownum rnum, product_id, product_name, product_price, 
+				product_stock, main_description, summary_description, product_category,
+				product_enable, created_at, detail_description
+			from (
+				select product_id, product_name, product_price, 
+					product_stock, main_description, summary_description, product_category,
+					product_enable, created_at, detail_description 
+				from product
+				where product_enable=1
+				)
+			    where rownum &lt;= #{endRowNo} 
+			)
+			where rnum &gt;= #{startRowNo}
+		<!-- ]]> -->
 	</select>
+
 
 	<!-- 전체 상품 가져오기 -->
 	<select id="selectAll" parameterType="map" resultType="Product">

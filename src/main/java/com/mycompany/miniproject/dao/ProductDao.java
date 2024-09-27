@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 
 @Mapper
@@ -22,7 +23,7 @@ public interface ProductDao {
 
 	public ProductDto selectProduct(int productId);
 	
-	public List<ProductDto> selectAllProduct();
+	public List<ProductDto> selectAllProduct(Pager pager);
 	
 	public int updateProduct(ProductDto product);
 	

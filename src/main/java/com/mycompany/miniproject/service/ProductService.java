@@ -104,11 +104,12 @@ public class ProductService {
 	}
 	
 	// 관리자 상품 조회
-	public List<ProductDto> getProductAll() {
+	public List<ProductDto> getProductAll(Pager pager) {
 		//Map<String, Object> catePager = new HashMap<>();
 		//catePager.put("pager", pager);
+		log.info(pager.toString());
 		
-		List<ProductDto> productList = productDao.selectAllProduct();
+		List<ProductDto> productList = productDao.selectAllProduct(pager);
 		
 		return productList;
 	}

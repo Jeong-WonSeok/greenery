@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -25,6 +26,7 @@ import com.mycompany.miniproject.dao.NoticeDao;
 import com.mycompany.miniproject.dao.ProductImageDao;
 import com.mycompany.miniproject.dto.NoticeDto;
 import com.mycompany.miniproject.dto.NoticeFormDto;
+import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductFormDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
@@ -155,10 +157,18 @@ public class AdminController {
 	}
 	// 관리자 페이지 - 상품 목록 조회
 	@GetMapping("/productselect")
-	public String productSelect(Model model) {
-		List<ProductDto> product = productService.getProductAll();
+	public String productSelect(
+						@RequestParam(defaultValue="1") int pageNo, 
+						HttpSession session,
+						Model model) {
+		int totalRows = productService.getTotalRows();
+		Pager pager = new Pager(10, 5, totalRows, pageNo); 
+		log.info(pager.toString());
+		List<ProductDto> product = productService.getProductAll(pager);
+		log.info("check");
+		model.addAttribute("pager", pager);
 		model.addAttribute("product", product);
-		log.info("상품 목록 productSelect 화면 실행");
+		
 		return "admin/productSelect";
 	}
 	// 상품 목록 조회 - 이미지 불러오기

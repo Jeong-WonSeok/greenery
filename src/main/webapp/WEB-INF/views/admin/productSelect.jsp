@@ -67,6 +67,32 @@
 				</div>
 			</c:forEach>
 			
+			<tr>
+				<td colspan="5" class="text-center">
+					<%-- [처음][이전] 1 2 3 4 5 [다음][맨끝] --%>
+					<div class="pagetable">
+						<a href="productselect?pageNo=1" class="btn  btn-sm">처음</a>
+						<c:if test="${pager.groupNo>1}">
+						    <a href="productselect?pageNo=${pager.startPageNo - 1}" class="btn  btn-sm">이전</a>
+						</c:if>
+						
+						<!-- 한 페이지 당 화면에 나오는 번호 ex) 1 2 3 4 5 -->
+						<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" step="1" var="i">
+						    <c:if test="${pager.pageNo == i}">
+						        <a href="productselect?pageNo=${i}" class="btn btn-outline-secondary btn-sm">${i}</a>
+						    </c:if>
+						    <c:if test="${pager.pageNo != i}">
+						        <a href="productselect?pageNo=${i}" class="btn  btn-sm">${i}</a>
+						    </c:if>
+						</c:forEach>
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+						    <a href="productselect?pageNo=${pager.endPageNo + 1}" class="btn  btn-sm">다음</a>
+						</c:if>
+						<a href="productselect?pageNo=${pager.totalPageNo}" class="btn  btn-sm">맨끝</a>
+					</div>
+				</td>
+			</tr>
+			
 		</div>
 	</div>
 

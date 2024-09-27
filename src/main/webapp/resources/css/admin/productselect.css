@@ -60,3 +60,8 @@
         font-size: 12px;
         margin-top: 2px;
     }
+    .pagetable {
+	    width: 100%;
+	    margin: 10px 0;
+	    text-align: center;
+}
