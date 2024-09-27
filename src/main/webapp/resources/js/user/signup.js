@@ -41,6 +41,7 @@ function inputPasswordCheck() {
     }
 }
 
+// 이름 유효성 검사
 let inputName = document.querySelector('#inputName');
 inputName.addEventListener('input', inputNameCheck);
 
@@ -50,12 +51,15 @@ function inputNameCheck() {
     let regExp = RegExp(/^[가-힣a-zA-Z]{1,20}$/);
     if (regExp.test(inputName.value) || inputName.value === '') {
         inputNameMessage.innerHTML =  ''; 
+        return true;
     } else {
         inputNameMessage.innerHTML = 
         "<span style='color:#F03F40; font-size:12px;'>영문 또는 한글로 입력해주세요</span>";
+        return false;
     }
 }
 
+//핸드폰 번호 입력 유효성 검사 
 let inputPhone = document.querySelector('#inputPhone');
 inputPhone.addEventListener('input', inputPhoneCheck);
 
@@ -65,38 +69,38 @@ function inputPhoneCheck() {
     let regExp = RegExp(/^[0-9]{1,11}$/);
     if (regExp.test(inputPhone.value) || inputPhone.value === '') {
         inputPhoneMessage.innerHTML =  ''; 
+        return true;
     } else {
         inputPhoneMessage.innerHTML = 
-        "<span style='color:#F03F40; font-size:12px;'>-하이픈을 제외하고 핸드폰 번호를 입력해주세요</span>";
+        "<span style='color:#F03F40; font-size:12px;'>-하이픈을 제외하고 11자리로 입력해주세요</span>";
+        return false;
     }
 }
 
-$(document).ready(function() {
-    // 이메일 주소와 도메인 입력 필드 선택
-    $('#inputEmailAddress, #inputEmail').on('input', function() {
-        // 입력값 가져오기
-        let emailAddress = $('#inputEmailAddress').val();
-        let emailDomain = $('#inputEmail').val();
-        let inputEmailMessage = $('#inputEmailMessage');
-        
-        // 이메일 주소와 도메인 결합
-        let fullEmail = emailAddress + emailDomain;
+//이메일 유효성 검사
+let inputEmail = document.querySelector('#inputEmailAddress');
+inputEmail.addEventListener('input', inputEmailCheck);
 
-        // 이메일 형식을 검증하는 정규 표현식
-        let regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function inputEmailCheck() {
+    let inputEmailMessage = $('#inputEmailMessage');
 
-        // 전체 이메일 형식 검사
-        if (regExp.test(fullEmail) || fullEmail === '') {
-            // 이메일 형식이 올바르거나 입력이 비어있으면 메시지 지우기
-            inputEmailMessage.html('');
-        } else {
-            // 이메일 형식이 올바르지 않으면 오류 메시지 표시
-            inputEmailMessage.html(
-                "<span style='color:#F03F40; font-size:12px;'>이메일 형식을 확인해주세요</span>"
-            );
-        }
-    });
-});
+    let regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // 전체 이메일 형식 검사
+    if (regExp.test(inputEmail.value) || inputEmail.value === '') {
+        // 이메일 형식이 올바르거나 입력이 비어있으면 메시지 지우기
+        inputEmailMessage.html('');
+        return true;
+    } else {
+        // 이메일 형식이 올바르지 않으면 오류 메시지 표시
+        inputEmailMessage.html(
+            "<span style='color:#F03F40; font-size:12px;'>이메일 형식을 확인해주세요</span>"
+        );
+        return false;
+    }
+}
+
+    
 
 let idCheck = false;
 let btnInputId = document.querySelector('#btnInputId');
@@ -145,7 +149,7 @@ function checkIdExists(userId) {
     });
 }
 
-//회원가입 버튼 클릭 시 실행되는 함수
+//----------------회원가입 버튼 클릭 시 실행되는 함수-------------------------
 let signupGo = document.querySelector('#signupGo');
 signupGo.addEventListener('click', function (e) {
 
@@ -154,6 +158,22 @@ signupGo.addEventListener('click', function (e) {
 	     alert("아이디 중복 체크를 먼저 해주세요.");
 	     return; // 아이디 중복 체크가 완료되지 않으면 회원가입을 진행하지 않음
 	 }
+	 else if(!inputPhoneCheck()){
+		e.preventDefault();
+		alert("핸드폰 번호 입력을 형식에 맞게 해주세요.");
+	    return; 
+	 }
+	 else if(!inputEmailCheck()){
+		e.preventDefault();
+		alert("이메일 형식에 맞춰서 입력해주세요.");
+	    return;
+	 }
+	 else if(!inputNameCheck()){
+			e.preventDefault();
+			alert("이름을 형식에 맞춰서 입력해주세요.");
+		    return;
+	 }
+	 
 });
 
 
@@ -192,6 +212,8 @@ btnZipcode.addEventListener('click', () => {
 
 document.querySelector('#iconClose').addEventListener('click', function() {
     window.location.href = '../main/main.html';
-})
+});
+
+
 
 
