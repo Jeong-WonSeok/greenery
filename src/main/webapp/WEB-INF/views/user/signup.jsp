@@ -53,20 +53,14 @@
 		<input id="inputName" name="userName" class="input input4" type="text"
 			placeholder="이름을 입력해주세요." required>
 		<div id="inputNameMessage"></div>
-		<input id="inputPhone" name="userTel" class="input input5" type="text"
-			placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
+			<input id="inputPhone" name="userTel" class="input input5" type="text"
+				placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
 		<div id="inputPhoneMessage"></div>
 
 		<div class="form-email">
 		    <input id="inputEmailAddress" name="userEmail"
 		        class="input input6" type="text" placeholder="이메일주소" required>
 		</div>
-		<!-- <div class="form-email">
-			<input id="inputEmailAddress" name="userEmail"
-				class="input input6" type="text" placeholder="이메일주소" required>
-			<input id="inputEmail" name="emailDomain" class="input input6"
-				type="text" placeholder="@" required>
-		</div> -->
 		<div id="inputEmailMessage"></div>
 
 		<div class="form-address">
