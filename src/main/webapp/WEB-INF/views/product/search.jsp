@@ -53,9 +53,9 @@
 	                <div class="product-image-container">
 	                    <a href="${pageContext.request.contextPath}/product/detailpage?productId=${product.productId}"><img src="${pageContext.request.contextPath}/imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image"></a>
 	                    <div class="product-icons">
-	                        <span class="icon like-icon">
-	                            <img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기 아이콘" data-productid="${product.productId}">
-	                        </span>
+	                        <span class="icon like-icon ${product.liked ? 'active' : ''}">
+					           <img src="${pageContext.request.contextPath}/resources/images/${product.liked ? 'fill_heart.png' : 'noFill_heart.png'}" alt="찜하기 아이콘" data-productid="${product.productId}">
+					        </span>
 	                        <span class="icon cart-icon">
 	                           	<img src="${pageContext.request.contextPath}/resources/images/cart_icon2.png" alt="장바구니 아이콘" class="cart-img" data-productid="${product.productId}">
 	                        </span>
