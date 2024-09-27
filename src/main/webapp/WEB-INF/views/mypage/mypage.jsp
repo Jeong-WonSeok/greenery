@@ -27,19 +27,6 @@
 			<span class="mypage-menu" data-url="editMyInfo">개인정보 수정</span>
 		</div>
 		<div class="mypage-content">
-			<section class="mypage-title">
-				<div class="mypage-title-greeting">
-					<img src="${pageContext.request.contextPath}/resources/images/thum.png">
-					<div class="greeting-text">
-						홍길동 님 반갑습니다.
-					</div>
-				</div>
-				<div class="mypage-title-coupon">
-					<span class="coupon-status">
-						쿠폰 <span class="coupon-num">1</span>개
-					</span>
-				</div>
-			</section>
 		</div>
 	</div>
 <div class="modal fade" id="pwCheckModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

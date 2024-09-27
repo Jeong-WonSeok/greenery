@@ -14,7 +14,7 @@ public class UserDto {
     private int userPostal;       
     private String userLoadAddress; 
     private String userDetailAddress;
-    private boolean userCoupon;
+    private int userCoupon;
     private Date createdAt;
     private String userRole;
     private boolean userEnable;

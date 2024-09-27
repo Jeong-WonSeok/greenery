@@ -72,6 +72,8 @@ public class MypageController {
 		UserDto userDto = userDetails.getMember();
 		
 		model.addAttribute("user", userDto);
+		model.addAttribute("userName", userDto.getUserName());
+		model.addAttribute("coupon", userDto.getUserCoupon() == 1 ? 1 : 0);
 		
 		return "mypage/editMyInfo";
 	}
@@ -124,9 +126,11 @@ public class MypageController {
 	// 찜한 상품 조회 
     @GetMapping("/likedProducts")
     public String likedProducts(Model model, Authentication authentication) {
-    	log.info("실행------");
         if(authentication != null) {
             String userId = authentication.getName();
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+    		UserDto userDto = userDetails.getMember();
+    		
             List<LikeDto> likeList = likeService.getLikeList(userId);
             List<ProductDto> productList = new ArrayList<>();
             
@@ -137,6 +141,9 @@ public class MypageController {
                 productList.add(product);
             }
             model.addAttribute("productList", productList);
+            model.addAttribute("userName", userDto.getUserName());
+    		model.addAttribute("coupon", userDto.getUserCoupon() == 1 ? 1 : 0);
+    		
         }
         return "mypage/likedProducts";
     }
@@ -189,7 +196,9 @@ public class MypageController {
 	public String orderList(
 			@RequestParam(defaultValue="1") int pageNo,
 			Authentication authentication, Model model) throws ParseException {
-
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDto userDto = userDetails.getMember();
 		String userId = authentication.getName();
 		List<OrderDetailDto> orderDetailList = orderService.getOrderItemAll(userId);
 		int totalRows = orderDetailList.size();
@@ -219,6 +228,9 @@ public class MypageController {
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("orderList", orderDetailToClient);
+		model.addAttribute("userName", userDto.getUserName());
+		model.addAttribute("coupon", userDto.getUserCoupon() == 1 ? 1 : 0);
+		
 		return "mypage/orderList";
 	}
 	

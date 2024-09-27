@@ -4,6 +4,19 @@
 <head>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css">
 </head>
+<section class="mypage-title">
+	<div class="mypage-title-greeting">
+		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
+		<div class="greeting-text">
+			${userName} 님 반갑습니다.
+		</div>
+	</div>
+	<div class="mypage-title-coupon">
+		<span class="coupon-status">
+			쿠폰 <span class="coupon-num">${coupon}</span>개
+		</span>
+	</div>
+</section>
 <span class="mypage-content-title">찜한 상품</span>
 <span class="product-container">
 	<c:forEach items="${productList}" var="product">

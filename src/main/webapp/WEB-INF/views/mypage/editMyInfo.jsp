@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<section class="mypage-title">
+	<div class="mypage-title-greeting">
+		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
+		<div class="greeting-text">
+			${userName} 님 반갑습니다.
+		</div>
+	</div>
+	<div class="mypage-title-coupon">
+		<span class="coupon-status">
+			쿠폰 <span class="coupon-num">${coupon}</span>개
+		</span>
+	</div>
+</section>
 <div class="mypage-myinfo-title">개인정보 수정</div>
 <div class="myinfo-list">
 	<form class="myinfo-form" method="post" action="updateUser" name="formInfo">

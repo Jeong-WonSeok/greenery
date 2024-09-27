@@ -38,8 +38,6 @@ $(document).on("click",".review-btn", function() {
             } else {
                 $("#image-preview").html('+');
             }
-
-            
             $('#exampleModal').modal('show');
 		}
 	})
@@ -52,7 +50,7 @@ $(document).on("click", ".order-page", function(){
 			url:"orderList?pageNo=" + $(this).data("start"),
 			method:"get",
 			success: function (data) {
-	        	$(".mypage-content").empty();
+				$(".mypage-content").empty();
 	            $(".mypage-content").append(data);
 			}
 		})
@@ -62,7 +60,7 @@ $(document).on("click", ".order-page", function(){
 		url:"orderList?pageNo=" + page,
 		method:"get",
 		success: function (data) {
-        	$(".mypage-content").empty();
+			$(".mypage-content").empty();
             $(".mypage-content").append(data);
 		}
 	})
@@ -82,8 +80,8 @@ function getContent(url) {
     });
 }
 
+
 $(document).ready(function () {
-	
 	// 페이지 로딩 시 기본적으로 찜한 상품 탭 보여줌 
     getContent("likedProducts");
 

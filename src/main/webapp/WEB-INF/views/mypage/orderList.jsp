@@ -1,7 +1,19 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<section class="mypage-title">
+	<div class="mypage-title-greeting">
+		<img src="${pageContext.request.contextPath}/resources/images/thum.png">
+		<div class="greeting-text">
+			${userName} 님 반갑습니다.
+		</div>
+	</div>
+	<div class="mypage-title-coupon">
+		<span class="coupon-status">
+			쿠폰 <span class="coupon-num">${coupon}</span>개
+		</span>
+	</div>
+</section>
 <span class="mypage-content-title">주문 내역</span>
 <div class="order-list">
 	
