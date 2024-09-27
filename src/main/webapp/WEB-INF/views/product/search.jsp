@@ -75,42 +75,42 @@
 		</div>
 		<c:if test="${category == null }">
 			<div class="pager text-center mt-5">
-				<a href="search?pageNo=1&query=${query}&sort=${sort}" class="btn btn-outline-primary btn-sm">처음</a>
+				<a href="search?pageNo=1&query=${query}&sort=${sort}" class="btn btn-sm">처음</a>
 				<c:if test="${pager.groupNo>1}">
-					<a href="search?pageNo=${pager.startPageNo-1}&query=${query}sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
+					<a href="search?pageNo=${pager.startPageNo-1}&query=${query}sort=${sort}" class="btn btn-sm">이전</a>
 				</c:if>
 				<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 					<c:if test="${i == pager.pageNo}">
-						<a href="search?pageNo=${i}&query=${query}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
+						<a href="search?pageNo=${i}&query=${query}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
 					</c:if>
 					<c:if test="${i != pager.pageNo}">
-						<a href="search?pageNo=${i}&query=${query}&sort=${sort}" class="btn btn-outline-success btn-sm">${i}</a>
+						<a href="search?pageNo=${i}&query=${query}&sort=${sort}" class="btn btn-sm">${i}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pager.groupNo<pager.totalGroupNo }" >
-					<a href="search?pageNo=${pager.endPageNo+1 }" class="btn btn-outline-info btn-sm">다음</a>
+					<a href="search?pageNo=${pager.endPageNo+1 }" class="btn  btn-sm">다음</a>
 				</c:if>
-				<a href="search?pageNo=${pager.totalPageNo}" class="btn btn-outline-primary btn-sm">맨끝</a>
+				<a href="search?pageNo=${pager.totalPageNo}" class="btn  btn-sm">맨끝</a>
 			</div>
 		</c:if>
 		<c:if test="${category != null }">
 			<div class="pager text-center mt-5">
-				<a href="category?category=${category}&pageNo=1&sort=${sort}" class="btn btn-outline-primary btn-sm">처음</a>
+				<a href="category?category=${category}&pageNo=1&sort=${sort}" class="btn btn-sm">처음</a>
 				<c:if test="${pager.groupNo>1}">
-					<a href="category?category=${category}&pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
+					<a href="category?category=${category}&pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-sm">이전</a>
 				</c:if>
 				<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 					<c:if test="${i == pager.pageNo}">
-						<a href="category?category=${category}&pageNo=${i}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
+						<a href="category?category=${category}&pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
 					</c:if>
 					<c:if test="${i != pager.pageNo}">
-						<a href="category?category=${category}&pageNo=${i}&sort=${sort}" class="btn btn-outline-success btn-sm">${i}</a>
+						<a href="category?category=${category}&pageNo=${i}&sort=${sort}" class="btn btn-sm">${i}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pager.groupNo<pager.totalGroupNo }" >
-					<a href="category?category=${category}&pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-outline-info btn-sm">다음</a>
+					<a href="category?category=${category}&pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-sm">다음</a>
 				</c:if>
-				<a href="category?category=${category}&pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-outline-primary btn-sm">맨끝</a>
+				<a href="category?category=${category}&pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-sm">맨끝</a>
 			</div>
 		</c:if>
         <button class="scroll-btn-up" onclick="scrollToTop()"></button>

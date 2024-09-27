@@ -122,22 +122,22 @@
    		<%-- [처음][이전] 1 2 3 4 5 [다음][맨끝] --%>
         <c:if test="${category == 'all'}">
 	   		<div class="pager text-center">
-	   			<a href="?pageNo=1&sort=${sort}" class="btn btn-outline-primary btn-sm">처음</a>
+	   			<a href="?pageNo=1&sort=${sort}" class="btn btn-sm">처음</a>
 	   			<c:if test="${pager.groupNo>1}">
-	   				<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-outline-info btn-sm">이전</a>
+	   				<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-sm">이전</a>
 	   			</c:if>
 	   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 	   				<c:if test="${i == pager.pageNo}">
-	   					<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-success btn-sm">${i}</a>
+	   					<a href="boardList?pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
 					</c:if>
 	   				<c:if test="${i != pager.pageNo }">
-	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-outline-success btn-sm">${i}</a>
+	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-sm">${i}</a>
 					</c:if>
 	   			</c:forEach>
 	   			<c:if test="${pager.groupNo<pager.totalGroupNo }" >
-	   				<a href="?pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-outline-info btn-sm">다음</a>
+	   				<a href="?pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-sm">다음</a>
 	  				</c:if>
-	   			<a href="?pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-outline-primary btn-sm">맨끝</a>
+	   			<a href="?pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-sm">맨끝</a>
 	   		</div>
 		</c:if>
 

@@ -62,18 +62,18 @@
 	</c:forEach>
 	<div class="order-pager text-center mt-5">
 		<c:if test="${pager.groupNo>1}">
-			<button class="btn btn-outline-info btn-sm page-move-button order-page" data-start="${pager.startPageNo-1 }">이전</button>
+			<button class="btn btn-sm page-move-button order-page" data-start="${pager.startPageNo-1 }">이전</button>
 		</c:if>
 		<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 			<c:if test="${i == pager.pageNo}">
-				<button class="btn btn-success btn-sm order-page">${i}</button>
+				<button class="btn btn-outline-secondary btn-sm order-page">${i}</button>
 			</c:if>
 			<c:if test="${i != pager.pageNo }">
-				<button class="btn btn-outline-success btn-sm order-page">${i}</button>
+				<button class="btn  btn-sm order-page">${i}</button>
 			</c:if>
 		</c:forEach>
 		<c:if test="${pager.groupNo<pager.totalGroupNo}" >
-			<button class="btn btn-outline-info btn-sm page-move-button order-page" data-start="${pager.endPageNo+1 }">>다음</button>
+			<button class="btn btn-sm page-move-button order-page" data-start="${pager.endPageNo+1 }">>다음</button>
 		</c:if>
 	</div>
 	
@@ -112,19 +112,20 @@
 	                    <div class="image-container">
 	                        <img src="${pageContext.request.contextPath}/resources/images/reviews-tip-1.jpg" alt="이미지 1" class="review-image">
 	                        <img src="${pageContext.request.contextPath}/resources/images/reviews-tip-2.jpg" alt="이미지 2" class="review-image">
-				                        </div>
-				                        <span class="tip-text">나만의 스킨케어루틴과 함께 전/후 변화를 보여주세요</span>
-				                        <span class="tip-text" id="tip-text2">오랜 기간동안 사용한 후기라면 더 좋아요!</span>
-				                    </div>
+                        </div>
+                        <span class="tip-text">나만의 스킨케어루틴과 함께 전/후 변화를 보여주세요</span>
+                        <span class="tip-text" id="tip-text2">오랜 기간동안 사용한 후기라면 더 좋아요!</span>
+                    </div>
 				
-				                    <span>솔직한 상품 리뷰를 남겨주세요.</span>
-				                    <div class="textarea-wrapper">
-				                        <textarea class="star_box" id="reviewTextarea" maxlength="1000" placeholder="꿀팁 가득, 상세한 리뷰를 작성해보세요!
+                    <span>솔직한 상품 리뷰를 남겨주세요.</span>
+                    <div class="textarea-wrapper">
+                        <textarea class="star_box" id="reviewTextarea" maxlength="1000" placeholder="꿀팁 가득, 상세한 리뷰를 작성해보세요!
 도움수가 올라가면 포인트도 받고,
 탑리뷰어가 될 확률도 높아져요!
 
-*반품, 환불 관련 내용은 고객센터로 별도 문의해주세요." ></textarea>
-				                        <div id="charCount">0 / 1,000</div> <!-- 글자 수 표시 -->
+*반품, 환불 관련 내용은 고객센터로 별도 문의해주세요." >
+						</textarea>
+                    <div id="charCount">0 / 1,000</div> <!-- 글자 수 표시 -->
 	                </div>
 	
 	                <div>
