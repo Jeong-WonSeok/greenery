@@ -125,6 +125,7 @@ $(document).ready(function () {
                     alert(response);
                     heartIcon.attr("src", "resources/images/noFill_heart.png");
                     likeButton.removeClass("active"); // likeButton을 사용하여 active 클래스 제거
+                    location.reload() // 페이지 리로드시켜서 상품 찜 해제를 하는 순간 리스트에서 뺌
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(jqXHR.responseText);

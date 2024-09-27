@@ -6,19 +6,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
+import com.mycompany.miniproject.service.LikeService;
 import com.mycompany.miniproject.service.ProductService;
 import com.mycompany.miniproject.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.security.o3logon.a;
 
 @Controller
 @Slf4j
@@ -29,6 +33,8 @@ public class ProductController {
 	private ProductService productService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private LikeService likeService;
 	
 	@RequestMapping("/detailInfo")
 	public String detailInfo(String productId, Model model) {
@@ -37,9 +43,22 @@ public class ProductController {
 	}
 	
 	@GetMapping("/detailpage")
-	public String detailpage(int productId, Model model) {
+	public String detailpage(int productId, Model model, Authentication authentication) {
 		ProductDto product = productService.getProduct(productId);
 		int imageNum = productService.getImageNum(productId); 
+		
+		if(authentication != null) {
+			String userId = authentication.getName();
+			List<LikeDto> likeList = likeService.getLikeList(userId);
+			
+			for (LikeDto like : likeList) {
+                if (product.getProductId() == like.getProductId()) {
+                    product.setLiked(true);
+                    break;
+                }
+            }
+		}
+		
 		model.addAttribute("imageNum", imageNum);
 		log.info(imageNum + " ");
 		model.addAttribute("product", product);
@@ -65,12 +84,26 @@ public class ProductController {
 	public String search(String query,
 			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="default") String sort, 
-			Model model) {
+			Model model,
+			Authentication authentication) {
 		int totalRows = productService.getSearchTotalRows(query);
 		Pager pager = new Pager(15, 5, totalRows, pageNo);
 		
 		List<ProductDto> productList = productService.getProductSearch(pager, query, sort);
 
+		if (authentication != null) {
+			String userId = authentication.getName();
+			List<LikeDto> likeList = likeService.getLikeList(userId);
+			
+			for (ProductDto product : productList) {
+				for (LikeDto like : likeList) {
+					if (product.getProductId() == like.getProductId()) {
+						product.setLiked(true);
+						break;
+					}
+				}
+			}
+		}
 		model.addAttribute("pager", pager);
 		model.addAttribute("query", query);
 		model.addAttribute("productList", productList);
@@ -83,10 +116,26 @@ public class ProductController {
 	public String category(String category, 
 						@RequestParam(defaultValue="1") int pageNo,
 						@RequestParam(defaultValue="default") String sort, 
-						Model model) {
+						Model model,
+						Authentication authentication) {
 		int totalRows = productService.getTotalRowsByCategory(category);
 		Pager pager = new Pager(15, 5, totalRows, pageNo);
 		List<ProductDto> productList = productService.getProductCategory(category, sort, pager);
+		
+		if (authentication != null) {
+			String userId = authentication.getName();
+			List<LikeDto> likeList = likeService.getLikeList(userId);
+			
+			for (ProductDto product : productList) {
+				for (LikeDto like : likeList) {
+					if (product.getProductId() == like.getProductId()) {
+						product.setLiked(true);
+						break;
+					}
+				}
+			}
+		}
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", category);

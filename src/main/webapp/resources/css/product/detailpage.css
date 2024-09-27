@@ -241,9 +241,6 @@ body {
 	padding: 0;
 }
 
-.wishlist-button.active .wishlist {
-	content: url('../../res/images/fullheart-icon.png');
-}
 
 .product-info {
 	display: flex;
