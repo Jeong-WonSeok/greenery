@@ -73,6 +73,7 @@ function getContent(url) {
         url: url,  // 절대 경로로 수정
         method: "GET",
         success: function (data) {
+        	$(".mypage-content").empty();
             $(".mypage-content").append(data);  // 가져온 JSP를 mypage-content에 추가
         },
         error: function (err) {
@@ -96,17 +97,17 @@ $(document).ready(function () {
     // 메뉴 탭 클릭 시
     $(".mypage-menu").click(function () {
     	$('.mypage-title').nextAll().remove();
-        getContent($(this).data("url"));  // 클릭한 탭의 URL을 기반으로 Ajax 호출
-
-        $('.mypage-menu').html(function () {
-            return $(this).text();  // 기존 텍스트로 복구
-        });
-        $(this).html('<strong>' + $(this).text() + '</strong>');  // 선택한 탭 텍스트 진하게
-        if($(this).data("url") === 'editMyInfo'){
-//        	$('body').append($('#pwCheckModal'));
-        	$('#pwCheckModal').modal('show');
-        }
-        
+    	if($(this).data("url") === 'editMyInfo'){
+    		$('#pwCheckModal').modal('show');
+    	}
+    	else{
+	        getContent($(this).data("url"));  // 클릭한 탭의 URL을 기반으로 Ajax 호출
+	
+    	}
+    	$('.mypage-menu').html(function () {
+    		return $(this).text();  // 기존 텍스트로 복구
+    	});
+    	$(this).html('<strong>' + $(this).text() + '</strong>');  // 선택한 탭 텍스트 진하게
     });
 
     // like 아이콘 이벤트 처리
@@ -158,11 +159,45 @@ $(document).ready(function () {
 
 
 //================================== 개인 정보 수정 =========================================
-$('#pwCheckModal').on("click", function(){
+//$('.pw-check').on("click", function(){
+function checkPassword(){
+	const password = $('#inputPassword').val();
+	console.log(password);
+	
 	$.ajax({
-		url: "/miniproject/CheckedPassword",
-		
+		url: getContextPath() + "/mypage/checkedPassword",
+		method: 'POST',
+		data: {password : password},
+		success: function() {
+			$("#pwCheckModal").modal('hide');
+			getContent('editMyInfo');
+		},
+		error: function () {
+			$("#pwCheckModal").modal('hide');
+			$(".header-modal-title").html("비밀번호 확인");
+			$(".header-modal-body").html("비밀번호가 다릅니다.");
+			$("#headerModal").modal("show");
+		}
 	})
+}
+
+$('#pwCheckModal').on('shown.bs.modal', function () {
+    $('#inputPassword').focus(); // 모달이 열릴 때 패스워드 입력란에 포커스
+
+    // 엔터 키가 눌리면 확인 버튼이 클릭되도록 처리
+    $(document).on('keydown', function(e) {
+        if (e.key === "Enter") { // 엔터 키가 눌렸을 때
+            $('.pw-check').trigger('click'); // 확인 버튼 클릭
+        }
+    });
+});
+
+$('#pwCheckModal').on('hidden.bs.modal', function (e) {
+	getContent("likedProducts");
+});
+
+$(".pw-close").on("click", function(){
+	getContent("likedProducts");
 })
 
 

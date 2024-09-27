@@ -101,15 +101,24 @@ public class MypageController {
 		return "redirect:/mypage/mypage";
 	}
 	
-	/*@RequestMapping("/likedProducts")
-	public String likedProducts() {
-		return "mypage/likedProducts";
-	}*/
-	
 	// 마이페이지 홈
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage/mypage";
+	}
+	
+	@PostMapping("/checkedPassword")
+	public ResponseEntity<Integer> checkedPassword(@RequestParam String password, Authentication authentication) {
+		UserDetailsImpl userInfo = (UserDetailsImpl) authentication.getPrincipal();
+		
+		UserDto userDto = userInfo.getMember();
+		String encodePw = userDto.getUserPw();
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	    
+	    if(passwordEncoder.matches(password, encodePw))
+	    	return ResponseEntity.ok(1);
+	    else 
+	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(0);
 	}
 	
 	// 찜한 상품 조회 

@@ -125,12 +125,12 @@
 <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header header-modal-title">
 				<h1 class="modal-title fs-5" id="exampleModalLabel">
 					Modal title
 				</h1>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body header-modal-body">
 			  	로그인을 해주시길 바랍니다.
 			</div>
 			<div class="modal-footer">

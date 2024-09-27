@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.User;
 
 import com.mycompany.miniproject.dto.UserDto;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class UserDetailsImpl extends User{	//User가 UserDetail를 구현해서 정보를 가지고 있음
 	
 	private UserDto user;
@@ -22,6 +24,11 @@ public class UserDetailsImpl extends User{	//User가 UserDetail를 구현해서 
 	
 	public UserDto getMember() {
 		return user;
+	}
+	
+	public String getPassword() {
+		log.info("패스워드를 가지고 오겠습니다.");
+        return super.getPassword();  
 	}
 	
 }

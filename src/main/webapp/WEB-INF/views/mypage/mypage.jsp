@@ -58,8 +58,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary pw-check">확인</button>
+                <button type="button" class="btn btn-secondary pw-close" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary pw-check" onclick="checkPassword()">확인</button>
             </div>
         </div>
     </div>
