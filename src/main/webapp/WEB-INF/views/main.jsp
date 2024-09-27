@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<c:if test="${category == 'all'}">
+	<c:if test="${category == 'all' && isLogin && couponNum == 0}">
 	    <div class="modal-container">
 	        <div class="coupon-modal">
 	            <img src="${pageContext.request.contextPath}/resources/images/modal.png" class="modal-image" />

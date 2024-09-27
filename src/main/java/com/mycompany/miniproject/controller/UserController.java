@@ -71,5 +71,11 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/giveCoupon")
+	public ResponseEntity<String> giveCoupon(Authentication authentication){
+		String userId = authentication.getName();
+		userService.giveCoupon(userId);
+		return ResponseEntity.ok("ok");
+	}
 
 }

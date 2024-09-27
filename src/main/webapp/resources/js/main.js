@@ -120,7 +120,17 @@ $(document).ready(function () {
         setTime("TodayCloseTime", 1);
     });
     $(".modal-image").click(() => {
-        showAlertCoupon();
+    	
+    	$.ajax({
+    		url:"user/giveCoupon",
+    		method: "Get",
+    		success:function () {
+    			showAlertCoupon();    			
+    		},
+    		error:function(){
+    			alert("실패");
+    		}
+    	})
     });
     
     $(".toolbar-category-btn").click(function () {

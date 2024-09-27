@@ -11,11 +11,13 @@ public interface UserDao {
 
 	public int insert(UserDto user);
 
-	public int updateUserCoupon(String userId);
+	public int updateCouponByUsing(String userId);
 
 	public int selectUserCoupon(String userId);
 
 	public int updateUser(UserDto userDto);
+
+	public int updateCouponByGiving(String userId);
 
 
 } 

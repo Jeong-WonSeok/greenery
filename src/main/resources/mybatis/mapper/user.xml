@@ -23,8 +23,13 @@
 	
 	</select>
 	
-	<update id="updateUserCoupon" parameterType="String">
+	<update id="updateCouponByUsing" parameterType="String">
 		update "User" set user_coupon = -1
+		where user_id=#{userId}
+	</update>	
+	
+	<update id="updateCouponByGiving" parameterType="String">
+		update "User" set user_coupon = 1
 		where user_id=#{userId}
 	</update>	
 	

@@ -18,6 +18,8 @@ import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ProductImageDto;
+import com.mycompany.miniproject.dto.UserDto;
+import com.mycompany.miniproject.security.UserDetailsImpl;
 import com.mycompany.miniproject.service.CartService;
 import com.mycompany.miniproject.service.LikeService;
 import com.mycompany.miniproject.service.ProductService;
@@ -46,11 +48,16 @@ public class HomeController {
 		int totalRows = productService.getTotalRows();
 		Pager pager = new Pager(10, 5, totalRows, pageNo);
 		session.setAttribute("pager", pager);
-		
+		int couponNum = 0;
 		List<ProductDto> productList = productService.getProductAll(pager, sort);
-		
+		boolean islogin = false;
 		if(authentication != null) {
+			islogin = true;
+			
 			String userId = authentication.getName();
+			UserDetailsImpl userDetail = (UserDetailsImpl) authentication.getPrincipal();
+			UserDto userDto = userDetail.getMember();
+			couponNum = userDto.getUserCoupon();
 			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
 			
 			List<LikeDto> likeList = likeService.getLikeList(userId);
@@ -79,7 +86,9 @@ public class HomeController {
 				session.removeAttribute("cartList");
 			}
 		}
-		
+			
+		model.addAttribute("couponNum", couponNum );
+		model.addAttribute("isLogin", islogin);
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", "all");
 		model.addAttribute("sort", sort);

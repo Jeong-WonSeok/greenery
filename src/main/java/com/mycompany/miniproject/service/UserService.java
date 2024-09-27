@@ -70,7 +70,7 @@ public class UserService {
 	}
 
 	public void useCoupon(String userId) {
-		userDao.updateUserCoupon(userId);
+		userDao.updateCouponByUsing(userId);
 	}
 	
 	public int getCouponNum(String userId) {
@@ -87,6 +87,10 @@ public class UserService {
 	public void updateUser(UserDto userDto) {
 		userDao.updateUser(userDto);
 		
+	}
+
+	public void giveCoupon(String userId) {
+		log.info(userDao.updateCouponByGiving(userId)+" ");		
 	}
 
 }
