@@ -283,30 +283,37 @@
 	color: #7E7E7E;
 }
 
+.form-address input{
+	width : 100%;
+}
+
 .myinfo-edit {
 	justify-content: center;
 }
 
 .btnZip {
+	margin-top:0px !important;
 	display: flex;
-	justify-content: flex-end;	
+	justify-content: space-between;	
 }
 
 #btnZipcode {
-	width: 30%;
+	width: 40%;
 	background-color: #CFF7D3;
 	border: none;
 	border-radius: 5px;
-	height: 30px;
 	font-size:14px;
-	margin-top : 3px;
-}
-#inputPasswordMessage1, #inputPasswordMessage2{
-	border:none;
-	height: 20px;
 }
 
-#inputPasswordMessage1 span, #inputPasswordMessage2 span{
+.form-message{
+	margin:0px;
+	border:none;
+	height: 30px !important; 
+	display:flex;
+	align-items: center;
+}
+
+.form-message span{
 	width:100%;
 }
 .myinfo-edit-btn {

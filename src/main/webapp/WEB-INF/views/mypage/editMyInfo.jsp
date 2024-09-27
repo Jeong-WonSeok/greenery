@@ -11,40 +11,45 @@
 			<span><label for="userName">이름</label></span>
 			<span><input type="text" id="userName" name="userName" value="${user.userName}" required></span>
 		</div>
+		<div class="name-message form-message" style="display:none"></div>
 		<div class="myinfo-phone">
 			<span><label for="userTel">전화번호</label></span>
 			<span><input type="text" id="userTel" name="userTel" value="${user.userTel}" required></span>
 		</div>
+		<div class="tel-message form-message" style="display:none"></div>
+		
 		<div class="myinfo-zipcode">
 			<span><label for=userPostal>우편번호</label></span>
-			<span><input class="input input8" type="text" name="userPostal"
-				value="${user.userPostal }" required></span>
+			<div class="d-flex btnZip">
+				<span><input class="input input8" type="text" name="userPostal" value="${user.userPostal }" required readonly></span>
+				<button id="btnZipcode" class="btn btn2" type="button">주소 찾기</button>
+			</div>
 		</div>
-		<div class="btnZip">
-			<button id="btnZipcode" class="btn btn2" type="button">우편번호 찾기</button>
-		</div>
+		<!-- <div class="btnZip">
+		</div> -->
 		<div class="myinfo-address">
 			<span><label for="userLoadAddress">주소</label></span>
-			<span><input name="userLoadAddress" type="text"  value="${user.userLoadAddress}" required></span> 
+			<span class="form-address"><input name="userLoadAddress" type="text"  value="${user.userLoadAddress}" required readonly></span> 
 		</div>
 		<div class="myinfo-detail-address">
 			<span><label for="userDetailAddress">상세 주소</label></span>
-			<span><input name="userDetailAddress" type="text"  value="${user.userDetailAddress}" required></span> 
+			<span class="form-address"><input name="userDetailAddress" type="text"  value="${user.userDetailAddress}" required></span> 
 		</div>
 		<div class="myinfo-email">
 			<span><label for="userEmail">이메일</label></span>
 			<span><input id="userEmail" name="userEmail" type="text" value="${user.userEmail}" required></span>
 		</div>
+		<div class="email-message form-message" style="display:none"></div>
 		<div class="myinfo-password">
 			<span><label for="userPw">비밀번호</label></span>
 			<span><input id="userPw" name="userPw" type="password" value=""></span>
 		</div>
-		<div id="inputPasswordMessage1"></div>
+		<div id="inputPasswordMessage1" class="form-message" style="display:none"></div>
 		<div class="myinfo-password-check">
 			<span><label for="userPwCheck">비밀번호 확인</label></span>
 			<span><input id="userPwCheck" name="userPwCheck" type="password" value=""></span>
 		</div>
-		<div id="inputPasswordMessage2"></div>
+		<div id="inputPasswordMessage2" class="form-message" style="display:none"></div>
 		<div class="myinfo-edit">
 			<button type=submit class="myinfo-edit-btn">개인정보 수정</button>
 		</div>
