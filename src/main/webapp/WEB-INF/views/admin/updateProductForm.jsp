@@ -75,76 +75,80 @@
 					type="text" name="productCategory"
 					value="${product.productCategory}">
 			</div>
-			<div class="image-thumnail">
-				<label>상품 대표 이미지 (썸네일)</label>
-				<div class="image-upload-container">
-					<!-- ----------1번 이미지 (대표 이미지)------------ -->
-					<c:if test="${image1 != null}">
-					    <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
-					        <img src="imageDown?productId=${product.productId}&usecase=1"
-					            alt="${product.productName}" class="product-image">
-					    </div>
-					</c:if>
-					<c:if test="${image1 == null}">
-					    <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
-					        <span>+</span>
-					    </div>
-					</c:if>
-					<input type="file" id="image-input1" name="productImage1"
-					    accept="image/*" style="display: none;"
-					    onchange="previewImage(event, 'image-preview1')" />
-
-
-					<!--------------- 2번 이미지 ------------->
-					<c:if test="${image2 != null}">
-						<div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
-							<img src="imageDown?productId=${product.productId}&usecase=2"
-								alt="${product.productName}" class="product-image">
-						</div>
-					</c:if>
-					<c:if test="${image2 == null }">
-						<div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
-							<span>+</span>
-						</div>
-					</c:if>
-					<input type="file" id="image-input2" name="productImage2"
-						accept="image/*" style="display: none;"
-						onchange="previewImage(event, 'image-preview2')" />
-
-					<!---------------- 3번 이미지------------ -->
-					<c:if test="${image3 != null}">
-						<div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
-							<img src="imageDown?productId=${product.productId}&usecase=3"
-								alt="${product.productName}" class="product-image">
-						</div>
-					</c:if>
-					<c:if test="${image3 == null }">
-						<div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
-							<span>+</span>
-						</div>
-					</c:if>
-					<input type="file" id="image-input3" name="productImage3"
-						accept="image/*" style="display: none;"
-						onchange="previewImage(event, 'image-preview3')" />
-
-					<!-- --------------4번 이미지--------------- -->
-					<c:if test="${image4 != null}">
-						<div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
-							<img src="imageDown?productId=${product.productId}&usecase=4"
-								alt="${product.productName}" class="product-image">
-						</div>
-					</c:if>
-					<c:if test="${image4 == null }">
-						<div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
-							<span>+</span>
-						</div>
-					</c:if>
-					<input type="file" id="image-input4" name="productImage4"
-						accept="image/*" style="display: none;"
-						onchange="previewImage(event, 'image-preview4')" />
-
-				</div>
+			<div class="image-thumbnail">
+			    <label>상품 대표 이미지 (썸네일)</label>
+			    <div class="image-upload-container">
+			
+			        <!-- 1번 이미지 -->
+			        <c:if test="${image1 != null}">
+			            <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
+			                <img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
+			                <button type="button" class="delete-image" onclick="deleteImage('image1', ${product.productId}, 1)">
+			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
+			                </button>
+			            </div>
+			        </c:if>
+			        <c:if test="${image1 == null}">
+			            <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
+			                <span>+</span>
+			            </div>
+			        </c:if>
+			        <input type="file" id="image-input1" name="productImage1" accept="image/*" style="display: none;"
+			               onchange="previewImage(event, 'image-preview1')" />
+			
+			        <!-- 2번 이미지 -->
+			        <c:if test="${image2 != null}">
+			            <div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
+			                <img src="imageDown?productId=${product.productId}&usecase=2" alt="${product.productName}" class="product-image">
+			                <button type="button" class="delete-image" onclick="deleteImage('image2', ${product.productId}, 2)">
+			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
+			                </button>
+			            </div>
+			        </c:if>
+			        <c:if test="${image2 == null}">
+			            <div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
+			                <span>+</span>
+			            </div>
+			        </c:if>
+			        <input type="file" id="image-input2" name="productImage2" accept="image/*" style="display: none;"
+			               onchange="previewImage(event, 'image-preview2')" />
+			
+			        <!-- 3번 이미지 -->
+			        <c:if test="${image3 != null}">
+			            <div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
+			                <img src="imageDown?productId=${product.productId}&usecase=3" alt="${product.productName}" class="product-image">
+			                <button type="button" class="delete-image" onclick="deleteImage('image3', ${product.productId}, 3)">
+			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
+			                </button>
+			            </div>
+			        </c:if>
+			        <c:if test="${image3 == null}">
+			            <div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
+			                <span>+</span>
+			            </div>
+			        </c:if>
+			        <input type="file" id="image-input3" name="productImage3" accept="image/*" style="display: none;"
+			               onchange="previewImage(event, 'image-preview3')" />
+			
+			        <!-- 4번 이미지 -->
+			        <c:if test="${image4 != null}">
+			            <div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
+			                <img src="imageDown?productId=${product.productId}&usecase=4" alt="${product.productName}" class="product-image">
+			                <button type="button" class="delete-image" onclick="deleteImage('image4', ${product.productId}, 4)">
+			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
+			                </button>
+			            </div>
+			        </c:if>
+			        <c:if test="${image4 == null}">
+			            <div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
+			                <span>+</span>
+			            </div>
+			        </c:if>
+			        <input type="file" id="image-input4" name="productImage4" accept="image/*" style="display: none;"
+			               onchange="previewImage(event, 'image-preview4')" />
+			    </div>
 			</div>
+
 
 			<div class="form-group">
 				<label>상품 대표 설명 (썸네일)</label> 

@@ -102,6 +102,21 @@ form-group textarea {
     font-size: 40px;
     color: #888;
     height: 150px;
+    position: relative;
+}
+/* X 버튼  */
+.delete-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-image img {
+    width: 30px;
+    height: 30px;
 }
 
 .image-preview img {
