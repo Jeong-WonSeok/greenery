@@ -275,7 +275,7 @@ public class OrderController {
 			String userId = authentication.getName();
 			cartNum = cartService.getCartNum(userId);
 		}
-		log.info(cartNum + " ");
+		
 		model.addAttribute("cartNum", cartNum);
 		return ResponseEntity.ok(cartNum);
 	}

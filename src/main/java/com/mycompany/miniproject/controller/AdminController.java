@@ -60,10 +60,12 @@ public class AdminController {
 	
 	// 공지사항 전체 조회
 	@GetMapping("/noticeselect")
-	public String noticeSelect(Model model) {
-		List<NoticeDto> notice = noticeService.getNoticeAll();
-		model.addAttribute("notice", notice);
-		log.info("목록 조회");
+	public String noticeSelect(Model model,  @RequestParam(defaultValue="1") int pageNo) {
+		int totalRows = noticeService.getSearchTotalRows();
+		Pager pager = new Pager(15, 5, totalRows, pageNo);
+		List<NoticeDto> notice = noticeService.getNoticeAll(pager);
+		model.addAttribute("notice", notice);		
+		model.addAttribute("pager", pager);
 		return "admin/noticeSelect";
 	}
 	// 공지사항 추가 폼get

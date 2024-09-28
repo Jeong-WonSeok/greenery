@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.miniproject.dao.NoticeDao;
 import com.mycompany.miniproject.dto.NoticeDto;
+import com.mycompany.miniproject.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,8 +19,8 @@ public class NoticeService {
 	NoticeDao noticeDao;
 	
 	// 공지사항 조회
-	public List<NoticeDto> getNoticeAll(){
-		List<NoticeDto> noticeList = noticeDao.selectAll();
+	public List<NoticeDto> getNoticeAll(Pager pager){
+		List<NoticeDto> noticeList = noticeDao.selectAll(pager);
 		return noticeList;
 	}
 	
@@ -43,6 +44,11 @@ public class NoticeService {
 	public void deleteNotice(int noticeId) {
 		noticeDao.deleteNotice(noticeId);
 		
+	}
+
+	public int getSearchTotalRows() {
+		int total = noticeDao.countRows();
+		return total;
 	}
 	
 	

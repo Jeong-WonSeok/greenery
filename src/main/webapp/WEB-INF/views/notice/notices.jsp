@@ -41,7 +41,7 @@
 				<div class="registrationDate"></div>
 				<c:forEach items="${noticeList}" var="notices">
 					<div class="notices-item">
-	        			<div class="noticeId">${notices.noticeId}</div>
+	        			<div class="noticeId">${notices.noticeRownum}</div>
 	        			<div class="title" >${notices.noticeTitle}</div>
 	        			<div class="registrationDate"><fmt:formatDate value="${notices.createdAt}" pattern="yyyy-MM-dd" /></div>
 	       			</div>
@@ -51,9 +51,24 @@
 			<div class="divider"></div>
 		</div>
 
-		<div class="pageNum">1
-			<div class="divider" style="width: 20px; border: 1.5px solid #069369; margin-top: 7px;"></div>
-		</div>
+		<div class="pager text-center mt-4">
+   			<a href="?pageNo=1&sort=${sort}" class="btn btn-sm">처음</a>
+   			<c:if test="${pager.groupNo>1}">
+   				<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-sm">이전</a>
+   			</c:if>
+   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+   				<c:if test="${i == pager.pageNo}">
+   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
+				</c:if>
+   				<c:if test="${i != pager.pageNo }">
+   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-sm">${i}</a>
+				</c:if>
+   			</c:forEach>
+   			<c:if test="${pager.groupNo<pager.totalGroupNo }" >
+   				<a href="?pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-sm">다음</a>
+  				</c:if>
+   			<a href="?pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-sm">맨끝</a>
+   		</div>
 
 	</div>
 

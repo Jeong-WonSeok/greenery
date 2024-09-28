@@ -52,8 +52,29 @@
 					</div>
 				</div>
 			</c:forEach>
+			
+			<div class="pager text-center mt-4">
+	   			<a href="?pageNo=1&sort=${sort}" class="btn btn-sm">처음</a>
+	   			<c:if test="${pager.groupNo>1}">
+	   				<a href="?pageNo=${pager.startPageNo-1}&sort=${sort}" class="btn btn-sm">이전</a>
+	   			</c:if>
+	   			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+	   				<c:if test="${i == pager.pageNo}">
+	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-outline-secondary btn-sm">${i}</a>
+					</c:if>
+	   				<c:if test="${i != pager.pageNo }">
+	   					<a href="?pageNo=${i}&sort=${sort}" class="btn btn-sm">${i}</a>
+					</c:if>
+	   			</c:forEach>
+	   			<c:if test="${pager.groupNo<pager.totalGroupNo }" >
+	   				<a href="?pageNo=${pager.endPageNo+1 }&sort=${sort}" class="btn btn-sm">다음</a>
+	  				</c:if>
+	   			<a href="?pageNo=${pager.totalPageNo}&sort=${sort}" class="btn btn-sm">맨끝</a>
+	   		</div>
 		</div>
 	</div>
+	
+	
 	<button type="button" class="btn btn-primary notice-modal" data-bs-toggle="modal" data-bs-target="#noticeModal" style="display:none"></button>
 	
 	<div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

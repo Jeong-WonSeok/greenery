@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class NoticeDto {
+	private int noticeRownum;
 	private int noticeId;
 	private String noticeTitle;
 	private String noticeContent;
