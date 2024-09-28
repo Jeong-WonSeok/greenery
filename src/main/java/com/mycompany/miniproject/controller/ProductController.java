@@ -43,13 +43,13 @@ public class ProductController {
 	}
 	
 	@GetMapping("/detailpage")
-	public String detailpage(int productId, Model model, Authentication authentication) {
+	public String detailpage(int productId, Model model, Authentication authentication, Pager pager) {
 		ProductDto product = productService.getProduct(productId);
 		int imageNum = productService.getImageNum(productId); 
 		
 		if(authentication != null) {
 			String userId = authentication.getName();
-			List<LikeDto> likeList = likeService.getLikeList(userId);
+			List<LikeDto> likeList = likeService.getLikeList(userId, pager);
 			
 			for (LikeDto like : likeList) {
                 if (product.getProductId() == like.getProductId()) {
@@ -93,7 +93,7 @@ public class ProductController {
 
 		if (authentication != null) {
 			String userId = authentication.getName();
-			List<LikeDto> likeList = likeService.getLikeList(userId);
+			List<LikeDto> likeList = likeService.getLikeList(userId, pager);
 			
 			for (ProductDto product : productList) {
 				for (LikeDto like : likeList) {
@@ -124,7 +124,7 @@ public class ProductController {
 		
 		if (authentication != null) {
 			String userId = authentication.getName();
-			List<LikeDto> likeList = likeService.getLikeList(userId);
+			List<LikeDto> likeList = likeService.getLikeList(userId, pager);
 			
 			for (ProductDto product : productList) {
 				for (LikeDto like : likeList) {

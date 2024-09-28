@@ -65,6 +65,29 @@ $(document).on("click", ".order-page", function(){
 		}
 	})
 })
+$(document).on("click", ".liked-products-page", function(){
+    const page = $(this).html();
+    if (page === "이전" || page === "다음") {
+        $.ajax({
+            url: "likedProducts?pageNo=" + $(this).data("start"),
+            method: "get",
+            success: function (data) {
+                $(".mypage-content").empty();
+                $(".mypage-content").append(data);
+            }
+        });
+    } else {
+        $.ajax({
+            url: "likedProducts?pageNo=" + page,
+            method: "get",
+            success: function (data) {
+                $(".mypage-content").empty();
+                $(".mypage-content").append(data);
+            }
+        });
+    }
+});
+
 
 function getContent(url) {
     $.ajax({

@@ -14,6 +14,8 @@ public interface LikeDao {
 
 	int deleteProduct(Map<String, Object> like);
 
-	List<LikeDto> selectLikeList(String userId);
+	List<LikeDto> selectLikeList(Map<String, Object> likePager);
+
+	int countRowsByLike(String userId);
 	
 }

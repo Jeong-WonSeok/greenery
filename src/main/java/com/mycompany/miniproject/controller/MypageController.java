@@ -30,8 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.miniproject.dto.LikeDto;
 import com.mycompany.miniproject.dto.OrderDetailDto;
-import com.mycompany.miniproject.dto.OrderDto;
-import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.Pager;
 import com.mycompany.miniproject.dto.ProductDto;
 import com.mycompany.miniproject.dto.ReviewDto;
@@ -124,13 +122,21 @@ public class MypageController {
 	
 	// 찜한 상품 조회 
     @GetMapping("/likedProducts")
-    public String likedProducts(Model model, Authentication authentication) {
+    public String likedProducts(
+				@RequestParam(defaultValue="1") int pageNo,
+				Authentication authentication,
+				HttpSession session,
+				Model model) {
+    	
         if(authentication != null) {
             String userId = authentication.getName();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     		UserDto userDto = userDetails.getMember();
+    		// 찜한 상품 전체 개수(getTotalLikeRows)
+    		int totalRows = likeService.getTotalLikeRows(userId);
+        	Pager pager = new Pager(10, 5, totalRows, pageNo);
     		
-            List<LikeDto> likeList = likeService.getLikeList(userId);
+            List<LikeDto> likeList = likeService.getLikeList(userId, pager);
             List<ProductDto> productList = new ArrayList<>();
             
             for (LikeDto i : likeList) {
@@ -139,10 +145,10 @@ public class MypageController {
                 product.setLiked(true);
                 productList.add(product);
             }
+            model.addAttribute("pager", pager);
             model.addAttribute("productList", productList);
             model.addAttribute("userName", userDto.getUserName());
     		model.addAttribute("coupon", userDto.getUserCoupon() == 1 ? 1 : 0);
-    		
         }
         return "mypage/likedProducts";
     }

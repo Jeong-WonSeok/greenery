@@ -65,8 +65,6 @@ public class ProductService {
 		return totalRows;
 	}
 	
-	
-	
 	public int insertProduct(ProductDto product) {
 		productDao.insertProduct(product);
 		int productId = product.getProductId();
@@ -84,6 +82,7 @@ public class ProductService {
 		return productList;
 	}
 
+	// productId로 해당 상품 조회
 	public ProductDto getProduct(int productId) {
 		ProductDto productDto = productDao.selectProduct(productId);
 		return productDto;

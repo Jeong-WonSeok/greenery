@@ -163,9 +163,10 @@ public class AdminController {
 						Model model) {
 		int totalRows = productService.getTotalRows();
 		Pager pager = new Pager(10, 5, totalRows, pageNo); 
-		log.info(pager.toString());
+		session.setAttribute("pager", pager);
+		
 		List<ProductDto> product = productService.getProductAll(pager);
-		log.info("check");
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("product", product);
 		

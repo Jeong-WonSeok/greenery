@@ -327,3 +327,8 @@
 .order-img:hover {
 	cursor: pointer;
 }
+.pagetable {
+	    width: 100%;
+	    margin: 10px 0;
+	    text-align: center;
+}

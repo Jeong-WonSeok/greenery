@@ -17,10 +17,28 @@
 	</delete>
 	
 	<!-- 찜한 상품 조회 -->
-	<select id="selectLikeList" parameterType="String">
-        select product_id
-		from "like"
-		where user_id = #{userId}
+	<select id="selectLikeList" parameterType="map">
+	    <![CDATA[
+		    select rnum, product_id, like_date
+		    from (
+		        select rownum rnum, product_id, like_date
+		        from (
+		            select product_id, like_date
+		            from "like"
+		            where user_id = #{userId}
+		            order by like_date desc
+		        )
+		        where rownum <= #{pager.endRowNo}
+		    )
+		    where rnum >= #{pager.startRowNo}
+	    ]]>
     </select> 
+    
+    <!-- 찜한 상품의 전체 개수 -->
+    <select id="countRowsByLike" parameterType="String" resultType="int">
+    	select count(*)
+    	from "like"
+    	where user_id = #{userId}
+    </select>
 
 </mapper>

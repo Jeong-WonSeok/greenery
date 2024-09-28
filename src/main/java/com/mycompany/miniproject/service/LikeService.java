@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.miniproject.dao.LikeDao;
 import com.mycompany.miniproject.dto.LikeDto;
+import com.mycompany.miniproject.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,8 +20,13 @@ public class LikeService {
 	LikeDao likeDao;
 	
 	// 찜한 상품 조회
-	public List<LikeDto> getLikeList(String userId) {
-		List<LikeDto> likeList = likeDao.selectLikeList(userId);
+	public List<LikeDto> getLikeList(String userId, Pager pager) {
+		Map<String, Object> likePager = new HashMap<>();
+		
+		likePager.put("userId", userId);
+		likePager.put("pager", pager);
+		
+		List<LikeDto> likeList = likeDao.selectLikeList(likePager);
 		return likeList;
 	}
 
@@ -56,6 +62,11 @@ public class LikeService {
 	    } catch (Exception e) {
 	        return 0;
 	    }
+	}
+	// 찜한 상품의 전체 개수
+	public int getTotalLikeRows(String userId) {
+		int totalRows = likeDao.countRowsByLike(userId);
+		return totalRows;
 	}
 
 }

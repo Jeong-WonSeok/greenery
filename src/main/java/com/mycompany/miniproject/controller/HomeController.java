@@ -51,6 +51,7 @@ public class HomeController {
 		int couponNum = 0;
 		List<ProductDto> productList = productService.getProductAll(pager, sort);
 		boolean islogin = false;
+		
 		if(authentication != null) {
 			islogin = true;
 			
@@ -60,7 +61,7 @@ public class HomeController {
 			couponNum = userDto.getUserCoupon();
 			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
 			
-			List<LikeDto> likeList = likeService.getLikeList(userId);
+			List<LikeDto> likeList = likeService.getLikeList(userId, pager);
 			// productList에 있는 상품 중 찜한 상품을 찾아서 isLiked 설정
 	        for (ProductDto product : productList) {
 	            for (LikeDto like : likeList) {
@@ -100,7 +101,6 @@ public class HomeController {
 			String category, Model model,
 			@RequestParam(name="sort", defaultValue="default") String sort) {
 		List<ProductDto> productList = productService.getCategoryToMain(category, sort);
-		
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("category", category);

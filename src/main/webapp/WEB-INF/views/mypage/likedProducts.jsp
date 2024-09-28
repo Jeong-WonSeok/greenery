@@ -47,3 +47,21 @@
 	    </div>
 	</c:forEach>
 </span>
+
+<div class="liked-products-pager text-center mt-5">
+    <c:if test="${pager.groupNo > 1}">
+        <button class="btn btn-sm page-move-button liked-products-page" data-start="${pager.startPageNo - 1}">이전</button>
+    </c:if>
+    <!-- 한 페이지 당 화면에 나오는 번호 ex) 1 2 3 4 5 -->
+    <c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
+        <c:if test="${i == pager.pageNo}">
+            <button class="btn btn-outline-secondary btn-sm liked-products-page">${i}</button>
+        </c:if>
+        <c:if test="${i != pager.pageNo}">
+            <button class="btn btn-sm liked-products-page">${i}</button>
+        </c:if>
+    </c:forEach>
+    <c:if test="${pager.groupNo < pager.totalGroupNo}">
+        <button class="btn btn-sm page-move-button liked-products-page" data-start="${pager.endPageNo + 1}">다음</button>
+    </c:if>
+</div>
