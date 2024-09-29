@@ -29,6 +29,8 @@ $(document).on("click",".review-btn", function() {
             for (let i = 1; i <= review.reviewScore; i++) {
                 $(".star_rating .star:nth-child(" + i + ")").addClass('on');
             }
+            const length = $("#reviewTextarea").val().length;
+            $('#charCount').html(length+" / 1,000");
             
             $(".write-btn").data("productid", product.productId);
             $(".write-btn").data("orderid", review.orderId);

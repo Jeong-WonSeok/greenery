@@ -48,7 +48,7 @@
 					    <fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd" />
 					</div>
 					<div class=product-image>
-						<a href="${pageContext.request.contextPath}/admin/productSelect?productId=${i.productId}">
+						<a href="${pageContext.request.contextPath}/admin/updateProductForm?productId=${i.productId}">
 		                     <img src="imageDown?productId=${i.productId}&usecase=1" alt="${i.productName}" class="product-image">
 						</a>
 					</div>
