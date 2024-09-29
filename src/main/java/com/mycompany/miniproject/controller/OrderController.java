@@ -11,7 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,8 @@ import com.mycompany.miniproject.dto.CreatedOrderDto;
 import com.mycompany.miniproject.dto.OrderDto;
 import com.mycompany.miniproject.dto.OrderItemDto;
 import com.mycompany.miniproject.dto.ProductDto;
+import com.mycompany.miniproject.security.UserDetailServiceImpl;
+import com.mycompany.miniproject.security.UserDetailsImpl;
 import com.mycompany.miniproject.service.CartService;
 import com.mycompany.miniproject.service.OrderService;
 import com.mycompany.miniproject.service.ProductService;
@@ -47,6 +51,8 @@ public class OrderController {
 	ReviewService reviewService;
 	@Autowired
 	CartService cartService;
+	@Autowired
+	UserDetailServiceImpl userDetailService;
 	
 	@GetMapping("/cart")
 	public String cart(Model model, Authentication authentication, HttpSession session) {
@@ -191,9 +197,12 @@ public class OrderController {
 		}
 		int couponNum = userService.getCouponNum(userId);
 		boolean hasCoupon = couponNum <= 0 ? false : true;
+		
+		
 		model.addAttribute("hasCoupon", hasCoupon);
 		model.addAttribute("productList", productList);
 
+		
 		
 		return "order/payment";
 	}
@@ -233,6 +242,13 @@ public class OrderController {
  		if(order.isCoupon()) {
  			userService.useCoupon(userId);
  		}
+ 		//사용자 상세 정보 얻기
+		UserDetailsImpl userDetails = (UserDetailsImpl) userDetailService.loadUserByUsername(userId);
+		//인증 객체 얻기
+		authentication = 
+				new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+		//스프링 시큐리티에 인증 객체 설정
+		SecurityContextHolder.getContext().setAuthentication(authentication);
  		
 		return ResponseEntity.ok(String.valueOf(orderId));
 	}
