@@ -29,23 +29,23 @@
 		    </div>
 		</div>
 	</c:forEach>
-	<div class="pager text-center mt-5">
-		<a href="?pageNo=1&productId=${productId}" class="btn btn-sm">처음</a>
+	<div class="pager text-center mt-5 review-detail-page-div" data-productid="${productId}">
+		<button class="btn btn-sm review-detail-page" data-end="1">처음</button>
 		<c:if test="${pager.groupNo>1}">
-			<a href="?pageNo=${pager.startPageNo-1}&productId=${productId}" class="btn  btn-sm">이전</a>
+			<button class="btn btn-sm review-detail-page" data-start="${pager.startPageNo - 1}">이전</button>
 		</c:if>
 		<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" var="i">
 			<c:if test="${i == pager.pageNo}">
-				<a href="?pageNo=${i}&productId=${productId}" class="btn btn-outline-secondary btn-sm">${i}</a>
+				<button class="btn btn-outline-secondary btn-sm review-detail-page">${i}</button>
 			</c:if>
 			<c:if test="${i != pager.pageNo }">
-				<a href="?pageNo=${i}&productId=${productId}" class="btn  btn-sm">${i}</a>
+				<button class="btn btn-sm review-detail-page">${i}</button>
 			</c:if>
 		</c:forEach>
 		<c:if test="${pager.groupNo<pager.totalGroupNo }" >
-			<a href="?pageNo=${pager.endPageNo+1 }" class="btn  btn-sm">다음</a>
+			<button class="btn btn-sm review-detail-page" data-start="${pager.endPageNo + 1}">다음</button>
 		</c:if>
-		<a href="?pageNo=${pager.totalPageNo}" class="btn  btn-sm">맨끝</a>
+		<button class="btn  btn-sm review-detail-page" data-end="${pager.totalPageNo}">맨끝</button>
 	</div>
 
 </div> 

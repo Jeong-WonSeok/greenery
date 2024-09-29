@@ -84,3 +84,4 @@ $(document).off("click", ".write-btn").on("click", ".write-btn", function(){
 		}
 	})
 })
+

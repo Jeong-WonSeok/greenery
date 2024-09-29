@@ -71,6 +71,7 @@ public class ProductController {
 		session.setAttribute("pager", pager);
 		List<ReviewDto> productReviews = reviewService.getReviewList(productId, pager);
 		
+		model.addAttribute("pager", pager);
 		model.addAttribute("productReviews", productReviews);
 		model.addAttribute("productId", productId);
 		return "product/reviews-select";
@@ -143,7 +144,7 @@ public class ProductController {
 	@GetMapping("/reviewImgDown")
 	public void reviewImgDown(int productId, int orderId, HttpServletResponse response) throws Exception{
 		ReviewDto review = reviewService.getReviewByOrderId(orderId, productId); 
-		if(review.getReviewImageName() != null) {
+		if(review != null && review.getReviewImageName() != null) {
 		//응답 헤더에 들어가는 Content-Type
 			String contentType = review.getReviewImageType();
 			response.setContentType(contentType);		

@@ -229,3 +229,37 @@ function scrollToTop() {
     });
 }
 
+
+$(document).on("click", ".review-detail-page", function(){
+    const page = $(this).html();
+    const productId = $(".review-detail-page-div").data("productid");
+    if (page === "이전" || page === "다음") {
+        $.ajax({
+            url: "reviewSelect?productId=" + productId + "&pageNo=" + $(this).data("start"),
+            method: "get",
+            success: function (data) {
+                $("#tab-content").empty();
+                $("#tab-content").append(data);
+            }
+        });
+    } else if(page === "처음" || page === "맨끝") {
+    	$.ajax({
+    		 url: "reviewSelect?productId=" + productId + "&pageNo=" +  $(this).data("end"),
+            method: "get",
+            success: function (data) {
+                $("#tab-content").empty();
+                $("#tab-content").append(data);
+            }
+        });
+    } else {
+        $.ajax({
+        	url: "reviewSelect?productId=" + productId + "&pageNo=" +page,
+            method: "get",
+            success: function (data) {
+                $("#tab-content").empty();
+                $("#tab-content").append(data);
+            }
+        });
+    }
+});
+

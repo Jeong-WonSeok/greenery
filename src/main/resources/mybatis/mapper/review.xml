@@ -17,7 +17,7 @@
 					created_at, user_id, review_enable, product_id
 				from review
 				where product_id = #{productId} and review_enable=1	
-				order by created_at
+				order by created_at desc
 			)
 			where rownum &lt;= #{pager.endRowNo} 
 		) 
