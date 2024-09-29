@@ -51,6 +51,19 @@
 	</select>
 
 	
+	<delete id="deleteImage" parameterType="map">
+		delete from product_image
+		where product_id = #{productId}
+		<if test="usecase == 2" >  
+			and pimage_usecase = 'productImage2'
+		</if>
+		<if test="usecase == 3" >  
+			and pimage_usecase = 'productImage3'
+		</if>
+		<if test="usecase == 4" >  
+			and pimage_usecase = 'productImage4'
+		</if>
+	</delete>
 	<!-- <update id="updateProductImage" parameterType="ProductImage">
 		update product_image
 		set pimage_name = #{pimageName},

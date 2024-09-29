@@ -51,7 +51,7 @@
 		<h5 class="top-text-margin">
 			<b>기본 정보</b>
 		</h5>
-		<form method="post" action="updateProduct" enctype="multipart/form-data">
+		<form id="update-form" method="post" action="updateProduct" enctype="multipart/form-data">
 			<input type="hidden" name="productId" value="${product.productId}">
 			<div class="form-group">
 				<label>상품명<span class="text-essential">(필수)</span></label> <input
@@ -75,17 +75,14 @@
 					type="text" name="productCategory"
 					value="${product.productCategory}">
 			</div>
-			<div class="image-thumbnail">
+			<div class="image-thumnail">
 			    <label>상품 대표 이미지 (썸네일)</label>
 			    <div class="image-upload-container">
 			
 			        <!-- 1번 이미지 -->
 			        <c:if test="${image1 != null}">
 			            <div class="image-preview" id="image-preview1" onclick="document.getElementById('image-input1').click();">
-			                <img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" class="product-image">
-			                <button type="button" class="delete-image" onclick="deleteImage('image1', ${product.productId}, 1)">
-			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
-			                </button>
+			                <img src="imageDown?productId=${product.productId}&usecase=1" alt="${product.productName}" data-imgid=${image1.pimageId } class="product-image">
 			            </div>
 			        </c:if>
 			        <c:if test="${image1 == null}">
@@ -99,8 +96,8 @@
 			        <!-- 2번 이미지 -->
 			        <c:if test="${image2 != null}">
 			            <div class="image-preview" id="image-preview2" onclick="document.getElementById('image-input2').click();">
-			                <img src="imageDown?productId=${product.productId}&usecase=2" alt="${product.productName}" class="product-image">
-			                <button type="button" class="delete-image" onclick="deleteImage('image2', ${product.productId}, 2)">
+			                <img src="imageDown?productId=${product.productId}&usecase=2" alt="${product.productName}" data-imgid=${image2.pimageId } class="product-image">
+			                <button type="button" class="delete-image">
 			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
 			                </button>
 			            </div>
@@ -116,8 +113,8 @@
 			        <!-- 3번 이미지 -->
 			        <c:if test="${image3 != null}">
 			            <div class="image-preview" id="image-preview3" onclick="document.getElementById('image-input3').click();">
-			                <img src="imageDown?productId=${product.productId}&usecase=3" alt="${product.productName}" class="product-image">
-			                <button type="button" class="delete-image" onclick="deleteImage('image3', ${product.productId}, 3)">
+			                <img src="imageDown?productId=${product.productId}&usecase=3" alt="${product.productName}" data-imgid=${image3.pimageId } class="product-image">
+			                <button type="button" class="delete-image">
 			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
 			                </button>
 			            </div>
@@ -133,8 +130,8 @@
 			        <!-- 4번 이미지 -->
 			        <c:if test="${image4 != null}">
 			            <div class="image-preview" id="image-preview4" onclick="document.getElementById('image-input4').click();">
-			                <img src="imageDown?productId=${product.productId}&usecase=4" alt="${product.productName}" class="product-image">
-			                <button type="button" class="delete-image" onclick="deleteImage('image4', ${product.productId}, 4)">
+			                <img src="imageDown?productId=${product.productId}&usecase=4" alt="${product.productName}" data-imgid=${image4.pimageId } class="product-image">
+			                <button type="button" class="delete-image">
 			                    <img src="${pageContext.request.contextPath}/resources/images/X-icon.png" alt="삭제">
 			                </button>
 			            </div>
@@ -167,7 +164,7 @@
 			<div class="image-thumnail">
 				<label>상품 상세페이지 상세정보 설명</label>
 				<c:if test="${detailImage != null}">
-					<div class="image-preview" id="image-preview5" onclick="document.getElementById('image-input5').click();">
+					<div class="image-preview" id="image-preview5" onclick="document.getElementById('image-input5').click();" data-imgid=${detailImage.pimageId } >
 						<img src="imageDown?productId=${product.productId}&usecase=5"
 							alt="${product.productName}" class="product-image">
 					</div>
@@ -187,7 +184,7 @@
 			
 			
 			<div class="btn-register-div">
-				<button type="submit" class="btn-register">수정하기</button>
+				<button type="submit" class="btn-register update-btn">수정하기</button>
 			</div>
 		</form>
 

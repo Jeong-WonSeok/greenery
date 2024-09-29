@@ -97,11 +97,76 @@ $("#productStock").on('input', function () {
 });
 
 
-function removeImage(imageNum) {
-    document.getElementById('image-preview' + imageNum).innerHTML = '<span>+</span>';
-    document.getElementById('image-input' + imageNum).value = '';
+//function removeImage(imageNum) {
+//	document.getElementById('image-preview' + imageNum).innerHTML = '<span>+</span>';
+//	document.getElementById('image-input' + imageNum).value = '';
+//}
+
+//$(document).on("click", ".delete-image", function(event){
+function deleteImage(data) {
+//	event.stopPropagation();
+	
+	const pimageId = $(data).data("imageid");
+	const parentImg = $(data).closest('.image-preview');
+	
+	parentImg.html('<span>+</span>');  // 이미지가 없는 상태로 업데이트
+	parentImg.siblings('input[type="file"]').val('');
+	
+	
+	/*$.ajax({
+		url: "imageDelete",
+		method: "POST",
+		data: pimageId
+	})*/
+//	event.preventDefault();
 }
 
+$(document).ready(function () {
+
+
+    // 버튼 클릭 시 이벤트 전파 방지
+    $('.delete-image').on('click', function(e) {
+        e.stopPropagation(); // 부모 div의 클릭 이벤트를 방지
+        deleteImage(this);
+    });
+    
+    $('.update-btn').on('click', function(e){
+    	e.preventDefault();
+    	
+    	let img2 = false;
+    	let img3 = false;
+    	let img4 = false;
+    	
+    	if($("#image-preview2").find('span').length > 0 ) img2 = true; 
+    	if($("#image-preview3").find('span').length > 0 ) img3 = true;
+    	if($("#image-preview4").find('span').length > 0 ) img4 = true;
+    	console.log(img4);
+    	
+    	let formData = new FormData($('#update-form')[0]);
+    	formData.append("deletedImage2", img2);
+    	formData.append("deletedImage3", img3);
+    	formData.append("deletedImage4", img4);
+    	
+    	$.ajax({
+    		url: "updateProduct",
+    		type: "post",
+    		processData: false,
+    		contentType: false,
+    		data: formData,
+    		success: function(response){
+    			console.log("ok");
+    		},
+    		error: function(jqXHR, textStatus, errorThrown){
+    			console.log(textStatus, errorThrown);
+    		}
+    			
+    	})
+    	
+    	
+    	
+    })
+    
+})
 // --------------------이미지 제거---------------------
 /*
 function removeImage(previewId, inputId) {

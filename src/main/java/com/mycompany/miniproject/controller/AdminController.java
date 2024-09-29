@@ -216,7 +216,7 @@ public class AdminController {
 	// 상품 수정 - post
 	@PostMapping("/updateProduct")
 	public String productUpdate(@ModelAttribute ProductFormDto productForm) throws IOException {
-		
+		log.info(productForm.toString());
 		ProductDto product = new ProductDto();
 		
 		product.setProductId(productForm.getProductId());
@@ -231,42 +231,61 @@ public class AdminController {
 		product.setProductEnable(true);	 /*상품 이미지를 수정하면 enable이 0으로 변경됨(이유는 아직 발견x)*/
 		
 		// 업데이트할 상품 id 설정
-		int productId = productService.updateProduct(product);
-		
+//		int productId = productService.updateProduct(product);
+		boolean[] isDeleted= { false, productForm.isDeletedImage2(),
+				productForm.isDeletedImage3(),
+				productForm.isDeletedImage4(), false
+		};
 		MultipartFile[] imageList = {
 	            productForm.getProductImage1(), productForm.getProductImage2(),
 	            productForm.getProductImage3(), productForm.getProductImage4(),
-	            productForm.getDetailImage() };
+	            productForm.getDetailImage() 
+        };
 		
+		int cnt = 0;
 		// 상품 1개 당 이미지는 5개니까 이미지 1개마다 ProductImageDto에 해당하는 필드값을 주입시켜줘야함
 		// PimageUsecase = 5 이면 디테일이미지, 그 외에는 해당 숫자의 이미지에 해당
 		for (int i = 0; i < 5; i++) {	// 이미지가 5개니까 for문으로 이미지 하나하나 이미지Dto에 값 세팅
-			 if (imageList[i] != null && !imageList[i].isEmpty()) { // null 체크 추가
+			int productId = productForm.getProductId();
+			int usecase = i + 1;
+			if (imageList[i] != null && !imageList[i].isEmpty()) { // null 체크 추가
 				ProductImageDto productImage = new ProductImageDto();
 				productImage.setProductId(productId);
 				productImage.setPimageName(imageList[i].getOriginalFilename());
 				productImage.setPimageType(imageList[i].getContentType());
 				productImage.setPimageData(imageList[i].getBytes());
-				productImage.setPimageUsecase(i == 4 ? "detailImage" : "productImage" + (i + 1));
+				productImage.setPimageUsecase(i == 4 ? "detailImage" : "productImage" + (i + 1 - cnt));
 				
-				log.info("이미지 {}: 이름={}", i + 1, imageList[i].getOriginalFilename());
+//				log.info("이미지 {}: 이름={}", i + 1, imageList[i].getOriginalFilename());
 
 				// 기존 이미지 조회
-	            Map<String, Object> image = new HashMap<>();
-	            image.put("productId", productImage.getProductId());
-	            image.put("usecase", i + 1);
 	            
-	            ProductImageDto existingImage = productImageDao.selectImage(image);
+	            ProductImageDto existingImage = productService.selectImage(productId, usecase);
 
 	            if (existingImage != null) {
 	                productImage.setPimageId(existingImage.getPimageId());
 	            }
 				
 				productService.updateProductImage(productImage);
+			}else {
+				ProductImageDto img = productService.selectImage(productId, usecase);
+				if(img == null || i == 4) {
+					continue;
+				}
+				
+				if(isDeleted[i]) {
+					cnt++;
+					productService.deleteImage(productId, usecase);
+				}else if(cnt != 0){
+//					log.info("pimage "+ img.getPimageId());
+					img.setPimageUsecase("productImage" + (i + 1 - cnt));
+					productService.updateProductImage(img);
+				}else 
+					continue;
 			}
 			 
 		}
-		log.info("수정 post 메소드 실행");
+//		log.info("수정 post 메소드 실행");
 		return "redirect:/admin/productselect";
 	}
  

@@ -106,7 +106,6 @@ public class ProductService {
 	public List<ProductDto> getProductAll(Pager pager) {
 		//Map<String, Object> catePager = new HashMap<>();
 		//catePager.put("pager", pager);
-		log.info(pager.toString());
 		
 		List<ProductDto> productList = productDao.selectAllProduct(pager);
 		
@@ -142,6 +141,21 @@ public class ProductService {
 	public int getSearchTotalRows(String query) {
 		int totalRows = productDao.countRowsBySearch(query);
 		return totalRows;
+	}
+
+	public ProductImageDto selectImage(int productId, int usecase) {
+		Map<String, Object> image = new HashMap<>();
+		image.put("productId", productId);
+		image.put("usecase", usecase);
+		ProductImageDto imgDto = productImageDao.selectImage(image);
+		return imgDto;
+	}
+
+	public void deleteImage(int productId, int usecase) {
+		Map<String, Object> image = new HashMap<>();
+		image.put("productId", productId);
+		image.put("usecase", usecase);
+		productImageDao.deleteImage(image);		
 	}
 	
 	

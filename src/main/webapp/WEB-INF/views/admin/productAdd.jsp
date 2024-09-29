@@ -57,7 +57,6 @@
                         <option value="Skincare">Skincare</option>
                         <option value="BeautyTools">BeautyTools</option>
                     </select>
-                    
                 </div>
 			    <div class="image-thumnail">
 			        <label>상품 대표 이미지 (썸네일)</label>

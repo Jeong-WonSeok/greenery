@@ -16,5 +16,7 @@ public interface ProductImageDao {
 	public int updateProductImage(ProductImageDto productImage);// insert, update, delete는 반환타입을 최대한 int로
 
 	public int selectImageNumber(int productId);
+
+	public int deleteImage(Map<String, Object> image);
 	
 }

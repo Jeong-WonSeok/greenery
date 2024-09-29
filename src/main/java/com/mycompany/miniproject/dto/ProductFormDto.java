@@ -19,5 +19,7 @@ public class ProductFormDto {
 	private String mainDescription;
 	private String detailDescription;
 	private MultipartFile detailImage;
-	
+	private boolean deletedImage2; 
+	private boolean deletedImage3; 
+	private boolean deletedImage4;
 }
