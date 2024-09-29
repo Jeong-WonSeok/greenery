@@ -41,4 +41,9 @@
     	where user_id = #{userId}
     </select>
 
+	<select id="selectLikeProduct" parameterType="map" resultType="Like">
+		select product_id, like_date
+		from "like"
+		where user_id = #{userId} and product_id = #{productId} 
+	</select>
 </mapper>

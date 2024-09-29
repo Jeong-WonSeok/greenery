@@ -69,4 +69,13 @@ public class LikeService {
 		return totalRows;
 	}
 
+	public LikeDto getLikeProduct(String userId, int productId) {
+		Map<String, Object> like = new HashMap<>();
+		like.put("productId", productId);
+	    like.put("userId", userId);
+	    
+		LikeDto likeDto = likeDao.selectLikeProduct(like);
+		return likeDto;
+	}
+
 }
