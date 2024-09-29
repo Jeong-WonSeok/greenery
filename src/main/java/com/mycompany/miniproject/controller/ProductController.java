@@ -51,7 +51,7 @@ public class ProductController {
 			String userId = authentication.getName();
 			LikeDto like = likeService.getLikeProduct(userId, productId);
 			
-			if (product.getProductId() == like.getProductId())
+			if (like != null && product.getProductId() == like.getProductId())
 				product.setLiked(true);
 		}
 		

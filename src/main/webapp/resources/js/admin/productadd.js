@@ -154,7 +154,8 @@ $(document).ready(function () {
     		contentType: false,
     		data: formData,
     		success: function(response){
-    			console.log("ok");
+    			console.log("실행");
+    			window.location.href = "productselect";
     		},
     		error: function(jqXHR, textStatus, errorThrown){
     			console.log(textStatus, errorThrown);

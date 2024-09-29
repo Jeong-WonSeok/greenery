@@ -227,11 +227,10 @@ public class AdminController {
 		product.setMainDescription(productForm.getMainDescription());
 		product.setDetailDescription(productForm.getDetailDescription());
 		product.setProductCategory(productForm.getProductCategory());
-		product.setCreatedAt(new Date());
 		product.setProductEnable(true);	 /*상품 이미지를 수정하면 enable이 0으로 변경됨(이유는 아직 발견x)*/
 		
 		// 업데이트할 상품 id 설정
-//		int productId = productService.updateProduct(product);
+		int productId = productService.updateProduct(product);
 		boolean[] isDeleted= { false, productForm.isDeletedImage2(),
 				productForm.isDeletedImage3(),
 				productForm.isDeletedImage4(), false
@@ -246,7 +245,6 @@ public class AdminController {
 		// 상품 1개 당 이미지는 5개니까 이미지 1개마다 ProductImageDto에 해당하는 필드값을 주입시켜줘야함
 		// PimageUsecase = 5 이면 디테일이미지, 그 외에는 해당 숫자의 이미지에 해당
 		for (int i = 0; i < 5; i++) {	// 이미지가 5개니까 for문으로 이미지 하나하나 이미지Dto에 값 세팅
-			int productId = productForm.getProductId();
 			int usecase = i + 1;
 			if (imageList[i] != null && !imageList[i].isEmpty()) { // null 체크 추가
 				ProductImageDto productImage = new ProductImageDto();

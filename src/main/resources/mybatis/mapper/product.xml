@@ -190,8 +190,7 @@
 	        main_description = #{mainDescription},
 	        summary_description = #{summaryDescription},
 	        product_category = #{productCategory},
-	        product_enable = #{productEnable},
-	        created_at = #{createdAt},
+<!-- 	        product_enable = #{productEnable}, -->
 	        detail_description = #{detailDescription}
 	    where product_id = #{productId} 
 	</update>
