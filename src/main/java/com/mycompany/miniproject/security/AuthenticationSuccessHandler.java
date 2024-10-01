@@ -37,7 +37,6 @@ public class AuthenticationSuccessHandler
             getRedirectStrategy().sendRedirect(request, response, "/");
             return;
         }
-		log.info("실행");
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 	

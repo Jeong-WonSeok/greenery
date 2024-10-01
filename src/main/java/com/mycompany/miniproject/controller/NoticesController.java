@@ -22,7 +22,7 @@ public class NoticesController {
 	NoticeService noticeService;
 	
 	@RequestMapping("/noticeContent")
-	public String editMyInfo(int noticeId, Model model) {
+	public String noticeContent(int noticeId, Model model) {
 		NoticeDto noticeDto = noticeService.getNotice(noticeId);
 		model.addAttribute("notice", noticeDto);
 		return "notice/noticeContent";

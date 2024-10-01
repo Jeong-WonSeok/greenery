@@ -27,7 +27,6 @@ public class UserDetailsImpl extends User{	//User가 UserDetail를 구현해서 
 	}
 	
 	public String getPassword() {
-		log.info("패스워드를 가지고 오겠습니다.");
         return super.getPassword();  
 	}
 	

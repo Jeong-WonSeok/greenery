@@ -97,7 +97,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/category")
-	public String mainPage(
+	public String mainCategory(
 			String category, Model model,
 			@RequestParam(name="sort", defaultValue="default") String sort) {
 		List<ProductDto> productList = productService.getCategoryToMain(category, sort);

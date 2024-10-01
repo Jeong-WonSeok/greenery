@@ -45,8 +45,6 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	@Autowired
-	ProductImageDao productImageDao;
-	@Autowired
 	NoticeService noticeService;
 	@Autowired
 	NoticeDao noticeDao;
@@ -216,7 +214,7 @@ public class AdminController {
 	// 상품 수정 - post
 	@PostMapping("/updateProduct")
 	public String productUpdate(@ModelAttribute ProductFormDto productForm) throws IOException {
-		log.info(productForm.toString());
+		
 		ProductDto product = new ProductDto();
 		
 		product.setProductId(productForm.getProductId());
