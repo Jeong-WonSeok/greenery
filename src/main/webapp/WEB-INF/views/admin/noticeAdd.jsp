@@ -29,10 +29,10 @@
 		<div>
 			<form class="container-form" method="post" action='${notice == null  ? "insertNotice" : "updateNotice" }'>
 				<div class="top-text-margin">
-					공지사항 > <span class="text-success"><b>공지사항 등록</b></span>
+					공지사항 > <span class="text-success"><b>공지사항 등록 / 수정</b></span>
 				</div>
 				<h2 class="top-text-margin">
-					<b>공지사항 등록</b>
+					<b>공지사항 등록 / 수정</b>
 				</h2>
 				<h5 class="top-text-margin">
 					<b>기본 정보</b>
