@@ -144,8 +144,8 @@ function toOrder(orderItems){
 				window.location.href="payment";
 			},
 			error : function(){
-				$(".modal-title").html("오류 발생");
-				$(".modal-body").html("알 수 없는 에러 발생");
+				$(".modal-title").html("주문 실패");
+				$(".modal-body").html("로그인을 해주세요");
 				$("#headerModal").modal("show");
 			}
 		});
