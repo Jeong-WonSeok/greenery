@@ -86,7 +86,7 @@
 			main_description, summary_description, product_category,
 			product_enable, created_at, detail_description
 		from product
-		where product_category=#{category}
+		where product_category=#{category} and product_enable=1
 		<if test="sort == 'default'">
 			order by created_at desc
 		</if>
@@ -96,6 +96,7 @@
 		<if test="sort == 'price-desc'">
 			order by product_price desc
 		</if>
+		FETCH FIRST 10 ROWS ONLY
 	</select>
 	
 	<select id="selectCategory" parameterType="map" resultType="Product">
