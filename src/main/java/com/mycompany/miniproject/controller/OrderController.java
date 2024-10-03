@@ -138,28 +138,40 @@ public class OrderController {
 	}
 	
 	@GetMapping("/changeQty")
-	public ResponseEntity<String> changeQty(int productId, int productQty, Authentication authentication) {
-		String userId = authentication.getName();
-		cartService.chageProductQty(productId, productQty, userId);
+	public ResponseEntity<String> changeQty(int productId, int productQty, Authentication authentication, HttpSession session) {
+		if(authentication != null) {
+			String userId = authentication.getName();
+			cartService.chageProductQty(productId, productQty, userId);
+		}else {
+			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+			cartList.put(productId, productQty);
+			
+		}
 		
 		return ResponseEntity.ok("OK");
 	}
 	
 	@GetMapping("/deleteProduct")
-	public ResponseEntity<Integer> deleteProduct(int productId, Authentication authentication, HttpSession session) {
-		if(authentication != null) {
-			String userId = authentication.getName();
-			boolean hasProduct = cartService.hasProductInCart(productId, userId);
-			if(hasProduct) {
-				cartService.deleteProduct(productId, userId);
-				return ResponseEntity.ok(1);
-			}else
-				return ResponseEntity.ok(0);
-		}else {
-			Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
-			cartList.remove(productId);
-			return ResponseEntity.ok(1);
+	public ResponseEntity<Integer> deleteProduct(int[] deletedItems, Authentication authentication, HttpSession session) {
+		boolean flag = true;
+		for(int productId : deletedItems) {
+			if(authentication != null) {
+				String userId = authentication.getName();
+				boolean hasProduct = cartService.hasProductInCart(productId, userId);
+				if(hasProduct) {
+					cartService.deleteProduct(productId, userId);
+					flag = true;
+				}else
+					flag = false;
+			}else {
+				Map<Integer, Integer> cartList = (Map<Integer, Integer>) session.getAttribute("cartList");
+				cartList.remove(productId);
+				flag = true;
+			}
 		}
+		
+		if(flag) return ResponseEntity.ok(1);
+		else return ResponseEntity.ok(0);
 	}
 	
 	@RequestMapping("/order")

@@ -67,7 +67,6 @@ $(document).ready(() => {
     		method: 'POST',
     		data: queryString,
     		success: function (response){
-    			console.log("요청 성공");
     			$(".modal-title").html("장바구니 등록 성공");
     			$(".modal-body").html(response);
     			$("#headerModal").modal("show");

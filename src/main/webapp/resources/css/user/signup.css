@@ -77,6 +77,17 @@ body {
     margin-top: 20px;
 }
 
+.idcheck-modal {
+    background-color: #000000;
+    color: white;
+    height: auto;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 0px !important;
+}
+
 .btn1 {
     width: 100px;
 }

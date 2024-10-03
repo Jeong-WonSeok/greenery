@@ -110,10 +110,14 @@ function btnInputIdCheck() {
     let regExp = RegExp(/^[A-Za-z\d@$!%*?&]{6,16}$/);
  
     if(inputId.value == "") {
-        alert('아이디를 입력해주세요.');
+    	$(".modal-title").html("아이디 입력 실패");
+    	$(".modal-body").html("아이디를 입력해주세요.");
+		$("#headerModal").modal("show");
         inputId.focus();
     } else if(!regExp.test(inputId.value)) {
-        alert("6자 이상 16자 이하로 영문, 숫자, 특수문자를 사용해주세요");
+    	$(".modal-title").html("아이디 입력 실패");
+		$(".modal-body").html("6자 이상 16자 이하로 영문, 숫자, 특수문자를 사용해주세요");
+		$("#headerModal").modal("show");
         inputId.value = '';
         inputId.focus();
     } else {
@@ -140,10 +144,14 @@ function checkIdExists(userId) {
     .then(data => {
         console.log(data);
         if (data.exists) {
-            alert("이미 사용 중인 아이디입니다.");
+			$(".modal-title").html("중복된 아이디");
+			$(".modal-body").html("이미 사용 중인 아이디 입니다.");
+			$("#headerModal").modal("show");
             idCheck = false; // 중복된 아이디
         } else {
-            alert("사용 가능한 아이디입니다.");
+			$(".modal-title").html("중복되지 않은 아이디");
+			$(".modal-body").html("사용 가능한 아이디입니다.");
+			$("#headerModal").modal("show");
             idCheck = true; // 중복되지 않은 아이디
         }
     });
@@ -155,22 +163,30 @@ signupGo.addEventListener('click', function (e) {
 
 	 if (!idCheck) {
 		 e.preventDefault();
-	     alert("아이디 중복 체크를 먼저 해주세요.");
+		 $(".modal-title").html("회원가입 실패");
+		 $(".modal-body").html("아이디 중복 체크를 완료해주세요.");
+		 $("#headerModal").modal("show");
 	     return; // 아이디 중복 체크가 완료되지 않으면 회원가입을 진행하지 않음
 	 }
 	 else if(!inputPhoneCheck()){
 		e.preventDefault();
-		alert("핸드폰 번호 입력을 형식에 맞게 해주세요.");
+		$(".modal-title").html("회원가입 실패");
+		$(".modal-body").html("핸드폰 번호 입력을 형식에 맞게 해주세요.");
+		$("#headerModal").modal("show");
 	    return; 
 	 }
 	 else if(!inputEmailCheck()){
 		e.preventDefault();
-		alert("이메일 형식에 맞춰서 입력해주세요.");
+		$(".modal-title").html("회원가입 실패");
+		$(".modal-body").html("이메일 형식에 맞춰서 입력해주세요.");
+		$("#headerModal").modal("show");
 	    return;
 	 }
 	 else if(!inputNameCheck()){
 			e.preventDefault();
-			alert("이름을 형식에 맞춰서 입력해주세요.");
+			$(".modal-title").html("회원가입 실패");
+			$(".modal-body").html("이름을 형식에 맞춰서 입력해주세요.");
+			$("#headerModal").modal("show");
 		    return;
 	 }
 	 
@@ -210,9 +226,9 @@ btnZipcode.addEventListener('click', () => {
 });
 
 
-document.querySelector('#iconClose').addEventListener('click', function() {
+/*document.querySelector('#iconClose').addEventListener('click', function() {
     window.location.href = '../main/main.html';
-});
+});*/
 
 
 

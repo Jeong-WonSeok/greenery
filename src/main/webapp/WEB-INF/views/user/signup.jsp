@@ -77,7 +77,24 @@
 			
 		<input id="signupGo" class="btn btn3" type="submit" value="회원가입">
 	</form>
-
+	<div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header header-modal-title">
+					<h2 class="modal-title fs-5" id="exampleModalLabel">
+						Modal title
+					</h2>
+				</div>
+				<div class="modal-body header-modal-body">
+				  	로그인을 해주시길 바랍니다.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary idcheck-modal" data-bs-dismiss="modal"> 닫기 </button>
+	<!-- 				<button type="button" class="btn btn-primary delete-modal-btn">삭제 </button> -->
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="${pageContext.request.contextPath}/resources/js/user/signup.js"></script>
 </body>
